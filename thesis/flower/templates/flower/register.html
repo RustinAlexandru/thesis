@@ -1,0 +1,17 @@
+{% extends 'flower/layout.html' %}
+
+{% block heading %}
+  <h2>Registration</em></h2>
+{% endblock %}
+
+{% block content %}
+<h2 class="centered">Create your account</h2>
+    <div class="register">
+        <p class="error">{{ message }}</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Register</button>
+        </form>
+    </div>
+{% endblock %}
