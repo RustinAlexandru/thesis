@@ -1,9 +1,8 @@
-from django.http import HttpResponse
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required, permission_required
-from django.shortcuts import get_object_or_404, redirect, render
-
+# -*- coding: utf-8 -*-
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from django.shortcuts import redirect, render
+
 from forms import RegisterForm
 
 
@@ -11,11 +10,12 @@ def index(request):
     context = []
     return render(request, 'flower/index.html', context)
 
+
 def register(request):
     if request.method == 'GET':
         form = RegisterForm()
         context = {
-            'form': form
+            'RegisterForm': form
         }
         return render(request, 'flower/register.html', context)
     elif request.method == 'POST':
@@ -37,7 +37,6 @@ def register(request):
                 login(request, user_auth)
         else:
             context = {
-                'form': form
+                'RegisterForm': form
             }
             return render(request, 'flower/register.html', context)
-

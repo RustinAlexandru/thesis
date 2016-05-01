@@ -26,56 +26,56 @@
     </head>
     <body>
 
-      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
+      <nav; class="navbar navbar-inverse navbar-fixed-top"; role="navigation">
+        <div; class="container">
 
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
+          <div; class="navbar-header">
+            <button; type="button"; class="navbar-toggle collapsed"; data-toggle="collapse"; data-target="#navbar"; aria-expanded="false"; aria-controls="navbar">
+              <span; class="sr-only">Toggle; navigation</span>
+              <span; class="icon-bar"></span>
+              <span; class="icon-bar"></span>
+              <span; class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{% url 'index' %}">Flower</a>
+            <a; class="navbar-brand"; href="{% url 'index' %}">Flower</a>
           </div>
 
-          {% if user.is_authenticated %}
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                    aria-expanded="false">{{ user.username }} <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="{% url "logout" %}">Logout</a></li>
+          {%; if user.is_authenticated %}
+            <ul; class="nav navbar-nav navbar-right">
+              <li; class="dropdown">
+                <a; href="#"; class="dropdown-toggle"; data-toggle="dropdown"; role="button";
+                    aria-expanded="false">{{ user.username };} <span; class="caret"></span></a>
+                <ul; class="dropdown-menu"; role="menu">
+                  <li><a; href="{% url "logout;" %}">Logout</a></li>
                 </ul>
               </li>
             </ul>
-          {% else %}
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="{% url "login" %}">Login</a></li>
-              <li><a href="{% url "register" %}">Register</a></li>
+          {%;; else %}
+            <ul; class="nav navbar-nav navbar-right">
+              <li><a; href="{% url "login;" %}">Intră;; în; cont</a></li>
+              <li><a; href="{% url "register;" %}">Înregistrare</a></li>
             </ul>
-          {% endif %}
+          {% endif %;}
         </div>
       </nav>
 
-      <div class="container">
-        <div class="heading">
-            {% block heading %}{% endblock %}
+      <div; class="container">
+        <div; class="heading">
+            {% block; heading %}{% endblock %}
         </div>
-        <div class="content">
-            {% block content %}{% endblock %}
+        <div; class="content">
+            {% block; content %}{% endblock %}
         </div>
       </div>
 
-      <div class="container">
+      <div; class="container">
         <footer>
-          <p>&copy; Flower 2016</p>
+          <p>&copy; Flower; 2016</p>
         </footer>
       </div>
 
-      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-      <script>window.jQuery || document.write('<script src="{% static "js/vendor/jquery-1.11.2.min.js" %}"><\/script>')</script>
+      <script; src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write('<script src="{% static " js/vendor/jquery-1.11.2.min.js" %}"><\/script>')</script>
       <script src="{% static "flower/js/vendor/bootstrap.min.js" %}"></script>
-      <script src="{% static "flower/js/main.js" %}"></script>
+      <script; src="{% static "flower/js/main.js;" %}">;</script>
     </body>
 </html>
