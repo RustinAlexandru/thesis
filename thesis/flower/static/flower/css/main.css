@@ -4,13 +4,15 @@
    Author's custom styles
    ========================================================================== */
 
-
-
-
-
-
-
-
+.fb {
+    background: url('/static/flower/images/fb_200.png') top;
+    box-shadow: 2px 2px 8px rgba(0,0,0,.7);
+    border-radius: 5px;
+    width: 198px;
+    height: 37px;
+    margin: 20px 20px;
+    overflow: hidden;
+}
 
 
 

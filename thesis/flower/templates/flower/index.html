@@ -6,4 +6,26 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
+    {% if user.first_name or user.last_name %}
+        {{ request.user.first_name }} {{ request.user.last_name }}
+    {% else %}
+        {{ request.user.username }}
+    {% endif %}
+    {% if request.user.profile.account_verified %} (verified) {% else %} (unverified) {% endif %}
+
+{% url 'socialaccount_connections' as connections_url %}
+  {% if connections_url %}
+  <li class="{% block account_nav_socialaccount_connections %}{% endblock %}">
+    <a href="{{ connections_url }}"> Connected Accounts</a>
+  </li>
+  {% endif %}
+
+<br>
+<br>
+   {{ wiki | safe }}
+
+{% endif %}
+
+
 {% endblock %}

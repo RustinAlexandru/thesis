@@ -4,10 +4,16 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 
 from forms import RegisterForm
+from wiki import get_wiki_html
 
 
 def index(request):
-    context = []
+    context = {}
+    wiki_page = get_wiki_html()
+
+    context = {
+        'wiki': wiki_page,
+    }
     return render(request, 'flower/index.html', context)
 
 
