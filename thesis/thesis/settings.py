@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'flower.apps.FlowerConfig',
+    'funfly.apps.Funfly',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'debug_toolbar',
+    'pytz',
+    'django_extensions',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -71,7 +73,7 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 ACCOUNT_FORMS = {
-    'login': 'flower.forms.CustomAuthenticationFormOauth',
+    'login': 'funfly.forms.CustomAuthenticationFormOauth',
 }
 
 
@@ -85,6 +87,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'funfly.middleware.TimezoneMiddleware',
 ]
 
 ROOT_URLCONF = 'thesis.urls'
@@ -92,7 +95,7 @@ ROOT_URLCONF = 'thesis.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['/Users/alexandrurustin/Desktop/thesis/thesis/thesis/funfly/templates/funfly'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

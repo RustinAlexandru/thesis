@@ -1,0 +1,41 @@
+{% extends 'funfly/layout.html' %}
+
+
+
+{% block content %}
+
+	<section class="main_wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+
+
+
+
+	{% if user.is_authenticated %}
+		{% if user.first_name or user.last_name %}
+			{{ request.user.first_name }} {{ request.user.last_name }}
+		{% else %}
+			{{ request.user.username }}
+		{% endif %}
+		{% if request.user.profile.account_verified %} (verified) {% else %}
+			(unverified) {% endif %}
+
+		{% url 'socialaccount_connections' as connections_url %}
+		{% if connections_url %}
+			<li class="
+					{% block account_nav_socialaccount_connections %}{% endblock %}">
+				<a href="{{ connections_url }}"> Connected Accounts</a>
+			</li>
+		{% endif %}
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "funfly/layout.html" %}
+
+
+{% block toggle_login %} {% endblock %}
+
+
+{% block content %}
+
+	{% load socialaccount %}
+{#	{% providers_media_js %}#}
+
+    <form action="{% url "login" %}" method="post" accept-charset="utf-8">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="next" value="{{ next }}">
+    <input class="btn btn-default" type="submit" value="Log in">
+    </form>
+
+	<a  href ="{% provider_login_url "facebook" method="oauth2" %}"><div class="fb"></div></a>
+
+{% endblock %}

@@ -1,0 +1,119 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+/*
+
+1) General css
+2) Main page css
+3)..
+
+
+
+*/
+
+/* 1 */
+
+.fb {
+    background: url('/static/funfly/images/fb_200.png') top;
+    box-shadow: 2px 2px 8px rgba(0,0,0,.7);
+    border-radius: 5px;
+    width: 198px;
+    height: 37px;
+    margin: 20px 20px;
+    overflow: hidden;
+}
+
+
+/* 2 */
+
+.header_top {
+  background-color: #333333;
+  padding: 15px 0 14px;
+}
+
+#header_carousel p {
+    color: white;
+    font-size: 12px;
+    margin-top: 0px;
+    margin-bottom: -1px;
+}
+
+.main_box ul {
+  list-style: outside none none;
+  padding: 0;
+}
+
+.main_box ul li {
+    display: inline-block;
+    margin-right: -4px;
+    padding: 8px 0;
+    position: relative;
+}
+
+.main_box ul li.nav_9gags:hover {
+    background: rgba(0, 0, 0, 0) url('../images/smile.svg') no-repeat scroll 25px !important;
+    transition: all 0.1s ease 0s;
+}
+
+.main_box ul li.nav_9gags {
+    background: rgba(0, 0, 0, 0) url('../images/smile.svg') no-repeat scroll 25px;
+    border-top: 0px solid #56BAE7;
+}
+
+.main_box ul li.nav_9gags a {
+    margin-left: 23px;
+    padding: 18px 29px 9px 51px;
+}
+
+.gags_bottom {
+  border-bottom: 1px solid #efefef;
+  overflow: hidden;
+  padding: 10px 0;
+}
+.gags_bottom.last_bottom {
+  border-bottom: 0px solid #efefef;
+}
+
+.left_gags {
+  border: 1px solid #efefef;
+  padding: 5px;
+}
+
+.left_main_header {
+    border-bottom: 1px solid #efefef;
+    margin-bottom: 26px;
+    overflow: hidden;
+    padding-top: 12px;
+}
+
+.single_top_img  {
+    float: left;
+    margin-right: 11px;
+    height: 100px;
+    width: 100px;
+    position: relative;
+}
+
+.top_img {
+    height: 180px;
+    width: 150px;
+}
+
+.single_top_img > img {
+    max-height:100%;
+    max-width:100%;
+}
+.top_img > img {
+    max-height: 100%;
+    max-width: 100%
+}
+
+
+
+/*video {*/
+    /*min-height:280px;*/
+    /*width: 500px;*/
+/*}*/
