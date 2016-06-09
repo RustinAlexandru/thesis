@@ -14,15 +14,23 @@ from scrapy.pipelines.files import FilesPipeline
 
 
 class MyFilesPipeline(FilesPipeline):
+    pass
 
-    def process_item(self, item, spider):
-        if spider.name not in ['9gagspy']:
-            return item
+    # def process_item(self, item, spider):
+    #     if spider.name not in ['9gagspy']:
+    #         return item
+    #     else:
+    #         return item
 
     def item_completed(self, results, item, info):
-       image_paths = [x['path'] for ok, x in results if ok]
-       item['imagevideo_path'] = 'funfly/images/imageorvideos/'+\
+       try:
+        image_paths = [x['path'] for ok, x in results if ok]
+        if not image_paths:
+            raise  IndexError
+        item['imagevideo_path'] = 'funfly/images/imageorvideos/'+\
                                  image_paths[0]
+       except IndexError:
+           return item
        return item
 
 
@@ -42,6 +50,12 @@ def get_or_create(model):
     except class_model.DoesNotExist:
         created = True
         obj = model
+    except AttributeError:
+        try:
+            obj = class_model.objects.get(identifier=model.identifier)
+        except class_model.DoesNotExist:
+            created = True
+            obj = model
 
     return (obj, created)
 

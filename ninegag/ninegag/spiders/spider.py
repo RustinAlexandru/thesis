@@ -2,7 +2,7 @@ import urlparse
 
 import scrapy
 
-from ninegag.items import NineGag, JokeItem
+from ninegag.items import NineGag, Joke
 
 
 class NGagSpyder(scrapy.Spider):
@@ -79,21 +79,27 @@ class JokesSpyder(scrapy.spiders.Spider):
         global priority_nr
         jokes_div = response.xpath('//*[@class="joke-area"]')
         for joke in jokes_div.xpath('.//*[@class="line"]'):
+            joke_id = joke.xpath('.//p/@id').extract_first()
             joke_text = joke.xpath('.//p/text()').extract()
             joke_text = ' '.join(joke_text)
-            joke_text = joke_text.strip(" \n")
+            # joke_text = joke_text.strip(" \n")
+            joke_text = " ".join(joke_text.split())
             joke_likes = joke.xpath('.//div[@class="thum-like-number"]/text()').extract_first()
             joke_dislikes = joke.xpath('.//div[@class="thum-dislike-number"]/text()').extract_first()
-            joke_item = JokeItem()
+            joke_category = response.xpath('//div[@class="new-content"]').xpath('.//span[@class="relation-color"]/text()').extract_first()
+            joke_category = " ".join(joke_category.split())
+            joke_item = Joke()
             joke_item['text'] = joke_text
             joke_item['likes'] = int(joke_likes)
             joke_item['dislikes'] = int(joke_dislikes)
+            joke_item['category'] = joke_category
+            joke_item['identifier'] = joke_id + joke_category
             yield joke_item
 
 
         next_page = jokes_div.xpath('.//div[@class="pagination"]//li//span//a')[-1].extract()
         next_page_nr = int(jokes_div.xpath('.//div[@class="pagination"]//li//span//a/@href')[-1].extract()[-1])
-        if "list-next" in next_page and next_page_nr <= 5:
+        if "list-next" in next_page and next_page_nr <= 2:
             next_page = jokes_div.xpath('.//div[@class="pagination"]//li//span/a/@href')[ -1].extract()
-            yield scrapy.Request(next_page, callback=self.parse_page, dont_filter=True, priority=priority_nr)
+            yield scrapy.Request(next_page, callback=self.parse_page, dont_filter=False, priority=priority_nr)
             priority_nr -= 1

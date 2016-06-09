@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'pytz',
     'django_extensions',
     'django.contrib.sites',
+    'moderation',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',

@@ -24,9 +24,11 @@ class NineGag(DjangoItem):
     django_model = Ninegag
 
 class JokeItem(scrapy.Item):
+    identifier = scrapy.Field()
     text = scrapy.Field()
     likes = scrapy.Field()
     dislikes = scrapy.Field()
+    category = scrapy.Field()
 
 class Joke(DjangoItem):
     django_model = Joke
