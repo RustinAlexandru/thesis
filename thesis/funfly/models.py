@@ -26,7 +26,7 @@ class UserProfile(models.Model):
 
 
 class Ninegag(ModeratedModel):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, db_index=True)
     source_url = models.CharField(max_length=200)
     imagevideo_path = models.CharField(max_length=200)
     is_video = models.BooleanField(default=False)
@@ -40,8 +40,8 @@ class Ninegag(ModeratedModel):
         notify_user = False
 
 
-class Joke(models.Model):
-    identifier = models.CharField(max_length=50, default='')
+class Joke(ModeratedModel):
+    identifier = models.CharField(max_length=50, default='', db_index=True)
     text = models.TextField(default='')
     likes = models.IntegerField(default=0)
     dislikes = models.IntegerField(default=0)
@@ -50,3 +50,14 @@ class Joke(models.Model):
     def __unicode__(self):
         return u'%s' % self.text
 
+    class Moderator:
+        notify_user = False
+
+
+class Youtube(models.Model):
+    identifier = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
+    url = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return u'%s' % self.title

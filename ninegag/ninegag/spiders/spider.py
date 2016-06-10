@@ -103,3 +103,30 @@ class JokesSpyder(scrapy.spiders.Spider):
             next_page = jokes_div.xpath('.//div[@class="pagination"]//li//span/a/@href')[ -1].extract()
             yield scrapy.Request(next_page, callback=self.parse_page, dont_filter=False, priority=priority_nr)
             priority_nr -= 1
+
+
+from scrapy.crawler import Crawler
+from scrapy import signals
+from twisted.internet import reactor
+from billiard import Process
+from scrapy.utils.project import get_project_settings
+
+class UrlCrawlerScript(Process):
+        def __init__(self, spider):
+            Process.__init__(self)
+            settings = get_project_settings()
+            self.crawler = Crawler(settings)
+            self.crawler.configure()
+            self.crawler.signals.connect(reactor.stop, signal=signals.spider_closed)
+            self.spider = spider
+
+        def run(self):
+            self.crawler.crawl(self.spider)
+            self.crawler.start()
+            reactor.run()
+
+def run_spider():
+    spider = NGagSpyder()
+    crawler = UrlCrawlerScript(spider)
+    crawler.start()
+    crawler.join()

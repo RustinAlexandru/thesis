@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from moderation.admin import ModerationAdmin
 
-from .models import  Ninegag, UserProfile, Joke
+from .models import  Ninegag, UserProfile, Joke, Youtube
 
 
 # class Admin(admin.ModelAdmin):
@@ -30,7 +30,7 @@ admin.site.unregister(User)
 admin.site.register(User, UserProfileAdmin)
 admin.site.register(Joke, JokeAdmin)
 admin.site.register(Ninegag, NinegagAdmin)
-
+admin.site.register(Youtube)
 
 
 

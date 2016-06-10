@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'funfly.apps.Funfly',
+    'funfly',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'debug_toolbar',
     'pytz',
+    'djcelery',
     'django_extensions',
     'django.contrib.sites',
     'moderation',
@@ -153,7 +154,7 @@ AUTHENTICATION_BACKENDS = (
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Bucharest'
 
 USE_I18N = True
 
@@ -174,3 +175,18 @@ LOGIN_REDIRECT_URL = 'index'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 DEFAULT_CHARSET = 'utf-8'
+
+
+# DEBUG_TOOLBAR_PANELS = (
+# #   'debug_toolbar.panels.version.VersionDebugPanel',
+# #   'debug_toolbar.panels.timer.TimerDebugPanel',
+# #   'debug_toolbar.panels.profiling.ProfilingPanel',
+# # )
+
+# BROKER_URL = 'amqp://guest@localhost//'
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Europe/Bucharest'
+CELERY_ENABLE_UTC = False
+

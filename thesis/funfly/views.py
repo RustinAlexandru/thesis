@@ -4,14 +4,19 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 
 from forms import RegisterForm
-from models import Ninegag, UserProfile
+from models import Ninegag, UserProfile, Joke
 
+
+# from youtube_parsing import youtube_search
 
 def index(request):
     left_8_items = Ninegag.objects.order_by('-pk')[:8]
+    left_6_jokes = Joke.objects.filter(category='Relationship Jokes')[:6]
     context = {
         'items': left_8_items,
+        'jokes': left_6_jokes,
     }
+    # youtube_result = youtube_search('funny')
     return render(request, 'funfly/layout.html', context)
 
 

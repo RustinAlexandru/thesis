@@ -68,6 +68,22 @@
     padding: 18px 29px 9px 51px;
 }
 
+.main_box ul li.nav_jokes:hover {
+    background: rgba(0, 0, 0, 0) url('../images/mouth-open-laugh.svg') no-repeat scroll 25px !important;
+    transition: all 0.1s ease 0s;
+}
+
+.main_box ul li.nav_jokes {
+    background: rgba(0, 0, 0, 0) url('../images/mouth-open-laugh.svg') no-repeat scroll 25px;
+    border-top: 0px solid #56BAE7;
+}
+
+.main_box ul li.nav_jokes a {
+    margin-left: 23px;
+    padding: 18px 29px 9px 51px;
+}
+
+
 .gags_bottom {
   border-bottom: 1px solid #efefef;
   overflow: hidden;

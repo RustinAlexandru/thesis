@@ -1,9 +1,19 @@
-from apiclient.discovery import build
-from apiclient.errors import HttpError
+import sys
+
+import django
+from googleapiclient.discovery import  build
+
+sys.path.append('/Users/alexandrurustin/Desktop/thesis/thesis/thesis')
+
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "thesis.settings")
+django.setup()
+
+from funfly.models import Youtube
 
 DEVELOPER_KEY = "AIzaSyB1dJ9YC6wkueu8q3M9d4HpRUP_BKIS9Oo"
 YOUTUBE_API_SERVICE_NAME = "youtube"
-YOUTUBE_API_VERSION = "v3"c
+YOUTUBE_API_VERSION = "v3"
 
 
 def youtube_search(query):
@@ -27,6 +37,12 @@ def youtube_search(query):
         if search_result["id"]["kind"] == "youtube#video":
             videos.append("%s (%s)" % (search_result["snippet"]["title"],
                                        search_result["id"]["videoId"]))
+            youtube_id = search_result["id"]["videoId"]
+            youtube_title = search_result["snippet"]["title"]
+            youtube_url = 'https://www.youtube.com/embeded/' + youtube_id
+            youtube_item = Youtube.objects.get_or_create(identifier=youtube_id, title=youtube_title, url=youtube_url)
+
+
         elif search_result["id"]["kind"] == "youtube#channel":
             channels.append("%s (%s)" % (search_result["snippet"]["title"],
                                          search_result["id"]["channelId"]))
@@ -38,11 +54,8 @@ def youtube_search(query):
     print "Channels:\n", "\n".join(channels), "\n"
     print "Playlists:\n", "\n".join(playlists), "\n"
 
-    print len(videos)
+
+    return videos
 
 if __name__ == '__main__':
-    try:
-        youtube_search('bon bon')
-    except HttpError, e:
-        print "An HTTP error %d occurred:\n%s" % (e.resp.status, e.content)
-   
+    youtube_search('funny')

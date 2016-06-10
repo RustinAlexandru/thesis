@@ -14,7 +14,6 @@ from scrapy.pipelines.files import FilesPipeline
 
 
 class MyFilesPipeline(FilesPipeline):
-    pass
 
     # def process_item(self, item, spider):
     #     if spider.name not in ['9gagspy']:
