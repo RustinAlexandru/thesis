@@ -1,16 +1,17 @@
 from __future__ import absolute_import
 
+import sys
 from datetime import timedelta
 
 from celery import task
 from celery.task import periodic_task
 
-from ninegag.spiders.spider import run_spider
 from youtube_parsing import youtube_search
 
+sys.path.append('/Users/alexandrurustin/Desktop/thesis/thesis/ninegag')
+from ninegag.spiders.spider import run_spider
 
-# from spider import run_spider
-# from ninegag.spiders.spider import run_spider
+
 
 @task
 def spider():

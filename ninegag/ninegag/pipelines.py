@@ -45,7 +45,7 @@ def get_or_create(model):
     created = False
 
     try:
-        obj = class_model.objects.get(title=model.title)
+        obj = class_model.unmoderated_objects.get(title=model.title)
     except class_model.DoesNotExist:
         created = True
         obj = model

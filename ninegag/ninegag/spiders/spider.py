@@ -1,9 +1,11 @@
 import urlparse
 
 import scrapy
+from scrapy.utils.project import get_project_settings
 
 from ninegag.items import NineGag, Joke
 
+sets = get_project_settings()
 
 class NGagSpyder(scrapy.Spider):
     name = "9gagspy"
@@ -114,15 +116,14 @@ from scrapy.utils.project import get_project_settings
 class UrlCrawlerScript(Process):
         def __init__(self, spider):
             Process.__init__(self)
-            settings = get_project_settings()
-            self.crawler = Crawler(settings)
-            self.crawler.configure()
+            self.crawler = Crawler(spider.__class__, get_project_settings())
+            # self.crawler.configure()
             self.crawler.signals.connect(reactor.stop, signal=signals.spider_closed)
             self.spider = spider
 
         def run(self):
             self.crawler.crawl(self.spider)
-            self.crawler.start()
+            # self.crawler.start()
             reactor.run()
 
 def run_spider():
