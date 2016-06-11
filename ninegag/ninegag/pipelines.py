@@ -51,7 +51,7 @@ def get_or_create(model):
         obj = model
     except AttributeError:
         try:
-            obj = class_model.objects.get(identifier=model.identifier)
+            obj = class_model.unmoderated_objects.get(identifier=model.identifier)
         except class_model.DoesNotExist:
             created = True
             obj = model

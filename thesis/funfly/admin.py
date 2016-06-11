@@ -20,8 +20,13 @@ class UserProfileInline(admin.StackedInline):
 class UserProfileAdmin(UserAdmin):
     inlines = [ UserProfileInline,]
 
-class JokeAdmin(admin.ModelAdmin):
+
+class JokeAdmin(ModerationAdmin):
     list_display = ("text", "category")
+
+
+class YoutubeAdmin(admin.ModelAdmin):
+    list_display = ("title", "added_at")
 
 # Register your models here.
 # admin.site.register(Ninegag, Admin)
@@ -30,8 +35,4 @@ admin.site.unregister(User)
 admin.site.register(User, UserProfileAdmin)
 admin.site.register(Joke, JokeAdmin)
 admin.site.register(Ninegag, NinegagAdmin)
-admin.site.register(Youtube)
-
-
-
-
+admin.site.register(Youtube, YoutubeAdmin)

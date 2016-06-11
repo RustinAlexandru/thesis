@@ -19,6 +19,10 @@ class NGagSpyder(scrapy.Spider):
         gag_item = NineGag()
         gag_source_url = response.css('.badge-post-container').xpath('a/img/@src').extract_first()
         gag_title = response.xpath('//article/header/h2/text()').extract_first()
+        gag_points = response.xpath('//article/header').xpath('p[@class="post-meta"]').css(
+            '.badge-item-love-count').xpath('text()').extract_first()
+        gag_points = int(gag_points.replace(',', ''))
+        gag_item['points'] = gag_points
         gag_item['title'] = gag_title
         gag_item['source_url'] = [gag_source_url]
         return gag_item
@@ -126,8 +130,16 @@ class UrlCrawlerScript(Process):
             # self.crawler.start()
             reactor.run()
 
-def run_spider():
+
+def run_9gag_spider():
     spider = NGagSpyder()
+    crawler = UrlCrawlerScript(spider)
+    crawler.start()
+    crawler.join()
+
+
+def run_jokes_spider():
+    spider = JokesSpyder()
     crawler = UrlCrawlerScript(spider)
     crawler.start()
     crawler.join()

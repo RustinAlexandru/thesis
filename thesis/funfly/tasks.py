@@ -9,13 +9,18 @@ from celery.task import periodic_task
 from youtube_parsing import youtube_search
 
 sys.path.append('/Users/alexandrurustin/Desktop/thesis/thesis/ninegag')
-from ninegag.spiders.spider import run_spider
+from ninegag.spiders.spider import run_9gag_spider, run_jokes_spider
 
 
 
 @task
-def spider():
-    run_spider()
+def spider_9gag():
+    run_9gag_spider()
+
+
+@task
+def spider_jokes():
+    run_jokes_spider()
 
 
 @task

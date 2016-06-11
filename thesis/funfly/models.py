@@ -38,6 +38,7 @@ class Ninegag(ModeratedModel):
 
     class Moderator:
         notify_user = False
+        fields_exclude = ['points', 'date_added']
 
 
 class Joke(ModeratedModel):
@@ -52,12 +53,14 @@ class Joke(ModeratedModel):
 
     class Moderator:
         notify_user = False
+        fields_exclude = ['likes', 'dislikes']
 
 
 class Youtube(models.Model):
     identifier = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
     url = models.CharField(max_length=200)
+    added_at = models.DateTimeField(null=True)
 
     def __unicode__(self):
         return u'%s' % self.title
