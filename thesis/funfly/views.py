@@ -2,9 +2,10 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
+from django.views.generic import DetailView
 
 from forms import RegisterForm
-from models import Ninegag, UserProfile, Joke
+from models import Ninegag, UserProfile, Joke, Youtube, PostComment
 
 
 # from youtube_parsing import youtube_search
@@ -12,9 +13,11 @@ from models import Ninegag, UserProfile, Joke
 def index(request):
     left_8_items = Ninegag.objects.order_by('-pk')[:8]
     left_6_jokes = Joke.objects.filter(category='Relationship Jokes')[:6]
+    left_4_videos = Youtube.objects.order_by('-pk')[:4]
     context = {
         'items': left_8_items,
         'jokes': left_6_jokes,
+        'videos': left_4_videos,
     }
     # youtube_result = youtube_search('funny')
     return render(request, 'funfly/layout.html', context)
@@ -55,3 +58,14 @@ def register(request):
                 'RegisterForm': form
             }
             return render(request, 'funfly/register.html', context)
+
+
+class VideoPostDetails(DetailView):
+    model = Youtube
+
+    def get_context_data(self, **kwargs):
+        context = super(VideoPostDetails, self).get_context_data(**kwargs)
+        if 'pk' in self.kwargs:
+            pk = self.kwargs['pk']
+            context['comments'] = PostComment.objects.filter(post_id=pk)
+        return context

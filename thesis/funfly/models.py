@@ -64,3 +64,16 @@ class Youtube(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.title
+
+
+class PostComment(models.Model):
+    text = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    post = models.ForeignKey('Youtube', related_name='comments',
+                             verbose_name='post', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='comments',
+                             verbose_name='user', on_delete=models.CASCADE)
+
+    def __unicode__(self):
+        return u'{} @ {}'.format(self.user, self.date_added)

@@ -141,8 +141,8 @@
 
 
 
-{% block content %}
 {# News Showcase Area Start #}
+{% block news_showcase %}
 <section class="news_showcase_area">
 	<div class="container">
 		<div class="row">
@@ -173,11 +173,14 @@
 	</div>
 </section>
 {# News Showcase Area End #}
+{% endblock %}
+
 
 {# Main Wrapper Start #}
 <section class="main_wrapper">
 	<div class="container">
 		<div class="row">
+			{% block main_wrapper %}
 			<div class="col-md-9 col-sm-9 col-xs-12">
 				{# Left Main Area Start #}
 				<div class="left_main_area">
@@ -224,7 +227,9 @@
 													</div>
 													<div class="single_bottom_text">
 														<h4><a href=""> {{ items.1.title}} </a></h4>
-														<p><a class="9gags_color" href="#">9gag</a>| <i class="fa fa-clock-o"></i> {{ items.1.date_added }} </p>
+														<p><a class="9gags_color" href="#">9gag</a>| <i
+																class="fa fa-clock-o"></i> {{ items.1.date_added }}
+															<i class="fa fa-comment"></i>2 comments</p>
 													</div>
 												</div>
 												<div class="gags_bottom">
@@ -241,7 +246,9 @@
 													</div>
 													<div class="single_bottom_text">
 														<h4><a href=""> {{ items.2.title}} </a></h4>
-														<p><a class="9gags_color" href="#">9gag</a>| <i class="fa fa-clock-o"></i> {{ items.2.date_added }} </p>
+														<p><a class="9gags_color" href="#">9gag</a>| <i
+																class="fa fa-clock-o"></i> {{ items.2.date_added }}
+															<i class="fa fa-comment"></i>2 comments </p>
 													</div>
 												</div>
 												<div class="gags_bottom last_bottom">
@@ -258,7 +265,9 @@
 													</div>
 													<div class="single_bottom_text">
 														<h4><a href=""> {{ items.3.title}}</a></h4>
-														<p><a class="9gags_color" href="#">9gag</a>| <i class="fa fa-clock-o"></i> {{ items.3.date_added }}</p>
+														<p><a class="9gags_color" href="#">9gag</a>| <i
+																class="fa fa-clock-o"></i> {{ items.3.date_added }}
+															<i class="fa fa-comment"></i>2 comments </p>
 													</div>
 												</div>
 											</div>
@@ -296,7 +305,9 @@
 													</div>
 													<div class="single_bottom_text">
 														<h4><a href=""> {{ items.5.title}} </a></h4>
-														<p><a class="9gags_color" href="#">9gag</a>| <i class="fa fa-clock-o"></i> {{ items.5.date_added }} </p>
+														<p><a class="9gags_color" href="#">9gag</a>| <i
+																class="fa fa-clock-o"></i> {{ items.5.date_added }}
+															<i class="fa fa-comment"></i>2 comments </p>
 													</div>
 												</div>
 												<div class="gags_bottom">
@@ -313,7 +324,9 @@
 													</div>
 													<div class="single_bottom_text">
 														<h4><a href=""> {{ items.6.title }} </a></h4>
-														<p><a class="9gags_color" href="#">9gag</a>| <i class="fa fa-clock-o"></i> {{ items.6.date_added }} </p>
+														<p><a class="9gags_color" href="#">9gag</a>| <i
+																class="fa fa-clock-o"></i> {{ items.6.date_added }}
+															<i class="fa fa-comment"></i>2 comments </p>
 													</div>
 												</div>
 												<div class="gags_bottom last_bottom">
@@ -330,7 +343,9 @@
 													</div>
 													<div class="single_bottom_text">
 														<h4><a href=""> {{ items.7.title }} </a></h4>
-														<p><a class="9gags_color" href="#">9gag</a>| <i class="fa fa-clock-o"></i> {{ items.7.date_added }} </p>
+														<p><a class="9gags_color" href="#">9gag</a>| <i
+																class="fa fa-clock-o"></i> {{ items.7.date_added }}
+															<i class="fa fa-comment"></i>2 comments </p>
 													</div>
 												</div>
 											</div>
@@ -339,8 +354,67 @@
 								</div>
 							</div>
 							<div class="left_main_header videos_heading">
+								<div class="left_main main_box">
+									<ul>
+										<li class="nav_videos"><a href="#">Videos</a></li>
+									</ul>
+								</div>
 							</div>
 							<div class="videos_area_box">
+								<div class="row">
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<div class="all_left_videos">
+											<div class="videos_left">
+												<iframe src={{ videos.0.url }} frameborder="0">
+													Your browser doesn't support iframes!
+												</iframe>
+												<div class="single_bottom_text">
+													<h4><a href=""> {{ videos.0.title }} </a></h4>
+													<p><a class="videos_color" href="#">videos</a>|<i
+															class="fa fa-clock-o"></i> {{ videos.0.added_at }}
+														<i class="fa fa-comment"></i>2 comments </p>
+												</div>
+											</div>
+											<div class="videos_left last_bottom">
+												<iframe src={{ videos.1.url }} frameborder="0">
+													Your browser doesn't support iframes!
+												</iframe>
+												<div class="single_bottom_text">
+													<h4><a href=""> {{ videos.1.title }} </a></h4>
+													<p><a class="videos_color" href="#">videos</a>|<i
+															class="fa fa-clock-o"></i> {{ videos.1.added_at }}
+														<i class="fa fa-comment"></i>2 comments </p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<div class="all_left_videos">
+											<div class="videos_left">
+												<iframe src={{ videos.2.url }} frameborder="0">
+													Your browser doesn't support iframes!
+												</iframe>
+												<div class="single_bottom_text">
+													<h4><a href=""> {{ videos.2.title }} </a></h4>
+													<p><a class="videos_color" href="#">videos</a>|<i
+															class="fa fa-clock-o"></i> {{ videos.2.added_at }}
+														<i class="fa fa-comment"></i>2 comments</p>
+												</div>
+											</div>
+											<div class="videos_left last_bottom">
+												<iframe src={{ videos.3.url }} frameborder="0">
+													Your browser doesn't support iframes!
+												</iframe>
+												<div class="single_bottom_text">
+													<h4><a href=""> {{ videos.3.title }} </a></h4>
+													<p><a class="videos_color" href="#">videos</a>|<i
+															class="fa fa-clock-o"></i> {{ videos.3.added_at }}
+														<i class="fa fa-comment"></i>2 comments </p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 							<div class="left_main_header jokes_heading">
 								<div class="left_main main_box">
@@ -448,7 +522,7 @@
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="footer_bottom_box">
-						<p>&copy Flower 2016</p>
+						<p>&copy Funfly 2016</p>
 					</div>
 				</div>
 			</div>

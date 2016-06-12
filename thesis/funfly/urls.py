@@ -6,6 +6,7 @@ from django.contrib.auth import views as auth_views
 from django.core.urlresolvers import reverse_lazy
 
 from forms import CustomAuthenticationForm
+from funfly.views import VideoPostDetails
 from . import views
 
 urlpatterns = [
@@ -18,5 +19,7 @@ urlpatterns = [
                       {'next_page': reverse_lazy('index')}, name='logout'),
                   url(r'^register/$', views.register, name='register'),
                   url(r'^$', views.index, name='index'),
+                  url(r'^video_post/(?P<pk>\d+)/$', VideoPostDetails.as_view(template_name='video_post.html'),
+                      name='video_post_details')
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

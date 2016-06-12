@@ -1,5 +1,3 @@
-
-
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
@@ -8,7 +6,7 @@
 
 1) General css
 2) Main page css
-3)..
+3) Video post css
 
 
 
@@ -18,7 +16,7 @@
 
 .fb {
     background: url('/static/funfly/images/fb_200.png') top;
-    box-shadow: 2px 2px 8px rgba(0,0,0,.7);
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, .7);
     border-radius: 5px;
     width: 198px;
     height: 37px;
@@ -26,12 +24,11 @@
     overflow: hidden;
 }
 
-
 /* 2 */
 
 .header_top {
-  background-color: #333333;
-  padding: 15px 0 14px;
+    background-color: #333333;
+    padding: 15px 0 14px;
 }
 
 #header_carousel p {
@@ -42,8 +39,8 @@
 }
 
 .main_box ul {
-  list-style: outside none none;
-  padding: 0;
+    list-style: outside none none;
+    padding: 0;
 }
 
 .main_box ul li {
@@ -83,19 +80,71 @@
     padding: 18px 29px 9px 51px;
 }
 
+.jokes_left .single_top_img_text {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.main_box ul li.nav_videos:hover {
+    background: rgba(0, 0, 0, 0) url('../images/old-video-camera-outline-symbol.svg') no-repeat scroll 25px;
+    background-size: 25px 25px;
+    transition: all 0.1s ease 0s;
+}
+
+.main_box ul li.nav_videos {
+    background: rgba(0, 0, 0, 0) url('../images/old-video-camera-outline-symbol.svg') no-repeat scroll 25px;
+    background-size: 25px 25px;
+    border-top: 0px solid #56BAE7;
+}
+
+.main_box ul li.nav_videos a {
+    margin-left: 23px;
+    padding: 18px 29px 9px 51px;
+}
+
+.nav_videos i {
+    margin-right: 5px;
+}
+
+.nav_videos .last_bottom {
+    border-bottom: 0px solid #efefef;
+}
 
 .gags_bottom {
-  border-bottom: 1px solid #efefef;
-  overflow: hidden;
-  padding: 10px 0;
+    border-bottom: 1px solid #efefef;
+    overflow: hidden;
+    padding: 10px 0;
 }
+
 .gags_bottom.last_bottom {
-  border-bottom: 0px solid #efefef;
+    border-bottom: 0px solid #efefef;
 }
 
 .left_gags {
-  border: 1px solid #efefef;
-  padding: 5px;
+    border: 1px solid #efefef;
+    padding: 5px;
+}
+
+.all_left_jokes {
+    border: 1px solid #efefef;
+    padding: 5px;
+}
+
+.all_left_videos {
+    border: 1px solid #efefef;
+    padding: 5px;
+}
+
+.videos_left {
+    border-bottom: 1px solid #efefef;
+    overflow: hidden;
+    padding: 10px 0;
+}
+
+.jokes_left {
+    border-bottom: 1px solid #efefef;
+    overflow: hidden;
+    padding: 10px 0;
 }
 
 .left_main_header {
@@ -105,7 +154,7 @@
     padding-top: 12px;
 }
 
-.single_top_img  {
+.single_top_img {
     float: left;
     margin-right: 11px;
     height: 100px;
@@ -119,17 +168,78 @@
 }
 
 .single_top_img > img {
-    max-height:100%;
-    max-width:100%;
+    max-height: 100%;
+    max-width: 100%;
 }
+
 .top_img > img {
     max-height: 100%;
     max-width: 100%
 }
 
-
-
 /*video {*/
-    /*min-height:280px;*/
-    /*width: 500px;*/
+/*min-height:280px;*/
+/*width: 500px;*/
 /*}*/
+
+/* 3) Video post css */
+
+.sp_comments_box > h2 {
+    margin-top: 36px;
+}
+
+.single_comment {
+    overflow: hidden;
+    padding: 30px 0;
+}
+
+.single_comment_avatar {
+    float: left;
+    margin-right: 35px;
+    overflow: hidden;
+    width: 105px;
+}
+
+.single_comment_text {
+    float: left;
+    overflow: hidden;
+    width: 83%;
+}
+
+.sp_title a h4 {
+    color: #333;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.sp_title a h4:hover {
+    color: #F8928D;
+    text-decoration: none;
+}
+
+.sp_title {
+    overflow: hidden;
+}
+
+.single_comment_text > a {
+    color: #999;
+    font-size: 12px;
+}
+
+.sp_title > a {
+    float: left;
+    width: 70%;
+}
+
+.sp_title > p {
+    color: #999;
+    float: left;
+    font-size: 12px;
+    text-align: right;
+    width: 20%;
+}
+
+.single_comment {
+    border-top: 1px solid hsl(0, 0%, 93%);
+    border-bottom: 1px solid hsl(0, 0%, 93%);
+}

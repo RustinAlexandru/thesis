@@ -1,0 +1,35 @@
+{% extends 'funfly/layout.html' %}
+
+{% block content %}
+	{% block main_wrapper %}
+		<div class="col-md-9 col-sm-9 col-xs-9">
+			<div class="sp_video_box">
+				<h3>{{ object.title }}</h3>
+				<iframe src={{ object.url }} frameborder="0"></iframe>
+			</div>
+			<div class="sp_comments_box">
+				<h2>Comments</h2>
+				{% for comment in comments %}
+					<div class="single_comment">
+						<div class="single_comment_avatar">
+
+						</div>
+						<div class="single_comment_text">
+							<div class="sp_title">
+								<a href="#"><h4> {{ comment.user }} </h4></a>
+								<p> 10 minutes ago </p>
+							</div>
+							<p>
+								{{ comment.text }}
+							</p>
+
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="comment_form">
+
+			</div>
+		</div>
+	{% endblock %}
+{% endblock %}

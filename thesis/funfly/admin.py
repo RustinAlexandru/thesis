@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from moderation.admin import ModerationAdmin
 
-from .models import  Ninegag, UserProfile, Joke, Youtube
+from .models import Ninegag, UserProfile, Joke, Youtube, PostComment
 
 
 # class Admin(admin.ModelAdmin):
@@ -26,7 +26,7 @@ class JokeAdmin(ModerationAdmin):
 
 
 class YoutubeAdmin(admin.ModelAdmin):
-    list_display = ("title", "added_at")
+    list_display = ("title", 'pk', "added_at")
 
 # Register your models here.
 # admin.site.register(Ninegag, Admin)
@@ -36,3 +36,4 @@ admin.site.register(User, UserProfileAdmin)
 admin.site.register(Joke, JokeAdmin)
 admin.site.register(Ninegag, NinegagAdmin)
 admin.site.register(Youtube, YoutubeAdmin)
+admin.site.register(PostComment)
