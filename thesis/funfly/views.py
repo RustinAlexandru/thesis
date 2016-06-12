@@ -69,8 +69,9 @@ class VideoPostDetails(DetailView):
         context = super(VideoPostDetails, self).get_context_data(**kwargs)
         if 'pk' in self.kwargs:
             pk = self.kwargs['pk']
-            # context['comments'] = PostComment.objects.filter(post_id=pk)
-            context['comments'] = Youtube.objects.get(pk=pk).comments.all()
+            # context['comments'] = PostComment.objects.filter(content_type__postcomment__object_id=pk)
+            comments = Youtube.objects.get(pk=pk).comments.all()
+            context['comments'] = comments
         context['CommentForm'] = CommentForm()
         return context
 
@@ -82,7 +83,7 @@ class VideoPostDetails(DetailView):
             pk = self.kwargs['pk']
             user = self.request.user
             youtube_post = Youtube.objects.get(pk=pk)
-            PostComment.objects.create(text=message, post=youtube_post, user=user)
+            PostComment.objects.create(text=message, content_object=youtube_post, user=user)
             return redirect(reverse('video_post_details', kwargs={'pk': pk}))
         else:
             return redirect(reverse('video_post_details', kwargs={'pk': self.kwargs['pk']}))
@@ -93,13 +94,13 @@ def comment_approve(request, pk):
     comment = PostComment.objects.get(pk=pk)
     if request.user.has_perm('Can change post comment'):
         comment.approve()
-    return redirect('video_post_details', pk=comment.post.pk)
+    return redirect('video_post_details', pk=comment.object_id)
 
 
 @login_required
 def comment_remove(request, pk):
     comment = PostComment.objects.get(pk=pk)
-    post_pk = comment.post.pk
+    post_pk = comment.object_id
     if request.user.has_perm(('Can change post comment')):
         comment.delete()
     return redirect('video_post_details', pk=post_pk)

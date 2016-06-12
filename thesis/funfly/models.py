@@ -3,6 +3,8 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from moderation.db import ModeratedModel
 
@@ -56,22 +58,18 @@ class Joke(ModeratedModel):
         fields_exclude = ['likes', 'dislikes']
 
 
-class Youtube(models.Model):
-    identifier = models.CharField(max_length=100)
-    title = models.CharField(max_length=100)
-    url = models.CharField(max_length=200)
-    added_at = models.DateTimeField(null=True)
-
-    def __unicode__(self):
-        return u'%s' % self.title
-
-
 class PostComment(models.Model):
     text = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
 
-    post = models.ForeignKey('Youtube', related_name='comments',
-                             verbose_name='post', on_delete=models.CASCADE)
+    # post = models.ForeignKey('Youtube', related_name='comments',
+    #                          verbose_name='post', on_delete=models.CASCADE)
+    #
+
+    content_type = models.ForeignKey(ContentType, null=True)
+    object_id = models.PositiveIntegerField(null=True)
+    content_object = GenericForeignKey('content_type', 'object_id')
+
     user = models.ForeignKey(User, related_name='comments',
                              verbose_name='user', on_delete=models.CASCADE)
 
@@ -83,3 +81,17 @@ class PostComment(models.Model):
 
     def __unicode__(self):
         return u'{} @ {}'.format(self.user, self.date_added)
+
+
+class Youtube(models.Model):
+    identifier = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
+    url = models.CharField(max_length=200)
+    added_at = models.DateTimeField(null=True)
+    comments = GenericRelation(PostComment, related_query_name='comments')
+
+    def __unicode__(self):
+        return u'%s' % self.title
+
+    def get_content_type(self):
+        return ContentType.objects.get_for_model(self).id
