@@ -1,0 +1,16 @@
+{% load el_pagination_tags %}
+
+{% lazy_paginate jokes %}
+
+{% for joke in jokes %}
+	<div class="single_joke jokes_left single_top_img_text">
+		<div class="single_top_img_text">
+			<h6><a href="#"> {{ joke.text }} </a></h6>
+		</div>
+		<p><i class="fa fa-clock-o"></i> {{ joke.date_added }}<i
+				class="fa fa-comment"></i>2 comments</p>
+	</div>
+{% endfor %}
+
+
+{% show_more %}

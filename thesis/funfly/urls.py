@@ -6,7 +6,8 @@ from django.contrib.auth import views as auth_views
 from django.core.urlresolvers import reverse_lazy
 
 from forms import CustomAuthenticationForm
-from funfly.views import VideoPostDetails
+from funfly.models import Joke
+from funfly.views import VideoPostDetails, VideosList, JokesList
 from . import views
 
 urlpatterns = [
@@ -19,6 +20,8 @@ urlpatterns = [
                       {'next_page': reverse_lazy('index')}, name='logout'),
                   url(r'^register/$', views.register, name='register'),
                   url(r'^$', views.index, name='index'),
+                  url(r'^jokes/$', JokesList.as_view(model=Joke), name='jokes'),
+                  url(r'^videos/$', VideosList.as_view(template_name='videos.html'), name='videos'),
                   url(r'^video_post/(?P<pk>\d+)/$', VideoPostDetails.as_view(template_name='video_post.html'),
                       name='video_post_details'),
                   url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),

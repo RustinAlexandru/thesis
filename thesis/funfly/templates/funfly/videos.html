@@ -1,0 +1,41 @@
+{% extends 'funfly/layout.html' %}
+
+{% block content %}
+	{% block main_wrapper %}
+		<div class="col-md-9 col-sm-9 col-xs-9 all_videos">
+			{% for video in videos %}
+				<div class="single_video">
+					<iframe src="{{ video.url }}" frameborder="0" width="560" height="315"></iframe>
+					<div class="single_bottom_text">
+						<h4>
+							<a href="{% url 'video_post_details' video.pk %}"> {{ video.title }} </a>
+						</h4>
+						<p><a class="videos_color" href="#">videos</a>|<i
+								class="fa fa-clock-o"></i> {{ video.added_at }}
+							<i class="fa fa-comment"></i>2 comments </p>
+					</div>
+				</div>
+			{% endfor %}
+
+			{% if is_paginated %}
+				<ul class="pagination">
+					{% if page_obj.has_previous %}
+						<li>
+							<span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+						</li>
+					{% endif %}
+					<li class="active">
+						<span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+					</li>
+					{% if page_obj.has_next %}
+						<li>
+							<span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+						</li>
+					{% endif %}
+				</ul>
+			{% else %}
+				<h3>Videos not available</h3>
+			{% endif %}
+		</div>
+	{% endblock %}
+{% endblock %}

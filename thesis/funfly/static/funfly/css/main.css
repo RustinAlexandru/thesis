@@ -7,7 +7,7 @@
 1) General css
 2) Main page css
 3) Video post css
-
+4) Jokes page css
 
 
 */
@@ -278,3 +278,30 @@
     color: #F8928D;
 }
 
+/*  4) Joke page css */
+.endless_page_template {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.single_joke {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/*  5) Videos page css   */
+
+.all_videos {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.single_video {
+    border-bottom: 1px solid #efefef;
+    padding: 50px 0;
+}
+
+/*.single_video iframe {*/
+/*width: 100%;*/
+/*height: 100%;*/
+/*}*/

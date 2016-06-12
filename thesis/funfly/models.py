@@ -49,6 +49,7 @@ class Joke(ModeratedModel):
     likes = models.IntegerField(default=0)
     dislikes = models.IntegerField(default=0)
     category = models.CharField(max_length=100, null=True, blank=False, default='')
+    date_added = models.DateTimeField(auto_now_add=True, null=True)
 
     def __unicode__(self):
         return u'%s' % self.text

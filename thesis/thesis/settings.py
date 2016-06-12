@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django.contrib.sites',
     'moderation',
+    'el_pagination',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -110,6 +111,12 @@ TEMPLATES = [
         },
     },
 ]
+
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
+
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'django.core.context_processors.request',
+)
 
 WSGI_APPLICATION = 'thesis.wsgi.application'
 

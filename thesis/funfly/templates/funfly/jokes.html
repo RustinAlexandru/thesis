@@ -1,0 +1,23 @@
+{% extends 'funfly/layout.html' %}
+{% load staticfiles %}
+
+
+{% load el_pagination_tags %}
+
+
+{% block content %}
+	{% block main_wrapper %}
+		<div class="col-md-9 col-sm-9 col-xs-9">
+			<div class="endless_page_template">
+				{% include page_template %}
+				{% block js %}
+					{{ block.super }}
+					<script src="http://code.jquery.com/jquery-latest.js"></script>
+					<script src="{% static "funfly/js/el-pagination.js" %}"></script>
+					<script>$.endlessPaginate();</script>
+				{% endblock %}
+			</div>
+		</div>
+	{% endblock %}
+{% endblock %}
+

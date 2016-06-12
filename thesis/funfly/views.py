@@ -6,6 +6,8 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
+from django.views.generic.list import ListView
+from el_pagination.views import AjaxListView
 
 from forms import RegisterForm, CommentForm
 from models import Ninegag, UserProfile, Joke, Youtube, PostComment
@@ -88,6 +90,18 @@ class VideoPostDetails(DetailView):
         else:
             return redirect(reverse('video_post_details', kwargs={'pk': self.kwargs['pk']}))
 
+
+class VideosList(ListView):
+    model = Youtube
+    context_object_name = 'videos'
+    paginate_by = 5
+
+
+class JokesList(AjaxListView):
+    model = Joke
+    context_object_name = 'jokes'
+    template_name = 'jokes.html'
+    page_template = 'joke_list.html'
 
 @login_required
 def comment_approve(request, pk):

@@ -123,8 +123,8 @@
 
 						<ul class="nav navbar-nav">
 							<li><a href="#">9gags</a></li>
-							<li><a href="#">Videos</a></li>
-							<li><a href="#">Jokes</a></li>
+							<li><a href="{% url 'videos' %}">Videos</a></li>
+							<li><a href="{% url 'jokes' %}">Jokes</a></li>
 							<li><a href="#">About</a></li>
 						</ul>
 					</div>
@@ -439,19 +439,22 @@
 												<div class="single_top_img_text">
 													<h6><a href="#"> {{ jokes.0.text }} </a></h6>
 												</div>
-											<p> <i class="fa fa-clock-o"></i> {{ items.0.date_added }}<i class="fa fa-comment"></i>2 comments</p>
+												<p><i class="fa fa-clock-o"></i> {{ jokes.0.date_added }}<i
+														class="fa fa-comment"></i>2 comments</p>
 											</div>
 											<div class="jokes_left">
 												<div class="single_top_img_text">
 													<h6><a href="#"> {{ jokes.1.text }} </a></h6>
 												</div>
-											<p> <i class="fa fa-clock-o"></i> {{ items.0.date_added }}<i class="fa fa-comment"></i>2 comments</p>
+												<p><i class="fa fa-clock-o"></i> {{ jokes.1.date_added }}<i
+														class="fa fa-comment"></i>2 comments</p>
 											</div>
 											<div class="jokes_left last_left">
 												<div class="single_top_img_text">
 													<h6><a href="#"> {{ jokes.2.text }} </a></h6>
 												</div>
-											<p> <i class="fa fa-clock-o"></i> {{ items.0.date_added }}<i class="fa fa-comment"></i>2 comments</p>
+												<p><i class="fa fa-clock-o"></i> {{ jokes.2.date_added }}<i
+														class="fa fa-comment"></i>2 comments</p>
 											</div>
 										</div>
 									</div>
@@ -461,21 +464,21 @@
 												<div class="single_top_img_text">
 													<h6><a href="#"> {{ jokes.3.text }} </a></h6>
 												</div>
-												<p><i class="fa fa-clock-o"></i> {{ items.0.date_added }}<i
+												<p><i class="fa fa-clock-o"></i> {{ jokes.3.date_added }}<i
 														class="fa fa-comment"></i>2 comments</p>
 											</div>
 											<div class="jokes_left">
 												<div class="single_top_img_text">
 													<h6><a href="#"> {{ jokes.4.text }} </a></h6>
 												</div>
-												<p><i class="fa fa-clock-o"></i> {{ items.0.date_added }}<i
+												<p><i class="fa fa-clock-o"></i> {{ jokes.4.date_added }}<i
 														class="fa fa-comment"></i>2 comments</p>
 											</div>
 											<div class="jokes_left last_left">
 												<div class="single_top_img_text">
 													<h6><a href="#"> {{ jokes.5.text }} </a></h6>
 												</div>
-												<p><i class="fa fa-clock-o"></i> {{ items.0.date_added }}<i
+												<p><i class="fa fa-clock-o"></i> {{ jokes.5.date_added }}<i
 														class="fa fa-comment"></i>2 comments</p>
 											</div>
 										</div>
