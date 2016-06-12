@@ -26,7 +26,11 @@ class JokeAdmin(ModerationAdmin):
 
 
 class YoutubeAdmin(admin.ModelAdmin):
-    list_display = ("title", 'pk', "added_at")
+    list_display = ("title", "pk", "added_at")
+
+
+class PostCommentAdmin(admin.ModelAdmin):
+    list_display = ("user", "post")
 
 # Register your models here.
 # admin.site.register(Ninegag, Admin)
@@ -36,4 +40,4 @@ admin.site.register(User, UserProfileAdmin)
 admin.site.register(Joke, JokeAdmin)
 admin.site.register(Ninegag, NinegagAdmin)
 admin.site.register(Youtube, YoutubeAdmin)
-admin.site.register(PostComment)
+admin.site.register(PostComment, PostCommentAdmin)

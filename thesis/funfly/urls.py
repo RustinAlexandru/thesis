@@ -20,6 +20,8 @@ urlpatterns = [
                   url(r'^register/$', views.register, name='register'),
                   url(r'^$', views.index, name='index'),
                   url(r'^video_post/(?P<pk>\d+)/$', VideoPostDetails.as_view(template_name='video_post.html'),
-                      name='video_post_details')
+                      name='video_post_details'),
+                  url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
+                  url(r'^comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

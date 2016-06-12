@@ -17,18 +17,32 @@
 						<div class="single_comment_text">
 							<div class="sp_title">
 								<a href="#"><h4> {{ comment.user }} </h4></a>
-								<p> 10 minutes ago </p>
+								<p> {{ comment.date_added }}  </p>
 							</div>
 							<p>
 								{{ comment.text }}
 							</p>
-
+							{% if not comment.approved_comment %}
+								{% if perms.funfly.change_postcomment %}
+									<a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span
+											class="glyphicon glyphicon-remove"></span></a>
+									<a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span
+											class="glyphicon glyphicon-ok"></span></a>
+								{% endif %}
+							{% endif %}
 						</div>
 					</div>
 				{% endfor %}
+				<div class="comment_form">
+					<h2></h2>
+				</div>
 			</div>
 			<div class="comment_form">
-
+				<h2>Leave your comment</h2>
+				<div class="comments_form">
+					{% load crispy_forms_tags %}
+					{% crispy CommentForm CommentForm.helper %}
+				</div>
 			</div>
 		</div>
 	{% endblock %}

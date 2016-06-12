@@ -4,18 +4,29 @@
 {% block toggle_login %} {% endblock %}
 
 
-{% block content %}
+{% block main_wrapper %}
 
 	{% load socialaccount %}
 {#	{% providers_media_js %}#}
 
-    <form action="{% url "login" %}" method="post" accept-charset="utf-8">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="hidden" name="next" value="{{ next }}">
-    <input class="btn btn-default" type="submit" value="Log in">
-    </form>
+	<div class="col-md-9 col-sm-9 col-xs-9">
+		<div class="login_form">
+			<form action="{% url "login" %}" method="post" accept-charset="utf-8">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<input type="hidden" name="next" value="{{ next }}">
+				<input class="btn btn-default" type="submit" value="Log in">
+			</form>
+		</div>
 
-	<a  href ="{% provider_login_url "facebook" method="oauth2" %}"><div class="fb"></div></a>
+		<br>
+		<br>
 
+		<div class="fb_login">
+			<a href="{% provider_login_url "facebook" method="oauth2" %}">
+				<div class="fb"></div>
+			</a>
+		</div>
+
+	</div>
 {% endblock %}

@@ -75,5 +75,11 @@ class PostComment(models.Model):
     user = models.ForeignKey(User, related_name='comments',
                              verbose_name='user', on_delete=models.CASCADE)
 
+    approved_comment = models.BooleanField(default=False)
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
     def __unicode__(self):
         return u'{} @ {}'.format(self.user, self.date_added)

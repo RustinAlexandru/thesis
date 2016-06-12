@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render
+from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
 
-from forms import RegisterForm
+from forms import RegisterForm, CommentForm
 from models import Ninegag, UserProfile, Joke, Youtube, PostComment
 
 
@@ -21,7 +24,6 @@ def index(request):
     }
     # youtube_result = youtube_search('funny')
     return render(request, 'funfly/layout.html', context)
-
 
 def register(request):
     if request.method == 'GET':
@@ -67,5 +69,37 @@ class VideoPostDetails(DetailView):
         context = super(VideoPostDetails, self).get_context_data(**kwargs)
         if 'pk' in self.kwargs:
             pk = self.kwargs['pk']
-            context['comments'] = PostComment.objects.filter(post_id=pk)
+            # context['comments'] = PostComment.objects.filter(post_id=pk)
+            context['comments'] = Youtube.objects.get(pk=pk).comments.all()
+        context['CommentForm'] = CommentForm()
         return context
+
+    @method_decorator(login_required)
+    def post(self, request, *args, **kwargs):
+        form = CommentForm(request.POST)
+        if form.is_valid() and request.user.is_authenticated():
+            message = form.cleaned_data['text']
+            pk = self.kwargs['pk']
+            user = self.request.user
+            youtube_post = Youtube.objects.get(pk=pk)
+            PostComment.objects.create(text=message, post=youtube_post, user=user)
+            return redirect(reverse('video_post_details', kwargs={'pk': pk}))
+        else:
+            return redirect(reverse('video_post_details', kwargs={'pk': self.kwargs['pk']}))
+
+
+@login_required
+def comment_approve(request, pk):
+    comment = PostComment.objects.get(pk=pk)
+    if request.user.has_perm('Can change post comment'):
+        comment.approve()
+    return redirect('video_post_details', pk=comment.post.pk)
+
+
+@login_required
+def comment_remove(request, pk):
+    comment = PostComment.objects.get(pk=pk)
+    post_pk = comment.post.pk
+    if request.user.has_perm(('Can change post comment')):
+        comment.delete()
+    return redirect('video_post_details', pk=post_pk)

@@ -369,7 +369,9 @@
 													Your browser doesn't support iframes!
 												</iframe>
 												<div class="single_bottom_text">
-													<h4><a href=""> {{ videos.0.title }} </a></h4>
+													<h4>
+														<a href="{% url 'video_post_details' videos.0.pk %}"> {{ videos.0.title }} </a>
+													</h4>
 													<p><a class="videos_color" href="#">videos</a>|<i
 															class="fa fa-clock-o"></i> {{ videos.0.added_at }}
 														<i class="fa fa-comment"></i>2 comments </p>
@@ -380,7 +382,9 @@
 													Your browser doesn't support iframes!
 												</iframe>
 												<div class="single_bottom_text">
-													<h4><a href=""> {{ videos.1.title }} </a></h4>
+													<h4>
+														<a href="{% url 'video_post_details' videos.1.pk %}"> {{ videos.1.title }} </a>
+													</h4>
 													<p><a class="videos_color" href="#">videos</a>|<i
 															class="fa fa-clock-o"></i> {{ videos.1.added_at }}
 														<i class="fa fa-comment"></i>2 comments </p>
@@ -395,7 +399,9 @@
 													Your browser doesn't support iframes!
 												</iframe>
 												<div class="single_bottom_text">
-													<h4><a href=""> {{ videos.2.title }} </a></h4>
+													<h4>
+														<a href="{% url 'video_post_details' videos.2.pk %}"> {{ videos.2.title }} </a>
+													</h4>
 													<p><a class="videos_color" href="#">videos</a>|<i
 															class="fa fa-clock-o"></i> {{ videos.2.added_at }}
 														<i class="fa fa-comment"></i>2 comments</p>
@@ -406,7 +412,9 @@
 													Your browser doesn't support iframes!
 												</iframe>
 												<div class="single_bottom_text">
-													<h4><a href=""> {{ videos.3.title }} </a></h4>
+													<h4>
+														<a href="{% url 'video_post_details' videos.3.pk %}"> {{ videos.3.title }} </a>
+													</h4>
 													<p><a class="videos_color" href="#">videos</a>|<i
 															class="fa fa-clock-o"></i> {{ videos.3.added_at }}
 														<i class="fa fa-comment"></i>2 comments </p>

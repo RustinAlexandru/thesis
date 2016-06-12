@@ -3,63 +3,65 @@ import pytz
 from allauth.account.forms import LoginForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
+from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
-from django.forms import *
 from django.utils.translation import ugettext_lazy as _
+
+from funfly.models import PostComment
 
 
 class CustomAuthenticationForm(AuthenticationForm):
-    password = CharField(label=_(u"Password"), strip=False, widget=PasswordInput)
+    password = forms.CharField(label=_(u"Password"), strip=False, widget=forms.PasswordInput)
 
 class CustomAuthenticationFormOauth(LoginForm):
-    password = CharField(label=_(u"Password"), strip=False, widget=PasswordInput)
+    password = forms.CharField(label=_(u"Password"), strip=False, widget=forms.PasswordInput)
 
-class RegisterForm(Form):
-    first_name = CharField(
+
+class RegisterForm(forms.Form):
+    first_name = forms.CharField(
         max_length=50,
         required=True,
     )
 
-    last_name = CharField(
+    last_name = forms.CharField(
         max_length=50,
         required=True,
     )
 
-    username = CharField(
+    username = forms.CharField(
         max_length=30,
         required=True,
     )
 
-    password = CharField(
+    password = forms.CharField(
         label='Password',
-        widget=PasswordInput,
+        widget=forms.PasswordInput,
     )
 
-    email = EmailField(
-        widget=EmailInput,
+    email = forms.EmailField(
+        widget=forms.EmailInput,
     )
 
-    sex = TypedChoiceField(
+    sex = forms.TypedChoiceField(
         label= u"Please select your gender!",
         choices=((1, "Male"), (0, "Female")),
         coerce=lambda x: bool(int(x)),
-        widget=RadioSelect,
+        widget=forms.RadioSelect,
         initial='1',
         required=True,
     )
 
-    city = CharField(
+    city = forms.CharField(
         label='City',
         required=False,
 
     )
 
-    timezone = ChoiceField(
+    timezone = forms.ChoiceField(
         label=_('Time Zone'),
         choices=[(t, t) for t in pytz.common_timezones]
     )
-
 
     def __init__(self, *args, **kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)
@@ -89,13 +91,45 @@ class RegisterForm(Form):
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if email and User.objects.filter(email=email).count():
-            raise ValidationError(
+            raise forms.ValidationError(
                 'Please choose another email, email already in use!')
         return email
 
     def clean_username(self):
         username = self.cleaned_data.get('username')
         if username and User.objects.filter(username=username).count():
-            raise ValidationError(
+            raise forms.ValidationError(
                 'Username is already taken, pick another one!')
         return username
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = PostComment
+        fields = ['text']
+        labels = {
+            'text': _('Message'),
+        }
+
+        widgets = {
+            'text': forms.Textarea(attrs={'placeholder': 'Message...',
+                                          'required': True}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'id_comment_form'
+        self.helper.form_method = 'post'
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2 col-md-2 col-sm-2'
+        self.helper.field_class = 'col-lg-10 col-md-10 col-sm-10'
+        self.helper.layout = Layout(
+            Fieldset(
+                '',
+                'text',
+            ),
+            ButtonHolder(
+                Submit('submit', 'Submit', css_class='button submit')
+            )
+        )
