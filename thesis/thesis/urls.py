@@ -21,5 +21,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^funfly/', include('funfly.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^accounts/', include('allauth.urls')),
+                  url('', include('social.apps.django_app.urls', namespace='social'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

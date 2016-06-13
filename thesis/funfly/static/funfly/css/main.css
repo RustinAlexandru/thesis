@@ -8,14 +8,18 @@
 2) Main page css
 3) Video post css
 4) Jokes page css
+5) Videos page css
+6) 9gag post css
+7) Ninegags page css
+
+ */
 
 
-*/
 
 /* 1) General css */
 
 .fb {
-    background: url('/static/funfly/images/fb_200.png') top;
+    background: url('../images/fb_200.png') top;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, .7);
     border-radius: 5px;
     width: 198px;
@@ -306,6 +310,9 @@ i {
     margin-right: 10px;
 }
 
+.joke_details_page {
+    padding-top: 100px;
+}
 /*  5) Videos page css   */
 
 .all_videos {
@@ -342,3 +349,4 @@ i {
     border-bottom: 1px solid #efefef;
     margin-bottom: 50px;
 }
+

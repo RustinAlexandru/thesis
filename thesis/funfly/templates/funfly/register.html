@@ -1,7 +1,4 @@
 {% extends 'funfly/layout.html' %}
-{% load i18n %}
-{% load account socialaccount %}
-{% providers_media_js %}
 
 
 {% block heading %}
@@ -25,36 +22,7 @@
 			{% load crispy_forms_tags %}
 			{% crispy RegisterForm RegisterForm.helper %}
 
-			{% load socialaccount %}
-
-
 		</div>
-		<br>
-		<br>
-		<div class="fb_login">
-			<a href="{% provider_login_url "facebook" method="oauth2" %}">Facebook OAuth2</a>
-		</div>
-
-		<br>
-
-{% get_providers as socialaccount_providers %}
-
-{% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts.{% endblocktrans %}</p>
-
-<div class="socialaccount_ballot">
-  <ul class="socialaccount_providers">
-    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
-</div>
-
-{% endif %}
-
-<br>
-
-		<p>Already got an account? Then please <a href="{% url 'login' %}"> log into it</a>.</p>
-
 
 	</div>
 {% endblock %}

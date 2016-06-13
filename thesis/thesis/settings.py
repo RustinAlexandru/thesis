@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -45,39 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'moderation',
     'el_pagination',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.instagram',
-
+    'social.apps.django_app.default',
 ]
 
 SITE_ID = 1
-
-SOCIALACCOUNT_PROVIDERS = {
-    'facebook': {
-        'SCOPE': ['email', 'public_profile'],
-        'METHOD': 'js_sdk', 'oauth2'
-        'FIELDS': [
-                   'id',
-                   'email',
-                   'name',
-                   'first_name',
-                   'last_name',
-                   'verified',
-                   'locale',
-                   'timezone',
-                   'link',
-                   'gender',
-                   'updated_time'
-                  ],
-    }
-}
-
-ACCOUNT_FORMS = {
-    'login': 'funfly.forms.CustomAuthenticationFormOauth',
-}
 
 
 
@@ -107,6 +79,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -151,10 +125,20 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
+    'social.backends.facebook.FacebookAppOAuth2',
+    'social.backends.facebook.FacebookOAuth2',
 
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
 )
+
+SOCIAL_AUTH_FACEBOOK_KEY = '527379650781936'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'd14158368a25f659e4920fb7fb845380'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_LOGIN_URL = '/'
+
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import pytz
-from allauth.account.forms import LoginForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 from django import forms
@@ -14,8 +13,9 @@ from funfly.models import PostComment
 class CustomAuthenticationForm(AuthenticationForm):
     password = forms.CharField(label=_(u"Password"), strip=False, widget=forms.PasswordInput)
 
-class CustomAuthenticationFormOauth(LoginForm):
-    password = forms.CharField(label=_(u"Password"), strip=False, widget=forms.PasswordInput)
+
+# class CustomAuthenticationFormOauth(LoginForm):
+#     password = forms.CharField(label=_(u"Password"), strip=False, widget=forms.PasswordInput)
 
 
 class RegisterForm(forms.Form):
