@@ -17,14 +17,13 @@ from models import Ninegag, UserProfile, Joke, Youtube, PostComment
 
 def index(request):
     left_8_items = Ninegag.objects.order_by('-pk')[:8]
-    left_6_jokes = Joke.objects.filter(category='Relationship Jokes')[:6]
+    left_6_jokes = Joke.objects.order_by('-pk')[:6]
     left_4_videos = Youtube.objects.order_by('-pk')[:4]
     context = {
         'items': left_8_items,
         'jokes': left_6_jokes,
         'videos': left_4_videos,
     }
-    # youtube_result = youtube_search('funny')
     return render(request, 'funfly/layout.html', context)
 
 def register(request):
@@ -140,9 +139,9 @@ class NinegagPostDetails(DetailView):
             user = self.request.user
             ninegag_post = Ninegag.objects.get(pk=pk)
             PostComment.objects.create(text=message, content_object=ninegag_post, user=user)
-            return redirect(reverse('joke_post_details', kwargs={'pk': pk}))
+            return redirect(reverse('ninegag_post_details', kwargs={'pk': pk}))
         else:
-            return redirect(reverse('joke_post_details', kwargs={'pk': self.kwargs['pk']}))
+            return redirect(reverse('ninegag_post_details', kwargs={'pk': self.kwargs['pk']}))
 
 class VideosList(ListView):
     model = Youtube
@@ -169,7 +168,7 @@ def comment_approve(request, pk):
     if comment.content_type.model == 'joke':
         return redirect('joke_post_details', pk=comment.object_id)
     elif comment.content_type.model == 'ninegag':
-        return redirect('9gag_post_details', pk=comment.object_id)
+        return redirect('ninegag_post_details', pk=comment.object_id)
     return redirect('video_post_details', pk=comment.object_id)
 
 
@@ -182,5 +181,5 @@ def comment_remove(request, pk):
     if comment.content_type.model == 'joke':
         return redirect('joke_post_details', pk=comment.object_id)
     elif comment.content_type.model == 'ninegag':
-        return redirect('9gag_post_details', pk=comment.object_id)
+        return redirect('ninegag_post_details', pk=comment.object_id)
     return redirect('video_post_details', pk=post_pk)

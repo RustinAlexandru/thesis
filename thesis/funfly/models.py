@@ -97,7 +97,7 @@ class Joke(ModeratedModel):
 
     class Moderator:
         notify_user = False
-        fields_exclude = ['likes', 'dislikes', 'joke_comments']
+        fields_exclude = ['likes', 'dislikes', 'joke_comments', 'date_added']
 
 
 

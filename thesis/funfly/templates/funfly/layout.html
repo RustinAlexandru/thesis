@@ -197,20 +197,29 @@
 								<div class="row">
 									<div class="col-md-6 col-sm-6 col-xs-12">
 										<div class="left_gags">
-											<div class="top_img">
-												{% if items.0.is_video %}
-															<div align="center" class="embed-responsive embed-responsive-16by9">
-																<video preload="auto" loop muted controls class="embed-responsive-item" >
-																	<source src="{% static items.0.imagevideo_path %}" type="video/mp4"> Your browser does not support the video tag!
-																</video>
-															</div>
-														{% else %}
-															<img class="img-responsive" src="{% static items.0.imagevideo_path %}" alt="">
-														{% endif %}
-											</div>
+											{% if items.0.is_video %}
+												<div class="top_video">
+													<div align="center"
+														 class="embed-responsive embed-responsive-16by9">
+														<video preload="auto" loop muted controls
+															   class="embed-responsive-item">
+															<source src="{% static items.0.imagevideo_path %}"
+																	type="video/mp4">
+															Your browser does not support the video tag!
+														</video>
+													</div>
+												</div>
+											{% else %}
+												<div class="top_img">
+													<img class="img-responsive"
+														 src="{% static items.0.imagevideo_path %}" alt="">
+												</div>
+											{% endif %}
 											<div class="single_top_img_text">
 												<h4>
+													{% if items %}
 													<a href="{% url 'ninegag_post_details' items.0.pk %}"> {{ items.0.title }} </a>
+													{% endif %}
 												</h4>
 											</div>
 											<p><i class="fa fa-clock-o"></i> {{ items.0.date_added }}<i
@@ -218,66 +227,93 @@
 												comments</p>
 											<div class="all_gags_bottom">
 												<div class="gags_bottom">
-													<div class="single_top_img">
-														{% if items.1.is_video %}
-															<div align="center" class="embed-responsive embed-responsive-16by9">
-																<video loop muted controls class="embed-responsive-item">
-																	<source src="{% static items.1.imagevideo_path %}" type="video/mp4">Your browser does not support the video tag!
+													{% if items.1.is_video %}
+														<div class="top_video">
+															<div align="center"
+																 class="embed-responsive embed-responsive-16by9">
+																<video preload="auto" loop muted controls
+																	   class="embed-responsive-item">
+																	<source src="{% static items.1.imagevideo_path %}"
+																			type="video/mp4">
+																	Your browser does not support the video tag!
 																</video>
 															</div>
-														{% else %}
-															<img class="img-responsive" src="{% static items.1.imagevideo_path %}" alt="">
-														{% endif %}
-													</div>
+														</div>
+													{% else %}
+														<div class="top_img">
+															<img class="img-responsive"
+																 src="{% static items.1.imagevideo_path %}" alt="">
+														</div>
+													{% endif %}
 													<div class="single_bottom_text">
 														<h4>
+															{% if items %}
 															<a href="{% url 'ninegag_post_details' items.1.pk %}"> {{ items.1.title }} </a>
+															{% endif %}
 														</h4>
-														<p><a class="9gags_color" href="#">9gag</a>| <i
+														<p><a class="category_tag" href="#">9gag</a>| <i
 																class="fa fa-clock-o"></i> {{ items.1.date_added }}
 															<i class="fa fa-comment"></i>{{ items.1.approved_comments.count }}
 															comments</p>
 													</div>
 												</div>
 												<div class="gags_bottom">
-													<div class="single_top_img">
-														{% if items.2.is_video %}
-															<div align="center" class="embed-responsive embed-responsive-16by9">
-																<video preload="auto" loop muted controls class="embed-responsive-item">
-																	<source src="{% static items.2.imagevideo_path %}" type="video/mp4"> Your browser does not support the video tag!
+													{% if items.2.is_video %}
+														<div class="top_video">
+															<div align="center"
+																 class="embed-responsive embed-responsive-16by9">
+																<video preload="auto" loop muted controls
+																	   class="embed-responsive-item">
+																	<source src="{% static items.2.imagevideo_path %}"
+																			type="video/mp4">
+																	Your browser does not support the video tag!
 																</video>
 															</div>
-														{% else %}
-															<img class="img-responsive" src="{% static items.2.imagevideo_path %}" alt="">
-														{% endif %}
-													</div>
+														</div>
+													{% else %}
+														<div class="top_img">
+															<img class="img-responsive"
+																 src="{% static items.2.imagevideo_path %}" alt="">
+														</div>
+													{% endif %}
 													<div class="single_bottom_text">
 														<h4>
+															{% if items %}
 															<a href="{% url 'ninegag_post_details' items.2.pk %}"> {{ items.2.title }} </a>
+															{% endif %}
 														</h4>
-														<p><a class="9gags_color" href="#">9gag</a>| <i
+														<p><a class="category_tag" href="#">9gag</a>| <i
 																class="fa fa-clock-o"></i> {{ items.2.date_added }}
 															<i class="fa fa-comment"></i>{{ items.2.approved_comments.count }}
 															comments</p>
 													</div>
 												</div>
 												<div class="gags_bottom last_bottom">
-													<div class="single_top_img">
-														{% if items.3.is_video %}
-															<div align="center" class="embed-responsive embed-responsive-16by9">
-																<video preload="auto" loop muted controls class="embed-responsive-item" >
-																	<source src="{% static items.3.imagevideo_path %}" type="video/mp4"> Your browser does not support the video tag!
+													{% if items.3.is_video %}
+														<div class="top_video">
+															<div align="center"
+																 class="embed-responsive embed-responsive-16by9">
+																<video preload="auto" loop muted controls
+																	   class="embed-responsive-item">
+																	<source src="{% static items.3.imagevideo_path %}"
+																			type="video/mp4">
+																	Your browser does not support the video tag!
 																</video>
 															</div>
-														{% else %}
-															<img class="img-responsive" src="{% static items.3.imagevideo_path %}" alt="">
-														{% endif %}
-													</div>
+														</div>
+													{% else %}
+														<div class="top_img">
+															<img class="img-responsive"
+																 src="{% static items.3.imagevideo_path %}" alt="">
+														</div>
+													{% endif %}
 													<div class="single_bottom_text">
 														<h4>
+															{% if items %}
 															<a href="{% url 'ninegag_post_details' items.3.pk %}"> {{ items.3.title }}</a>
+															{% endif %}
 														</h4>
-														<p><a class="9gags_color" href="#">9gag</a>| <i
+														<p><a class="category_tag" href="#">9gag</a>| <i
 																class="fa fa-clock-o"></i> {{ items.3.date_added }}
 															<i class="fa fa-comment"></i>{{ items.3.approved_comments.count }}
 															comments</p>
@@ -288,20 +324,30 @@
 									</div>
 									<div class="col-md-6 col-sm-6 col-xs-12">
 										<div class="left_gags">
-											<div class="top_img">
-												{% if items.4.is_video %}
-															<div align="center" class="embed-responsive embed-responsive-16by9">
-																<video preload="auto" loop muted controls class="embed-responsive-item" >
-																	<source src="{% static items.4.imagevideo_path %}" type="video/mp4"> Your browser does not support the video tag!
-																</video>
-															</div>
-														{% else %}
-															<img class="img-responsive" src="{% static items.4.imagevideo_path %}" alt="">
-														{% endif %}
-											</div>
+											{% if items.4.is_video %}
+												<div class="top_video">
+													<div align="center"
+														 class="embed-responsive embed-responsive-16by9">
+														<video preload="auto" loop muted controls
+															   class="embed-responsive-item">
+															<source src="{% static items.4.imagevideo_path %}"
+																	type="video/mp4">
+															Your browser does not support the video tag!
+														</video>
+													</div>
+												</div>
+											{% else %}
+												<div class="top_img">
+													<img class="img-responsive"
+														 src="{% static items.4.imagevideo_path %}"
+														 alt="">
+												</div>
+											{% endif %}
 											<div class="single_top_img_text">
 												<h4>
+													{% if items %}
 													<a href="{% url 'ninegag_post_details' items.4.pk %}"> {{ items.4.title }}</a>
+													{% endif %}
 												</h4>
 											</div>
 											<p><i class="fa fa-clock-o"></i>{{ items.4.date_added }}<i
@@ -309,66 +355,93 @@
 												comments</p>
 											<div class="all_gags_bottom">
 												<div class="gags_bottom">
-													<div class="single_top_img">
-														{% if items.5.is_video %}
-															<div align="center" class="embed-responsive embed-responsive-16by9">
-																<video preload="auto" loop muted controls class="embed-responsive-item" >
-																	<source src="{% static items.5.imagevideo_path %}" type="video/mp4"> Your browser does not support the video tag!
+													{% if items.5.is_video %}
+														<div class="top_video">
+															<div align="center"
+																 class="embed-responsive embed-responsive-16by9">
+																<video preload="auto" loop muted controls
+																	   class="embed-responsive-item">
+																	<source src="{% static items.5.imagevideo_path %}"
+																			type="video/mp4">
+																	Your browser does not support the video tag!
 																</video>
 															</div>
-														{% else %}
-															<img class="img-responsive" src="{% static items.5.imagevideo_path %}" alt="">
-														{% endif %}
-													</div>
+														</div>
+													{% else %}
+														<div class="top_img">
+															<img class="img-responsive"
+																 src="{% static items.5.imagevideo_path %}" alt="">
+														</div>
+													{% endif %}
 													<div class="single_bottom_text">
 														<h4>
+															{% if items %}
 															<a href="{% url 'ninegag_post_details' items.5.pk %}"> {{ items.5.title }} </a>
+															{% endif %}
 														</h4>
-														<p><a class="9gags_color" href="#">9gag</a>| <i
+														<p><a class="category_tag" href="#">9gag</a>| <i
 																class="fa fa-clock-o"></i> {{ items.5.date_added }}
 															<i class="fa fa-comment"></i>{{ items.5.approved_comments.count }}
 															comments</p>
 													</div>
 												</div>
 												<div class="gags_bottom">
-													<div class="single_top_img">
-														{% if items.6.is_video %}
-															<div align="center" class="embed-responsive embed-responsive-16by9">
-																<video preload="auto" loop muted controls class="embed-responsive-item" >
-																	<source src="{% static items.6.imagevideo_path %}" type="video/mp4"> Your browser does not support the video tag!
+													{% if items.6.is_video %}
+														<div class="top_video">
+															<div align="center"
+																 class="embed-responsive embed-responsive-16by9">
+																<video preload="auto" loop muted controls
+																	   class="embed-responsive-item">
+																	<source src="{% static items.6.imagevideo_path %}"
+																			type="video/mp4">
+																	Your browser does not support the video tag!
 																</video>
 															</div>
-														{% else %}
-															<img class="img-responsive" src="{% static items.6.imagevideo_path %}" alt="">
-														{% endif %}
-													</div>
+														</div>
+													{% else %}
+														<div class="top_img">
+															<img class="img-responsive"
+																 src="{% static items.6.imagevideo_path %}" alt="">
+														</div>
+													{% endif %}
 													<div class="single_bottom_text">
 														<h4>
+															{% if items %}
 															<a href="{% url 'ninegag_post_details' items.6.pk %}"> {{ items.6.title }} </a>
+															{% endif %}
 														</h4>
-														<p><a class="9gags_color" href="#">9gag</a>| <i
+														<p><a class="category_tag" href="#">9gag</a>| <i
 																class="fa fa-clock-o"></i> {{ items.6.date_added }}
 															<i class="fa fa-comment"></i>{{ items.6.approved_comments.count }}
 															comments</p>
 													</div>
 												</div>
 												<div class="gags_bottom last_bottom">
-													<div class="single_top_img">
-														{% if items.7.is_video %}
-															<div align="center" class="embed-responsive embed-responsive-16by9">
-																<video preload="auto" loop muted controls class="embed-responsive-item" >
-																	<source src="{% static items.7.imagevideo_path %}" type="video/mp4"> Your browser does not support the video tag!
+													{% if items.7.is_video %}
+														<div class="top_video">
+															<div align="center"
+																 class="embed-responsive embed-responsive-16by9">
+																<video preload="auto" loop muted controls
+																	   class="embed-responsive-item">
+																	<source src="{% static items.7.imagevideo_path %}"
+																			type="video/mp4">
+																	Your browser does not support the video tag!
 																</video>
 															</div>
-														{% else %}
-															<img class="img-responsive" src="{% static items.7.imagevideo_path %}" alt="">
-														{% endif %}
-													</div>
+														</div>
+													{% else %}
+														<div class="top_img">
+															<img class="img-responsive"
+																 src="{% static items.7.imagevideo_path %}" alt="">
+														</div>
+													{% endif %}
 													<div class="single_bottom_text">
 														<h4>
+															{% if items %}
 															<a href="{% url 'ninegag_post_details' items.7.pk %}"> {{ items.7.title }} </a>
+															{% endif %}
 														</h4>
-														<p><a class="9gags_color" href="#">9gag</a>| <i
+														<p><a class="category_tag" href="#">9gag</a>| <i
 																class="fa fa-clock-o"></i> {{ items.7.date_added }}
 															<i class="fa fa-comment"></i>{{ items.7.approved_comments.count }}
 															comments</p>
@@ -391,28 +464,42 @@
 									<div class="col-md-6 col-sm-6 col-xs-12">
 										<div class="all_left_videos">
 											<div class="videos_left">
-												<iframe src={{ videos.0.url }} frameborder="0">
-													Your browser doesn't support iframes!
-												</iframe>
+												<div class="top_video">
+													<div align="center"
+														 class="embed-responsive embed-responsive-16by9">
+														<iframe src={{ videos.0.url }} class="embed-responsive-item"></iframe>
+														Your browser does not support the video tag!
+														</video>
+													</div>
+												</div>
 												<div class="single_bottom_text">
 													<h4>
+														{% if videos %}
 														<a href="{% url 'video_post_details' videos.0.pk %}"> {{ videos.0.title }} </a>
+														{% endif %}
 													</h4>
-													<p><a class="videos_color" href="#">videos</a>|<i
+													<p><a class="category_tag" href="#">videos</a>|<i
 															class="fa fa-clock-o"></i> {{ videos.0.added_at }}
 														<i class="fa fa-comment"></i> {{ videos.0.approved_comments.count }}
 														comments </p>
 												</div>
 											</div>
 											<div class="videos_left last_bottom">
-												<iframe src={{ videos.1.url }} frameborder="0">
-													Your browser doesn't support iframes!
-												</iframe>
+												<div class="top_video">
+													<div align="center"
+														 class="embed-responsive embed-responsive-16by9">
+														<iframe class="embed-responsive-item"
+																src={{ videos.1.url }}></iframe>
+														Your browser does not support iframes!
+													</div>
+												</div>
 												<div class="single_bottom_text">
 													<h4>
+														{% if videos %}
 														<a href="{% url 'video_post_details' videos.1.pk %}"> {{ videos.1.title }} </a>
+														{% endif %}
 													</h4>
-													<p><a class="videos_color" href="#">videos</a>|<i
+													<p><a class="category_tag" href="#">videos</a>|<i
 															class="fa fa-clock-o"></i> {{ videos.1.added_at }}
 														<i class="fa fa-comment"></i> {{ videos.1.approved_comments.count }}
 														comments </p>
@@ -423,28 +510,42 @@
 									<div class="col-md-6 col-sm-6 col-xs-12">
 										<div class="all_left_videos">
 											<div class="videos_left">
-												<iframe src={{ videos.2.url }} frameborder="0">
-													Your browser doesn't support iframes!
-												</iframe>
+												<div class="top_video">
+													<div align="center"
+														 class="embed-responsive embed-responsive-16by9">
+														<iframe class="embed-responsive-item"
+																src={{ videos.2.url }}></iframe>
+														Your browser does not support iframes!
+													</div>
+												</div>
 												<div class="single_bottom_text">
 													<h4>
+														{% if videos %}
 														<a href="{% url 'video_post_details' videos.2.pk %}"> {{ videos.2.title }} </a>
+														{% endif %}
 													</h4>
-													<p><a class="videos_color" href="#">videos</a>|<i
+													<p><a class="category_tag" href="#">videos</a>|<i
 															class="fa fa-clock-o"></i> {{ videos.2.added_at }}
 														<i class="fa fa-comment"></i>{{ videos.2.approved_comments.count }}
 														comments </p>
 												</div>
 											</div>
 											<div class="videos_left last_bottom">
-												<iframe src={{ videos.3.url }} frameborder="0">
-													Your browser doesn't support iframes!
-												</iframe>
+												<div class="top_video">
+													<div align="center"
+														 class="embed-responsive embed-responsive-16by9">
+														<iframe class="embed-responsive-item"
+																src={{ videos.3.url }}></iframe>
+														Your browser does not support iframes!
+													</div>
+												</div>
 												<div class="single_bottom_text">
 													<h4>
+														{% if videos %}
 														<a href="{% url 'video_post_details' videos.3.pk %}"> {{ videos.3.title }} </a>
+														{% endif %}
 													</h4>
-													<p><a class="videos_color" href="#">videos</a>|<i
+													<p><a class="category_tag" href="#">videos</a>|<i
 															class="fa fa-clock-o"></i> {{ videos.3.added_at }}
 														<i class="fa fa-comment"></i>{{ videos.3.approved_comments.count }}
 														comments </p>
@@ -471,11 +572,11 @@
 														<h6>
 															<a href="{% url 'joke_post_details' jokes.0.pk %}"> {{ jokes.0.text }} </a>
 														</h6>
+													{% endif %}
 												</div>
 												<p><i class="fa fa-clock-o"></i> {{ jokes.0.date_added }}<i
 														class="fa fa-comment"></i>{{ jokes.0.approved_comments.count }}
 													comments</p>
-													{% endif %}
 											</div>
 											<div class="jokes_left">
 												<div class="single_top_img_text">
@@ -483,11 +584,11 @@
 														<h6>
 															<a href="{% url 'joke_post_details' jokes.1.pk %}"> {{ jokes.1.text }} </a>
 														</h6>
+													{% endif %}
 												</div>
 												<p><i class="fa fa-clock-o"></i> {{ jokes.1.date_added }}<i
 														class="fa fa-comment"></i>{{ jokes.1.approved_comments.count }}
 													comments</p>
-													{% endif %}
 											</div>
 											<div class="jokes_left last_left">
 												<div class="single_top_img_text">
@@ -495,11 +596,11 @@
 														<h6>
 															<a href="{% url 'joke_post_details' jokes.2.pk %}"> {{ jokes.2.text }} </a>
 														</h6>
+													{% endif %}
 												</div>
 												<p><i class="fa fa-clock-o"></i> {{ jokes.2.date_added }}<i
 														class="fa fa-comment"></i>{{ jokes.2.approved_comments.count }}
 													comments</p>
-													{% endif %}
 											</div>
 										</div>
 									</div>
@@ -511,11 +612,11 @@
 														<h6>
 															<a href="{% url 'joke_post_details' jokes.3.pk %}"> {{ jokes.3.text }} </a>
 														</h6>
+													{% endif %}
 												</div>
 												<p><i class="fa fa-clock-o"></i> {{ jokes.3.date_added }}<i
 														class="fa fa-comment"></i>{{ jokes.3.approved_comments.count }}
 													comments</p>
-													{% endif %}
 											</div>
 											<div class="jokes_left">
 												<div class="single_top_img_text">
@@ -523,11 +624,11 @@
 														<h6>
 															<a href="{% url 'joke_post_details' jokes.4.pk %}"> {{ jokes.4.text }} </a>
 														</h6>
+													{% endif %}
 												</div>
 												<p><i class="fa fa-clock-o"></i> {{ jokes.4.date_added }}<i
 														class="fa fa-comment"></i>{{ jokes.4.approved_comments.count }}
 													comments</p>
-													{% endif %}
 											</div>
 											<div class="jokes_left last_left">
 												<div class="single_top_img_text">
@@ -535,11 +636,11 @@
 														<h6>
 															<a href="{% url 'joke_post_details' jokes.5.pk %}"> {{ jokes.5.text }} </a>
 														</h6>
+													{% endif %}
 												</div>
 												<p><i class="fa fa-clock-o"></i> {{ jokes.5.date_added }}<i
 														class="fa fa-comment"></i>{{ jokes.5.approved_comments.count }}
 													comments</p>
-													{% endif %}
 											</div>
 										</div>
 									</div>

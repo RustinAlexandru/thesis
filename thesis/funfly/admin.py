@@ -24,6 +24,7 @@ class UserProfileAdmin(UserAdmin):
 
 class JokeAdmin(ModerationAdmin):
     list_display = ("text", "category")
+    readonly_fields = ('date_added',)
 
 
 class YoutubeAdmin(admin.ModelAdmin):

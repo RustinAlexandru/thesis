@@ -94,7 +94,6 @@ class JsonEncodingPipeline(object):
     def process_item(self, item, spider):
         line = json.dumps(dict(item), ensure_ascii=False,  indent=4) + ',' + '\n'
         self.file.write(line)
-        # item.save()
         return item
 
     def close_spider(self, spider):

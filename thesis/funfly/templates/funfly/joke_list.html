@@ -10,6 +10,9 @@
 		<p><i class="fa fa-clock-o"></i> {{ joke.date_added }}<i
 				class="fa fa-comment"></i>2 comments</p>
 	</div>
+
+{% empty %}
+	<h3>Jokes not available</h3>
 {% endfor %}
 
 
