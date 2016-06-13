@@ -27,38 +27,6 @@ class UserProfile(models.Model):
         return u'%s' % self.user
 
 
-class Ninegag(ModeratedModel):
-    title = models.CharField(max_length=100, db_index=True)
-    source_url = models.CharField(max_length=200)
-    imagevideo_path = models.CharField(max_length=200)
-    is_video = models.BooleanField(default=False)
-    points = models.IntegerField(default=0)
-    date_added = models.DateTimeField(auto_now_add=True, null=True)
-
-    def __unicode__(self):
-        return u'%s' % self.title
-
-    class Moderator:
-        notify_user = False
-        fields_exclude = ['points', 'date_added']
-
-
-class Joke(ModeratedModel):
-    identifier = models.CharField(max_length=50, default='', db_index=True)
-    text = models.TextField(default='')
-    likes = models.IntegerField(default=0)
-    dislikes = models.IntegerField(default=0)
-    category = models.CharField(max_length=100, null=True, blank=False, default='')
-    date_added = models.DateTimeField(auto_now_add=True, null=True)
-
-    def __unicode__(self):
-        return u'%s' % self.text
-
-    class Moderator:
-        notify_user = False
-        fields_exclude = ['likes', 'dislikes']
-
-
 class PostComment(models.Model):
     text = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
@@ -80,8 +48,58 @@ class PostComment(models.Model):
         self.approved_comment = True
         self.save()
 
+    def approved_comments(self):
+        return self.comments.filter(approved_comment=True)
+
     def __unicode__(self):
         return u'{} @ {}'.format(self.user, self.date_added)
+
+class Ninegag(ModeratedModel):
+    title = models.CharField(max_length=100, db_index=True)
+    source_url = models.CharField(max_length=200)
+    imagevideo_path = models.CharField(max_length=200)
+    is_video = models.BooleanField(default=False)
+    points = models.IntegerField(default=0)
+    date_added = models.DateTimeField(auto_now_add=True, null=True)
+    nine_gag_comments = GenericRelation(PostComment, related_query_name='nine_gag_comments')
+
+    def get_content_type(self):
+        return ContentType.objects.get_for_model(self).id
+
+    def approved_comments(self):
+        return self.nine_gag_comments.filter(approved_comment=True)
+
+    def __unicode__(self):
+        return u'%s' % self.title
+
+    class Moderator:
+        notify_user = False
+        fields_exclude = ['points', 'date_added']
+
+
+class Joke(ModeratedModel):
+    identifier = models.CharField(max_length=50, default='', db_index=True)
+    text = models.TextField(default='')
+    likes = models.IntegerField(default=0)
+    dislikes = models.IntegerField(default=0)
+    category = models.CharField(max_length=100, null=True, blank=False, default='')
+    date_added = models.DateTimeField(auto_now_add=True, null=True)
+    joke_comments = GenericRelation(PostComment, related_query_name='joke_comments')
+
+    def __unicode__(self):
+        return u'%s' % self.text
+
+    def get_content_type(self):
+        return ContentType.objects.get_for_model(self).id
+
+    def approved_comments(self):
+        return self.joke_comments.filter(approved_comment=True)
+
+    class Moderator:
+        notify_user = False
+        fields_exclude = ['likes', 'dislikes', 'joke_comments']
+
+
 
 
 class Youtube(models.Model):
@@ -89,10 +107,13 @@ class Youtube(models.Model):
     title = models.CharField(max_length=100)
     url = models.CharField(max_length=200)
     added_at = models.DateTimeField(null=True)
-    comments = GenericRelation(PostComment, related_query_name='comments')
+    youtube_comments = GenericRelation(PostComment, related_query_name='youtube_comments')
 
     def __unicode__(self):
         return u'%s' % self.title
 
     def get_content_type(self):
         return ContentType.objects.get_for_model(self).id
+
+    def approved_comments(self):
+        return self.youtube_comments.filter(approved_comment=True)

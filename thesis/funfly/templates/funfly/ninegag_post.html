@@ -1,13 +1,26 @@
 {% extends 'funfly/layout.html' %}
+{% load staticfiles %}
 
 {% block content %}
 	{% block main_wrapper %}
 		<div class="col-md-9 col-sm-9 col-xs-9">
-			<div class="sp_video_box">
-				<h3>{{ object.title }}</h3>
-				<div class="embed-responsive embed-responsive-16by9">
-					<iframe class="embed-responsive-item" src={{ object.url }}></iframe>
-				</div>
+			<div class="single_9gag_bottom_text">
+				<h2><a href=""> {{ object.title }} </a></h2>
+				<p><a class="9gags_color" href="#">9gag</a>| <i
+						class="fa fa-clock-o"></i> {{ object.date_added }}
+					<i class="fa fa-comment"></i> {{ object.approved_comments.count }} comments</p>
+			</div>
+			<div class="single_9gag_image_or_video">
+				{% if object.is_video %}
+					<div align="center" class="embed-responsive embed-responsive-16by9">
+						<video loop muted controls class="embed-responsive-item">
+							<source src="{% static object.imagevideo_path %}" type="video/mp4">
+							Your browser does not support the video tag!
+						</video>
+					</div>
+				{% else %}
+					<img class="img-responsive" src="{% static object.imagevideo_path %}" alt="">
+				{% endif %}
 			</div>
 			<div class="sp_comments_box">
 				<h2>Comments</h2>

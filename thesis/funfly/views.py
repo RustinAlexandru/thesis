@@ -72,7 +72,7 @@ class VideoPostDetails(DetailView):
         if 'pk' in self.kwargs:
             pk = self.kwargs['pk']
             # context['comments'] = PostComment.objects.filter(content_type__postcomment__object_id=pk)
-            comments = Youtube.objects.get(pk=pk).comments.all()
+            comments = Youtube.objects.get(pk=pk).youtube_comments.all()
             context['comments'] = comments
         context['CommentForm'] = CommentForm()
         return context
@@ -91,11 +91,69 @@ class VideoPostDetails(DetailView):
             return redirect(reverse('video_post_details', kwargs={'pk': self.kwargs['pk']}))
 
 
+class JokePostDetails(DetailView):
+    model = Joke
+
+    def get_context_data(self, **kwargs):
+        context = super(JokePostDetails, self).get_context_data(**kwargs)
+        if 'pk' in self.kwargs:
+            pk = self.kwargs['pk']
+            # context['comments'] = PostComment.objects.filter(content_type__postcomment__object_id=pk)
+            comments = Joke.objects.get(pk=pk).joke_comments.all()
+            context['comments'] = comments
+        context['CommentForm'] = CommentForm()
+        return context
+
+    @method_decorator(login_required)
+    def post(self, request, *args, **kwargs):
+        form = CommentForm(request.POST)
+        if form.is_valid() and request.user.is_authenticated():
+            message = form.cleaned_data['text']
+            pk = self.kwargs['pk']
+            user = self.request.user
+            joke_post = Joke.objects.get(pk=pk)
+            PostComment.objects.create(text=message, content_object=joke_post, user=user)
+            return redirect(reverse('joke_post_details', kwargs={'pk': pk}))
+        else:
+            return redirect(reverse('joke_post_details', kwargs={'pk': self.kwargs['pk']}))
+
+
+class NinegagPostDetails(DetailView):
+    model = Ninegag
+
+    def get_context_data(self, **kwargs):
+        context = super(NinegagPostDetails, self).get_context_data(**kwargs)
+        if 'pk' in self.kwargs:
+            pk = self.kwargs['pk']
+            # context['comments'] = PostComment.objects.filter(content_type__postcomment__object_id=pk)
+            comments = Ninegag.objects.get(pk=pk).nine_gag_comments.all()
+            context['comments'] = comments
+        context['CommentForm'] = CommentForm()
+        return context
+
+    @method_decorator(login_required)
+    def post(self, request, *args, **kwargs):
+        form = CommentForm(request.POST)
+        if form.is_valid() and request.user.is_authenticated():
+            message = form.cleaned_data['text']
+            pk = self.kwargs['pk']
+            user = self.request.user
+            ninegag_post = Ninegag.objects.get(pk=pk)
+            PostComment.objects.create(text=message, content_object=ninegag_post, user=user)
+            return redirect(reverse('joke_post_details', kwargs={'pk': pk}))
+        else:
+            return redirect(reverse('joke_post_details', kwargs={'pk': self.kwargs['pk']}))
+
 class VideosList(ListView):
     model = Youtube
     context_object_name = 'videos'
     paginate_by = 5
 
+
+class NinegagsList(ListView):
+    model = Ninegag
+    context_object_name = 'ninegags'
+    paginate_by = 5
 
 class JokesList(AjaxListView):
     model = Joke
@@ -108,6 +166,10 @@ def comment_approve(request, pk):
     comment = PostComment.objects.get(pk=pk)
     if request.user.has_perm('Can change post comment'):
         comment.approve()
+    if comment.content_type.model == 'joke':
+        return redirect('joke_post_details', pk=comment.object_id)
+    elif comment.content_type.model == 'ninegag':
+        return redirect('9gag_post_details', pk=comment.object_id)
     return redirect('video_post_details', pk=comment.object_id)
 
 
@@ -117,4 +179,8 @@ def comment_remove(request, pk):
     post_pk = comment.object_id
     if request.user.has_perm(('Can change post comment')):
         comment.delete()
+    if comment.content_type.model == 'joke':
+        return redirect('joke_post_details', pk=comment.object_id)
+    elif comment.content_type.model == 'ninegag':
+        return redirect('9gag_post_details', pk=comment.object_id)
     return redirect('video_post_details', pk=post_pk)

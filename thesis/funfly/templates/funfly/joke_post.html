@@ -3,11 +3,12 @@
 {% block content %}
 	{% block main_wrapper %}
 		<div class="col-md-9 col-sm-9 col-xs-9">
-			<div class="sp_video_box">
-				<h3>{{ object.title }}</h3>
-				<div class="embed-responsive embed-responsive-16by9">
-					<iframe class="embed-responsive-item" src={{ object.url }}></iframe>
+			<div class="jokes_left">
+				<div class="single_top_img_text">
+					<p> {{ object.text }} </p>
 				</div>
+				<p><i class="fa fa-clock-o"></i> {{ object.date_added }}<i
+						class="fa fa-comment"></i> {{ object.approved_comments.count }}</p>
 			</div>
 			<div class="sp_comments_box">
 				<h2>Comments</h2>

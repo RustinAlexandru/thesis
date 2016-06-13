@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse_lazy
 
 from forms import CustomAuthenticationForm
 from funfly.models import Joke
-from funfly.views import VideoPostDetails, VideosList, JokesList
+from funfly.views import VideoPostDetails, VideosList, JokesList, JokePostDetails, NinegagPostDetails, NinegagsList
 from . import views
 
 urlpatterns = [
@@ -22,8 +22,13 @@ urlpatterns = [
                   url(r'^$', views.index, name='index'),
                   url(r'^jokes/$', JokesList.as_view(model=Joke), name='jokes'),
                   url(r'^videos/$', VideosList.as_view(template_name='videos.html'), name='videos'),
+                  url(r'ninegags/$', NinegagsList.as_view(template_name='ninegags.html'), name='ninegags'),
                   url(r'^video_post/(?P<pk>\d+)/$', VideoPostDetails.as_view(template_name='video_post.html'),
                       name='video_post_details'),
+                  url(r'joke_post/(?P<pk>\d+)/$', JokePostDetails.as_view(template_name='joke_post.html'),
+                      name='joke_post_details'),
+                  url(r'ninegag_post/(?P<pk>\d+)/$', NinegagPostDetails.as_view(template_name='ninegag_post.html'),
+                      name='ninegag_post_details'),
                   url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
                   url(r'^comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
 

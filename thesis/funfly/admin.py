@@ -10,6 +10,7 @@ from .models import Ninegag, UserProfile, Joke, Youtube, PostComment
     # readonly_fields = ('date_added',)
 
 class NinegagAdmin(ModerationAdmin):
+    list_display = ("title", "pk")
     readonly_fields = ('date_added',)
 
 
