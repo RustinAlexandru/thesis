@@ -1,0 +1,20 @@
+{% extends 'funfly/layout.html' %}
+{% load staticfiles %}
+
+{% block head %}
+	{{ block.super }}
+		<script src="{% static "funfly/js/add_item.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+	{% block main_wrapper %}
+		<div class="col-md-9 col-sm-9 col-xs-9">
+			<div class="add_item_form">
+				<p class="error">{{ message }}</p>
+				{% load crispy_forms_tags %}
+				{% crispy AddItemForm AddItemForm.helper %}
+			</div>
+		</div>
+	{% endblock %}
+{% endblock %}
+

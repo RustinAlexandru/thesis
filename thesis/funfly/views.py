@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+import os
+
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render
@@ -9,11 +11,34 @@ from django.views.generic import DetailView
 from django.views.generic.list import ListView
 from el_pagination.views import AjaxListView
 
-from forms import RegisterForm, CommentForm
+from forms import RegisterForm, CommentForm, AddItemForm
 from models import Ninegag, UserProfile, Joke, Youtube, PostComment
 
+from django.http import HttpResponseNotAllowed, HttpResponseRedirect
 
 # from youtube_parsing import youtube_search
+from thesis.settings import MEDIA_ROOT
+
+
+def anonymous_required(function=None):
+    def _dec(view_func):
+        def _view(request, *args, **kwargs):
+            if request.user.is_authenticated():
+                return redirect('index')
+            else:
+                return view_func(request, *args, **kwargs)
+
+        _view.__name__ = view_func.__name__
+        _view.__dict__ = view_func.__dict__
+        _view.__doc__ = view_func.__doc__
+
+        return _view
+
+    if function is None:
+        return _dec
+    else:
+        return _dec(function)
+
 
 def index(request):
     left_8_items = Ninegag.objects.order_by('-pk')[:8]
@@ -183,3 +208,54 @@ def comment_remove(request, pk):
     elif comment.content_type.model == 'ninegag':
         return redirect('ninegag_post_details', pk=comment.object_id)
     return redirect('video_post_details', pk=post_pk)
+
+def save_file(file, path=''):
+    filename = file._get_name()
+    fd = open('%s/%s' % (MEDIA_ROOT, str(path) + str(filename)), 'wb')
+    path = '{0}/{1}'.format('funfly/imagesandvideos/imageorvideos/', str(filename))
+    for chunk in file.chunks():
+        fd.write(chunk)
+    fd.close()
+    return path
+
+
+def is_moderator(user):
+    return user.groups.filter(name='Moderators').exists()
+
+@user_passes_test(is_moderator)
+def add_item(request):
+    context = {}
+    if request.method == 'GET':
+        form = AddItemForm()
+        context = {
+            'AddItemForm': form,
+        }
+        return render(request, 'funfly/add_item.html', context)
+    # elif request.method == 'POST':
+    #     form = AddItemForm(request.POST, request.FILES)
+    #     if form.is_valid():
+    #         item_option = form.cleaned_data['item_type']
+    #         if item_option == 'Ninegag':
+    #             title = form.cleaned_data['title']
+    #             url = form.cleaned_data['url']
+    #             imagevideo = request.FILES['media']
+    #             path = save_file(imagevideo)
+    #             file_path, file_extension = os.path.splitext(path)
+    #             if file_extension == '.png' or file_extension == '.jpg':
+    #                 is_video = False
+    #             else:
+    #                 is_video = True
+    #             ninegag = Ninegag.objects.create(title=title, source_url=url, imagevideo_path=path, is_video=is_video)
+    #         elif item_option == 'Video':
+    #             pass
+    #         else:
+    #             pass
+    #         return redirect('add_item')
+    #     else:
+    #         context = {
+    #             'AddItemForm': form
+    #         }
+    #         return render(request, 'funfly/add_item.html', context)
+
+
+

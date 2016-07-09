@@ -9,10 +9,11 @@ from forms import CustomAuthenticationForm
 from funfly.models import Joke
 from funfly.views import VideoPostDetails, VideosList, JokesList, JokePostDetails, NinegagPostDetails, NinegagsList
 from . import views
+from views import anonymous_required
 
 urlpatterns = [
                   url(r'^admin/', admin.site.urls),
-                  url(r'^login/$', auth_views.login, {
+                  url(r'^login/$', anonymous_required(auth_views.login), {
                       'template_name': 'funfly/login.html',
                       'authentication_form': CustomAuthenticationForm
                       }, name='login'),
@@ -31,5 +32,6 @@ urlpatterns = [
                       name='ninegag_post_details'),
                   url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
                   url(r'^comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
+                  url(r'add/$', views.add_item, name='add_item'),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

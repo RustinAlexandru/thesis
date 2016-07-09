@@ -26,7 +26,7 @@ class MyFilesPipeline(FilesPipeline):
         image_paths = [x['path'] for ok, x in results if ok]
         if not image_paths:
             raise  IndexError
-        item['imagevideo_path'] = 'funfly/images/imageorvideos/'+\
+        item['imagevideo_path'] = 'funfly/imagesandvideos/imageorvideos/'+\
                                  image_paths[0]
        except IndexError:
            return item

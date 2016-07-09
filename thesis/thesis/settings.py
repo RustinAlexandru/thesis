@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'moderation',
     'el_pagination',
     'social.apps.django_app.default',
+    'rolepermissions',
 ]
 
 SITE_ID = 1
@@ -138,6 +139,7 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_LOGIN_URL = '/'
 
 
+ROLEPERMISSIONS_MODULE = 'thesis.roles'
 
 
 # Internationalization
@@ -158,7 +160,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'funfly/static/funfly/imagesandvideos/imageorvideos')
+MEDIA_URL = '/'
 
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'

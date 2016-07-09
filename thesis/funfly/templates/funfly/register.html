@@ -13,12 +13,6 @@
 
 		<div class="register_form">
 			<p class="error">{{ message }}</p>
-			<!--<form method="post">-->
-			{#            <!--{% csrf_token %}-->#}
-			{#            <!--{{ form.as_p }}-->#}
-			<!--<button type="submit">Register</button>-->
-			<!--</form>-->
-
 			{% load crispy_forms_tags %}
 			{% crispy RegisterForm RegisterForm.helper %}
 

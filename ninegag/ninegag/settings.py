@@ -87,7 +87,7 @@ FEED_EXPORTERS_BASE = {
     'xml': 'scrapy.contrib.exporter.XmlItemExporter',
 }
 
-FILES_STORE = '/Users/alexandrurustin/Desktop/thesis/thesis/thesis/funfly/static/funfly/images/imageorvideos'
+FILES_STORE = '/Users/alexandrurustin/Desktop/thesis/thesis/thesis/funfly/static/funfly/imagesandvideos/imageorvideos'
 
 FILES_URLS_FIELD = 'source_url'
 FILES_RESULT_FIELD = 'imagevideo'
@@ -95,7 +95,7 @@ FILES_RESULT_FIELD = 'imagevideo'
 IMAGES_URLS_FIELD = 'source_url'
 IMAGES_RESULT_FIELD = 'imagevideo'
 
-IMAGES_STORE = '/Users/alexandrurustin/Desktop/thesis/thesis/thesis/funfly/static/funfly/images/imageorvideos'
+IMAGES_STORE = '/Users/alexandrurustin/Desktop/thesis/thesis/thesis/funfly/static/funfly/imagesandvideos/imageorvideos'
 
 IMAGES_THUMBS = {
     'big': (100, 100),

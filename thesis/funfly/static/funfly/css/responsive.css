@@ -2,6 +2,11 @@
     .container {
         width: 970px;
     }
+
+    .navbar-brand {
+    margin-top: 10%;
+}
+
 }
 
 /* Mobile Layout: 320px. */

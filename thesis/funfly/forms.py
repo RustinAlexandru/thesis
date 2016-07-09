@@ -17,6 +17,12 @@ class CustomAuthenticationForm(AuthenticationForm):
 # class CustomAuthenticationFormOauth(LoginForm):
 #     password = forms.CharField(label=_(u"Password"), strip=False, widget=forms.PasswordInput)
 
+class UserProfileForm(forms.ModelForm):
+    timezone = forms.ChoiceField(
+        label=_('Time Zone'),
+        choices=[(t, t) for t in pytz.common_timezones]
+    )
+
 
 class RegisterForm(forms.Form):
     first_name = forms.CharField(
@@ -69,7 +75,7 @@ class RegisterForm(forms.Form):
         self.helper.form_id = 'id_register_form'
         self.helper.form_method = 'post'
         self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-lg-1'
+        self.helper.label_class = 'col-lg-3'
         self.helper.field_class = 'col-lg-4'
         self.helper.layout = Layout(
             Fieldset(
@@ -128,6 +134,47 @@ class CommentForm(forms.ModelForm):
             Fieldset(
                 '',
                 'text',
+            ),
+            ButtonHolder(
+                Submit('submit', 'Submit', css_class='button submit')
+            )
+        )
+
+
+class AddItemForm(forms.Form):
+    item_type = forms.ChoiceField(
+        label=_('Please select which type of item you want to add'),
+        choices=( ('Ninegag', 'Ninegag' ), ('Video', 'Video'), ('Joke', 'Joke') )
+    )
+
+    title = forms.CharField(max_length=200,
+                            required=True)
+
+    source_url = forms.CharField(max_length=200,
+                          required=False)
+
+    media_file = forms.FileField(label='Please select a file to upload')
+
+    text_area = forms.CharField(
+        widget = forms.Textarea(),
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(AddItemForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'id_add_item_form'
+        self.helper.form_method = 'post'
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-6 col-md-6 col-sm-6'
+        self.helper.field_class = 'col-lg-5 col-md-5 col-sm-5'
+        self.helper.layout = Layout(
+            Fieldset(
+                '',
+                'item_type',
+                'title',
+                'source_url',
+                'media_file',
+                'text_area',
             ),
             ButtonHolder(
                 Submit('submit', 'Submit', css_class='button submit')
