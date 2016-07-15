@@ -7,7 +7,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelatio
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from moderation.db import ModeratedModel
-
+from gm2m import GM2MField
 
 # Create your models here.
 SEX = (
@@ -22,6 +22,7 @@ class UserProfile(models.Model):
         verbose_name=u'Are you male or female?')
     city = models.CharField(null=True, default=None, max_length=100)
     timezone = models.CharField(null=True, default=None, max_length=100)
+    saved_items = GM2MField()
 
     def __unicode__(self):
         return u'%s' % self.user

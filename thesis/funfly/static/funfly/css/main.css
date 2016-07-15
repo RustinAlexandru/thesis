@@ -102,11 +102,18 @@
     background: #c66196 url("../imagesandvideos/mouth-open-laugh.svg") no-repeat scroll;
     background-size: 25px 25px;
     background-position: 10% 50%;
-    border-top: 2px solid #B4BD00;
 }
 
 #nav_about:hover {
     background: #c66196
+}
+
+.main_nav_box ul li.add_item {
+    border-top: 2px solid #0a006c;
+}
+
+.main_nav_box ul li.add_item:hover {
+    background: #c66196;
 }
 
 #myNavbar .navbar_left {
@@ -121,11 +128,21 @@
     position: relative;
 }
 
-.main_nav_box ul li a{
-    margin-left: 20px;
+.main_nav_box ul li a {
     border-right: 1px solid #efefef;
+    color: #444444;
     display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-left: 20px;
+    padding: 18px 30px 18px 24px;
+    text-transform: uppercase;
 }
+
+.main_nav_box ul li:hover a {
+    border-right: 1px solid #c66196;
+}
+
 /* 2) Main page css*/
 
 .header_top {
@@ -220,6 +237,7 @@
     border-bottom: 1px solid #efefef;
     overflow: hidden;
     padding: 10px 0;
+    position: relative;
 }
 
 .gags_bottom.last_bottom {
@@ -229,6 +247,7 @@
 .left_gags {
     border: 1px solid #efefef;
     padding: 5px;
+    position: relative;
 }
 
 .category_tag {
@@ -285,7 +304,8 @@
 }
 
 .top_video {
-    padding: 25px
+    padding: 25px;
+    position: relative;
 }
 
 .single_top_img > img {
@@ -306,6 +326,14 @@
 i {
     padding-left: 5px;
     padding-right: 5px;
+}
+
+.save_button_wrap {
+    margin-top: 10px;
+    margin-left: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 /* 3) Video post css */
 

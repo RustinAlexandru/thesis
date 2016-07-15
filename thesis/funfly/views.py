@@ -14,7 +14,9 @@ from el_pagination.views import AjaxListView
 from forms import RegisterForm, CommentForm, AddItemForm
 from models import Ninegag, UserProfile, Joke, Youtube, PostComment
 
-from django.http import HttpResponseNotAllowed, HttpResponseRedirect
+from django.http import HttpResponseNotAllowed, HttpResponseRedirect, JsonResponse
+import json
+
 
 # from youtube_parsing import youtube_search
 from thesis.settings import MEDIA_ROOT
@@ -49,6 +51,20 @@ def index(request):
         'jokes': left_6_jokes,
         'videos': left_4_videos,
     }
+    user = request.user
+    user_profile = UserProfile.objects.get(user=user)
+
+    if request.method == 'POST' and request.is_ajax():
+        data_sent = {"plm":"merge ba"}
+        item_info = json.loads(request.POST['data'])
+        if item_info["item_type"] == 'Ninegag':
+            item = Ninegag.objects.get(pk=item_info["item_id"])
+            user_profile.saved_items.add(item)
+        if item_info["item_type"] == 'Youtube':
+            item = Youtube.objects.get(pk=item_info["item_id"])
+            user_profile.saved_items.add(item)
+        return JsonResponse(data_sent)
+
     return render(request, 'funfly/layout.html', context)
 
 def register(request):
@@ -179,6 +195,20 @@ class NinegagsList(ListView):
     context_object_name = 'ninegags'
     paginate_by = 5
 
+    def get_queryset(self):
+        filter_val = self.request.GET.get('filter', 'True')
+        order = self.request.GET.get('orderby', 'pk')
+        new_context = Ninegag.objects.filter(
+            is_video=filter_val,
+        ).order_by(order)
+        return new_context
+
+    def get_context_data(self, **kwargs):
+        context = super(NinegagsList, self).get_context_data(**kwargs)
+        context['filter'] = self.request.GET.get('filter', 'True')
+        context['orderby'] = self.request.GET.get('orderby', 'pk')
+        return context
+
 class JokesList(AjaxListView):
     model = Joke
     context_object_name = 'jokes'
@@ -231,31 +261,40 @@ def add_item(request):
             'AddItemForm': form,
         }
         return render(request, 'funfly/add_item.html', context)
-    # elif request.method == 'POST':
-    #     form = AddItemForm(request.POST, request.FILES)
-    #     if form.is_valid():
-    #         item_option = form.cleaned_data['item_type']
-    #         if item_option == 'Ninegag':
-    #             title = form.cleaned_data['title']
-    #             url = form.cleaned_data['url']
-    #             imagevideo = request.FILES['media']
-    #             path = save_file(imagevideo)
-    #             file_path, file_extension = os.path.splitext(path)
-    #             if file_extension == '.png' or file_extension == '.jpg':
-    #                 is_video = False
-    #             else:
-    #                 is_video = True
-    #             ninegag = Ninegag.objects.create(title=title, source_url=url, imagevideo_path=path, is_video=is_video)
-    #         elif item_option == 'Video':
-    #             pass
-    #         else:
-    #             pass
-    #         return redirect('add_item')
-    #     else:
-    #         context = {
-    #             'AddItemForm': form
-    #         }
-    #         return render(request, 'funfly/add_item.html', context)
+    elif request.method == 'POST':
+        form = AddItemForm(request.POST, request.FILES)
+        if form.is_valid():
+            item_option = form.cleaned_data['item_type']
+            if item_option == 'Ninegag':
+                title = form.cleaned_data['title']
+                url = form.cleaned_data['url']
+                imagevideo = request.FILES['media']
+                path = save_file(imagevideo)
+                file_path, file_extension = os.path.splitext(path)
+                if file_extension == '.png' or file_extension == '.jpg':
+                    is_video = False
+                else:
+                    is_video = True
+                ninegag = Ninegag.objects.create(title=title, source_url=url, imagevideo_path=path, is_video=is_video)
+            elif item_option == 'Video':
+                pass
+            else:
+                pass
+            return redirect('add_item')
+        else:
+            context = {
+                'AddItemForm': form
+            }
+            return render(request, 'funfly/add_item.html', context)
 
 
-
+@login_required
+def saved_items_list(request):
+    if request.method == 'GET':
+        user = request.user
+        user_profile = UserProfile.objects.get(user=user)
+        saved_items = user_profile.saved_items.all()
+        context = {
+            'saved_items': saved_items
+        }
+        return render(request, 'funfly/saved_items_list.html', context)

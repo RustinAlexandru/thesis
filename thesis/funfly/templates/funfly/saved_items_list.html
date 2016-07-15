@@ -1,0 +1,80 @@
+{% extends 'funfly/layout.html' %}
+{% load staticfiles %}
+{% load custom_tags %}
+
+{% block content %}
+	{% block main_wrapper %}
+		<div class="col-md-9 col-sm-9 col-xs-9">
+			{% for item in saved_items %}
+				{% if item|classname == 'Ninegag' %}
+					<div class="gags_bottom">
+						{% if item.is_video %}
+							<div class="top_video">
+								<div align="center"
+									 class="embed-responsive embed-responsive-16by9">
+									<video preload="auto" loop muted controls
+										   class="embed-responsive-item">
+										<source src="{% static item.imagevideo_path %}"
+												type="video/mp4">
+										Your browser does not support the video tag!
+									</video>
+								</div>
+							</div>
+						{% else %}
+							<div class="top_img">
+								<img class="img-responsive"
+									 src="{% static item.imagevideo_path %}" alt="">
+							</div>
+							<div class="save_button_wrap">
+							<span class="glyphicon glyphicon-plus-sign" data-item-id="{{ item.pk }}"
+								  data-item-type="Ninegag" data-toggle="tooltip"
+								  title="Click to save the item into your personal list!"></span>
+							</div>
+						{% endif %}
+						<div class="single_bottom_text">
+							<h4>
+								{% if saved_items %}
+									<a href="{% url 'ninegag_post_details' item.pk %}"> {{ item.title }} </a>
+								{% endif %}
+							</h4>
+							<p><a class="category_tag" href="#">9gag</a>| <i
+									class="fa fa-clock-o"></i> {{ item.date_added }}
+								<i class="fa fa-comment"></i>{{ item.approved_comments.count }}
+								comments</p>
+						</div>
+					</div>
+				{% endif %}
+
+				{% if item|classname == 'Youtube' %}
+					<div class="videos_left">
+						<div class="top_video">
+							<div align="center"
+								 class="embed-responsive embed-responsive-16by9">
+								<iframe src={{ item.url }} class="embed-responsive-item"></iframe>
+								Your browser does not support the video tag!
+								</video>
+							</div>
+						</div>
+						<div class="single_bottom_text">
+							<h4>
+								{% if items %}
+									<a href="{% url 'video_post_details' item.pk %}"> {{ item.title }} </a>
+								{% endif %}
+							</h4>
+							<p><a class="category_tag" href="#">videos</a>|<i
+									class="fa fa-clock-o"></i> {{ item.added_at }}
+								<i class="fa fa-comment"></i> {{ item.approved_comments.count }}
+								comments </p>
+						</div>
+					</div>
+				{% endif %}
+
+				{% if item|classname == 'Joke' %}
+
+
+				{% endif %}
+
+			{% endfor %}
+		</div>
+	{% endblock %}
+{% endblock %}
