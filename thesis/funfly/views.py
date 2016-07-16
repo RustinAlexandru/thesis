@@ -62,13 +62,18 @@ def index(request):
         item_info = json.loads(request.POST['data'])
         if item_info["item_type"] == 'Ninegag':
             item = Ninegag.objects.get(pk=item_info["item_id"])
-            try:
-                user_profile.saved_items.add(item)
-            except IntegrityError as integrity_error:
-                data_sent["integrity_error"] = integrity_error.__class__.__name__
+
         if item_info["item_type"] == 'Youtube':
             item = Youtube.objects.get(pk=item_info["item_id"])
+
+        if item_info["item_type"] == 'Joke':
+            item = Joke.objects.get(pk=item_info["item_id"])
+
+        try:
             user_profile.saved_items.add(item)
+        except IntegrityError as integrity_error:
+            data_sent["integrity_error"] = integrity_error.__class__.__name__
+
         return JsonResponse(data_sent)
 
     return render(request, 'funfly/layout.html', context)
