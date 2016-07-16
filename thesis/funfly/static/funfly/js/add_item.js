@@ -53,11 +53,28 @@ $(document).ready(function () {
             },
             dataType: "json",
             success: function (data) {
-                alert(data.plm);
-                alert("Works");
+                if (!data["integrity_error"]) {
+                    swal(
+                        'Good job!',
+                        'You added the item to your personal save list!',
+                        'success'
+                    )
+                }
+                else {  // integrity_error message alert
+                    sweetAlert(
+                        'Oops...',
+                        "We're sorry, you've already added this item, you cannot add the same item twice!",
+                        'error'
+                    )
+                }
+
             },
             error: function(data) {
-                alert("Something went wrong!");
+                sweetAlert(
+                'Oops...',
+                    'Something went wrong!',
+                    'error'
+                )
             }
         });
     });

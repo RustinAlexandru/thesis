@@ -15,6 +15,7 @@ from forms import RegisterForm, CommentForm, AddItemForm
 from models import Ninegag, UserProfile, Joke, Youtube, PostComment
 
 from django.http import HttpResponseNotAllowed, HttpResponseRedirect, JsonResponse
+from django.db import IntegrityError
 import json
 
 
@@ -55,11 +56,16 @@ def index(request):
     user_profile = UserProfile.objects.get(user=user)
 
     if request.method == 'POST' and request.is_ajax():
-        data_sent = {"plm":"merge ba"}
+        data_sent = {
+
+        }
         item_info = json.loads(request.POST['data'])
         if item_info["item_type"] == 'Ninegag':
             item = Ninegag.objects.get(pk=item_info["item_id"])
-            user_profile.saved_items.add(item)
+            try:
+                user_profile.saved_items.add(item)
+            except IntegrityError as integrity_error:
+                data_sent["integrity_error"] = integrity_error.__class__.__name__
         if item_info["item_type"] == 'Youtube':
             item = Youtube.objects.get(pk=item_info["item_id"])
             user_profile.saved_items.add(item)
