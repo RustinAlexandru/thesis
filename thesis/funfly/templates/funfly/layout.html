@@ -20,10 +20,14 @@
 	<link rel="stylesheet" href="{% static "funfly/css/responsive.css" %}">
 	<link rel="stylesheet" href="{% static "funfly/font-awesome-4.6.3/css/font-awesome.min.css" %}">
 	<link rel="stylesheet" type="text/css" href="{% static "funfly/sweetalert2/sweetalert2.css" %}">
-	<script src="{% static "funfly/js/vendor/jquery-1.11.2.min.js" %}"></script>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+{#	<script src="{% static "funfly/js/vendor/jquery-1.11.2.min.js" %}"></script>#}
 	<script src="{% static "funfly/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" %}"></script>
-	<script src="{% static "funfly/js/add_item.js" %}"></script>
 	<script src="{% static "funfly/sweetalert2/sweetalert2.min.js" %}"></script>
+	<script src="{% static "funfly/js/main.js" %}"></script>
+
 
 </head>
 {% endblock%}
@@ -139,7 +143,7 @@
 							<li class="nav_videos"><a href="{% url 'videos' %}">Videos</a></li>
 							<li class="nav_jokes"><a href="{% url 'jokes' %}">Jokes</a></li>
 							{% if user|is_in_group:"Moderators" %}
-							  <li class="add_item"><a href="{% url 'add_item' %}">Add item</a> </li>
+							  <li class="save_item"><a href="{% url 'save_item' %}">Add item</a> </li>
 							{% endif %}
 							<li class="saved_items"><a href="{% url 'saved_items_list' %}">Saved items</a> </li>
 							<li id="nav_about"><a href="#">About</a></li>
@@ -225,6 +229,9 @@
 															Your browser does not support the video tag!
 														</video>
 													</div>
+													<div class="save_button_wrap">
+														<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ items.0.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+													</div>
 												</div>
 											{% else %}
 												<div class="top_img">
@@ -232,7 +239,7 @@
 														 src="{% static items.0.imagevideo_path %}" alt="">
 												</div>
 												<div class="save_button_wrap">
-													<span class="glyphicon glyphicon-plus-sign" data-item-id="{{ items.0.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+													<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ items.0.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
 												</div>
 											{% endif %}
 											<div class="single_top_img_text">
@@ -258,6 +265,9 @@
 																	Your browser does not support the video tag!
 																</video>
 															</div>
+															<div class="save_button_wrap">
+																<span class="glyphicon glyphicon-plus-sign save_item " data-item-id="{{ items.1.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+															</div>
 														</div>
 													{% else %}
 														<div class="top_img">
@@ -265,7 +275,7 @@
 																 src="{% static items.1.imagevideo_path %}" alt="">
 														</div>
 														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign" data-item-id="{{ items.1.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+															<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ items.1.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 														</div>
 													{% endif %}
 													<div class="single_bottom_text">
@@ -292,6 +302,9 @@
 																	Your browser does not support the video tag!
 																</video>
 															</div>
+															<div class="save_button_wrap">
+																<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.2.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+															</div>
 														</div>
 													{% else %}
 														<div class="top_img">
@@ -299,7 +312,7 @@
 																 src="{% static items.2.imagevideo_path %}" alt="">
 														</div>
 														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign" data-item-id="{{ items.2.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+															<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.2.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 														</div>
 													{% endif %}
 													<div class="single_bottom_text">
@@ -326,6 +339,9 @@
 																	Your browser does not support the video tag!
 																</video>
 															</div>
+															<div class="save_button_wrap">
+																<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.3.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+															</div>
 														</div>
 													{% else %}
 														<div class="top_img">
@@ -333,8 +349,8 @@
 																 src="{% static items.3.imagevideo_path %}" alt="">
 														</div>
 														<div class="save_button_wrap">
-													<span class="glyphicon glyphicon-plus-sign" data-item-id="{{ items.3.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-												</div>
+															<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.3.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+														</div>
 													{% endif %}
 													<div class="single_bottom_text">
 														<h4>
@@ -365,7 +381,7 @@
 														</video>
 													</div>
 													<div class="save_button_wrap">
-														<span class="glyphicon glyphicon-plus-sign" data-item-id="{{ items.4.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+														<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.4.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 													</div>
 												</div>
 
@@ -374,6 +390,9 @@
 													<img class="img-responsive"
 														 src="{% static items.4.imagevideo_path %}"
 														 alt="">
+												</div>
+												<div class="save_button_wrap">
+													<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.4.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
 												</div>
 											{% endif %}
 											<div class="single_top_img_text">
@@ -399,14 +418,17 @@
 																	Your browser does not support the video tag!
 																</video>
 															</div>
-														</div>
 														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign" data-item-id="{{ items.5.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+															<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.5.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+														</div>
 														</div>
 													{% else %}
 														<div class="top_img">
 															<img class="img-responsive"
 																 src="{% static items.5.imagevideo_path %}" alt="">
+														</div>
+														<div class="save_button_wrap">
+															<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.5.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
 														</div>
 													{% endif %}
 													<div class="single_bottom_text">
@@ -433,11 +455,17 @@
 																	Your browser does not support the video tag!
 																</video>
 															</div>
+															<div class="save_button_wrap">
+																<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.6.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+															</div>
 														</div>
 													{% else %}
 														<div class="top_img">
 															<img class="img-responsive"
 																 src="{% static items.6.imagevideo_path %}" alt="">
+														</div>
+														<div class="save_button_wrap">
+															<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.6.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
 														</div>
 													{% endif %}
 													<div class="single_bottom_text">
@@ -464,14 +492,17 @@
 																	Your browser does not support the video tag!
 																</video>
 															</div>
-														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign" data-item-id="{{ items.5.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-														</div>
+															<div class="save_button_wrap">
+																<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.7.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+															</div>
 														</div>
 													{% else %}
 														<div class="top_img">
 															<img class="img-responsive"
 																 src="{% static items.7.imagevideo_path %}" alt="">
+														</div>
+														<div class="save_button_wrap">
+															<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.7.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
 														</div>
 													{% endif %}
 													<div class="single_bottom_text">
@@ -511,7 +542,7 @@
 														</video>
 													</div>
 													<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign" data-item-id="{{ videos.0.pk }}" data-item-type="Youtube" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+															<span class="glyphicon glyphicon-plus-sign save_item" id="save_item" data-item-id="{{ videos.0.pk }}" data-item-type="Youtube" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 													</div>
 												</div>
 												<div class="single_bottom_text">
@@ -535,7 +566,7 @@
 														Your browser does not support iframes!
 													</div>
 													<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign" data-item-id="{{ videos.1.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+															<span class="glyphicon glyphicon-plus-sign save_item" id="save_item" data-item-id="{{ videos.1.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 														</div>
 												</div>
 												<div class="single_bottom_text">
@@ -562,6 +593,9 @@
 																src={{ videos.2.url }}></iframe>
 														Your browser does not support iframes!
 													</div>
+													<div class="save_button_wrap">
+															<span class="glyphicon glyphicon-plus-sign save_item" id="save_item" data-item-id="{{ videos.2.pk }}" data-item-type="Youtube" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+													</div>
 												</div>
 												<div class="single_bottom_text">
 													<h4>
@@ -582,6 +616,9 @@
 														<iframe class="embed-responsive-item"
 																src={{ videos.3.url }}></iframe>
 														Your browser does not support iframes!
+													</div>
+													<div class="save_button_wrap">
+															<span class="glyphicon glyphicon-plus-sign save_item" id="save_item" data-item-id="{{ videos.3.pk }}" data-item-type="Youtube" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 													</div>
 												</div>
 												<div class="single_bottom_text">

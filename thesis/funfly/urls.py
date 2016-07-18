@@ -34,5 +34,6 @@ urlpatterns = [
                   url(r'^comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
                   url(r'add/$', views.add_item, name='add_item'),
                   url(r'saved_items/$', views.saved_items_list, name='saved_items_list'),
+                  url(r'.*add_to_savelist/$', views.add_item_to_savelist, name='add_item_to_savelist')
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

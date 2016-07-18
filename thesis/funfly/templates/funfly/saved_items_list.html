@@ -2,12 +2,19 @@
 {% load staticfiles %}
 {% load custom_tags %}
 
+
+{% block head %}
+	{{ block.super }}
+		<script src="{% static "funfly/js/delete_savelist_item.js" %}"></script>
+{% endblock %}
+
+
 {% block content %}
 	{% block main_wrapper %}
 		<div class="col-md-9 col-sm-9 col-xs-9">
 			{% for item in saved_items %}
 				{% if item|classname == 'Ninegag' %}
-					<div class="gags_bottom">
+					<div class="gags_bottom" id="delete_item_{{ item.pk }}">
 						{% if item.is_video %}
 							<div class="top_video">
 								<div align="center"
@@ -19,6 +26,11 @@
 										Your browser does not support the video tag!
 									</video>
 								</div>
+								<div class="save_button_wrap">
+								<span class="glyphicon glyphicon-minus-sign delete_item" data-item-id="{{ item.pk }}"
+								  	data-item-type="Ninegag" data-toggle="tooltip" data-container="body"
+								  	title="Click to save the item into your personal list!"></span>
+								</div>
 							</div>
 						{% else %}
 							<div class="top_img">
@@ -26,8 +38,8 @@
 									 src="{% static item.imagevideo_path %}" alt="">
 							</div>
 							<div class="save_button_wrap">
-							<span class="glyphicon glyphicon-plus-sign" data-item-id="{{ item.pk }}"
-								  data-item-type="Ninegag" data-toggle="tooltip"
+							<span class="glyphicon glyphicon-minus-sign delete_item" data-item-id="{{ item.pk }}"
+								  data-item-type="Ninegag" data-toggle="tooltip" data-container="body"
 								  title="Click to save the item into your personal list!"></span>
 							</div>
 						{% endif %}
@@ -46,7 +58,7 @@
 				{% endif %}
 
 				{% if item|classname == 'Youtube' %}
-					<div class="videos_left">
+					<div class="videos_left" id="delete_item_{{ item.pk }}">
 						<div class="top_video">
 							<div align="center"
 								 class="embed-responsive embed-responsive-16by9">
@@ -54,10 +66,15 @@
 								Your browser does not support the video tag!
 								</video>
 							</div>
+							<div class="save_button_wrap">
+							<span class="glyphicon glyphicon-minus-sign delete_item"  data-item-id="{{ item.pk }}"
+								  data-item-type="Youtube" data-toggle="tooltip" data-container="body"
+								  title="Click to save the item into your personal list!"></span>
+							</div>
 						</div>
 						<div class="single_bottom_text">
 							<h4>
-								{% if items %}
+								{% if saved_items %}
 									<a href="{% url 'video_post_details' item.pk %}"> {{ item.title }} </a>
 								{% endif %}
 							</h4>
@@ -70,7 +87,23 @@
 				{% endif %}
 
 				{% if item|classname == 'Joke' %}
-
+					<div class="jokes_left" id="delete_item_{{ item.pk }}">
+						<div class="single_top_img_text">
+							{% if saved_items %}
+								<h6>
+									<a href="{% url 'joke_post_details' item.pk %}"> {{ item.text }} </a>
+								</h6>
+							{% endif %}
+						</div>
+						<div class="save_button_wrap">
+							<span class="glyphicon glyphicon-minus-sign delete_item" data-item-id="{{ item.pk }}"
+								  data-item-type="Ninegag" data-toggle="tooltip" data-container="body"
+								  title="Click to save the item into your personal list!"></span>
+						</div>
+						<p><i class="fa fa-clock-o"></i> {{ item.date_added }}<i
+								class="fa fa-comment"></i>{{ item.approved_comments.count }}
+							comments</p>
+					</div>
 
 				{% endif %}
 

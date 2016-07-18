@@ -479,5 +479,6 @@ i {
 .single_ninegag {
     border-bottom: 1px solid #efefef;
     margin-bottom: 50px;
+    position: relative;
 }
 

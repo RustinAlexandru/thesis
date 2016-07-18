@@ -1,40 +1,45 @@
 /**
- * Created by alexandrurustin on 7/9/16.
+ * Created by alexandrurustin on 7/18/16.
  */
 
-var page_href;
+$(document).ready(function () {
 
-$('.save_item').on('click', function () {
+    $('[data-toggle="tooltip"]').tooltip();
 
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+    $('.delete_item').click(function () {
         item_id = $(this).attr("data-item-id");
         item_type = $(this).attr("data-item-type");
-        url = page_href + 'add_to_savelist/';
         data_received = {
             "item_id": item_id,
             "item_type": item_type
         };
+        var self = this;
+
         $.ajax({
             type: 'POST',
-            url: url,
+            url: '',
             data: {
                 "data": JSON.stringify(data_received)
             },
-            dataType: "json",
+            dataType: "html",
             success: function (data) {
-                if (!data["integrity_error"]) {
-                    swal(
-                        'Good job!',
-                        'You added the item to your personal save list!',
-                        'success'
-                    )
-                }
-                else {  // integrity_error message alert
-                    sweetAlert(
-                        'Oops...',
-                        "We're sorry, you've already added this item, you cannot add the same item twice!",
-                        'error'
-                    )
-                }
+                swal(
+                    'Alright!',
+                    'You deleted the item from your personal save list!',
+                    'success'
+                );
+
+                $(self).tooltip('hide');
+
+                $('#delete_item_' + item_id).remove();
 
             },
             error: function (data) {
@@ -45,26 +50,7 @@ $('.save_item').on('click', function () {
                 )
             }
         });
-
     });
-
-$(document).ready(function () {
-
-    $('[data-toggle="tooltip"]').tooltip();
-
-    page_href = window.location.href;
-
-    $.ajaxSetup({
-        beforeSend: function (xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        }
-    });
-
-
-
-    
 
 });
 

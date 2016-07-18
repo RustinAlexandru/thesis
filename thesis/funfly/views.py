@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, render_to_response
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
 from django.views.generic.list import ListView
@@ -57,7 +57,6 @@ def index(request):
 
     if request.method == 'POST' and request.is_ajax():
         data_sent = {
-
         }
         item_info = json.loads(request.POST['data'])
         if item_info["item_type"] == 'Ninegag':
@@ -209,9 +208,7 @@ class NinegagsList(ListView):
     def get_queryset(self):
         filter_val = self.request.GET.get('filter', 'True')
         order = self.request.GET.get('orderby', 'pk')
-        new_context = Ninegag.objects.filter(
-            is_video=filter_val,
-        ).order_by(order)
+        new_context = Ninegag.objects.filter(is_video=filter_val,).order_by(order)
         return new_context
 
     def get_context_data(self, **kwargs):
@@ -220,11 +217,37 @@ class NinegagsList(ListView):
         context['orderby'] = self.request.GET.get('orderby', 'pk')
         return context
 
+
+def add_item_to_savelist(request):
+    user = request.user
+    user_profile = UserProfile.objects.get(user=user)
+    if request.method == 'POST' and request.is_ajax():
+        data_sent = {
+        }
+        item_info = json.loads(request.POST['data'])
+        if item_info["item_type"] == 'Ninegag':
+            item = Ninegag.objects.get(pk=item_info["item_id"])
+
+        if item_info["item_type"] == 'Youtube':
+            item = Youtube.objects.get(pk=item_info["item_id"])
+
+        if item_info["item_type"] == 'Joke':
+            item = Joke.objects.get(pk=item_info["item_id"])
+
+        try:
+            user_profile.saved_items.add(item)
+        except IntegrityError as integrity_error:
+            data_sent["integrity_error"] = integrity_error.__class__.__name__
+
+        return JsonResponse(data_sent)
+
+
 class JokesList(AjaxListView):
     model = Joke
     context_object_name = 'jokes'
     template_name = 'jokes.html'
     page_template = 'joke_list.html'
+
 
 @login_required
 def comment_approve(request, pk):
@@ -262,6 +285,7 @@ def save_file(file, path=''):
 
 def is_moderator(user):
     return user.groups.filter(name='Moderators').exists()
+
 
 @user_passes_test(is_moderator)
 def add_item(request):
@@ -301,11 +325,30 @@ def add_item(request):
 
 @login_required
 def saved_items_list(request):
+    user = request.user
+    user_profile = UserProfile.objects.get(user=user)
     if request.method == 'GET':
-        user = request.user
-        user_profile = UserProfile.objects.get(user=user)
         saved_items = user_profile.saved_items.all()
         context = {
             'saved_items': saved_items
         }
         return render(request, 'funfly/saved_items_list.html', context)
+    elif request.method == 'POST' and request.is_ajax():
+        context = {}
+        item_info = json.loads(request.POST['data'])
+        if item_info["item_type"] == 'Ninegag':
+            item = Ninegag.objects.get(pk=item_info["item_id"])
+
+        if item_info["item_type"] == 'Youtube':
+            item = Youtube.objects.get(pk=item_info["item_id"])
+
+        if item_info["item_type"] == 'Joke':
+            item = Joke.objects.get(pk=item_info["item_id"])
+
+        user_profile.saved_items.remove(item)
+        saved_items = user_profile.saved_items.all()
+        context = {
+            'saved_items': saved_items
+        }
+        return render_to_response('funfly/saved_items_list.html',context=context)
+        # return render(request,'funfly/saved_items_list.html', context)
