@@ -2,6 +2,7 @@
  * Created by alexandrurustin on 7/18/16.
  */
 
+
 $(document).ready(function () {
 
     $('[data-toggle="tooltip"]').tooltip();
@@ -14,7 +15,8 @@ $(document).ready(function () {
         }
     });
 
-    $('.delete_item').click(function () {
+        $('.delete_item').click(function () {
+
         item_id = $(this).attr("data-item-id");
         item_type = $(this).attr("data-item-type");
         data_received = {
@@ -51,6 +53,7 @@ $(document).ready(function () {
             }
         });
     });
+
 
 });
 

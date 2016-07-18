@@ -4,8 +4,27 @@
 
 
 {% block head %}
-	{{ block.super }}
+	<head>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Funfly</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="{% static "funfly/css/bootstrap.min.css" %}">
+		<link rel="stylesheet" href="{% static "funfly/css/bootstrap-theme.min.css" %}">
+		<link rel="stylesheet" href="{% static "funfly/css/main.css" %}">
+		<link rel="stylesheet" href="{% static "funfly/css/responsive.css" %}">
+		<link rel="stylesheet" href="{% static "funfly/font-awesome-4.6.3/css/font-awesome.min.css" %}">
+		<link rel="stylesheet" type="text/css" href="{% static "funfly/sweetalert2/sweetalert2.css" %}">
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		{#	<script src="{% static "funfly/js/vendor/jquery-1.11.2.min.js" %}"></script>#}
+		<script src="{% static "funfly/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" %}"></script>
+		<script src="{% static "funfly/sweetalert2/sweetalert2.min.js" %}"></script>
 		<script src="{% static "funfly/js/delete_savelist_item.js" %}"></script>
+
+	</head>
 {% endblock %}
 
 
@@ -29,7 +48,7 @@
 								<div class="save_button_wrap">
 								<span class="glyphicon glyphicon-minus-sign delete_item" data-item-id="{{ item.pk }}"
 								  	data-item-type="Ninegag" data-toggle="tooltip" data-container="body"
-								  	title="Click to save the item into your personal list!"></span>
+								  	title="Click to remove the item into your personal list!"></span>
 								</div>
 							</div>
 						{% else %}
@@ -40,7 +59,7 @@
 							<div class="save_button_wrap">
 							<span class="glyphicon glyphicon-minus-sign delete_item" data-item-id="{{ item.pk }}"
 								  data-item-type="Ninegag" data-toggle="tooltip" data-container="body"
-								  title="Click to save the item into your personal list!"></span>
+								  title="Click to remove the item from your personal list!"></span>
 							</div>
 						{% endif %}
 						<div class="single_bottom_text">
@@ -69,7 +88,7 @@
 							<div class="save_button_wrap">
 							<span class="glyphicon glyphicon-minus-sign delete_item"  data-item-id="{{ item.pk }}"
 								  data-item-type="Youtube" data-toggle="tooltip" data-container="body"
-								  title="Click to save the item into your personal list!"></span>
+								  title="Click to remove the item from your personal list!"></span>
 							</div>
 						</div>
 						<div class="single_bottom_text">
@@ -98,7 +117,7 @@
 						<div class="save_button_wrap">
 							<span class="glyphicon glyphicon-minus-sign delete_item" data-item-id="{{ item.pk }}"
 								  data-item-type="Ninegag" data-toggle="tooltip" data-container="body"
-								  title="Click to save the item into your personal list!"></span>
+								  title="Click to remove the item into your personal list!"></span>
 						</div>
 						<p><i class="fa fa-clock-o"></i> {{ item.date_added }}<i
 								class="fa fa-comment"></i>{{ item.approved_comments.count }}

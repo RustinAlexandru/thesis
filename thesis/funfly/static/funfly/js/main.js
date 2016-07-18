@@ -2,9 +2,13 @@
  * Created by alexandrurustin on 7/9/16.
  */
 
-var page_href;
+$(document).ready(function () {
 
-$('.save_item').on('click', function () {
+    $('[data-toggle="tooltip"]').tooltip();
+
+    page_href = window.location.href;
+
+    $('.save_item').click(function () {
 
         item_id = $(this).attr("data-item-id");
         item_type = $(this).attr("data-item-type");
@@ -45,14 +49,7 @@ $('.save_item').on('click', function () {
                 )
             }
         });
-
     });
-
-$(document).ready(function () {
-
-    $('[data-toggle="tooltip"]').tooltip();
-
-    page_href = window.location.href;
 
     $.ajaxSetup({
         beforeSend: function (xhr, settings) {
@@ -64,7 +61,7 @@ $(document).ready(function () {
 
 
 
-    
+
 
 });
 
