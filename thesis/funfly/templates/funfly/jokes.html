@@ -4,6 +4,19 @@
 
 {% load el_pagination_tags %}
 
+{% block  head %}
+	{{ block.super }}
+	<style type="text/css">
+		.save_button_wrap {
+			margin-top: 0;
+			margin-left: 20px;
+			margin-right: 0;
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
+	</style>
+{% endblock %}
 
 {% block content %}
 	{% block main_wrapper %}
@@ -12,9 +25,72 @@
 				{% include page_template %}
 				{% block js %}
 					{{ block.super }}
-					<script src="http://code.jquery.com/jquery-latest.js"></script>
 					<script src="{% static "funfly/js/el-pagination.js" %}"></script>
-					<script>$.endlessPaginate();</script>
+					<script>
+						$.endlessPaginate({
+							onCompleted: function (context, fragment) {
+
+								$('.save_item').unbind().on('click', function () {
+
+
+									item_id = $(this).attr("data-item-id");
+									item_type = $(this).attr("data-item-type");
+									url = page_href;
+									if (url.indexOf("page") !== -1) { //  url contains 'page' in it, needs adjustment
+										// get_params_pos= url.indexOf("?")  // insert 'add_to_savelist' before get parameters
+										if (url.indexOf("ninegags") !== -1) {
+											url = url.replace("/ninegags/", "/ninegags/add_to_savelist/");
+										} else if (url.indexOf("videos") !== -1) {
+											url = url.replace("/videos/", "/videos/add_to_savelist/");
+										} else if (url.indexOf("jokes") !== -1) {
+											url = url.replace("/jokes/", "/videos/add_to_savelist/");
+										}
+									} else {
+										url = page_href + 'add_to_savelist/'; // first page in a paginated list, url doesnt contain 'page' in it
+									}
+
+									data_received = {
+										"item_id": item_id,
+										"item_type": item_type
+									};
+									$.ajax({
+										type: 'POST',
+										url: url,
+										data: {
+											"data": JSON.stringify(data_received)
+										},
+										dataType: "json",
+										success: function (data) {
+											if (!data["integrity_error"]) {
+												swal(
+														'Good job!',
+														'You added the item to your personal save list!',
+														'success'
+												)
+											}
+											else {  // integrity_error message alert
+												sweetAlert(
+														'Oops...',
+														"We're sorry, you've already added this item, you cannot add the same item twice!",
+														'error'
+												)
+											}
+
+										},
+										error: function (data) {
+											sweetAlert(
+													'Oops...',
+													'Something went wrong!',
+													'error'
+											)
+										}
+									});
+								})
+
+							}
+						});
+					</script>
+
 				{% endblock %}
 			</div>
 		</div>

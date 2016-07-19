@@ -83,20 +83,3 @@ class ItemUpdatePipeline(object):
         update_model(model, item_model)
 
         return item
-
-
-class JsonEncodingPipeline(object):
-
-    def __init__(self):
-        self.file = codecs.open('items.json', 'w+', encoding='utf-8')
-        self.file.write('[')
-
-    def process_item(self, item, spider):
-        line = json.dumps(dict(item), ensure_ascii=False,  indent=4) + ',' + '\n'
-        self.file.write(line)
-        return item
-
-    def close_spider(self, spider):
-        self.file.seek(-2, os.SEEK_END)
-        self.file.write(']')
-        self.file.close()

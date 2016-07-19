@@ -74,7 +74,7 @@ class JokesSpyder(scrapy.spiders.Spider):
 
     def parse(self, response):
         global priority_nr
-        category_links = response.xpath('//div[@class="left-nav"]/ul').xpath(
+        category_links = response.xpath('//div[@class="jokes-nav"]/ul').xpath(
             './/li/a/@href').extract()
 
         for link in category_links:
@@ -83,16 +83,16 @@ class JokesSpyder(scrapy.spiders.Spider):
 
     def parse_page(self, response):
         global priority_nr
-        jokes_div = response.xpath('//*[@class="joke-area"]')
-        for joke in jokes_div.xpath('.//*[@class="line"]'):
+        jokes_div = response.css('#jokes_container')
+        for joke in jokes_div.xpath('.//*[@class="jokes"]'):
             joke_id = joke.xpath('.//p/@id').extract_first()
             joke_text = joke.xpath('.//p/text()').extract()
             joke_text = ' '.join(joke_text)
             # joke_text = joke_text.strip(" \n")
             joke_text = " ".join(joke_text.split())
-            joke_likes = joke.xpath('.//div[@class="thum-like-number"]/text()').extract_first()
-            joke_dislikes = joke.xpath('.//div[@class="thum-dislike-number"]/text()').extract_first()
-            joke_category = response.xpath('//div[@class="new-content"]').xpath('.//span[@class="relation-color"]/text()').extract_first()
+            joke_likes = joke.css('.dislike').xpath('.//text()').extract_first()
+            joke_dislikes = joke.css('.like').xpath('.//text()').extract_first()
+            joke_category = response.xpath('//div[@class="main-right-content"]').xpath('.//span[@class="relation-color"]/text()').extract_first()
             joke_category = " ".join(joke_category.split())
             joke_item = Joke()
             joke_item['text'] = joke_text
@@ -103,10 +103,10 @@ class JokesSpyder(scrapy.spiders.Spider):
             yield joke_item
 
 
-        next_page = jokes_div.xpath('.//div[@class="pagination"]//li//span//a')[-1].extract()
-        next_page_nr = int(jokes_div.xpath('.//div[@class="pagination"]//li//span//a/@href')[-1].extract()[-1])
-        if "list-next" in next_page and next_page_nr <= 2:
-            next_page = jokes_div.xpath('.//div[@class="pagination"]//li//span/a/@href')[ -1].extract()
+        next_page = jokes_div.xpath('.//div[@class="pagination-sec"]//li//a')[-1].extract()
+        next_page_nr = int(jokes_div.xpath('.//div[@class="pagination-sec"]//li//a/@href')[-1].extract()[-1])
+        if "NEXT" in next_page and next_page_nr <= 2:
+            next_page = jokes_div.xpath('.//div[@class="pagination-sec"]//li//a/@href')[-1].extract()
             yield scrapy.Request(next_page, callback=self.parse_page, dont_filter=False, priority=priority_nr)
             priority_nr -= 1
 

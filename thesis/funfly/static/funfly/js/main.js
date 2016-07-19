@@ -4,15 +4,31 @@
 
 $(document).ready(function () {
 
-    $('[data-toggle="tooltip"]').tooltip();
+
+    $("body").tooltip({
+        selector: '[data-toggle="tooltip"]'
+    });
 
     page_href = window.location.href;
 
-    $('.save_item').click(function () {
+    $('.save_item').on('click', function () {
 
         item_id = $(this).attr("data-item-id");
         item_type = $(this).attr("data-item-type");
-        url = page_href + 'add_to_savelist/';
+        url = page_href;
+        if (url.indexOf("page") !== -1) { //  url contains 'page' in it, needs adjustment
+            // get_params_pos= url.indexOf("?")  // insert 'add_to_savelist' before get parameters
+            if (url.indexOf("ninegags") !== -1) {
+                url = url.replace("/ninegags/", "/ninegags/add_to_savelist/");
+            } else if (url.indexOf("videos") !== -1) {
+                url = url.replace("/videos/", "/videos/add_to_savelist/");
+            } else if (url.indexOf("jokes") !== -1) {
+                url = url.replace("/jokes/", "/videos/add_to_savelist/");
+            }
+        } else {
+            url = page_href + 'add_to_savelist/'; // first page in a paginated list, url doesnt contain 'page' in it
+        }
+
         data_received = {
             "item_id": item_id,
             "item_type": item_type
@@ -58,9 +74,6 @@ $(document).ready(function () {
             }
         }
     });
-
-
-
 
 
 });

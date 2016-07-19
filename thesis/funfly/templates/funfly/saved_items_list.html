@@ -19,10 +19,20 @@
 		<link rel="stylesheet" href="{% static "funfly/font-awesome-4.6.3/css/font-awesome.min.css" %}">
 		<link rel="stylesheet" type="text/css" href="{% static "funfly/sweetalert2/sweetalert2.css" %}">
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-		{#	<script src="{% static "funfly/js/vendor/jquery-1.11.2.min.js" %}"></script>#}
 		<script src="{% static "funfly/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" %}"></script>
 		<script src="{% static "funfly/sweetalert2/sweetalert2.min.js" %}"></script>
 		<script src="{% static "funfly/js/delete_savelist_item.js" %}"></script>
+
+		<style type="text/css">
+			.save_button_wrap {
+				margin-top: 3%;
+				margin-left: 20px;
+				margin-right: 0;
+				position: absolute;
+				top: 0;
+				right: 0;
+			}
+		</style>
 
 	</head>
 {% endblock %}
@@ -116,7 +126,7 @@
 						</div>
 						<div class="save_button_wrap">
 							<span class="glyphicon glyphicon-minus-sign delete_item" data-item-id="{{ item.pk }}"
-								  data-item-type="Ninegag" data-toggle="tooltip" data-container="body"
+								  data-item-type="Joke" data-toggle="tooltip" data-container="body"
 								  title="Click to remove the item into your personal list!"></span>
 						</div>
 						<p><i class="fa fa-clock-o"></i> {{ item.date_added }}<i
@@ -130,3 +140,4 @@
 		</div>
 	{% endblock %}
 {% endblock %}
+

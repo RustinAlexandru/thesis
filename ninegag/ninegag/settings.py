@@ -78,8 +78,7 @@ EXTENSIONS = {
 #}
 ITEM_PIPELINES = {
     'ninegag.pipelines.ItemUpdatePipeline': 3,
-    'ninegag.pipelines.JsonEncodingPipeline': 2,
-    'ninegag.pipelines.MyFilesPipeline': 1,
+    'ninegag.pipelines.MyFilesPipeline': 2,
 }
 
 
