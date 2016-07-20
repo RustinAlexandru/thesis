@@ -11,7 +11,7 @@ $(document).ready(function () {
 
     page_href = window.location.href;
 
-    $('.save_item').on('click', function () {
+    $(document).on('click', '.save_item',  function () {
 
         item_id = $(this).attr("data-item-id");
         item_type = $(this).attr("data-item-type");

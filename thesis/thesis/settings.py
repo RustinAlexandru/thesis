@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'social.apps.django_app.default',
     'rolepermissions',
     'gm2m',
+
 ]
 
 SITE_ID = 1

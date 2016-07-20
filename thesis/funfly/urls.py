@@ -4,9 +4,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.core.urlresolvers import reverse_lazy
+from django_filters.views import FilterView
 
 from forms import CustomAuthenticationForm
-from funfly.models import Joke
+from funfly.models import Joke, Youtube, Ninegag
 from funfly.views import VideoPostDetails, VideosList, JokesList, JokePostDetails, NinegagPostDetails, NinegagsList
 from . import views
 from views import anonymous_required
@@ -34,6 +35,6 @@ urlpatterns = [
                   url(r'^comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
                   url(r'add/$', views.add_item, name='add_item'),
                   url(r'saved_items/$', views.saved_items_list, name='saved_items_list'),
-                  url(r'.*add_to_savelist/$', views.add_item_to_savelist, name='add_item_to_savelist')
+                  url(r'.*add_to_savelist/$', views.add_item_to_savelist, name='add_item_to_savelist'),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

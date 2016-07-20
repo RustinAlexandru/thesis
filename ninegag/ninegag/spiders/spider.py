@@ -1,3 +1,4 @@
+import re
 import urlparse
 
 import scrapy
@@ -66,6 +67,40 @@ class NGagSpyder(scrapy.Spider):
 
 priority_nr = 100
 
+
+class JokesCCSpyder(scrapy.spiders.CrawlSpider):
+    name = "jokesccspy"
+    start_urls = ["http://jokes.cc.com/joke-categories"]
+
+    def parse(self, response):
+        categories = response.css('.list_horiz').xpath('.//li/a/@href')
+        for category in categories:
+            category_link = category.extract()
+            yield scrapy.Request(category_link, callback=self.parse_category)
+
+    def parse_category(self, response):
+        jokes_div_container = response.css('#tier_4').css('.middle')
+        jokes = jokes_div_container.xpath('.//li//a//@href')
+        jokes = jokes[-3:]
+        for joke in jokes:
+            joke_link = joke.extract()
+            yield scrapy.Request(joke_link, callback=self.parse_joke)
+
+    def parse_joke(self, response):
+        regex = re.compile("/[a-z0-9]+/")
+        joke_id = regex.search(response.url)
+        joke_id = joke_id.group()
+        joke_id = joke_id.strip("/")
+        joke_text = response.css('.arrow_area').xpath('.//p/text()').extract()
+        joke_text = ' '.join(joke_text)
+        joke_category = response.css('#tier_1').css('.middle').css('ul')\
+                        .css(':nth-child(2)').xpath('.//a/text()').extract_first()
+        joke_item = Joke()
+        joke_item['text'] = joke_text
+        joke_item['category'] = joke_category
+        joke_item['identifier'] = joke_id + joke_category
+        yield joke_item
+
 class JokesSpyder(scrapy.spiders.Spider):
     name = "jokesspy"
     allowed_domains = ["laughfactory.com"]
@@ -78,8 +113,13 @@ class JokesSpyder(scrapy.spiders.Spider):
             './/li/a/@href').extract()
 
         for link in category_links:
-            yield scrapy.Request(link, callback=self.parse_page, priority=priority_nr)
+            yield scrapy.Request(link, callback=self.parse_last_page, priority=priority_nr)
             priority_nr -= 1
+
+    def parse_last_page(self, response):
+        jokes_div = response.css('#jokes_container')
+        last_page = jokes_div.xpath('.//div[@class="pagination-sec"]//li//a/@href')[-2].extract()
+        return scrapy.Request(last_page, callback=self.parse_page, priority=priority_nr)
 
     def parse_page(self, response):
         global priority_nr
@@ -103,12 +143,12 @@ class JokesSpyder(scrapy.spiders.Spider):
             yield joke_item
 
 
-        next_page = jokes_div.xpath('.//div[@class="pagination-sec"]//li//a')[-1].extract()
-        next_page_nr = int(jokes_div.xpath('.//div[@class="pagination-sec"]//li//a/@href')[-1].extract()[-1])
-        if "NEXT" in next_page and next_page_nr <= 2:
-            next_page = jokes_div.xpath('.//div[@class="pagination-sec"]//li//a/@href')[-1].extract()
-            yield scrapy.Request(next_page, callback=self.parse_page, dont_filter=False, priority=priority_nr)
-            priority_nr -= 1
+        # next_page = jokes_div.xpath('.//div[@class="pagination-sec"]//li//a')[-1].extract()
+        # next_page_nr = int(jokes_div.xpath('.//div[@class="pagination-sec"]//li//a/@href')[-1].extract()[-1])
+        # if "NEXT" in next_page and next_page_nr <= 2:
+        # next_page = jokes_div.xpath('.//div[@class="pagination-sec"]//li//a/@href')[-3].extract()
+        # priority_nr -= 1
+        # yield scrapy.Request(next_page, callback=self.parse_page, dont_filter=False, priority=priority_nr)
 
 
 from scrapy.crawler import Crawler
@@ -140,6 +180,13 @@ def run_9gag_spider():
 
 def run_jokes_spider():
     spider = JokesSpyder()
+    crawler = UrlCrawlerScript(spider)
+    crawler.start()
+    crawler.join()
+
+
+def run_jokescc_spider():
+    spider = JokesCCSpyder()
     crawler = UrlCrawlerScript(spider)
     crawler.start()
     crawler.join()
