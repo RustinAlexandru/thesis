@@ -24,7 +24,7 @@ urlpatterns = [
                   url(r'^$', views.index, name='index'),
                   url(r'^jokes/$', JokesList.as_view(model=Joke), name='jokes'),
                   url(r'^videos/$', VideosList.as_view(template_name='videos.html'), name='videos'),
-                  url(r'ninegags/$', NinegagsList.as_view(template_name='ninegags.html'), name='ninegags'),
+                  url(r'ninegags/$', NinegagsList.as_view(), name='ninegags'),
                   url(r'^video_post/(?P<pk>\d+)/$', VideoPostDetails.as_view(template_name='video_post.html'),
                       name='video_post_details'),
                   url(r'joke_post/(?P<pk>\d+)/$', JokePostDetails.as_view(template_name='joke_post.html'),
