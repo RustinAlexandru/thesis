@@ -11,7 +11,15 @@ $(document).ready(function () {
 
     page_href = window.location.href;
 
-    $(document).on('click', '.save_item',  function () {
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+    $(document).on('click', '.save_item', function () {
 
         item_id = $(this).attr("data-item-id");
         item_type = $(this).attr("data-item-type");
@@ -67,14 +75,27 @@ $(document).ready(function () {
         });
     });
 
-    $.ajaxSetup({
-        beforeSend: function (xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        }
-    });
 
+    $("#filter_sort_form").on('submit', function (e) {
+
+            $.ajax({
+                url: '',
+                type: 'GET',
+                data: $(this).serialize(),
+                success: function (data) {
+                    sweetAlert('Works', 'succes');
+                    $(".endless_page_template").html(data)
+                },
+                error: function (err) {
+                    console.log('err: ' + err);
+                }
+            });
+            e.preventDefault();
+        });
+
+    $("#filter_sort_form").on('change', "[data-input]", function () {
+        $("#filter_sort_form").submit()
+    });
 
 });
 

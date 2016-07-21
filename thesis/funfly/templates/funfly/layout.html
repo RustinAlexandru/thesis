@@ -22,9 +22,18 @@
 	<link rel="stylesheet" href="{% static "funfly/font-awesome-4.6.3/css/font-awesome.min.css" %}">
 	<link rel="stylesheet" type="text/css" href="{% static "funfly/sweetalert2/sweetalert2.css" %}">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script type="application/javascript" src="{% static "funfly/js/vendor/bootstrap.js" %}"></script>
 	<script src="{% static "funfly/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" %}"></script>
 	<script src="{% static "funfly/sweetalert2/sweetalert2.min.js" %}"></script>
-	<script src="{% static "funfly/js/main.js" %}"></script>
+    <script src="{% static "funfly/js/main.js" %}"></script>
+
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+		  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
 
 </head>
 {% endblock%}
@@ -140,7 +149,7 @@
 							<li class="nav_videos"><a href="{% url 'videos' %}">Videos</a></li>
 							<li class="nav_jokes"><a href="{% url 'jokes' %}">Jokes</a></li>
 							{% if user|is_in_group:"Moderators" %}
-							  <li class="save_item"><a href="{% url 'save_item' %}">Add item</a> </li>
+							  <li class="save_item"><a href="{% url 'add_item' %}">Add item</a> </li>
 							{% endif %}
 							<li class="saved_items"><a href="{% url 'saved_items_list' %}">Saved items</a> </li>
 							<li id="nav_about"><a href="#">About</a></li>
@@ -800,14 +809,6 @@
 </footer>
 {# Footer End #}
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="{% static "funfly/js/vendor/bootstrap.min.js" %}"></script>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.6&appId=527379650781936";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+
 </body>
 </html>

@@ -1,57 +1,44 @@
 {% extends 'funfly/layout.html' %}
 {% load staticfiles %}
 
+{% load el_pagination_tags %}
+
 {% block content %}
 	{% block main_wrapper %}
 		<div class="col-md-9 col-sm-9 col-xs-9 all_ninegags">
-			{% for ninegag in ninegags %}
-				<div class="single_ninegag">
-					<div class="single_9gag_bottom_text">
-						<h4><a href="{% url 'ninegag_post_details' ninegag.pk %}"> {{ ninegag.title }} </a></h4>
-						<p><a class="9gags_color" href="#">9gag</a>| <i
-								class="fa fa-clock-o"></i> {{ ninegag.date_added }}
-							<i class="fa fa-comment"></i> {{ ninegag.approved_comments.count }} comments </p>
-					</div>
-					<div class="single_9gag_image_or_video">
-						{% if ninegag.is_video %}
-							<div align="center" class="embed-responsive embed-responsive-16by9">
-								<video preload="auto" loop muted controls class="embed-responsive-item">
-									<source src="{% static ninegag.imagevideo_path %}" type="video/mp4">
-									Your browser does not support the video tag!
-								</video>
-							</div>
-							<div class="save_button_wrap">
-								<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ ninegag.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!" ></span>
-							</div>
-						{% else %}
-							<img class="img-responsive" src="{% static ninegag.imagevideo_path %}" alt="">
-							<div class="save_button_wrap">
-								<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ ninegag.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!" ></span>
-							</div>
-						{% endif %}
+			<div class="filtering">
+				<form id="filter_sort_form" class="form-inline" method="get" action="{% url 'ninegags' %}">
+				<div class="form-group">
+					<label class="input-group" for="type">Type of item</label>
+					<select class="selectpicker show-tick show-menu-arrow"  title="Anything" data-width="fit" data-input id="type" name="type">
+						<option value="Any">Anything</option>
+						<option value="False" data-icon="glyphicon-camera" >Images</option>
+						<option value="True" data-icon="glyphicon-film" >GIFs</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label class="input-group" for="filter">Sort by</label>
+					<div class="btn-group input-group-sm">
+						<button class="btn btn-default btn-md project-phase">
+							 Date added <span class="glyphicon glyphicon-sort"></span>
+						</button>
+						<button class="btn btn-default btn-md project-phase">
+							Points <span class="glyphicon glyphicon-sort"></span>
+						</button>
 					</div>
 				</div>
-			{% endfor %}
-
-			{% if is_paginated %}
-				<ul class="pagination">
-					{% if page_obj.has_previous %}
-						<li>
-							<span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
-						</li>
-					{% endif %}
-					<li class="active">
-						<span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
-					</li>
-					{% if page_obj.has_next %}
-						<li>
-							<span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
-						</li>
-					{% endif %}
-				</ul>
-			{% else %}
-				<h3>Ninegags not available</h3>
-			{% endif %}
+			</form>
+			</div>
+			<div class="endless_page_template">
+				{% include page_template %}
+				{% block js %}
+					{{ block.super }}
+					<script src="{% static "funfly/js/el-pagination.js" %}"></script>
+					<script>
+						$.endlessPaginate();
+					</script>
+				{% endblock %}
+			</div>
 		</div>
 	{% endblock %}
 {% endblock %}

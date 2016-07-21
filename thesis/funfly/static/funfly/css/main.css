@@ -487,4 +487,8 @@ i {
     position: relative;
 }
 
+.btn .glyphicon {
+    margin-left: 10px;
+}
+
 /* 8) Saved items page css */

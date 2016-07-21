@@ -11,7 +11,7 @@ from .forms import UserProfileForm
     # readonly_fields = ('date_added',)
 
 class NinegagAdmin(ModerationAdmin):
-    list_display = ("title", "pk")
+    list_display = ("title", "pk", "is_video")
     readonly_fields = ('date_added',)
 
 

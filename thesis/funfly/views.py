@@ -17,6 +17,7 @@ from models import Ninegag, UserProfile, Joke, Youtube, PostComment
 from django.http import HttpResponseNotAllowed, HttpResponseRedirect, JsonResponse
 from django.db import IntegrityError
 import json
+import ast
 
 
 # from youtube_parsing import youtube_search
@@ -200,23 +201,35 @@ class VideosList(ListView):
     paginate_by = 5
 
 
-class NinegagsList(ListView):
+class NinegagsList(AjaxListView):
     model = Ninegag
     context_object_name = 'ninegags'
     paginate_by = 5
+    template_name = 'ninegags.html'
+    page_template = 'ninegags_ajax.html'
+
+
 
     def get_queryset(self):
-        filter_val = self.request.GET.get('filter', 'True')
-        order = self.request.GET.get('orderby', 'pk')
-        new_context = Ninegag.objects.filter(is_video=filter_val,).order_by(order)
+        filter_val = self.request.GET.get("type", 'True')
+        # order = self.request.GET.get('orderby', 'pk')
+        if not filter_val == 'Any':
+            filter_val = ast.literal_eval(filter_val)
+        new_context = Ninegag.objects.filter(is_video=filter_val)
         return new_context
 
     def get_context_data(self, **kwargs):
         context = super(NinegagsList, self).get_context_data(**kwargs)
-        context['filter'] = self.request.GET.get('filter', 'True')
-        context['orderby'] = self.request.GET.get('orderby', 'pk')
+        context['type'] = self.request.GET.get('type', 'true')
+        # context['orderby'] = self.request.GET.get('orderby', 'pk')
         return context
 
+    def get_template_names(self):
+        if self.request.is_ajax():
+            return ['ninegags_ajax.html']
+
+        else:
+            return ['ninegags.html']
 
 def add_item_to_savelist(request):
     user = request.user
