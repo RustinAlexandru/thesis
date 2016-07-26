@@ -5,7 +5,6 @@
 		<div class="col-md-9 col-sm-9 col-xs-9 all_videos">
 			{% for video in videos %}
 				<div class="single_video">
-					<iframe src="{{ video.url }}" frameborder="0" width="560" height="315"></iframe>
 					<div class="single_bottom_text">
 						<h4>
 							<a href="{% url 'video_post_details' video.pk %}"> {{ video.title }} </a>
@@ -13,10 +12,16 @@
 						<p><a class="videos_color" href="#">videos</a>|<i
 								class="fa fa-clock-o"></i> {{ video.added_at }}
 							<i class="fa fa-comment"></i>{{ video.approved_comments.count }} comments </p>
+						{% if request.user.is_authenticated %}
+							<div class="save_button_wrap">
+								<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ video.pk }}"
+									  data-item-type="Youtube" data-toggle="tooltip" data-container="body"
+									  title="Click to save the item into your personal list!"></span>
+							</div>
+						{% endif %}
 					</div>
-					<div class="save_button_wrap">
-						<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ video.pk }}" data-item-type="Youtube" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!" ></span>
-					</div>
+					<iframe src="{{ video.url }}" frameborder="0" width="560" height="315"></iframe>
+
 				</div>
 			{% endfor %}
 

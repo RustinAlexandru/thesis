@@ -8,10 +8,12 @@
 			<h6><a href="{% url 'joke_post_details' joke.pk %}"> {{ joke.text }} </a></h6>
 		</div>
 		<p><i class="fa fa-clock-o"></i> {{ joke.date_added }}<i
-				class="fa fa-comment"></i> {{ joke.approved_comments.count }} comments</p>
-		<div class="save_button_wrap">
-			<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ joke.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-		</div>
+				class="fa fa-comment"></i> {{ joke.approved_comments.count }} comments  likes: {{ joke.likes }} </p>
+		{% if request.user.is_authenticated %}
+			<div class="save_button_wrap">
+				<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ joke.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+			</div>
+		{% endif %}
 	</div>
 
 {% empty %}

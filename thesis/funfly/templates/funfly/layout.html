@@ -151,7 +151,9 @@
 							{% if user|is_in_group:"Moderators" %}
 							  <li class="save_item"><a href="{% url 'add_item' %}">Add item</a> </li>
 							{% endif %}
-							<li class="saved_items"><a href="{% url 'saved_items_list' %}">Saved items</a> </li>
+							{% if user.is_authenticated %}
+								<li class="saved_items"><a href="{% url 'saved_items_list' %}">Saved items</a> </li>
+							{% endif %}
 							<li id="nav_about"><a href="#">About</a></li>
 						</ul>
 					</div>
@@ -235,18 +237,22 @@
 															Your browser does not support the video tag!
 														</video>
 													</div>
-													<div class="save_button_wrap">
-														<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ items.0.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
-													</div>
+													{% if request.user.is_authenticated%}
+														<div class="save_button_wrap">
+															<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ items.0.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+														</div>
+													{% endif %}
 												</div>
 											{% else %}
 												<div class="top_img">
 													<img class="img-responsive"
 														 src="{% static items.0.imagevideo_path %}" alt="">
 												</div>
-												<div class="save_button_wrap">
-													<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ items.0.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
-												</div>
+												{% if request.user.is_authenticated %}
+													<div class="save_button_wrap">
+														<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ items.0.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+													</div>
+												{% endif %}
 											{% endif %}
 											<div class="single_top_img_text">
 												<h4>
@@ -255,7 +261,7 @@
 													{% endif %}
 												</h4>
 											</div>
-											<p><i class="fa fa-clock-o"></i> {{ items.0.date_added }}<i
+											<p><a class="category_tag" href="#">9gag</a>| <i class="fa fa-clock-o"></i> {{ items.0.date_added }}<i
 													class="fa fa-comment"></i>{{ items.0.approved_comments.count }}
 												comments</p>
 											<div class="all_gags_bottom">
@@ -271,18 +277,22 @@
 																	Your browser does not support the video tag!
 																</video>
 															</div>
-															<div class="save_button_wrap">
-																<span class="glyphicon glyphicon-plus-sign save_item " data-item-id="{{ items.1.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
-															</div>
+															{% if request.user.is_authenticated %}
+																<div class="save_button_wrap">
+																	<span class="glyphicon glyphicon-plus-sign save_item " data-item-id="{{ items.1.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+																</div>
+															{% endif %}
 														</div>
 													{% else %}
 														<div class="top_img">
 															<img class="img-responsive"
 																 src="{% static items.1.imagevideo_path %}" alt="">
 														</div>
-														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ items.1.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-														</div>
+														{% if request.user.is_authenticated %}
+															<div class="save_button_wrap">
+																<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ items.1.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+															</div>
+														{% endif %}
 													{% endif %}
 													<div class="single_bottom_text">
 														<h4>
@@ -308,18 +318,22 @@
 																	Your browser does not support the video tag!
 																</video>
 															</div>
-															<div class="save_button_wrap">
-																<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.2.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
-															</div>
+															{% if request.user.is_authenticated %}
+																<div class="save_button_wrap">
+																	<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.2.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+																</div>
+															{% endif %}
 														</div>
 													{% else %}
 														<div class="top_img">
 															<img class="img-responsive"
 																 src="{% static items.2.imagevideo_path %}" alt="">
 														</div>
-														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.2.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-														</div>
+														{% if request.user.is_authenticated %}
+															<div class="save_button_wrap">
+																<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.2.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+															</div>
+														{% endif %}
 													{% endif %}
 													<div class="single_bottom_text">
 														<h4>
@@ -345,18 +359,22 @@
 																	Your browser does not support the video tag!
 																</video>
 															</div>
-															<div class="save_button_wrap">
-																<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.3.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
-															</div>
+															{% if request.user.is_authenticated %}
+																<div class="save_button_wrap">
+																	<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.3.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+																</div>
+															{% endif %}
 														</div>
 													{% else %}
 														<div class="top_img">
 															<img class="img-responsive"
 																 src="{% static items.3.imagevideo_path %}" alt="">
 														</div>
-														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.3.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-														</div>
+														{% if request.user.is_authenticated %}
+															<div class="save_button_wrap">
+																<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.3.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+															</div>
+														{% endif %}
 													{% endif %}
 													<div class="single_bottom_text">
 														<h4>
@@ -386,9 +404,11 @@
 															Your browser does not support the video tag!
 														</video>
 													</div>
-													<div class="save_button_wrap">
-														<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.4.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-													</div>
+													{% if request.user.is_authenticated%}
+														<div class="save_button_wrap">
+															<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.4.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+														</div>
+													{% endif %}
 												</div>
 
 											{% else %}
@@ -397,9 +417,11 @@
 														 src="{% static items.4.imagevideo_path %}"
 														 alt="">
 												</div>
-												<div class="save_button_wrap">
-													<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.4.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
-												</div>
+												{% if request.user.is_authenticated %}
+													<div class="save_button_wrap">
+														<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.4.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+													</div>
+												{% endif %}
 											{% endif %}
 											<div class="single_top_img_text">
 												<h4>
@@ -408,7 +430,7 @@
 													{% endif %}
 												</h4>
 											</div>
-											<p><i class="fa fa-clock-o"></i>{{ items.4.date_added }}<i
+											<p><a class="category_tag" href="#">9gag</a>| <i class="fa fa-clock-o"></i>{{ items.4.date_added }}<i
 													class="fa fa-comment"></i>{{ items.4.approved_comments.count }}
 												comments</p>
 											<div class="all_gags_bottom">
@@ -424,18 +446,22 @@
 																	Your browser does not support the video tag!
 																</video>
 															</div>
-														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.5.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-														</div>
+															{% if request.user.is_authenticated %}
+																<div class="save_button_wrap">
+																	<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.5.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+																</div>
+															{% endif %}
 														</div>
 													{% else %}
 														<div class="top_img">
 															<img class="img-responsive"
 																 src="{% static items.5.imagevideo_path %}" alt="">
 														</div>
-														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.5.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
-														</div>
+														{% if request.user.is_authenticated%}
+															<div class="save_button_wrap">
+																<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.5.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+															</div>
+														{% endif %}
 													{% endif %}
 													<div class="single_bottom_text">
 														<h4>
@@ -461,18 +487,22 @@
 																	Your browser does not support the video tag!
 																</video>
 															</div>
-															<div class="save_button_wrap">
-																<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.6.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
-															</div>
+															{% if request.user.is_authenticated %}
+																<div class="save_button_wrap">
+																	<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.6.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+																</div>
+															{% endif %}
 														</div>
 													{% else %}
 														<div class="top_img">
 															<img class="img-responsive"
 																 src="{% static items.6.imagevideo_path %}" alt="">
 														</div>
-														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.6.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
-														</div>
+														{% if request.user.is_authenticated %}
+															<div class="save_button_wrap">
+																<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.6.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+															</div>
+														{% endif %}
 													{% endif %}
 													<div class="single_bottom_text">
 														<h4>
@@ -498,18 +528,22 @@
 																	Your browser does not support the video tag!
 																</video>
 															</div>
-															<div class="save_button_wrap">
-																<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.7.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-															</div>
+															{% if request.user.is_authenticated %}
+																<div class="save_button_wrap">
+																	<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.7.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+																</div>
+															{% endif %}
 														</div>
 													{% else %}
 														<div class="top_img">
 															<img class="img-responsive"
 																 src="{% static items.7.imagevideo_path %}" alt="">
 														</div>
-														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.7.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
-														</div>
+														{% if request.user.is_authenticated %}
+															<div class="save_button_wrap">
+																<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.7.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+															</div>
+														{% endif %}
 													{% endif %}
 													<div class="single_bottom_text">
 														<h4>
@@ -547,9 +581,11 @@
 														Your browser does not support the video tag!
 														</video>
 													</div>
-													<div class="save_button_wrap">
+													{% if request.user.is_authenticated%}
+														<div class="save_button_wrap">
 															<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ videos.0.pk }}" data-item-type="Youtube" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-													</div>
+														</div>
+													{% endif %}
 												</div>
 												<div class="single_bottom_text">
 													<h4>
@@ -571,9 +607,11 @@
 																src={{ videos.1.url }}></iframe>
 														Your browser does not support iframes!
 													</div>
-													<div class="save_button_wrap">
+													{% if request.user.is_authenticated%}
+														<div class="save_button_wrap">
 															<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ videos.1.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 														</div>
+													{% endif %}
 												</div>
 												<div class="single_bottom_text">
 													<h4>
@@ -599,9 +637,11 @@
 																src={{ videos.2.url }}></iframe>
 														Your browser does not support iframes!
 													</div>
-													<div class="save_button_wrap">
+													{% if request.user.is_authenticated %}
+														<div class="save_button_wrap">
 															<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ videos.2.pk }}" data-item-type="Youtube" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-													</div>
+														</div>
+													{% endif %}
 												</div>
 												<div class="single_bottom_text">
 													<h4>
@@ -623,9 +663,11 @@
 																src={{ videos.3.url }}></iframe>
 														Your browser does not support iframes!
 													</div>
-													<div class="save_button_wrap">
+													{% if request.user.is_authenticated %}
+														<div class="save_button_wrap">
 															<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ videos.3.pk }}" data-item-type="Youtube" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-													</div>
+														</div>
+													{% endif %}
 												</div>
 												<div class="single_bottom_text">
 													<h4>
@@ -662,12 +704,18 @@
 														</h6>
 													{% endif %}
 												</div>
-												<p><i class="fa fa-clock-o"></i> {{ jokes.0.date_added }}<i
-														class="fa fa-comment"></i>{{ jokes.0.approved_comments.count }}
-													comments</p>
-												<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ jokes.0.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+												<div class="single_bottom_text">
+													<p><a class="category_tag" href="#">jokes</a>| <i
+															class="fa fa-clock-o"></i> {{ jokes.0.date_added }}<i
+															class="fa fa-comment"></i>{{ jokes.0.approved_comments.count }}
+														comments
+													</p>
 												</div>
+												{% if request.user.is_authenticated %}
+													<div class="save_button_wrap">
+														<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ jokes.0.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+													</div>
+												{% endif %}
 											</div>
 											<div class="jokes_left">
 												<div class="single_top_img_text">
@@ -677,12 +725,18 @@
 														</h6>
 													{% endif %}
 												</div>
-												<p><i class="fa fa-clock-o"></i> {{ jokes.1.date_added }}<i
-														class="fa fa-comment"></i>{{ jokes.1.approved_comments.count }}
-													comments</p>
-												<div class="save_button_wrap">
-													<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ jokes.1.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+												<div class="single_bottom_text">
+													<p><a class="category_tag" href="#">jokes</a>| <i
+															class="fa fa-clock-o"></i> {{ jokes.1.date_added }}<i
+															class="fa fa-comment"></i>{{ jokes.1.approved_comments.count }}
+														comments
+													</p>
 												</div>
+												{% if request.user.is_authenticated%}
+													<div class="save_button_wrap">
+														<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ jokes.1.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+													</div>
+												{% endif %}
 											</div>
 											<div class="jokes_left last_left">
 												<div class="single_top_img_text">
@@ -692,12 +746,17 @@
 														</h6>
 													{% endif %}
 												</div>
-												<p><i class="fa fa-clock-o"></i> {{ jokes.2.date_added }}<i
-														class="fa fa-comment"></i>{{ jokes.2.approved_comments.count }}
-													comments</p>
-												<div class="save_button_wrap">
-													<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ jokes.2.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-												</div>
+												<div class="single_bottom_text">
+													<p><a class="category_tag" href="#">jokes</a>| <i
+															class="fa fa-clock-o"></i> {{ jokes.2.date_added }}<i
+															class="fa fa-comment"></i>{{ jokes.2.approved_comments.count }}
+														comments
+													</p></div>
+												{% if request.user.is_authenticated %}
+													<div class="save_button_wrap">
+														<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ jokes.2.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+													</div>
+												{% endif %}
 											</div>
 										</div>
 									</div>
@@ -711,12 +770,18 @@
 														</h6>
 													{% endif %}
 												</div>
-												<p><i class="fa fa-clock-o"></i> {{ jokes.3.date_added }}<i
-														class="fa fa-comment"></i>{{ jokes.3.approved_comments.count }}
-													comments</p>
-												<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ jokes.3.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+												<div class="single_bottom_text">
+													<p><a class="category_tag" href="#">jokes</a>| <i
+															class="fa fa-clock-o"></i> {{ jokes.3.date_added }}<i
+															class="fa fa-comment"></i>{{ jokes.3.approved_comments.count }}
+														comments
+													</p>
 												</div>
+												{% if request.user.is_authenticated %}
+													<div class="save_button_wrap">
+														<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ jokes.3.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+													</div>
+												{% endif %}
 											</div>
 											<div class="jokes_left">
 												<div class="single_top_img_text">
@@ -726,12 +791,18 @@
 														</h6>
 													{% endif %}
 												</div>
-												<p><i class="fa fa-clock-o"></i> {{ jokes.4.date_added }}<i
-														class="fa fa-comment"></i>{{ jokes.4.approved_comments.count }}
-													comments</p>
-												<div class="save_button_wrap">
-													<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ jokes.4.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+												<div class="single_bottom_text">
+													<p><a class="category_tag" href="#">jokes</a>| <i
+															class="fa fa-clock-o"></i> {{ jokes.4.date_added }}<i
+															class="fa fa-comment"></i>{{ jokes.4.approved_comments.count }}
+														comments
+													</p>
 												</div>
+												{% if request.user.is_authenticated %}
+													<div class="save_button_wrap">
+														<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ jokes.4.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+													</div>
+												{% endif %}
 											</div>
 											<div class="jokes_left last_left">
 												<div class="single_top_img_text">
@@ -741,12 +812,18 @@
 														</h6>
 													{% endif %}
 												</div>
-												<p><i class="fa fa-clock-o"></i> {{ jokes.5.date_added }}<i
-														class="fa fa-comment"></i>{{ jokes.5.approved_comments.count }}
-													comments</p>
-												<div class="save_button_wrap">
-													<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ jokes.5.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+												<div class="single_bottom_text">
+													<p><a class="category_tag" href="#">jokes</a>| <i
+															class="fa fa-clock-o"></i> {{ jokes.5.date_added }}<i
+															class="fa fa-comment"></i>{{ jokes.5.approved_comments.count }}
+														comments
+													</p>
 												</div>
+												{% if request.user.is_authenticated %}
+													<div class="save_button_wrap">
+														<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ jokes.5.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+													</div>
+												{% endif %}
 											</div>
 										</div>
 									</div>

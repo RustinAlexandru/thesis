@@ -297,6 +297,7 @@
 .single_top_img_text, .single_bottom_text {
     margin-left: 15px;
     margin-right: 15px;
+    position: relative;
 }
 
 .top_img {
@@ -448,6 +449,12 @@ i {
 .joke_details_page {
     padding-top: 100px;
 }
+
+.all_jokes {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
 /*  5) Videos page css   */
 
 .all_videos {

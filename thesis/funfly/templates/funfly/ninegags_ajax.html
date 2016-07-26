@@ -1,7 +1,7 @@
 {% load staticfiles %}
 {% load el_pagination_tags %}
 
-{% lazy_paginate 5 ninegags %}
+{% paginate 5 ninegags %}
 
 			{% for ninegag in ninegags %}
 				<div class="single_ninegag">
@@ -10,6 +10,7 @@
 						<p><a class="9gags_color" href="#">9gag</a>| <i
 								class="fa fa-clock-o"></i> {{ ninegag.date_added }}
 							<i class="fa fa-comment"></i> {{ ninegag.approved_comments.count }} comments </p>
+						<p> {{ ninegag.points }} points </p>
 					</div>
 					<div class="single_9gag_image_or_video">
 						{% if ninegag.is_video %}
@@ -19,14 +20,18 @@
 									Your browser does not support the video tag!
 								</video>
 							</div>
-							<div class="save_button_wrap">
-								<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ ninegag.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!" ></span>
-							</div>
+							{% if request.user.is_authenticated %}
+								<div class="save_button_wrap">
+									<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ ninegag.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!" ></span>
+								</div>
+							{% endif %}
 						{% else %}
 							<img class="img-responsive" src="{% static ninegag.imagevideo_path %}" alt="">
-							<div class="save_button_wrap">
-								<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ ninegag.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!" ></span>
-							</div>
+							{% if request.user.is_authenticated %}
+								<div class="save_button_wrap">
+									<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ ninegag.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!" ></span>
+								</div>
+							{% endif %}
 						{% endif %}
 					</div>
 				</div>

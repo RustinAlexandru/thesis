@@ -3,30 +3,69 @@
 
 {% load el_pagination_tags %}
 
+{% block  head %}
+	<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Funfly</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="{% static "funfly/css/bootstrap.min.css" %}">
+	<link rel="stylesheet" href="{% static "funfly/css/bootstrap-theme.min.css" %}">
+	<link rel="stylesheet" href="{% static "funfly/css/main.css" %}">
+	<link rel="stylesheet" href="{% static "funfly/css/responsive.css" %}">
+	<link rel="stylesheet" href="{% static "funfly/font-awesome-4.6.3/css/font-awesome.min.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "funfly/sweetalert2/sweetalert2.css" %}">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script type="application/javascript" src="{% static "funfly/js/vendor/bootstrap.js" %}"></script>
+	<script src="{% static "funfly/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" %}"></script>
+	<script src="{% static "funfly/sweetalert2/sweetalert2.min.js" %}"></script>
+    <script src="{% static "funfly/js/ninegags_list.js" %}"></script>
+
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+		  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
+</head>
+{% endblock %}
+
 {% block content %}
 	{% block main_wrapper %}
 		<div class="col-md-9 col-sm-9 col-xs-9 all_ninegags">
 			<div class="filtering">
 				<form id="filter_sort_form" class="form-inline" method="get" action="{% url 'ninegags' %}">
-				<div class="form-group">
-					<label class="input-group" for="type">Type of item</label>
-					<select class="selectpicker show-tick show-menu-arrow"  title="Anything" data-width="fit" data-input id="type" name="type">
-						<option value="Any">Anything</option>
-						<option value="False" data-icon="glyphicon-camera" >Images</option>
-						<option value="True" data-icon="glyphicon-film" >GIFs</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label class="input-group" for="filter">Sort by</label>
-					<div class="btn-group input-group-sm">
-						<button class="btn btn-default btn-md project-phase">
-							 Date added <span class="glyphicon glyphicon-sort"></span>
-						</button>
-						<button class="btn btn-default btn-md project-phase">
-							Points <span class="glyphicon glyphicon-sort"></span>
-						</button>
+					<div class="form-group">
+						<label class="input-group" for="type">Type of item</label>
+						<select class="selectpicker show-tick show-menu-arrow" title="Anything" data-width="fit"
+								data-input id="type" name="itemType">
+							<option value="Any">Anything</option>
+							<option value="False" data-icon="glyphicon-camera">Images</option>
+							<option value="True" data-icon="glyphicon-film">GIFs</option>
+						</select>
 					</div>
-				</div>
+					<div class="form-group ordering">
+						<label for="orderBy">Sort by</label>
+
+						<div class="btn-group" data-toggle="buttons">
+							<label class="btn btn-default" id="date_orderBy">
+								<input type="checkbox" value="date_added" name="date_orderBy"/>
+								Date
+								<i class="fa fa-arrow-down"></i>
+							</label>
+							<label class="btn btn-default" id="points_orderBy">
+								<input type="checkbox" value="points" name="points_orderBy"/>
+								Points
+								<i class="fa fa-arrow-down"></i>
+							</label>
+						</div>
+
+					</div>
 			</form>
 			</div>
 			<div class="endless_page_template">

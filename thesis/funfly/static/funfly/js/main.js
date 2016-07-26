@@ -2,8 +2,8 @@
  * Created by alexandrurustin on 7/9/16.
  */
 
-$(document).ready(function () {
 
+$(document).ready(function () {
 
     $("body").tooltip({
         selector: '[data-toggle="tooltip"]'
@@ -23,6 +23,9 @@ $(document).ready(function () {
 
         item_id = $(this).attr("data-item-id");
         item_type = $(this).attr("data-item-type");
+
+        itemType = $(this).attr("data-item-type");
+
         url = page_href;
         if (url.indexOf("page") !== -1) { //  url contains 'page' in it, needs adjustment
             // get_params_pos= url.indexOf("?")  // insert 'add_to_savelist' before get parameters
@@ -73,28 +76,6 @@ $(document).ready(function () {
                 )
             }
         });
-    });
-
-
-    $("#filter_sort_form").on('submit', function (e) {
-
-            $.ajax({
-                url: '',
-                type: 'GET',
-                data: $(this).serialize(),
-                success: function (data) {
-                    sweetAlert('Works', 'succes');
-                    $(".endless_page_template").html(data)
-                },
-                error: function (err) {
-                    console.log('err: ' + err);
-                }
-            });
-            e.preventDefault();
-        });
-
-    $("#filter_sort_form").on('change', "[data-input]", function () {
-        $("#filter_sort_form").submit()
     });
 
 });
