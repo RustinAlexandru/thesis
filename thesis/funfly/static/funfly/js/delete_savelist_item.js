@@ -2,6 +2,7 @@
  * Created by alexandrurustin on 7/18/16.
  */
 
+var data = {};
 
 $(document).ready(function () {
 
@@ -15,7 +16,7 @@ $(document).ready(function () {
         }
     });
 
-        $('.delete_item').click(function () {
+    $('.delete_item').click(function () {
 
         item_id = $(this).attr("data-item-id");
         item_type = $(this).attr("data-item-type");
@@ -52,6 +53,28 @@ $(document).ready(function () {
                 )
             }
         });
+    });
+
+    $("#filter_sort_form").on('submit', function (e) {
+        // current_page = $('.endless_page_current > strong:nth-child(1)').text();
+        // url = window.location.href + '?page=' + current_page + '&querystring_key=page'
+        data['itemType'] = $('.selectpicker').val();
+            $.ajax({
+                url: '',
+                type: 'GET',
+                data: data,
+                success: function (data) {
+                    $(".saved_items_container").html(data)
+                },
+                error: function (err) {
+                    console.log('err: ' + err);
+                }
+            });
+            e.preventDefault();
+        });
+
+    $("#filter_sort_form").on('change', "[data-input]", function () {
+        $("#filter_sort_form").submit()
     });
 
 

@@ -24,6 +24,13 @@
 		<script src="{% static "funfly/sweetalert2/sweetalert2.min.js" %}"></script>
 		<script src="{% static "funfly/js/delete_savelist_item.js" %}"></script>
 
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet"
+			  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
 		<style type="text/css">
 			.save_button_wrap {
 				margin-top: 3%;
@@ -33,6 +40,7 @@
 				top: 0;
 				right: 0;
 			}
+
 		</style>
 
 	</head>
@@ -41,10 +49,38 @@
 
 {% block content %}
 	{% block main_wrapper %}
-		<div class="col-md-9 col-sm-9 col-xs-9">
+		<div class="col-md-9 col-sm-9 col-xs-9 all_saved_items">
+			{% if saved_items %}
+				<div class="filtering">
+					<form id="filter_sort_form" class="form-inline" method="get" action="{% url 'ninegags' %}">
+						<div class="form-group">
+							<label class="input-group" for="type">Please select an item category</label>
+							<select class="selectpicker show-tick show-menu-arrow" title="Anything" data-width="fit"
+									data-input id="type" name="itemType">
+								<option value="Any">Anything</option>
+								<option value="Ninegag">Ninegags</option>
+								<option value="Youtube">Videos</option>
+								<option value="Joke">Jokes</option>
+							</select>
+						</div>
+					</form>
+				</div>
+			{% endif %}
+			<div class="saved_items_container">
 			{% for item in saved_items %}
 				{% if item|classname == 'Ninegag' %}
 					<div class="gags_bottom" id="delete_item_{{ item.pk }}">
+						<div class="single_bottom_text">
+							<h4>
+								{% if saved_items %}
+									<a href="{% url 'ninegag_post_details' item.pk %}"> {{ item.title }} </a>
+								{% endif %}
+							</h4>
+							<p><a class="category_tag" href="#">9gag</a>| <i
+									class="fa fa-clock-o"></i> {{ item.date_added }}
+								<i class="fa fa-comment"></i>{{ item.approved_comments.count }}
+								comments</p>
+						</div>
 						{% if item.is_video %}
 							<div class="top_video">
 								<div align="center"
@@ -56,11 +92,12 @@
 										Your browser does not support the video tag!
 									</video>
 								</div>
-								<div class="save_button_wrap">
+							</div>
+							<div class="save_button_wrap">
 								<span class="glyphicon glyphicon-minus-sign delete_item" data-item-id="{{ item.pk }}"
-								  	data-item-type="Ninegag" data-toggle="tooltip" data-container="body"
-								  	title="Click to remove the item into your personal list!"></span>
-								</div>
+									  data-item-type="Ninegag" data-toggle="tooltip" data-container="body"
+									  title="Click to remove the item into your personal list!">
+								</span>
 							</div>
 						{% else %}
 							<div class="top_img">
@@ -73,22 +110,22 @@
 								  title="Click to remove the item from your personal list!"></span>
 							</div>
 						{% endif %}
-						<div class="single_bottom_text">
-							<h4>
-								{% if saved_items %}
-									<a href="{% url 'ninegag_post_details' item.pk %}"> {{ item.title }} </a>
-								{% endif %}
-							</h4>
-							<p><a class="category_tag" href="#">9gag</a>| <i
-									class="fa fa-clock-o"></i> {{ item.date_added }}
-								<i class="fa fa-comment"></i>{{ item.approved_comments.count }}
-								comments</p>
-						</div>
 					</div>
 				{% endif %}
 
 				{% if item|classname == 'Youtube' %}
 					<div class="videos_left" id="delete_item_{{ item.pk }}">
+						<div class="single_bottom_text">
+							<h4>
+								{% if saved_items %}
+									<a href="{% url 'video_post_details' item.pk %}"> {{ item.title }} </a>
+								{% endif %}
+							</h4>
+							<p><a class="category_tag" href="#">videos</a>|<i
+									class="fa fa-clock-o"></i> {{ item.date_added }}
+								<i class="fa fa-comment"></i> {{ item.approved_comments.count }}
+								comments </p>
+						</div>
 						<div class="top_video">
 							<div align="center"
 								 class="embed-responsive embed-responsive-16by9">
@@ -97,21 +134,10 @@
 								</video>
 							</div>
 							<div class="save_button_wrap">
-							<span class="glyphicon glyphicon-minus-sign delete_item"  data-item-id="{{ item.pk }}"
+							<span class="glyphicon glyphicon-minus-sign delete_item" data-item-id="{{ item.pk }}"
 								  data-item-type="Youtube" data-toggle="tooltip" data-container="body"
 								  title="Click to remove the item from your personal list!"></span>
 							</div>
-						</div>
-						<div class="single_bottom_text">
-							<h4>
-								{% if saved_items %}
-									<a href="{% url 'video_post_details' item.pk %}"> {{ item.title }} </a>
-								{% endif %}
-							</h4>
-							<p><a class="category_tag" href="#">videos</a>|<i
-									class="fa fa-clock-o"></i> {{ item.added_at }}
-								<i class="fa fa-comment"></i> {{ item.approved_comments.count }}
-								comments </p>
 						</div>
 					</div>
 				{% endif %}
@@ -138,6 +164,7 @@
 				{% endif %}
 
 			{% endfor %}
+			</div>
 		</div>
 	{% endblock %}
 {% endblock %}

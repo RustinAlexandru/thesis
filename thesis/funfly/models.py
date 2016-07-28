@@ -107,7 +107,7 @@ class Youtube(models.Model):
     identifier = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
     url = models.CharField(max_length=200)
-    added_at = models.DateTimeField(null=True)
+    date_added = models.DateTimeField(null=True)
     youtube_comments = GenericRelation(PostComment, related_query_name='youtube_comments')
 
     def __unicode__(self):

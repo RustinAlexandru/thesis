@@ -1,0 +1,35 @@
+{% load staticfiles %}
+{% load el_pagination_tags %}
+
+{% paginate 5 videos %}
+
+{% for video in videos %}
+
+	<div class="single_video">
+		<div class="single_bottom_text">
+			<h4>
+				<a href="{% url 'video_post_details' video.pk %}"> {{ video.title }} </a>
+			</h4>
+			<p><a class="videos_color" href="#">videos</a>|<i
+					class="fa fa-clock-o"></i> {{ video.date_added }}
+				<i class="fa fa-comment"></i>{{ video.approved_comments.count }} comments </p>
+			{% if request.user.is_authenticated %}
+				<div class="save_button_wrap">
+								<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ video.pk }}"
+									  data-item-type="Youtube" data-toggle="tooltip" data-container="body"
+									  title="Click to save the item into your personal list!">
+
+								</span>
+				</div>
+			{% endif %}
+		</div>
+		<iframe src="{{ video.url }}" frameborder="0" width="560" height="315"></iframe>
+
+	</div>
+
+{% empty %}
+	<h3>Videos not available</h3>
+{% endfor %}
+
+
+{% show_pages %}

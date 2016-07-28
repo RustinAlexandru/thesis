@@ -25,8 +25,8 @@
 					<i class="fa fa-comment"></i> {{ object.approved_comments.count }} comments</p>
 				{% if request.user.is_authenticated %}
 					<div class="save_button_wrap">
-						<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ joke.pk }}"
-							  data-item-type="Joke" data-toggle="tooltip" data-container="body"
+						<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ object.pk }}"
+							  data-item-type="Youtube" data-toggle="tooltip" data-container="body"
 							  title="Click to save the item into your personal list!"></span>
 					</div>
 				{% endif %}

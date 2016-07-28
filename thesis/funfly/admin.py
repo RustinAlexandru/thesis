@@ -32,7 +32,7 @@ class JokeAdmin(ModerationAdmin):
 
 
 class YoutubeAdmin(admin.ModelAdmin):
-    list_display = ("title", "pk", "added_at")
+    list_display = ("title", "pk", "date_added")
 
 
 # class PostCommentAdmin(admin.ModelAdmin):

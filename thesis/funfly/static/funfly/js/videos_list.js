@@ -1,20 +1,20 @@
 /**
- * Created by alexandrurustin on 7/26/16.
+ * Created by alexandrurustin on 7/27/16.
  */
 
 
-var orderByPoints = 'points';
 var orderByDate = 'date_added';
-var itemType = 'Any';
+var orderByTitle = 'title';
 
-var data = {
-    date_orderBy: orderByDate,
-    points_orderBy: orderByPoints,
-    itemType: itemType
+var date_data = {
+    'date_orderBy': orderByDate
 };
 
-function sendRequest() {
+var title_data = {
+    'title_orderBy': orderByTitle
+};
 
+function sendRequest(data) {
 
     $.ajax({
         url: '',
@@ -46,13 +46,12 @@ function changeIcons(selector){
 }
 
 
-
 $(document).ready(function () {
 
     var date_orderby_selector = '#date_orderBy';
-    var points_orderby_selector = '#points_orderBy';
+    var title_orderby_selector = '#title_orderBy';
     var date_checkbox_selector = date_orderby_selector + " :checkbox";
-    var points_checkbox_selector = points_orderby_selector + " :checkbox";
+    var title_checkbox_selector = title_orderby_selector + " :checkbox";
 
 
     $("body").tooltip({
@@ -62,15 +61,17 @@ $(document).ready(function () {
     $(date_checkbox_selector).on('change', function () {
         changeIcons(date_orderby_selector);
 
-        data['date_orderBy'] = ($(date_checkbox_selector).is(':checked') ? '-date_added' : 'date_added');
-        sendRequest();
+        orderByDate = ($(date_checkbox_selector).is(':checked') ? '-date_added' : 'date_added');
+        date_data['date_orderBy'] = orderByDate;
+        sendRequest(date_data);
     });
 
-    $(points_checkbox_selector).on('change', function () {
-        changeIcons(points_orderby_selector);
+    $(title_checkbox_selector).on('change', function () {
+        changeIcons(title_orderby_selector);
 
-        data['points_orderBy'] = ($(points_checkbox_selector).is(':checked') ? '-points' : 'points');
-        sendRequest();
+        orderByTitle = ($(title_checkbox_selector).is(':checked') ? '-title' : 'title');
+        title_data['title_orderBy'] = orderByTitle;
+        sendRequest(title_data);
     });
 
 
@@ -144,27 +145,26 @@ $(document).ready(function () {
     });
 
 
-    $("#filter_sort_form").on('submit', function (e) {
-        current_page = $('.endless_page_current > strong:nth-child(1)').text();
-        // url = window.location.href + '?page=' + current_page + '&querystring_key=page'
-        data['itemType'] = $('.selectpicker').val();
-            $.ajax({
-                url: '',
-                type: 'GET',
-                data: data,
-                success: function (data) {
-                    $(".endless_page_template").html(data)
-                },
-                error: function (err) {
-                    console.log('err: ' + err);
-                }
-            });
-            e.preventDefault();
-        });
+    // $("#filter_sort_form").on('submit', function (e) {
+    //     current_page = $('.endless_page_current > strong:nth-child(1)').text();
+    //     // url = window.location.href + '?page=' + current_page + '&querystring_key=page'
+    //         $.ajax({
+    //             url: '',
+    //             type: 'GET',
+    //             data: data,
+    //             success: function (data) {
+    //                 $(".endless_page_template").html(data)
+    //             },
+    //             error: function (err) {
+    //                 console.log('err: ' + err);
+    //             }
+    //         });
+    //         e.preventDefault();
+    //     });
 
-    $("#filter_sort_form").on('change', "[data-input]", function () {
-        $("#filter_sort_form").submit()
-    });
+    // $("#filter_sort_form").on('change', "[data-input]", function () {
+    //     $("#filter_sort_form").submit()
+    // });
 
 });
 
