@@ -455,6 +455,10 @@ i {
     margin-bottom: 50px;
 }
 
+#likes_number:hover {
+    text-decoration: underline;
+}
+
 /*  5) Videos page css   */
 
 .all_videos {

@@ -15,7 +15,7 @@
 				<i class="fa fa-comment"></i>{{ video.approved_comments.count }} comments </p>
 			{% if request.user.is_authenticated %}
 				<div class="save_button_wrap">
-								<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ video.pk }}"
+								<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ video.pk }}"
 									  data-item-type="Youtube" data-toggle="tooltip" data-container="body"
 									  title="Click to save the item into your personal list!">
 

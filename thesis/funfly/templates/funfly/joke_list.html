@@ -8,10 +8,44 @@
 			<h6><a href="{% url 'joke_post_details' joke.pk %}"> {{ joke.text }} </a></h6>
 		</div>
 		<p><i class="fa fa-clock-o"></i> {{ joke.date_added }}<i
-				class="fa fa-comment"></i> {{ joke.approved_comments.count }} comments  likes: {{ joke.likes }} </p>
+				class="fa fa-comment"></i> {{ joke.approved_comments.count }} comments
+			{% if request.user.is_authenticated %}
+				<span class="like_button_wrap">
+					<i class="fa fa-thumbs-o-up like_item" data-item-id="{{ joke.pk }}" data-item-type="Joke"
+					   data-toggle="tooltip" data-container="body" title="Click to like it!"></i>
+				</span>
+			{% endif %}
+
+			<span id="likes">likes: </span><span data-toggle="modal" data-target="#myModal" id="likes_number">{{ joke.total_likes }}</span>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+								aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">See who else liked this: </h4>
+					</div>
+					<div class="modal-body">
+						<div id="likes_user_list">
+							<ul class="list-group">
+								{% for user in joke.likes_users %}
+								<li class="list-group-item">{{ user.username }}</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+					<div class="modal-footer">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		</p>
 		{% if request.user.is_authenticated %}
 			<div class="save_button_wrap">
-				<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ joke.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+				<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ joke.pk }}" data-item-type="Joke"
+					  data-toggle="tooltip" data-container="body"
+					  title="Click to save the item into your personal list!"></span>
 			</div>
 		{% endif %}
 	</div>

@@ -3,40 +3,52 @@
 
 {% paginate 5 ninegags %}
 
-			{% for ninegag in ninegags %}
-				<div class="single_ninegag">
-					<div class="single_9gag_bottom_text">
-						<h4><a href="{% url 'ninegag_post_details' ninegag.pk %}"> {{ ninegag.title }} </a></h4>
-						<p><a class="9gags_color" href="#">9gag</a>| <i
-								class="fa fa-clock-o"></i> {{ ninegag.date_added }}
-							<i class="fa fa-comment"></i> {{ ninegag.approved_comments.count }} comments </p>
-						<p> {{ ninegag.points }} points </p>
-					</div>
-					<div class="single_9gag_image_or_video">
-						{% if ninegag.is_video %}
-							<div align="center" class="embed-responsive embed-responsive-16by9">
-								<video preload="auto" loop muted controls class="embed-responsive-item">
-									<source src="{% static ninegag.imagevideo_path %}" type="video/mp4">
-									Your browser does not support the video tag!
-								</video>
-							</div>
-							{% if request.user.is_authenticated %}
-								<div class="save_button_wrap">
-									<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ ninegag.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!" ></span>
-								</div>
-							{% endif %}
-						{% else %}
-							<img class="img-responsive" src="{% static ninegag.imagevideo_path %}" alt="">
-							{% if request.user.is_authenticated %}
-								<div class="save_button_wrap">
-									<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ ninegag.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!" ></span>
-								</div>
-							{% endif %}
-						{% endif %}
-					</div>
+{% for ninegag in ninegags %}
+	<div class="single_ninegag">
+		<div class="single_9gag_bottom_text">
+			<h4><a href="{% url 'ninegag_post_details' ninegag.pk %}"> {{ ninegag.title }} </a></h4>
+			<p><a class="9gags_color" href="#">9gag</a>| <i
+					class="fa fa-clock-o"></i> {{ ninegag.date_added }}
+				<i class="fa fa-comment"></i> {{ ninegag.approved_comments.count }} comments </p>
+			<p>
+				<span id="points">{{ ninegag.points }}</span> points
+				{% if request.user.is_authenticated %}
+					<span class="add_point_wrap">
+						<i class="fa fa-plus add_point" data-item-id="{{ ninegag.pk }}" data-item-type="Ninegag"
+						   data-toggle="tooltip" data-container="body" title="Click to add a point!"></i>
+					</span>
+				{% endif %}
+			</p>
+		</div>
+		<div class="single_9gag_image_or_video">
+			{% if ninegag.is_video %}
+				<div align="center" class="embed-responsive embed-responsive-16by9">
+					<video preload="auto" loop muted controls class="embed-responsive-item">
+						<source src="{% static ninegag.imagevideo_path %}" type="video/mp4">
+						Your browser does not support the video tag!
+					</video>
 				</div>
-			{% empty %}
-				<h3>Ninegags not available</h3>
-			{% endfor %}
+				{% if request.user.is_authenticated %}
+					<div class="save_button_wrap">
+						<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ ninegag.pk }}"
+							  data-item-type="Ninegag" data-toggle="tooltip" data-container="body"
+							  title="Click to save the item into your personal list!"></span>
+					</div>
+				{% endif %}
+			{% else %}
+				<img class="img-responsive" src="{% static ninegag.imagevideo_path %}" alt="">
+				{% if request.user.is_authenticated %}
+					<div class="save_button_wrap">
+						<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ ninegag.pk }}"
+							  data-item-type="Ninegag" data-toggle="tooltip" data-container="body"
+							  title="Click to save the item into your personal list!"></span>
+					</div>
+				{% endif %}
+			{% endif %}
+		</div>
+	</div>
+{% empty %}
+	<h3>Ninegags not available</h3>
+{% endfor %}
 
 {% show_pages %}

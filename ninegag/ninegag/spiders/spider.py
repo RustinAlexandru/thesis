@@ -136,8 +136,6 @@ class JokesSpyder(scrapy.spiders.Spider):
             joke_category = " ".join(joke_category.split())
             joke_item = Joke()
             joke_item['text'] = joke_text
-            joke_item['likes'] = int(joke_likes)
-            joke_item['dislikes'] = int(joke_dislikes)
             joke_item['category'] = joke_category
             joke_item['identifier'] = joke_id + joke_category
             yield joke_item

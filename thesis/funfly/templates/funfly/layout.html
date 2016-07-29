@@ -239,7 +239,7 @@
 													</div>
 													{% if request.user.is_authenticated%}
 														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ items.0.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+															<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ items.0.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
 														</div>
 													{% endif %}
 												</div>
@@ -250,7 +250,7 @@
 												</div>
 												{% if request.user.is_authenticated %}
 													<div class="save_button_wrap">
-														<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ items.0.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+														<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ items.0.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
 													</div>
 												{% endif %}
 											{% endif %}
@@ -260,10 +260,10 @@
 													<a href="{% url 'ninegag_post_details' items.0.pk %}"> {{ items.0.title }} </a>
 													{% endif %}
 												</h4>
-											</div>
-											<p><a class="category_tag" href="#">9gag</a>| <i class="fa fa-clock-o"></i> {{ items.0.date_added }}<i
+												<p><a class="category_tag" href="#">9gag</a>| <i class="fa fa-clock-o"></i> {{ items.0.date_added }}<i
 													class="fa fa-comment"></i>{{ items.0.approved_comments.count }}
 												comments</p>
+											</div>
 											<div class="all_gags_bottom">
 												<div class="gags_bottom">
 													{% if items.1.is_video %}
@@ -279,7 +279,7 @@
 															</div>
 															{% if request.user.is_authenticated %}
 																<div class="save_button_wrap">
-																	<span class="glyphicon glyphicon-plus-sign save_item " data-item-id="{{ items.1.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+																	<span class="glyphicon glyphicon-bookmark save_item " data-item-id="{{ items.1.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
 																</div>
 															{% endif %}
 														</div>
@@ -290,7 +290,7 @@
 														</div>
 														{% if request.user.is_authenticated %}
 															<div class="save_button_wrap">
-																<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ items.1.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+																<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ items.1.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 															</div>
 														{% endif %}
 													{% endif %}
@@ -320,7 +320,7 @@
 															</div>
 															{% if request.user.is_authenticated %}
 																<div class="save_button_wrap">
-																	<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.2.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+																	<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.2.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
 																</div>
 															{% endif %}
 														</div>
@@ -331,7 +331,7 @@
 														</div>
 														{% if request.user.is_authenticated %}
 															<div class="save_button_wrap">
-																<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.2.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+																<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.2.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 															</div>
 														{% endif %}
 													{% endif %}
@@ -361,7 +361,7 @@
 															</div>
 															{% if request.user.is_authenticated %}
 																<div class="save_button_wrap">
-																	<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.3.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+																	<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.3.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
 																</div>
 															{% endif %}
 														</div>
@@ -372,7 +372,7 @@
 														</div>
 														{% if request.user.is_authenticated %}
 															<div class="save_button_wrap">
-																<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.3.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+																<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.3.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 															</div>
 														{% endif %}
 													{% endif %}
@@ -406,7 +406,7 @@
 													</div>
 													{% if request.user.is_authenticated%}
 														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.4.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+															<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.4.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 														</div>
 													{% endif %}
 												</div>
@@ -419,7 +419,7 @@
 												</div>
 												{% if request.user.is_authenticated %}
 													<div class="save_button_wrap">
-														<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.4.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+														<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.4.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
 													</div>
 												{% endif %}
 											{% endif %}
@@ -429,10 +429,11 @@
 													<a href="{% url 'ninegag_post_details' items.4.pk %}"> {{ items.4.title }}</a>
 													{% endif %}
 												</h4>
+												<p><a class="category_tag" href="#">9gag</a>| <i
+														class="fa fa-clock-o"></i>{{ items.4.date_added }}<i
+														class="fa fa-comment"></i>{{ items.4.approved_comments.count }}
+													comments</p>
 											</div>
-											<p><a class="category_tag" href="#">9gag</a>| <i class="fa fa-clock-o"></i>{{ items.4.date_added }}<i
-													class="fa fa-comment"></i>{{ items.4.approved_comments.count }}
-												comments</p>
 											<div class="all_gags_bottom">
 												<div class="gags_bottom">
 													{% if items.5.is_video %}
@@ -448,7 +449,7 @@
 															</div>
 															{% if request.user.is_authenticated %}
 																<div class="save_button_wrap">
-																	<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.5.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+																	<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.5.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 																</div>
 															{% endif %}
 														</div>
@@ -459,7 +460,7 @@
 														</div>
 														{% if request.user.is_authenticated%}
 															<div class="save_button_wrap">
-																<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.5.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+																<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.5.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
 															</div>
 														{% endif %}
 													{% endif %}
@@ -489,7 +490,7 @@
 															</div>
 															{% if request.user.is_authenticated %}
 																<div class="save_button_wrap">
-																	<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.6.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+																	<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.6.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
 																</div>
 															{% endif %}
 														</div>
@@ -500,7 +501,7 @@
 														</div>
 														{% if request.user.is_authenticated %}
 															<div class="save_button_wrap">
-																<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.6.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+																<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.6.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
 															</div>
 														{% endif %}
 													{% endif %}
@@ -530,7 +531,7 @@
 															</div>
 															{% if request.user.is_authenticated %}
 																<div class="save_button_wrap">
-																	<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.7.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+																	<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.7.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 																</div>
 															{% endif %}
 														</div>
@@ -541,7 +542,7 @@
 														</div>
 														{% if request.user.is_authenticated %}
 															<div class="save_button_wrap">
-																<span class="glyphicon glyphicon-plus-sign save_item" data-item-id="{{ items.7.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+																<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.7.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
 															</div>
 														{% endif %}
 													{% endif %}
@@ -583,7 +584,7 @@
 													</div>
 													{% if request.user.is_authenticated%}
 														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ videos.0.pk }}" data-item-type="Youtube" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+															<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ videos.0.pk }}" data-item-type="Youtube" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 														</div>
 													{% endif %}
 												</div>
@@ -609,7 +610,7 @@
 													</div>
 													{% if request.user.is_authenticated%}
 														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ videos.1.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+															<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ videos.1.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 														</div>
 													{% endif %}
 												</div>
@@ -639,7 +640,7 @@
 													</div>
 													{% if request.user.is_authenticated %}
 														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ videos.2.pk }}" data-item-type="Youtube" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+															<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ videos.2.pk }}" data-item-type="Youtube" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 														</div>
 													{% endif %}
 												</div>
@@ -665,7 +666,7 @@
 													</div>
 													{% if request.user.is_authenticated %}
 														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ videos.3.pk }}" data-item-type="Youtube" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+															<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ videos.3.pk }}" data-item-type="Youtube" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 														</div>
 													{% endif %}
 												</div>
@@ -713,7 +714,7 @@
 												</div>
 												{% if request.user.is_authenticated %}
 													<div class="save_button_wrap">
-														<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ jokes.0.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+														<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ jokes.0.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 													</div>
 												{% endif %}
 											</div>
@@ -734,7 +735,7 @@
 												</div>
 												{% if request.user.is_authenticated%}
 													<div class="save_button_wrap">
-														<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ jokes.1.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+														<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ jokes.1.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 													</div>
 												{% endif %}
 											</div>
@@ -754,7 +755,7 @@
 													</p></div>
 												{% if request.user.is_authenticated %}
 													<div class="save_button_wrap">
-														<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ jokes.2.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+														<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ jokes.2.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 													</div>
 												{% endif %}
 											</div>
@@ -779,7 +780,7 @@
 												</div>
 												{% if request.user.is_authenticated %}
 													<div class="save_button_wrap">
-														<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ jokes.3.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+														<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ jokes.3.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 													</div>
 												{% endif %}
 											</div>
@@ -800,7 +801,7 @@
 												</div>
 												{% if request.user.is_authenticated %}
 													<div class="save_button_wrap">
-														<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ jokes.4.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+														<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ jokes.4.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 													</div>
 												{% endif %}
 											</div>
@@ -821,7 +822,7 @@
 												</div>
 												{% if request.user.is_authenticated %}
 													<div class="save_button_wrap">
-														<span class="glyphicon glyphicon-plus-sign save_item"  data-item-id="{{ jokes.5.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+														<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ jokes.5.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
 													</div>
 												{% endif %}
 											</div>

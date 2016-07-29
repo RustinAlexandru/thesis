@@ -40,7 +40,7 @@ $(document).ready(function () {
             url = page_href + 'add_to_savelist/'; // first page in a paginated list, url doesnt contain 'page' in it
         }
 
-        data_received = {
+        data_sent = {
             "item_id": item_id,
             "item_type": item_type
         };
@@ -48,7 +48,7 @@ $(document).ready(function () {
             type: 'POST',
             url: url,
             data: {
-                "data": JSON.stringify(data_received)
+                "data": JSON.stringify(data_sent)
             },
             dataType: "json",
             success: function (data) {
@@ -77,6 +77,56 @@ $(document).ready(function () {
             }
         });
     });
+    
+    $(document).on('click', '.like_button_wrap', function () {
+        item_id = $(this).attr("data-item-id");
+        item_type = $(this).attr("data-item-type");
+
+
+        url = page_href;
+        if (url.indexOf("page") !== -1) { //  url contains 'page' in it, needs adjustment
+            // get_params_pos= url.indexOf("?")  // insert 'add_to_savelist' before get parameters
+            if (url.indexOf("ninegags") !== -1) {
+                url = url.replace("/ninegags/", "/ninegags/like/");
+            } else if (url.indexOf("videos") !== -1) {
+                url = url.replace("/videos/", "/videos/like/");
+            } else if (url.indexOf("jokes") !== -1) {
+                url = url.replace("/jokes/", "/videos/like/");
+            }
+        } else {
+            url = page_href + 'like/'; // first page in a paginated list, url doesnt contain 'page' in it
+        }
+
+        data_sent = {
+            "item_id": item_id,
+            "item_type": item_type
+        };
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                "data": JSON.stringify(data_sent)
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data["integrity_error"]) {
+                    sweetAlert(
+                        'Oops...',
+                        "We're sorry, you've already added this item, you cannot add the same item twice!",
+                        'error'
+                    )
+                }
+
+            },
+            error: function (data) {
+                sweetAlert(
+                    'Oops...',
+                    'Something went wrong!',
+                    'error'
+                )
+            }
+        });
+    })
 
 });
 

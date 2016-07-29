@@ -17,7 +17,6 @@ from ninegag.spiders.spider import run_9gag_spider, run_jokes_spider, run_jokesc
 def spider_9gag():
     run_9gag_spider()
 
-
 @task
 def spider_jokes():
     run_jokes_spider()

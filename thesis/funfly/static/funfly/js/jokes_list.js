@@ -87,9 +87,6 @@ $(document).ready(function () {
     });
 
 
-
-
-
     page_href = window.location.href;
 
     $.ajaxSetup({
@@ -148,6 +145,55 @@ $(document).ready(function () {
                     )
                 }
 
+            },
+            error: function (data) {
+                sweetAlert(
+                    'Oops...',
+                    'Something went wrong!',
+                    'error'
+                )
+            }
+        });
+    });
+
+    $(document).on('click', '.like_item', function () {
+        item_id = $(this).attr("data-item-id");
+        item_type = $(this).attr("data-item-type");
+
+        $("#likes").toggleClass('text-primary');
+        $(this).toggleClass('text-primary');
+
+        url = page_href;
+        if (url.indexOf("page") !== -1) { //  url contains 'page' in it, needs adjustment
+            // get_params_pos= url.indexOf("?")  // insert 'add_to_savelist' before get parameters
+            if (url.indexOf("ninegags") !== -1) {
+                url = url.replace("/ninegags/", "/ninegags/like/");
+            } else if (url.indexOf("videos") !== -1) {
+                url = url.replace("/videos/", "/videos/like/");
+            } else if (url.indexOf("jokes") !== -1) {
+                url = url.replace("/jokes/", "/videos/like/");
+            }
+        } else {
+            url = page_href + 'like/'; // first page in a paginated list, url doesnt contain 'page' in it
+        }
+
+        data_sent = {
+            "item_id": item_id,
+            "item_type": item_type
+        };
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                'data': JSON.stringify(data_sent)
+            },
+            dataType: "json",
+            success: function (data) {
+                $('#likes_number').html(data['likes']);
+                $("#likes_user_list").html("");
+                data['likes_list'].forEach(function (item) {
+                    $("#likes_user_list").append("<li class='list-group-item'>" + item['username'] + "</li>");
+                })
             },
             error: function (data) {
                 sweetAlert(

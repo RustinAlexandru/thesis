@@ -143,6 +143,52 @@ $(document).ready(function () {
         });
     });
 
+    $(document).on('click', '.add_point', function () {
+        item_id = $(this).attr("data-item-id");
+        item_type = $(this).attr("data-item-type");
+
+        $("#likes").toggleClass('text-primary');
+        $(this).toggleClass('text-primary');
+
+        url = page_href;
+        if (url.indexOf("page") !== -1) { //  url contains 'page' in it, needs adjustment
+            // get_params_pos= url.indexOf("?")  // insert 'add_to_savelist' before get parameters
+            if (url.indexOf("ninegags") !== -1) {
+                url = url.replace("/ninegags/", "/ninegags/add_point/");
+            } else if (url.indexOf("videos") !== -1) {
+                url = url.replace("/videos/", "/videos/add_point/");
+            } else if (url.indexOf("jokes") !== -1) {
+                url = url.replace("/jokes/", "/videos/add_point/");
+            }
+        } else {
+            url = page_href + 'add_point/'; // first page in a paginated list, url doesnt contain 'page' in it
+        }
+
+        data_sent = {
+            "item_id": item_id,
+            "item_type": item_type
+        };
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                'data': JSON.stringify(data_sent)
+            },
+            dataType: "json",
+            success: function (data) {
+                $('#points').html(data['points']);
+                selector = "i[data-item-id=" + item_id + "]";
+                $(selector).parents()[0].remove()
+            },
+            error: function (data) {
+                sweetAlert(
+                    'Oops...',
+                    'Something went wrong!',
+                    'error'
+                )
+            }
+        });
+    });
 
     $("#filter_sort_form").on('submit', function (e) {
         current_page = $('.endless_page_current > strong:nth-child(1)').text();

@@ -4,6 +4,7 @@ import os
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
+from django.core import serializers
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render, render_to_response
 from django.utils.decorators import method_decorator
@@ -294,7 +295,7 @@ class JokesList(AjaxListView):
         context['categories'] = categories_list
         return context
 
-
+@login_required
 def add_item_to_savelist(request):
     user = request.user
     user_profile = UserProfile.objects.get(user=user)
@@ -315,6 +316,52 @@ def add_item_to_savelist(request):
             user_profile.saved_items.add(item)
         except IntegrityError as integrity_error:
             data_sent["integrity_error"] = integrity_error.__class__.__name__
+
+        return JsonResponse(data_sent)
+
+@login_required
+def like_item(request):
+    user = request.user
+    if request.method == 'POST' and request.is_ajax():
+        data_sent = {
+        }
+        item_info = json.loads(request.POST['data'])
+        if item_info["item_type"] == 'Ninegag':
+            item = Ninegag.objects.get(pk=item_info["item_id"])
+
+        if item_info["item_type"] == 'Youtube':
+            item = Youtube.objects.get(pk=item_info["item_id"])
+
+        if item_info["item_type"] == 'Joke':
+            item = Joke.objects.get(pk=item_info["item_id"])
+            if item.likes.filter(id=user.id).exists():
+                item.likes.remove(user)
+                message = 'You disliked this'
+            else:
+                item.likes.add(user)
+            data_sent['likes'] = item.total_likes()
+            names = list(item.likes_users().values('username'))
+            data_sent['likes_list'] = names
+
+        return JsonResponse(data_sent)
+
+@login_required
+def add_point(request):
+    if request.method == 'POST' and request.is_ajax():
+        data_sent = {
+        }
+        item_info = json.loads(request.POST['data'])
+        if item_info["item_type"] == 'Ninegag':
+            item = Ninegag.objects.get(pk=item_info["item_id"])
+            item.points += 1
+            item.save()
+            data_sent['points'] = item.points
+
+        if item_info["item_type"] == 'Youtube':
+            item = Youtube.objects.get(pk=item_info["item_id"])
+
+        if item_info["item_type"] == 'Joke':
+            item = Joke.objects.get(pk=item_info["item_id"])
 
         return JsonResponse(data_sent)
 

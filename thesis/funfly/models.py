@@ -81,10 +81,9 @@ class Ninegag(ModeratedModel):
 class Joke(ModeratedModel):
     identifier = models.CharField(max_length=50, default='', db_index=True)
     text = models.TextField(default='')
-    likes = models.IntegerField(default=0)
-    dislikes = models.IntegerField(default=0)
     category = models.CharField(max_length=100, null=True, blank=False, default='')
     date_added = models.DateTimeField(auto_now_add=True, null=True)
+    likes = models.ManyToManyField(User, related_name='likes')
     joke_comments = GenericRelation(PostComment, related_query_name='joke_comments')
 
     def __unicode__(self):
@@ -96,9 +95,15 @@ class Joke(ModeratedModel):
     def approved_comments(self):
         return self.joke_comments.filter(approved_comment=True)
 
+    def total_likes(self):
+        return self.likes.count()
+
+    def likes_users(self):
+        return self.likes.all()
+
     class Moderator:
         notify_user = False
-        fields_exclude = ['likes', 'dislikes', 'joke_comments', 'date_added']
+        fields_exclude = ['joke_comments', 'likes', 'date_added']
 
 
 

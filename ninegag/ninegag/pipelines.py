@@ -63,7 +63,8 @@ def update_model(destination, source, commit=True):
 
     source_dict = model_to_dict(source)
     for (key, value) in source_dict.items():
-        setattr(destination, key, value)
+        if key != 'likes':
+            setattr(destination, key, value)
 
     setattr(destination, 'pk', pk)
 
