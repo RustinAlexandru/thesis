@@ -81,6 +81,7 @@ def index(request):
 
     return render(request, 'funfly/layout.html', context)
 
+
 def register(request):
     if request.method == 'GET':
         form = RegisterForm()
@@ -117,6 +118,10 @@ def register(request):
             }
             return render(request, 'funfly/register.html', context)
 
+def about(request):
+    if request.method == 'GET':
+        context = {}
+        return render(request, 'funfly/about.html', context)
 
 class VideoPostDetails(DetailView):
     model = Youtube
@@ -391,8 +396,8 @@ def comment_remove(request, pk):
     return redirect('video_post_details', pk=post_pk)
 
 
-def save_file(file, path=''):
-    filename = file._get_name()
+def save_file(_file, path=''):
+    filename = _file._get_name()
     fd = open('%s/%s' % (MEDIA_ROOT, str(path) + str(filename)), 'wb')
     path = '{0}/{1}'.format('funfly/imagesandvideos/imageorvideos/', str(filename))
     for chunk in file.chunks():
@@ -486,3 +491,4 @@ def saved_items_list(request):
         }
         return render_to_response('funfly/saved_items_list.html',context=context)
         # return render(request,'funfly/saved_items_list.html', context)
+

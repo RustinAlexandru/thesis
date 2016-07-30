@@ -143,6 +143,10 @@
     border-right: 1px solid #c66196;
 }
 
+.login_form {
+    margin-top: 50px;
+}
+
 /* 2) Main page css*/
 
 .header_top {

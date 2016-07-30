@@ -93,6 +93,8 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 
 TEMPLATE_CONTEXT_PROCESSORS += (
     'django.core.context_processors.request',
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
 )
 
 WSGI_APPLICATION = 'thesis.wsgi.application'
@@ -133,12 +135,36 @@ AUTHENTICATION_BACKENDS = (
 
 )
 
+
 SOCIAL_AUTH_FACEBOOK_KEY = '527379650781936'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'd14158368a25f659e4920fb7fb845380'
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_location']
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
-SOCIAL_AUTH_LOGIN_URL = '/'
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+  'fields': 'id, name, email, gender, timezone, location'
+}
+
+
+SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'email', 'location']
+
+# SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'index'
+SOCIAL_AUTH_LOGIN_URL = 'index'
+
+
+USER_MODEL = 'auth.User'
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'funfly.middleware.save_profile',  # <--- set the path to the function
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+)
 
 
 ROLEPERMISSIONS_MODULE = 'thesis.roles'

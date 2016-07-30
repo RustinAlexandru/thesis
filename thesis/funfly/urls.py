@@ -21,6 +21,7 @@ urlpatterns = [
                   url(r'^logout/$', auth_views.logout,
                       {'next_page': reverse_lazy('index')}, name='logout'),
                   url(r'^register/$', views.register, name='register'),
+                  url(r'^about/$', views.about, name='about'),
                   url(r'^$', views.index, name='index'),
                   url(r'^jokes/$', JokesList.as_view(model=Joke), name='jokes'),
                   url(r'^videos/$', VideosList.as_view(template_name='videos.html'), name='videos'),
