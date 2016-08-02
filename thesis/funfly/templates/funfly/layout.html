@@ -260,7 +260,7 @@
 													<a href="{% url 'ninegag_post_details' items.0.pk %}"> {{ items.0.title }} </a>
 													{% endif %}
 												</h4>
-												<p><a class="category_tag" href="#">9gag</a>| <i class="fa fa-clock-o"></i> {{ items.0.date_added }}<i
+												<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i class="fa fa-clock-o"></i> {{ items.0.date_added }}<i
 													class="fa fa-comment"></i>{{ items.0.approved_comments.count }}
 												comments</p>
 											</div>
@@ -300,7 +300,7 @@
 															<a href="{% url 'ninegag_post_details' items.1.pk %}"> {{ items.1.title }} </a>
 															{% endif %}
 														</h4>
-														<p><a class="category_tag" href="#">9gag</a>| <i
+														<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
 																class="fa fa-clock-o"></i> {{ items.1.date_added }}
 															<i class="fa fa-comment"></i>{{ items.1.approved_comments.count }}
 															comments</p>
@@ -341,7 +341,7 @@
 															<a href="{% url 'ninegag_post_details' items.2.pk %}"> {{ items.2.title }} </a>
 															{% endif %}
 														</h4>
-														<p><a class="category_tag" href="#">9gag</a>| <i
+														<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
 																class="fa fa-clock-o"></i> {{ items.2.date_added }}
 															<i class="fa fa-comment"></i>{{ items.2.approved_comments.count }}
 															comments</p>
@@ -382,7 +382,7 @@
 															<a href="{% url 'ninegag_post_details' items.3.pk %}"> {{ items.3.title }}</a>
 															{% endif %}
 														</h4>
-														<p><a class="category_tag" href="#">9gag</a>| <i
+														<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
 																class="fa fa-clock-o"></i> {{ items.3.date_added }}
 															<i class="fa fa-comment"></i>{{ items.3.approved_comments.count }}
 															comments</p>
@@ -429,7 +429,7 @@
 													<a href="{% url 'ninegag_post_details' items.4.pk %}"> {{ items.4.title }}</a>
 													{% endif %}
 												</h4>
-												<p><a class="category_tag" href="#">9gag</a>| <i
+												<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
 														class="fa fa-clock-o"></i>{{ items.4.date_added }}<i
 														class="fa fa-comment"></i>{{ items.4.approved_comments.count }}
 													comments</p>
@@ -470,7 +470,7 @@
 															<a href="{% url 'ninegag_post_details' items.5.pk %}"> {{ items.5.title }} </a>
 															{% endif %}
 														</h4>
-														<p><a class="category_tag" href="#">9gag</a>| <i
+														<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
 																class="fa fa-clock-o"></i> {{ items.5.date_added }}
 															<i class="fa fa-comment"></i>{{ items.5.approved_comments.count }}
 															comments</p>
@@ -511,7 +511,7 @@
 															<a href="{% url 'ninegag_post_details' items.6.pk %}"> {{ items.6.title }} </a>
 															{% endif %}
 														</h4>
-														<p><a class="category_tag" href="#">9gag</a>| <i
+														<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
 																class="fa fa-clock-o"></i> {{ items.6.date_added }}
 															<i class="fa fa-comment"></i>{{ items.6.approved_comments.count }}
 															comments</p>
@@ -552,7 +552,7 @@
 															<a href="{% url 'ninegag_post_details' items.7.pk %}"> {{ items.7.title }} </a>
 															{% endif %}
 														</h4>
-														<p><a class="category_tag" href="#">9gag</a>| <i
+														<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
 																class="fa fa-clock-o"></i> {{ items.7.date_added }}
 															<i class="fa fa-comment"></i>{{ items.7.approved_comments.count }}
 															comments</p>
@@ -594,7 +594,7 @@
 														<a href="{% url 'video_post_details' videos.0.pk %}"> {{ videos.0.title }} </a>
 														{% endif %}
 													</h4>
-													<p><a class="category_tag" href="#">videos</a>|<i
+													<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
 															class="fa fa-clock-o"></i> {{ videos.0.added_at }}
 														<i class="fa fa-comment"></i> {{ videos.0.approved_comments.count }}
 														comments </p>
@@ -620,7 +620,7 @@
 														<a href="{% url 'video_post_details' videos.1.pk %}"> {{ videos.1.title }} </a>
 														{% endif %}
 													</h4>
-													<p><a class="category_tag" href="#">videos</a>|<i
+													<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
 															class="fa fa-clock-o"></i> {{ videos.1.date_added }}
 														<i class="fa fa-comment"></i> {{ videos.1.approved_comments.count }}
 														comments </p>
@@ -650,7 +650,7 @@
 														<a href="{% url 'video_post_details' videos.2.pk %}"> {{ videos.2.title }} </a>
 														{% endif %}
 													</h4>
-													<p><a class="category_tag" href="#">videos</a>|<i
+													<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
 															class="fa fa-clock-o"></i> {{ videos.2.date_added }}
 														<i class="fa fa-comment"></i>{{ videos.2.approved_comments.count }}
 														comments </p>
@@ -676,7 +676,7 @@
 														<a href="{% url 'video_post_details' videos.3.pk %}"> {{ videos.3.title }} </a>
 														{% endif %}
 													</h4>
-													<p><a class="category_tag" href="#">videos</a>|<i
+													<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
 															class="fa fa-clock-o"></i> {{ videos.3.date_added }}
 														<i class="fa fa-comment"></i>{{ videos.3.approved_comments.count }}
 														comments </p>
@@ -706,7 +706,7 @@
 													{% endif %}
 												</div>
 												<div class="single_bottom_text">
-													<p><a class="category_tag" href="#">jokes</a>| <i
+													<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>| <i
 															class="fa fa-clock-o"></i> {{ jokes.0.date_added }}<i
 															class="fa fa-comment"></i>{{ jokes.0.approved_comments.count }}
 														comments
@@ -727,7 +727,7 @@
 													{% endif %}
 												</div>
 												<div class="single_bottom_text">
-													<p><a class="category_tag" href="#">jokes</a>| <i
+													<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>| <i
 															class="fa fa-clock-o"></i> {{ jokes.1.date_added }}<i
 															class="fa fa-comment"></i>{{ jokes.1.approved_comments.count }}
 														comments
@@ -748,7 +748,7 @@
 													{% endif %}
 												</div>
 												<div class="single_bottom_text">
-													<p><a class="category_tag" href="#">jokes</a>| <i
+													<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>| <i
 															class="fa fa-clock-o"></i> {{ jokes.2.date_added }}<i
 															class="fa fa-comment"></i>{{ jokes.2.approved_comments.count }}
 														comments
@@ -772,7 +772,7 @@
 													{% endif %}
 												</div>
 												<div class="single_bottom_text">
-													<p><a class="category_tag" href="#">jokes</a>| <i
+													<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>| <i
 															class="fa fa-clock-o"></i> {{ jokes.3.date_added }}<i
 															class="fa fa-comment"></i>{{ jokes.3.approved_comments.count }}
 														comments
@@ -793,7 +793,7 @@
 													{% endif %}
 												</div>
 												<div class="single_bottom_text">
-													<p><a class="category_tag" href="#">jokes</a>| <i
+													<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>| <i
 															class="fa fa-clock-o"></i> {{ jokes.4.date_added }}<i
 															class="fa fa-comment"></i>{{ jokes.4.approved_comments.count }}
 														comments
@@ -814,7 +814,7 @@
 													{% endif %}
 												</div>
 												<div class="single_bottom_text">
-													<p><a class="category_tag" href="#">jokes</a>| <i
+													<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>| <i
 															class="fa fa-clock-o"></i> {{ jokes.5.date_added }}<i
 															class="fa fa-comment"></i>{{ jokes.5.approved_comments.count }}
 														comments

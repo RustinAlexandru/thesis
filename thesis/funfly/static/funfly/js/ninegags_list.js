@@ -13,6 +13,7 @@ var data = {
     itemType: itemType
 };
 
+
 function sendRequest() {
 
 
@@ -29,7 +30,7 @@ function sendRequest() {
     });
 }
 
-function changeIcons(selector){
+function changeIcons(selector) {
 
     var checkbox = $(selector + " :checkbox");
     var icon_var = $(selector).children(":nth-child(2)");
@@ -44,7 +45,6 @@ function changeIcons(selector){
 
     }
 }
-
 
 
 $(document).ready(function () {
@@ -178,7 +178,13 @@ $(document).ready(function () {
             success: function (data) {
                 $('#points').html(data['points']);
                 selector = "i[data-item-id=" + item_id + "]";
-                $(selector).parents()[0].remove()
+                add_point_button = $(selector).parents()[0];
+                $('.add_point').tooltip('hide');
+                add_point_button.remove();
+                button = 'button' + item_id;
+                sessionStorage.setItem(button, "deleted")
+
+
             },
             error: function (data) {
                 sweetAlert(
@@ -194,23 +200,46 @@ $(document).ready(function () {
         current_page = $('.endless_page_current > strong:nth-child(1)').text();
         // url = window.location.href + '?page=' + current_page + '&querystring_key=page'
         data['itemType'] = $('.selectpicker').val();
-            $.ajax({
-                url: '',
-                type: 'GET',
-                data: data,
-                success: function (data) {
-                    $(".endless_page_template").html(data)
-                },
-                error: function (err) {
-                    console.log('err: ' + err);
-                }
-            });
-            e.preventDefault();
+        $.ajax({
+            url: '',
+            type: 'GET',
+            data: data,
+            success: function (data) {
+                $(".endless_page_template").html(data);
+                hideAddPointButtons();
+                // doesnt work for ajax, works for simple page.
+            },
+            error: function (err) {
+                console.log('err: ' + err);
+            }
         });
+        e.preventDefault();
+    });
 
     $("#filter_sort_form").on('change', "[data-input]", function () {
         $("#filter_sort_form").submit()
     });
+
+    hideAddPointButtons();
+    function hideAddPointButtons() {
+        $.each(sessionStorage, function (key, value) {
+
+            key_string = key;
+            if (key_string.startsWith("button") && value == 'deleted') {
+                var numberPattern = /\d+/g;
+                id = key.match(numberPattern);
+                selector = "i[data-item-id=" + id + "]";
+                if (add_point_button = $(selector).parents()[0]) {
+                    add_point_button.remove()
+                }
+            }
+            
+         $.each($('.add_point'), function () {
+             $(this).removeClass('hidden');
+         })   
+
+        });
+    }
 
 });
 

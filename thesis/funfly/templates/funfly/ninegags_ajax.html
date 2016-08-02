@@ -7,14 +7,14 @@
 	<div class="single_ninegag">
 		<div class="single_9gag_bottom_text">
 			<h4><a href="{% url 'ninegag_post_details' ninegag.pk %}"> {{ ninegag.title }} </a></h4>
-			<p><a class="9gags_color" href="#">9gag</a>| <i
+			<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
 					class="fa fa-clock-o"></i> {{ ninegag.date_added }}
 				<i class="fa fa-comment"></i> {{ ninegag.approved_comments.count }} comments </p>
 			<p>
 				<span id="points">{{ ninegag.points }}</span> points
 				{% if request.user.is_authenticated %}
 					<span class="add_point_wrap">
-						<i class="fa fa-plus add_point" data-item-id="{{ ninegag.pk }}" data-item-type="Ninegag"
+						<i class="fa fa-plus add_point hidden" data-item-id="{{ ninegag.pk }}" data-item-type="Ninegag"
 						   data-toggle="tooltip" data-container="body" title="Click to add a point!"></i>
 					</span>
 				{% endif %}

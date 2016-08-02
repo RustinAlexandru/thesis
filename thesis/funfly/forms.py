@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pytz
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
@@ -87,7 +87,7 @@ class RegisterForm(forms.Form):
                 'email',
                 'sex',
                 'city',
-                'timezone',
+                Field('timezone', css_class='selectpicker'),
             ),
             ButtonHolder(
                 Submit('create', u'Create', css_class='button create')

@@ -242,7 +242,7 @@ class NinegagsList(AjaxListView):
                 new_context = Ninegag.objects.filter(is_video=filter_val).order_by(date_orderby_val, points_orderby_val)
             elif filter_val == 'Any':
                 new_context = Ninegag.objects.order_by(date_orderby_val, points_orderby_val)
-            return new_context
+            return Ninegag.objects.all()
         else:                                   # normal get request
             return Ninegag.objects.all()
 
@@ -361,6 +361,7 @@ def add_point(request):
             item.points += 1
             item.save()
             data_sent['points'] = item.points
+            button = 'add_button_' + item_info["item_id"]
 
         if item_info["item_type"] == 'Youtube':
             item = Youtube.objects.get(pk=item_info["item_id"])

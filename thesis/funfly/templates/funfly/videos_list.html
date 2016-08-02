@@ -10,16 +10,15 @@
 			<h4>
 				<a href="{% url 'video_post_details' video.pk %}"> {{ video.title }} </a>
 			</h4>
-			<p><a class="videos_color" href="#">videos</a>|<i
+			<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
 					class="fa fa-clock-o"></i> {{ video.date_added }}
 				<i class="fa fa-comment"></i>{{ video.approved_comments.count }} comments </p>
 			{% if request.user.is_authenticated %}
 				<div class="save_button_wrap">
-								<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ video.pk }}"
+					<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ video.pk }}"
 									  data-item-type="Youtube" data-toggle="tooltip" data-container="body"
 									  title="Click to save the item into your personal list!">
-
-								</span>
+					</span>
 				</div>
 			{% endif %}
 		</div>

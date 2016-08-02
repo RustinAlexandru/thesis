@@ -6,9 +6,17 @@
 		<div class="col-md-9 col-sm-9 col-xs-9">
 			<div class="single_9gag_bottom_text">
 				<h2><a href=""> {{ object.title }} </a></h2>
-				<p><a class="category_tag" href="#">9gag</a>| <i
+				<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
 						class="fa fa-clock-o"></i> {{ object.date_added }}
-					<i class="fa fa-comment"></i> {{ object.approved_comments.count }} comments</p>
+					<i class="fa fa-comment"></i> {{ object.approved_comments.count }} comments
+					<span id="points">{{ ninegag.points }}</span> points
+					{% if request.user.is_authenticated %}
+						<span class="add_point_wrap">
+						<i class="fa fa-plus add_point hidden" data-item-id="{{ ninegag.pk }}" data-item-type="Ninegag"
+						   data-toggle="tooltip" data-container="body" title="Click to add a point!"></i>
+					</span>
+					{% endif %}
+				</p>
 				{% if request.user.is_authenticated %}
 					<div class="save_button_wrap">
 						<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ object.pk }}"

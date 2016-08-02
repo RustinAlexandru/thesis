@@ -24,6 +24,7 @@
 		<div class="login_form">
 			<form action="{% url "login" %}" method="post" accept-charset="utf-8">
 				{% csrf_token %}
+				<h2 class="form-signin-heading">Please sign in</h2>
 				{{ form.as_p }}
 				<input type="hidden" name="next" value="{{ next }}">
 				<input class="btn btn-default" type="submit" value="Log in">
