@@ -38,7 +38,7 @@
 				{% for comment in comments %}
 					<div class="single_comment">
 						<div class="single_comment_avatar">
-
+							<img src="/static/funfly{{comment.user.userprofile.avatar.url }}" alt="">
 						</div>
 						<div class="single_comment_text">
 							<div class="sp_title">
@@ -60,13 +60,15 @@
 					</div>
 				{% endfor %}
 			</div>
-			<div class="comment_form">
-				<h2>Leave your comment</h2>
-				<div class="comments_form">
-					{% load crispy_forms_tags %}
-					{% crispy CommentForm CommentForm.helper %}
+			{% if request.user.is_authenticated %}
+				<div class="comment_form">
+					<h2>Leave your comment</h2>
+					<div class="comments_form">
+						{% load crispy_forms_tags %}
+						{% crispy CommentForm CommentForm.helper %}
+					</div>
 				</div>
-			</div>
+			{% endif %}
 		</div>
 	{% endblock %}
 {% endblock %}

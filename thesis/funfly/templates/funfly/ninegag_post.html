@@ -1,10 +1,25 @@
 {% extends 'funfly/layout.html' %}
 {% load staticfiles %}
 
+{% block head %}
+	{{ block.super }}
+	<style>
+
+	.save_button_wrap {
+		margin-top: 1%;
+		margin-right: 2%;
+
+	}
+
+
+	</style>
+{% endblock %}
+
+
 {% block content %}
 	{% block main_wrapper %}
 		<div class="col-md-9 col-sm-9 col-xs-9">
-			<div class="single_9gag_bottom_text">
+			<div class="post_9gag_bottom_text">
 				<h2><a href=""> {{ object.title }} </a></h2>
 				<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
 						class="fa fa-clock-o"></i> {{ object.date_added }}
@@ -38,11 +53,11 @@
 				{% endif %}
 			</div>
 			<div class="sp_comments_box">
-				<h2>Comments</h2>
+				<h2>{{ comments.count }} comments</h2>
 				{% for comment in comments %}
 					<div class="single_comment">
 						<div class="single_comment_avatar">
-
+							<img src="/static/funfly{{comment.user.userprofile.avatar.url }}" alt="">
 						</div>
 						<div class="single_comment_text">
 							<div class="sp_title">
@@ -64,6 +79,7 @@
 					</div>
 				{% endfor %}
 			</div>
+			{% if request.user.is_authenticated %}
 			<div class="comment_form">
 				<h2>Leave your comment</h2>
 				<div class="comments_form">
@@ -71,6 +87,7 @@
 					{% crispy CommentForm CommentForm.helper %}
 				</div>
 			</div>
+			{% endif %}
 		</div>
 	{% endblock %}
 {% endblock %}

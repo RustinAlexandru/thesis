@@ -90,20 +90,36 @@ def register(request):
         }
         return render(request, 'funfly/register.html', context)
     elif request.method == 'POST':
-        form = RegisterForm(request.POST)
+        form = RegisterForm(request.POST, request.FILES)
         if form.is_valid():
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password"]
             email = form.cleaned_data["email"]
-            sex = form.cleaned_data["sex"]
-            city = form.cleaned_data["city"]
-            timezone = form.cleaned_data["timezone"]
+            if form.cleaned_data['sex']:
+                sex = form.cleaned_data["sex"]
+            else:
+                sex = None
+            if form.cleaned_data['city']:
+                city = form.cleaned_data["city"]
+            else:
+                city = None
+            if form.cleaned_data['timezone']:
+                timezone = form.cleaned_data["timezone"]
+            else:
+                timezone = None
+            if form.cleaned_data['avatar']:
+                avatar = form.cleaned_data['avatar']
+                avatar = form.resize_avatar()
+            else:
+                avatar = None
+
 
             user = User.objects.create(username=username, email=email)
             user.set_password(password)
             user.save()
 
-            profile = UserProfile.objects.create(user=user, sex=sex, city=city, timezone=timezone)
+
+            profile = UserProfile.objects.create(user=user, sex=sex, city=city, timezone=timezone, avatar=avatar)
 
             user_auth = authenticate(username=username, password=password)
 
@@ -118,10 +134,20 @@ def register(request):
             }
             return render(request, 'funfly/register.html', context)
 
+
 def about(request):
     if request.method == 'GET':
         context = {}
         return render(request, 'funfly/about.html', context)
+
+
+class ViewProfile(DetailView):
+    model = UserProfile
+
+    def get_context_data(self, **kwargs):
+        context = super(ViewProfile, self).get_context_data(**kwargs)
+        context['username'] = context['object'].user.username
+        return context
 
 class VideoPostDetails(DetailView):
     model = Youtube

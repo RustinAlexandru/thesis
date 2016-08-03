@@ -22,6 +22,8 @@ class UserProfile(models.Model):
         verbose_name=u'Are you male or female?')
     city = models.CharField(null=True, default=None, max_length=100)
     timezone = models.CharField(null=True, default=None, max_length=100)
+    avatar = models.ImageField(upload_to='imagesandvideos/imageorvideos/avatars',
+                               default='avatars/no_avatar.jpg', blank=True, null=True)
     saved_items = GM2MField()
 
     def __unicode__(self):

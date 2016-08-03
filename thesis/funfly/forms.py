@@ -8,7 +8,9 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
 from funfly.models import PostComment
-
+from PIL import Image as pil
+import StringIO, time, os.path
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 class CustomAuthenticationForm(AuthenticationForm):
     password = forms.CharField(label=_(u"Password"), strip=False, widget=forms.PasswordInput)
@@ -55,7 +57,7 @@ class RegisterForm(forms.Form):
         coerce=lambda x: bool(int(x)),
         widget=forms.RadioSelect,
         initial='1',
-        required=True,
+        required=False,
     )
 
     city = forms.CharField(
@@ -66,7 +68,12 @@ class RegisterForm(forms.Form):
 
     timezone = forms.ChoiceField(
         label=_('Time Zone'),
-        choices=[(t, t) for t in pytz.common_timezones]
+        choices=[(t, t) for t in pytz.common_timezones],
+        required=False
+    )
+
+    avatar = forms.ImageField(
+        required=False,
     )
 
     def __init__(self, *args, **kwargs):
@@ -88,6 +95,7 @@ class RegisterForm(forms.Form):
                 'sex',
                 'city',
                 Field('timezone', css_class='selectpicker'),
+                'avatar',
             ),
             ButtonHolder(
                 Submit('create', u'Create', css_class='button create')
@@ -108,6 +116,25 @@ class RegisterForm(forms.Form):
                 'Username is already taken, pick another one!')
         return username
 
+    def resize_avatar(self):
+        img = pil.open(self.cleaned_data['avatar'])
+
+        img.thumbnail((75, 75), pil.ANTIALIAS)
+
+        thumb_io = StringIO.StringIO()
+        img.save(thumb_io, self.cleaned_data['avatar'].content_type.split('/')[-1].upper())
+
+        filename = self.cleaned_data['avatar'].name
+
+        file = InMemoryUploadedFile(thumb_io,
+                                    u"avatar",
+                                    filename,
+                                    self.files['avatar'].content_type,
+                                    thumb_io.len,
+                                    None)
+
+        self.cleaned_data['avatar'] = file
+        return self.cleaned_data['avatar']
 
 class CommentForm(forms.ModelForm):
     class Meta:

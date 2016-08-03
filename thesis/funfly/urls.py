@@ -10,7 +10,7 @@ from forms import CustomAuthenticationForm
 from funfly.models import Joke, Youtube, Ninegag
 from funfly.views import VideoPostDetails, VideosList, JokesList, JokePostDetails, NinegagPostDetails, NinegagsList
 from . import views
-from views import anonymous_required
+from views import anonymous_required, ViewProfile
 
 urlpatterns = [
                   url(r'^admin/', admin.site.urls),
@@ -22,6 +22,7 @@ urlpatterns = [
                       {'next_page': reverse_lazy('index')}, name='logout'),
                   url(r'^register/$', views.register, name='register'),
                   url(r'^about/$', views.about, name='about'),
+                  url(r'^view_profile/(?P<pk>\d+)/$', ViewProfile.as_view(template_name='view_profile.html'), name='view_profile'),
                   url(r'^$', views.index, name='index'),
                   url(r'^jokes/$', JokesList.as_view(model=Joke), name='jokes'),
                   url(r'^videos/$', VideosList.as_view(template_name='videos.html'), name='videos'),

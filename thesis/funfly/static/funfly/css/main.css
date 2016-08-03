@@ -11,6 +11,8 @@
 5) Videos page css
 6) 9gag post css
 7) Ninegags page css
+8) Saved items page css
+9) Joke post css
 
  */
 
@@ -151,6 +153,111 @@
     margin-bottom:30px;
     margin-top: 30px;
 }
+
+.single_comment {
+    overflow: hidden;
+    padding: 36px 0;
+
+}
+
+.single_comment_avatar {
+    border-radius: 100px;
+    float: left;
+    height: 75px;
+    margin-right: 35px;
+    overflow: hidden;
+    text-align: center;
+    width: 75px;
+}
+
+.single_comment_text {
+    float: left;
+    overflow: hidden;
+    width: 78%;
+}
+
+
+.single_comment_text > a {
+    color: #999;
+    font-size: 12px;
+}
+
+.sp_comments_box > h2 {
+    font-size: 18px;
+    margin-bottom: 7%;
+    margin-top: 7%;
+    text-transform: uppercase;
+}
+
+
+.sp_title a h4 {
+    color: #333;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.sp_title a h4:hover {
+    color: #F8928D;
+    text-decoration: none;
+}
+
+.sp_title {
+    overflow: hidden;
+}
+
+.sp_title > a {
+    float: left;
+    width: 70%;
+}
+
+.sp_title > p {
+    color: #999;
+    float: left;
+    font-size: 12px;
+    text-align: right;
+    width: 25%;
+}
+
+.single_comment {
+    border-top: 1px solid hsl(0, 0%, 93%);
+    border-bottom: 1px solid hsl(0, 0%, 93%);
+}
+
+.comment_form {
+    margin-top: 5%;
+}
+.comment_form h2 {
+    margin-bottom: 48px;
+    margin-top: 13px;
+}
+
+.comments_form textarea {
+    border-color: #E7E7E7;
+    border-style: solid;
+    border-width: 0 0 1px;
+    box-shadow: none;
+    margin-bottom: 57px;
+    margin-top: 12px;
+    font-size: 12px;
+    color: #777;
+}
+
+.comments_form input[type="submit"] {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ddd;
+    color: hsl(0, 0%, 20%);
+    font-size: 12px;
+    padding: 10px 20px;
+}
+
+.comments_form .form-group {
+    margin-bottom: 0;
+}
+
+.comments_form input[type="submit"]:hover {
+    color: #F8928D;
+}
+
 
 /* 2) Main page css*/
 
@@ -349,98 +456,20 @@ i {
     top: 0;
     right: 0;
 }
+
+
 /* 3) Video post css */
 
-.sp_comments_box > h2 {
-    margin-top: 36px;
+
+.sp_video_box {
+    margin-bottom: 6%;
+    padding-bottom: 8%;
+    border-bottom: 1px solid #EDEDED;
 }
 
-.single_comment {
-    overflow: hidden;
-    padding: 30px 0;
-}
-
-.single_comment_avatar {
-    float: left;
-    margin-right: 35px;
-    overflow: hidden;
-    width: 105px;
-}
-
-.single_comment_text {
-    float: left;
-    overflow: hidden;
-    width: 83%;
-}
-
-.sp_title a h4 {
-    color: #333;
-    font-size: 13px;
-    text-transform: uppercase;
-}
-
-.sp_title a h4:hover {
-    color: #F8928D;
-    text-decoration: none;
-}
-
-.sp_title {
-    overflow: hidden;
-}
-
-.single_comment_text > a {
-    color: #999;
-    font-size: 12px;
-}
-
-.sp_title > a {
-    float: left;
-    width: 70%;
-}
-
-.sp_title > p {
-    color: #999;
-    float: left;
-    font-size: 12px;
-    text-align: right;
-    width: 25%;
-}
-
-.single_comment {
-    border-top: 1px solid hsl(0, 0%, 93%);
-    border-bottom: 1px solid hsl(0, 0%, 93%);
-}
-
-.comment_form h2 {
-    margin-bottom: 48px;
-    margin-top: 13px;
-}
-
-.comments_form textarea {
-    border-color: #E7E7E7;
-    border-style: solid;
-    border-width: 0 0 1px;
-    box-shadow: none;
-    margin-bottom: 57px;
-    margin-top: 12px;
-    font-size: 12px;
-    color: #777;
-}
-
-.comments_form input[type="submit"] {
-    background: #fff none repeat scroll 0 0;
-    border: 1px solid #ddd;
-    color: hsl(0, 0%, 20%);
-    font-size: 12px;
-    padding: 10px 20px;
-}
-
-.comments_form .form-group {
-    margin-bottom: 0;
-}
-
-.comments_form input[type="submit"]:hover {
-    color: #F8928D;
+.sp_video_title {
+    padding-top: 5%;
+    padding-bottom: 10%;
 }
 
 /*  4) Joke page css */
@@ -455,9 +484,6 @@ i {
     position: relative;
 }
 
-.joke_details_page {
-    padding-top: 100px;
-}
 
 .all_jokes {
     margin-top: 50px;
@@ -477,12 +503,13 @@ i {
 
 .single_video {
     border-bottom: 1px solid #efefef;
-    padding: 50px 0;
+    padding: 8% 0;
     position: relative;
 }
 
 div.single_video:nth-child(1) {
-    padding: 0;
+    padding-top: 2%;
+    padding-bottom: 8%;
 }
 /*.single_video iframe {*/
 /*width: 100%;*/
@@ -492,6 +519,17 @@ div.single_video:nth-child(1) {
 /*  6) 9gag post css  */
 .single_9gag_bottom_text {
     margin-bottom: 30px;
+    padding-right: 10px;
+}
+
+.post_9gag_bottom_text {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.videos-list_text {
+    padding-bottom: 5%;
 }
 
 /* 7) Ninegags page css */
@@ -501,7 +539,9 @@ div.single_video:nth-child(1) {
 }
 
 .single_9gag_image_or_video {
-    margin-bottom: 30px;
+    margin-bottom: 6%;
+    padding-bottom: 8%;
+    border-bottom: 1px solid #EDEDED;
 }
 
 .single_ninegag {
@@ -518,4 +558,14 @@ div.single_video:nth-child(1) {
 .all_saved_items {
     margin-top: 50px;
     margin-bottom: 50px;
+}
+
+/* 9) Joke post css */
+
+.joke_details_page p:nth-child(2) {
+    margin-bottom: 5%;
+}
+
+.joke_details_page {
+    padding-top: 10%;
 }

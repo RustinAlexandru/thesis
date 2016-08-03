@@ -4,7 +4,7 @@
 	{{ block.super }}
 	<style type="text/css">
 		.save_button_wrap {
-			margin-top: 1.5%;
+			margin-top: 9%;
 			margin-left: 0;
 			margin-right: 0;
 			position: absolute;
@@ -18,7 +18,7 @@
 {% block content %}
 	{% block main_wrapper %}
 		<div class="col-md-9 col-sm-9 col-xs-9">
-			<div class="single_bottom_text">
+			<div class="single_bottom_text sp_video_title">
 				<h2><a href=""> {{ object.title }} </a></h2>
 				<p><a class="category_tag" href="{% url 'videos' %}">videos</a>| <i
 						class="fa fa-clock-o"></i> {{ object.date_added }}
@@ -37,11 +37,11 @@
 				</div>
 			</div>
 			<div class="sp_comments_box">
-				<h2>Comments</h2>
+				<h2>{{ comments.count}} comments</h2>
 				{% for comment in comments %}
 					<div class="single_comment">
 						<div class="single_comment_avatar">
-
+							<img src="/static/funfly{{comment.user.userprofile.avatar.url }}" alt="">
 						</div>
 						<div class="single_comment_text">
 							<div class="sp_title">
@@ -63,13 +63,15 @@
 					</div>
 				{% endfor %}
 			</div>
-			<div class="comment_form">
-				<h2>Leave your comment</h2>
-				<div class="comments_form">
-					{% load crispy_forms_tags %}
-					{% crispy CommentForm CommentForm.helper %}
+			{% if request.user.is_authenticated %}
+				<div class="comment_form">
+					<h2>Leave your comment</h2>
+					<div class="comments_form">
+						{% load crispy_forms_tags %}
+						{% crispy CommentForm CommentForm.helper %}
+					</div>
 				</div>
-			</div>
+			{% endif %}
 		</div>
 	{% endblock %}
 {% endblock %}
