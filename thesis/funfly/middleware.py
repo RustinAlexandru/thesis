@@ -26,10 +26,13 @@ def save_profile(backend, user, response, *args, **kwargs):
 
         try:
             user_profile = UserProfile.objects.get(user=user)
+            user_profile.sex = sex
+            user_profile.city = city
+            # profile.timezone = profile_timezone
+            user_profile.save()
         except UserProfile.DoesNotExist:
             profile = UserProfile.objects.create(user=user, sex=sex, city=city)
-
-        profile.sex = sex
-        profile.city = city
-        # profile.timezone = profile_timezone
-        profile.save()
+            profile.sex = sex
+            profile.city = city
+            # profile.timezone = profile_timezone
+            profile.save()

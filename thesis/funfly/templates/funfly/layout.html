@@ -133,6 +133,7 @@
 									   aria-expanded="false">{{ user.username }} <span
 											class="caret"></span></a>
 									<ul class="dropdown-menu" role="menu">
+										<li><a href="{% url 'view_profile' user.userprofile.pk %}">Profile</a></li>
 											<li><a href="{% url "logout" %}">Logout</a></li>
 									</ul>
 								</li>

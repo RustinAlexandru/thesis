@@ -3,16 +3,16 @@ import os
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.core import serializers
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render, render_to_response
 from django.utils.decorators import method_decorator
-from django.views.generic import DetailView
-from django.views.generic.list import ListView
+from django.views.generic import DetailView, UpdateView, ListView
 from el_pagination.views import AjaxListView
 
-from forms import RegisterForm, CommentForm, AddItemForm
+from forms import RegisterForm, CommentForm, AddItemForm, UpdateProfileForm
 from models import Ninegag, UserProfile, Joke, Youtube, PostComment
 
 from django.http import HttpResponseNotAllowed, HttpResponseRedirect, JsonResponse
@@ -148,6 +148,21 @@ class ViewProfile(DetailView):
         context = super(ViewProfile, self).get_context_data(**kwargs)
         context['username'] = context['object'].user.username
         return context
+
+
+class UpdateProfile(UpdateView):
+    model = UserProfile
+    # fields = ['sex', 'city', 'timezone', 'avatar']
+    form_class = UpdateProfileForm
+
+    def get_success_url(self):
+        return reverse('view_profile', args=[self.kwargs['pk']])
+
+    def form_valid(self, form):
+        avatar = form.cleaned_data['avatar']
+        if avatar:
+            form.instance.avatar = form.resize_avatar()
+        return super(UpdateProfile, self).form_valid(form)
 
 class VideoPostDetails(DetailView):
     model = Youtube

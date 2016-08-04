@@ -3,6 +3,7 @@ from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy
 from django_filters.views import FilterView
 
@@ -22,7 +23,10 @@ urlpatterns = [
                       {'next_page': reverse_lazy('index')}, name='logout'),
                   url(r'^register/$', views.register, name='register'),
                   url(r'^about/$', views.about, name='about'),
-                  url(r'^view_profile/(?P<pk>\d+)/$', ViewProfile.as_view(template_name='view_profile.html'), name='view_profile'),
+                  url(r'^profile/(?P<pk>\d+)/$', ViewProfile.as_view(template_name='view_profile.html'),
+                      name='view_profile'),
+                  url(r'^profile/edit/(?P<pk>\d+)/$', login_required(views.UpdateProfile.as_view(template_name='update_profile.html')),
+                      name='edit_profile'),
                   url(r'^$', views.index, name='index'),
                   url(r'^jokes/$', JokesList.as_view(model=Joke), name='jokes'),
                   url(r'^videos/$', VideosList.as_view(template_name='videos.html'), name='videos'),
