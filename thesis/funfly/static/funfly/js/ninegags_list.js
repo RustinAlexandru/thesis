@@ -239,6 +239,12 @@ $(document).ready(function () {
          })   
 
         });
+        // in case session is empty
+        $.each($('.add_point'), function () {
+             $(this).removeClass('hidden');
+         })   
+
+        
     }
 
 });

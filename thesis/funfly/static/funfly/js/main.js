@@ -36,7 +36,13 @@ $(document).ready(function () {
             } else if (url.indexOf("jokes") !== -1) {
                 url = url.replace("/jokes/", "/videos/add_to_savelist/");
             }
-        } else {
+            else if (url.indexOf("search") !== -1) {
+                url = url.replace("/search/", "/search/add_to_savelist/");
+        }
+        } else if (url.indexOf("search") !== -1) {
+            url = url.replace("/search/", "/search/add_to_savelist/");
+        }
+        else {
             url = page_href + 'add_to_savelist/'; // first page in a paginated list, url doesnt contain 'page' in it
         }
 
@@ -200,12 +206,54 @@ $(document).ready(function () {
             })
 
         });
+        // in case session is empty
+        $.each($('.add_point'), function () {
+            $(this).removeClass('hidden');
+        })
     }
 
     hideAddPointButtons();
 
-
+    var submitIcon = $('.searchbox-icon');
+    var inputBox = $('.searchbox-input');
+    var searchBox = $('.searchbox');
+    var isOpen = false;
+    submitIcon.click(function () {
+        if (isOpen == false) {
+            searchBox.addClass('searchbox-open');
+            inputBox.focus();
+            isOpen = true;
+        } else {
+            searchBox.removeClass('searchbox-open');
+            inputBox.focusout();
+            isOpen = false;
+        }
+    });
+    submitIcon.mouseup(function () {
+        return false;
+    });
+    searchBox.mouseup(function () {
+        return false;
+    });
+    $(document).mouseup(function () {
+        if (isOpen == true) {
+            $('.searchbox-icon').css('display', 'block');
+            submitIcon.click();
+        }
+    });
 });
+
+
+function buttonUp() {
+    var inputVal = $('.searchbox-input').val();
+    inputVal = $.trim(inputVal).length;
+    if (inputVal !== 0) {
+        $('.searchbox-icon').css('display', 'none');
+    } else {
+        $('.searchbox-input').val('');
+        $('.searchbox-icon').css('display', 'block');
+    }
+    }
 
 
 function getCookie(name) {

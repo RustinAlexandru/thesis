@@ -39,6 +39,51 @@
 			}
 
 		</style>
+
+		<script>
+			$(document).ready(function () {
+
+				var submitIcon = $('.searchbox-icon');
+				var inputBox = $('.searchbox-input');
+				var searchBox = $('.searchbox');
+				var isOpen = false;
+				submitIcon.click(function () {
+					if (isOpen == false) {
+						searchBox.addClass('searchbox-open');
+						inputBox.focus();
+						isOpen = true;
+					} else {
+						searchBox.removeClass('searchbox-open');
+						inputBox.focusout();
+						isOpen = false;
+					}
+				});
+				submitIcon.mouseup(function () {
+					return false;
+				});
+				searchBox.mouseup(function () {
+					return false;
+				});
+				$(document).mouseup(function () {
+					if (isOpen == true) {
+						$('.searchbox-icon').css('display', 'block');
+						submitIcon.click();
+					}
+				});
+			});
+			function buttonUp() {
+				var inputVal = $('.searchbox-input').val();
+				inputVal = $.trim(inputVal).length;
+				if (inputVal !== 0) {
+					$('.searchbox-icon').css('display', 'none');
+				} else {
+					$('.searchbox-input').val('');
+					$('.searchbox-icon').css('display', 'block');
+				}
+			}
+
+		</script>
+
 	</head>
 {% endblock %}
 
@@ -83,24 +128,28 @@
 					<script>
 						$.endlessPaginate({
 							onCompleted: function (data) {
-									$.each(sessionStorage, function (key, value) {
+								$.each(sessionStorage, function (key, value) {
 
-										key_string = key;
-										if (key_string.startsWith("button") && value == 'deleted') {
-											var numberPattern = /\d+/g;
-											id = key.match(numberPattern);
-											selector = "i[data-item-id=" + id + "]";
-											if (add_point_button = $(selector).parents()[0]) {
-												add_point_button.remove()
-											}
+									key_string = key;
+									if (key_string.startsWith("button") && value == 'deleted') {
+										var numberPattern = /\d+/g;
+										id = key.match(numberPattern);
+										selector = "i[data-item-id=" + id + "]";
+										if (add_point_button = $(selector).parents()[0]) {
+											add_point_button.remove()
 										}
+									}
 
-										$.each($('.add_point'), function () {
-											$(this).removeClass('hidden');
-										})
+									$.each($('.add_point'), function () {
+										$(this).removeClass('hidden');
+									})
 
-									});
-								}
+								});
+								// in case session is empty
+								$.each($('.add_point'), function () {
+										$(this).removeClass('hidden');
+									})
+							}
 						});
 					</script>
 				{% endblock %}

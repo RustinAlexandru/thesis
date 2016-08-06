@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
@@ -18,16 +18,18 @@ urlpatterns = [
                   url(r'^login/$', anonymous_required(auth_views.login), {
                       'template_name': 'funfly/login.html',
                       'authentication_form': CustomAuthenticationForm
-                      }, name='login'),
+                  }, name='login'),
                   url(r'^logout/$', auth_views.logout,
                       {'next_page': reverse_lazy('index')}, name='logout'),
                   url(r'^register/$', views.register, name='register'),
                   url(r'^about/$', views.about, name='about'),
                   url(r'^profile/(?P<pk>\d+)/$', ViewProfile.as_view(template_name='view_profile.html'),
                       name='view_profile'),
-                  url(r'^profile/edit/(?P<pk>\d+)/$', login_required(views.UpdateProfile.as_view(template_name='update_profile.html')),
+                  url(r'^profile/edit/(?P<pk>\d+)/$',
+                      login_required(views.UpdateProfile.as_view(template_name='update_profile.html')),
                       name='edit_profile'),
                   url(r'^$', views.index, name='index'),
+                  url(r'.*search/', include('haystack.urls')),
                   url(r'^jokes/$', JokesList.as_view(model=Joke), name='jokes'),
                   url(r'^videos/$', VideosList.as_view(template_name='videos.html'), name='videos'),
                   url(r'ninegags/$', NinegagsList.as_view(), name='ninegags'),

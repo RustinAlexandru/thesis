@@ -5,16 +5,10 @@
 	{% block main_wrapper %}
 		<div class="col-md-9 col-sm-9 col-xs-9">
 			<div id="profile_container" class="jumbotron">
-				{#				<form action="" method="post">{% csrf_token %}#}
-				{#					{{ form.as_p }}#}
-				{#					<input type="submit" value="Update"/>#}
-				{#				</form>#}
-
 				<div class="edit_profile_form">
 					<p class="error">{{ message }}</p>
 					{% load crispy_forms_tags %}
 					{% crispy form form.helper %}
-
 				</div>
 			</div>
 		</div>

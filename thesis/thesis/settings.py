@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'social.apps.django_app.default',
     'rolepermissions',
     'gm2m',
+    'haystack',
 
 ]
 
@@ -212,3 +213,11 @@ DEFAULT_CHARSET = 'utf-8'
 CELERY_TIMEZONE = 'Europe/Bucharest'
 CELERY_ENABLE_UTC = False
 
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack',
+    },
+}

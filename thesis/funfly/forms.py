@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pytz
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field, HTML, Button
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
@@ -56,29 +56,34 @@ class UpdateProfileForm(forms.ModelForm):
                 Field('avatar',  template='avatar_template.html'),
             ),
             ButtonHolder(
-                Submit('update', u'Update', css_class='button create')
+                Submit('update', u'Update', css_class='button create'),
+                Button('cancel', 'Cancel', css_class='btn-default', onclick="window.history.back()")
             )
         )
 
     def resize_avatar(self):
-        img = pil.open(self.cleaned_data['avatar'])
+        if hasattr(self.cleaned_data['avatar'], 'content_type'):
 
-        img.thumbnail((75, 75), pil.ANTIALIAS)
+            img = pil.open(self.cleaned_data['avatar'])
 
-        thumb_io = StringIO.StringIO()
-        img.save(thumb_io, self.cleaned_data['avatar'].content_type.split('/')[-1].upper())
+            img.thumbnail((75, 75), pil.ANTIALIAS)
 
-        filename = self.cleaned_data['avatar'].name
+            thumb_io = StringIO.StringIO()
+            img.save(thumb_io, self.cleaned_data['avatar'].content_type.split('/')[-1].upper())
 
-        file = InMemoryUploadedFile(thumb_io,
-                                    u"avatar",
-                                    filename,
-                                    self.files['avatar'].content_type,
-                                    thumb_io.len,
-                                    None)
+            filename = self.cleaned_data['avatar'].name
 
-        self.cleaned_data['avatar'] = file
-        return self.cleaned_data['avatar']
+            file = InMemoryUploadedFile(thumb_io,
+                                        u"avatar",
+                                        filename,
+                                        self.files['avatar'].content_type,
+                                        thumb_io.len,
+                                        None)
+
+            self.cleaned_data['avatar'] = file
+            return self.cleaned_data['avatar']
+        else:
+            return self.cleaned_data['avatar']
 
 
 class RegisterForm(forms.Form):

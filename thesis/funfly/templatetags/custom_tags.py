@@ -12,10 +12,11 @@ def is_in_group(user, group_name):
 def classname(obj):
     return obj.__class__.__name__
 
+
 @register.filter()
 def error_avatar(obj):
     if hasattr(obj, 'avatar'):
-        if hasattr(obj, 'url'):
+        if hasattr(obj.avatar, 'url'):
             return obj.avatar.url
         else:
             return ''
