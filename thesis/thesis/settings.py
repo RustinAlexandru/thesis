@@ -142,7 +142,7 @@ SOCIAL_AUTH_FACEBOOK_SECRET = 'd14158368a25f659e4920fb7fb845380'
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_location']
 
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-  'fields': 'id, name, email, gender, timezone, location'
+  'fields': 'id, name, email, gender, timezone, location, picture'
 }
 
 
