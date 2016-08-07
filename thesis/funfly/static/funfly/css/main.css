@@ -5814,91 +5814,61 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
-.sp_title a h4 {
-  color: #333;
-  font-size: 13px;
-  text-transform: uppercase; }
-
-.sp_title a h4:hover {
-  color: #F8928D;
-  text-decoration: none; }
-
-.sp_title {
-  overflow: hidden; }
-
-.sp_title > a {
-  float: left;
-  width: 70%; }
-
-.sp_title > p {
-  color: #999;
-  float: left;
-  font-size: 12px;
-  text-align: right;
-  width: 25%; }
-
 .main_box ul {
   list-style: outside none none;
   padding: 0; }
-
-.main_box ul li {
-  display: inline-block;
-  margin-right: -4px;
-  padding: 8px 0;
-  position: relative; }
-
-.main_box ul li.nav_9gags:hover {
-  background: transparent url("../imagesandvideos/smile.svg") no-repeat scroll 25px !important;
-  background-size: 25px 25px;
-  transition: all 0.1s ease 0s; }
+  .main_box ul li {
+    display: inline-block;
+    margin-right: -4px;
+    padding: 8px 0;
+    position: relative; }
 
 .main_box ul li.nav_9gags {
   background: transparent url("../imagesandvideos/smile.svg") no-repeat scroll 25px;
   background-size: 25px 25px;
-  border-top: 0px solid #56BAE7; }
-
-.main_box ul li.nav_9gags a {
-  margin-left: 23px;
-  padding: 18px 29px 9px 51px; }
-
-.main_box ul li.nav_jokes:hover {
-  background: transparent url("../imagesandvideos/mouth-open-laugh.svg") no-repeat scroll 25px !important;
-  background-size: 25px 25px;
-  transition: all 0.1s ease 0s; }
+  border-top: 0 solid #56BAE7; }
+  .main_box ul li.nav_9gags a {
+    margin-left: 23px;
+    padding: 18px 29px 9px 51px; }
+  .main_box ul li.nav_9gags:hover {
+    background: transparent url("../imagesandvideos/smile.svg") no-repeat scroll 25px !important;
+    background-size: 25px 25px;
+    transition: all 0.1s ease 0s; }
 
 .main_box ul li.nav_jokes {
   background: transparent url("../imagesandvideos/mouth-open-laugh.svg") no-repeat scroll 25px;
   background-size: 25px 25px;
-  border-top: 0px solid #56BAE7; }
-
-.main_box ul li.nav_jokes a {
-  margin-left: 23px;
-  padding: 18px 29px 9px 51px; }
+  border-top: 0 solid #56BAE7; }
+  .main_box ul li.nav_jokes a {
+    margin-left: 23px;
+    padding: 18px 29px 9px 51px; }
+  .main_box ul li.nav_jokes:hover {
+    background: transparent url("../imagesandvideos/mouth-open-laugh.svg") no-repeat scroll 25px !important;
+    background-size: 25px 25px;
+    transition: all 0.1s ease 0s; }
 
 .jokes_left .single_top_img_text {
   margin-left: 10px;
   margin-right: 10px;
   padding-right: 10px; }
 
-.main_box ul li.nav_videos:hover {
-  background: transparent url("../imagesandvideos/old-video-camera-outline-symbol.svg") no-repeat scroll 25px;
-  background-size: 25px 25px;
-  transition: all 0.1s ease 0s; }
-
 .main_box ul li.nav_videos {
   background: transparent url("../imagesandvideos/old-video-camera-outline-symbol.svg") no-repeat scroll 25px;
   background-size: 25px 25px;
-  border-top: 0px solid #56BAE7; }
-
-.main_box ul li.nav_videos a {
-  margin-left: 23px;
-  padding: 18px 29px 9px 51px; }
+  border-top: 0 solid #56BAE7; }
+  .main_box ul li.nav_videos a {
+    margin-left: 23px;
+    padding: 18px 29px 9px 51px; }
+  .main_box ul li.nav_videos:hover {
+    background: transparent url("../imagesandvideos/old-video-camera-outline-symbol.svg") no-repeat scroll 25px;
+    background-size: 25px 25px;
+    transition: all 0.1s ease 0s; }
 
 .nav_videos i {
   margin-right: 5px; }
 
 .nav_videos .last_bottom {
-  border-bottom: 0px solid #efefef; }
+  border-bottom: 0 solid #efefef; }
 
 .gags_bottom {
   border-bottom: 1px solid #efefef;
@@ -5907,7 +5877,7 @@ button.close {
   position: relative; }
 
 .gags_bottom.last_bottom {
-  border-bottom: 0px solid #efefef; }
+  border-bottom: 0 solid #efefef; }
 
 .left_gags {
   border: 1px solid #efefef;
@@ -5917,21 +5887,11 @@ button.close {
 .category_tag {
   margin-right: 5px; }
 
-.all_left_jokes {
+.all_left_jokes, .all_left_videos {
   border: 1px solid #efefef;
   padding: 5px; }
 
-.all_left_videos {
-  border: 1px solid #efefef;
-  padding: 5px; }
-
-.videos_left {
-  border-bottom: 1px solid #efefef;
-  overflow: hidden;
-  padding: 10px 0;
-  position: relative; }
-
-.jokes_left {
+.videos_left, .jokes_left {
   border-bottom: 1px solid #efefef;
   overflow: hidden;
   padding: 10px 0;
@@ -5960,15 +5920,14 @@ button.close {
   width: 150px;
   margin-left: 20px;
   margin-top: 20px; }
+  .top_img > img {
+    max-height: 100%;
+    max-width: 100%; }
 
 .top_video {
   padding: 25px; }
 
 .single_top_img > img {
-  max-height: 100%;
-  max-width: 100%; }
-
-.top_img > img {
   max-height: 100%;
   max-width: 100%; }
 
@@ -5991,27 +5950,22 @@ i {
 .social_header {
   float: left;
   width: 96%; }
-
-.social_header ul {
-  list-style: outside none none;
-  margin: 0;
-  padding: 0; }
-
-.social_header ul li {
-  display: inline-block; }
-
-.social_header ul li a {
-  color: #fff;
-  display: block;
-  font-size: 13px;
-  padding: 0 10px; }
-
-.social_header ul li a:hover {
-  color: #C66196;
-  text-decoration: none; }
-
-.social_header ul li a:focus {
-  outline: none; }
+  .social_header ul {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0; }
+    .social_header ul li {
+      display: inline-block; }
+      .social_header ul li a {
+        color: #fff;
+        display: block;
+        font-size: 13px;
+        padding: 0 10px; }
+        .social_header ul li a:hover {
+          color: #C66196;
+          text-decoration: none; }
+        .social_header ul li a:focus {
+          outline: none; }
 
 .header_top_right {
   text-align: right; }
@@ -6084,44 +6038,41 @@ i {
   background-size: 25px 25px;
   background-position: 10% 50%;
   border-top: 2px solid #c66196; }
-
-.main_nav_box ul li.nav_9gags:hover {
-  background: #c66196 url("../imagesandvideos/smile.svg") no-repeat scroll;
-  background-size: 25px 25px;
-  background-position: 10% 50%;
-  border-top: 2px solid #c66196; }
+  .main_nav_box ul li.nav_9gags:hover {
+    background: #c66196 url("../imagesandvideos/smile.svg") no-repeat scroll;
+    background-size: 25px 25px;
+    background-position: 10% 50%;
+    border-top: 2px solid #c66196; }
 
 .main_nav_box ul li.nav_videos {
   background: transparent url("../imagesandvideos/old-video-camera-outline-symbol.svg") no-repeat scroll;
   background-size: 25px 25px;
   background-position: 10% 50%;
   border-top: 2px solid #35A3F0; }
-
-.main_nav_box ul li.nav_videos:hover {
-  background: #c66196 url("../imagesandvideos/old-video-camera-outline-symbol.svg") no-repeat scroll;
-  background-size: 25px 25px;
-  background-position: 10% 50%;
-  border-top: 2px solid #35A3F0; }
+  .main_nav_box ul li.nav_videos:hover {
+    background: #c66196 url("../imagesandvideos/old-video-camera-outline-symbol.svg") no-repeat scroll;
+    background-size: 25px 25px;
+    background-position: 10% 50%;
+    border-top: 2px solid #c66196; }
 
 .main_nav_box ul li.nav_jokes {
   background: transparent url("../imagesandvideos/mouth-open-laugh.svg") no-repeat scroll;
   background-size: 25px 25px;
   background-position: 10% 50%;
   border-top: 2px solid #FFA431; }
-
-.main_nav_box ul li.nav_jokes:hover {
-  background: #c66196 url("../imagesandvideos/mouth-open-laugh.svg") no-repeat scroll;
-  background-size: 25px 25px;
-  background-position: 10% 50%; }
+  .main_nav_box ul li.nav_jokes:hover {
+    background: #c66196 url("../imagesandvideos/mouth-open-laugh.svg") no-repeat scroll;
+    background-size: 25px 25px;
+    background-position: 10% 50%;
+    border-top: 2px solid #c66196; }
 
 #nav_about:hover {
   background: #c66196; }
 
 .main_nav_box ul li.add_item {
   border-top: 2px solid #0a006c; }
-
-.main_nav_box ul li.add_item:hover {
-  background: #c66196; }
+  .main_nav_box ul li.add_item:hover {
+    background: #c66196; }
 
 #myNavbar .navbar_left {
   padding-left: 10%; }
@@ -6131,19 +6082,17 @@ i {
   margin-right: -4px;
   padding: 8px 0;
   position: relative; }
-
-.main_nav_box ul li a {
-  border-right: 1px solid #efefef;
-  color: #444444;
-  display: block;
-  font-size: 13px;
-  font-weight: 600;
-  margin-left: 20px;
-  padding: 18px 30px 18px 24px;
-  text-transform: uppercase; }
-
-.main_nav_box ul li:hover a {
-  border-right: 1px solid #c66196; }
+  .main_nav_box ul li:hover a {
+    border-right: 1px solid #c66196; }
+  .main_nav_box ul li a {
+    border-right: 1px solid #efefef;
+    color: #444444;
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-left: 20px;
+    padding: 18px 30px 18px 24px;
+    text-transform: uppercase; }
 
 .header_top {
   background-color: #333333;
@@ -6162,35 +6111,30 @@ i {
   margin-bottom: 30px;
   margin-top: 30px; }
 
-.comment_form {
+.comments_form {
   margin-top: 5%; }
-
-.comment_form h2 {
-  margin-bottom: 48px;
-  margin-top: 13px; }
-
-.comments_form textarea {
-  border-color: #E7E7E7;
-  border-style: solid;
-  border-width: 0 0 1px;
-  box-shadow: none;
-  margin-bottom: 57px;
-  margin-top: 12px;
-  font-size: 12px;
-  color: #777; }
-
-.comments_form input[type="submit"] {
-  background: #fff none repeat scroll 0 0;
-  border: 1px solid #ddd;
-  color: #333333;
-  font-size: 12px;
-  padding: 10px 20px; }
-
-.comments_form .form-group {
-  margin-bottom: 0; }
-
-.comments_form input[type="submit"]:hover {
-  color: #F8928D; }
+  .comments_form h2 {
+    margin-bottom: 48px;
+    margin-top: 13px; }
+  .comments_form textarea {
+    border-color: #E7E7E7;
+    border-style: solid;
+    border-width: 0 0 1px;
+    box-shadow: none;
+    margin-bottom: 57px;
+    margin-top: 12px;
+    font-size: 12px;
+    color: #777; }
+  .comments_form input[type="submit"] {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ddd;
+    color: #333333;
+    font-size: 12px;
+    padding: 10px 20px; }
+    .comments_form input[type="submit"]:hover {
+      color: #F8928D; }
+  .comments_form .form-group {
+    margin-bottom: 0; }
 
 .single_comment {
   overflow: hidden;
@@ -6209,10 +6153,9 @@ i {
   float: left;
   overflow: hidden;
   width: 78%; }
-
-.single_comment_text > a {
-  color: #999;
-  font-size: 12px; }
+  .single_comment_text > a {
+    color: #999;
+    font-size: 12px; }
 
 .sp_comments_box > h2 {
   font-size: 18px;
@@ -6223,6 +6166,25 @@ i {
 .single_comment {
   border-top: 1px solid #ededed;
   border-bottom: 1px solid #ededed; }
+
+.sp_title {
+  overflow: hidden; }
+  .sp_title a h4 {
+    color: #333;
+    font-size: 13px;
+    text-transform: uppercase; }
+    .sp_title a h4:hover {
+      color: #F8928D;
+      text-decoration: none; }
+  .sp_title > a {
+    float: left;
+    width: 70%; }
+  .sp_title > p {
+    color: #999;
+    float: left;
+    font-size: 12px;
+    text-align: right;
+    width: 25%; }
 
 .joke_details_page p:nth-child(2) {
   margin-bottom: 5%; }

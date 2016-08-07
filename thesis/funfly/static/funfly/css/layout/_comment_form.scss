@@ -1,13 +1,10 @@
-
-.comment_form {
-    margin-top: 5%;
-}
-.comment_form h2 {
+.comments_form {
+  margin-top: 5%;
+  h2 {
     margin-bottom: 48px;
     margin-top: 13px;
-}
-
-.comments_form textarea {
+  }
+  textarea {
     border-color: #E7E7E7;
     border-style: solid;
     border-width: 0 0 1px;
@@ -16,20 +13,19 @@
     margin-top: 12px;
     font-size: 12px;
     color: #777;
-}
-
-.comments_form input[type="submit"] {
+  }
+  input[type="submit"] {
     background: #fff none repeat scroll 0 0;
     border: 1px solid #ddd;
     color: hsl(0, 0%, 20%);
     font-size: 12px;
     padding: 10px 20px;
-}
+    &:hover {
+      color: #F8928D;
 
-.comments_form .form-group {
+    }
+  }
+  .form-group {
     margin-bottom: 0;
-}
-
-.comments_form input[type="submit"]:hover {
-    color: #F8928D;
+  }
 }

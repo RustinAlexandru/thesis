@@ -1,39 +1,68 @@
 .single_comment {
-    overflow: hidden;
-    padding: 36px 0;
+  overflow: hidden;
+  padding: 36px 0;
 
 }
 
 .single_comment_avatar {
-    border-radius: 100px;
-    float: left;
-    height: 75px;
-    margin-right: 35px;
-    overflow: hidden;
-    text-align: center;
-    width: 75px;
+  border-radius: 100px;
+  float: left;
+  height: 75px;
+  margin-right: 35px;
+  overflow: hidden;
+  text-align: center;
+  width: 75px;
 }
 
 .single_comment_text {
-    float: left;
-    overflow: hidden;
-    width: 78%;
-}
-
-
-.single_comment_text > a {
+  float: left;
+  overflow: hidden;
+  width: 78%;
+  > a {
     color: #999;
     font-size: 12px;
+  }
 }
 
+
 .sp_comments_box > h2 {
-    font-size: 18px;
-    margin-bottom: 7%;
-    margin-top: 7%;
-    text-transform: uppercase;
+  font-size: 18px;
+  margin-bottom: 7%;
+  margin-top: 7%;
+  text-transform: uppercase;
 }
 
 .single_comment {
-    border-top: 1px solid hsl(0, 0%, 93%);
-    border-bottom: 1px solid hsl(0, 0%, 93%);
+  border-top: 1px solid hsl(0, 0%, 93%);
+  border-bottom: 1px solid hsl(0, 0%, 93%);
+}
+
+.sp_title {
+  overflow: hidden;
+  a {
+    h4 {
+      color: #333;
+      font-size: 13px;
+      text-transform: uppercase;
+      &:hover {
+        color: #F8928D;
+        text-decoration: none;
+      }
+    }
+
+  }
+
+  > a {
+    float: left;
+    width: 70%;
+  }
+
+  > p {
+    color: #999;
+    float: left;
+    font-size: 12px;
+    text-align: right;
+    width: 25%;
+  }
+
 }
