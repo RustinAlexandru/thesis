@@ -1,0 +1,28 @@
+.sp_title a h4 {
+    color: #333;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.sp_title a h4:hover {
+    color: #F8928D;
+    text-decoration: none;
+}
+
+.sp_title {
+    overflow: hidden;
+}
+
+.sp_title > a {
+    float: left;
+    width: 70%;
+}
+
+.sp_title > p {
+    color: #999;
+    float: left;
+    font-size: 12px;
+    text-align: right;
+    width: 25%;
+}
+

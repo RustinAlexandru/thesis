@@ -1,0 +1,39 @@
+.single_comment {
+    overflow: hidden;
+    padding: 36px 0;
+
+}
+
+.single_comment_avatar {
+    border-radius: 100px;
+    float: left;
+    height: 75px;
+    margin-right: 35px;
+    overflow: hidden;
+    text-align: center;
+    width: 75px;
+}
+
+.single_comment_text {
+    float: left;
+    overflow: hidden;
+    width: 78%;
+}
+
+
+.single_comment_text > a {
+    color: #999;
+    font-size: 12px;
+}
+
+.sp_comments_box > h2 {
+    font-size: 18px;
+    margin-bottom: 7%;
+    margin-top: 7%;
+    text-transform: uppercase;
+}
+
+.single_comment {
+    border-top: 1px solid hsl(0, 0%, 93%);
+    border-bottom: 1px solid hsl(0, 0%, 93%);
+}
