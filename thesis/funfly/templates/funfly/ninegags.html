@@ -1,5 +1,7 @@
 {% extends 'funfly/layout.html' %}
 {% load staticfiles %}
+{% load sass_tags %}
+
 
 {% load el_pagination_tags %}
 
@@ -12,15 +14,13 @@
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="stylesheet" href="{% static "funfly/css/bootstrap.min.css" %}">
-		<link rel="stylesheet" href="{% static "funfly/css/bootstrap-theme.min.css" %}">
-		<link rel="stylesheet" href="{% static "funfly/css/main.css" %}">
+		<link rel="stylesheet" type="text/css" href="{% sass_src 'funfly/css/main.scss' %}">
 		<link rel="stylesheet" href="{% static "funfly/css/responsive.css" %}">
 		<link rel="stylesheet" href="{% static "funfly/font-awesome-4.6.3/css/font-awesome.min.css" %}">
 		<link rel="stylesheet" type="text/css" href="{% static "funfly/sweetalert2/sweetalert2.css" %}">
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-		<script type="application/javascript" src="{% static "funfly/js/vendor/bootstrap.js" %}"></script>
-		<script src="{% static "funfly/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" %}"></script>
+		<script type="application/javascript" src="{% static "funfly/js/bootstrap.js" %}"></script>
+		<script src="{% static "funfly/sweetalert2/sweetalert2.min.js" %}"></script>
 		<script src="{% static "funfly/sweetalert2/sweetalert2.min.js" %}"></script>
 		<script src="{% static "funfly/js/ninegags_list.js" %}"></script>
 
@@ -147,8 +147,8 @@
 								});
 								// in case session is empty
 								$.each($('.add_point'), function () {
-										$(this).removeClass('hidden');
-									})
+									$(this).removeClass('hidden');
+								})
 							}
 						});
 					</script>

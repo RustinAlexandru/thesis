@@ -1,0 +1,647 @@
+@import "vendors/bootstrap";
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+/*
+
+1) General css
+2) Main page css
+3) Video post css
+4) Jokes page css
+5) Videos page css
+6) 9gag post css
+7) Ninegags page css
+8) Saved items page css
+9) Joke post css
+10) Profile css
+
+ */
+
+
+
+/* 1) General css */
+
+.fb {
+    background: url('../imagesandvideos/fb_200.png') top;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, .7);
+    border-radius: 5px;
+    width: 198px;
+    height: 37px;
+    margin: 20px 20px;
+    overflow: hidden;
+}
+
+.social_header {
+  float: left;
+  width: 96%;
+}
+.social_header ul {
+  list-style: outside none none;
+  margin: 0;
+  padding: 0;
+}
+.social_header ul li {
+  display:inline-block;
+}
+
+.social_header ul li a {
+  color: #fff;
+  display: block;
+  font-size: 13px;
+  padding: 0 10px;
+}
+.social_header ul li a:hover {
+  color: #C66196;
+  text-decoration:none;
+}
+.social_header ul li a:focus {
+  outline:none;
+}
+
+.header_top_right {
+    text-align: right;
+}
+
+
+.searchbox{
+    position:relative;
+    min-width:50px;
+    width:0%;
+    height:50px;
+    float:right;
+    margin-top: 2%;
+    overflow:hidden;
+
+    -webkit-transition: width 0.3s;
+    -moz-transition: width 0.3s;
+    -ms-transition: width 0.3s;
+    -o-transition: width 0.3s;
+    transition: width 0.3s;
+}
+
+.searchbox-input{
+    top:0;
+    right:0;
+    border:0;
+    outline:0;
+    background:#dcddd8;
+    width:100%;
+    height:50px;
+    margin:0;
+    padding:0px 55px 0px 20px;
+    font-size:20px;
+    color:red;
+}
+.searchbox-input::-webkit-input-placeholder {
+    color: #d74b4b;
+}
+.searchbox-input:-moz-placeholder {
+    color: #d74b4b;
+}
+.searchbox-input::-moz-placeholder {
+    color: #d74b4b;
+}
+.searchbox-input:-ms-input-placeholder {
+    color: #d74b4b;
+}
+
+.searchbox-icon,
+.searchbox-submit{
+    width:50px;
+    height:50px;
+    display:block;
+    position:absolute;
+    top:0;
+    right:0;
+    padding:0;
+    margin:0;
+    border:0;
+    outline:0;
+    line-height:50px;
+    text-align:center;
+    cursor:pointer;
+    color:#56BAE7;
+    background: #ff8100;
+}
+
+.searchbox-open{
+    width:100%;
+}
+
+
+.main_nav {
+    box-shadow: 0 2px 10px #eee;
+}
+
+.main_nav_box ul li.nav_9gags {
+    background: rgba(0, 0, 0, 0) url("../imagesandvideos/smile.svg") no-repeat scroll;
+    background-size: 25px 25px;
+    background-position: 10% 50%;
+    border-top: 2px solid #c66196;
+}
+
+.main_nav_box ul li.nav_9gags:hover {
+    background: #c66196 url("../imagesandvideos/smile.svg") no-repeat scroll;
+    background-size: 25px 25px;
+    background-position: 10% 50%;
+    border-top: 2px solid #c66196;
+}
+
+.main_nav_box ul li.nav_videos {
+    background: rgba(0, 0, 0, 0) url("../imagesandvideos/old-video-camera-outline-symbol.svg") no-repeat scroll;
+    background-size: 25px 25px;
+    background-position: 10% 50%;
+    border-top: 2px solid #35A3F0;
+}
+
+.main_nav_box ul li.nav_videos:hover {
+    background: #c66196  url("../imagesandvideos/old-video-camera-outline-symbol.svg") no-repeat scroll;
+    background-size: 25px 25px;
+    background-position: 10% 50%;
+    border-top: 2px solid #35A3F0;
+}
+
+.main_nav_box ul li.nav_jokes {
+    background: rgba(0, 0, 0, 0) url("../imagesandvideos/mouth-open-laugh.svg") no-repeat scroll;
+    background-size: 25px 25px;
+    background-position: 10% 50%;
+    border-top: 2px solid #FFA431;
+}
+
+.main_nav_box ul li.nav_jokes:hover {
+    background: #c66196 url("../imagesandvideos/mouth-open-laugh.svg") no-repeat scroll;
+    background-size: 25px 25px;
+    background-position: 10% 50%;
+}
+
+#nav_about:hover {
+    background: #c66196
+}
+
+.main_nav_box ul li.add_item {
+    border-top: 2px solid #0a006c;
+}
+
+.main_nav_box ul li.add_item:hover {
+    background: #c66196;
+}
+
+#myNavbar .navbar_left {
+    padding-left: 10%;
+}
+
+
+.main_nav_box ul li {
+    display: inline-block;
+    margin-right: -4px;
+    padding: 8px 0;
+    position: relative;
+}
+
+.main_nav_box ul li a {
+    border-right: 1px solid #efefef;
+    color: #444444;
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-left: 20px;
+    padding: 18px 30px 18px 24px;
+    text-transform: uppercase;
+}
+
+.main_nav_box ul li:hover a {
+    border-right: 1px solid #c66196;
+}
+
+.login_form {
+    margin-top: 50px;
+}
+
+.form-signin-heading {
+    margin-bottom:30px;
+    margin-top: 30px;
+}
+
+.single_comment {
+    overflow: hidden;
+    padding: 36px 0;
+
+}
+
+.single_comment_avatar {
+    border-radius: 100px;
+    float: left;
+    height: 75px;
+    margin-right: 35px;
+    overflow: hidden;
+    text-align: center;
+    width: 75px;
+}
+
+.single_comment_text {
+    float: left;
+    overflow: hidden;
+    width: 78%;
+}
+
+
+.single_comment_text > a {
+    color: #999;
+    font-size: 12px;
+}
+
+.sp_comments_box > h2 {
+    font-size: 18px;
+    margin-bottom: 7%;
+    margin-top: 7%;
+    text-transform: uppercase;
+}
+
+
+.sp_title a h4 {
+    color: #333;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.sp_title a h4:hover {
+    color: #F8928D;
+    text-decoration: none;
+}
+
+.sp_title {
+    overflow: hidden;
+}
+
+.sp_title > a {
+    float: left;
+    width: 70%;
+}
+
+.sp_title > p {
+    color: #999;
+    float: left;
+    font-size: 12px;
+    text-align: right;
+    width: 25%;
+}
+
+.single_comment {
+    border-top: 1px solid hsl(0, 0%, 93%);
+    border-bottom: 1px solid hsl(0, 0%, 93%);
+}
+
+.comment_form {
+    margin-top: 5%;
+}
+.comment_form h2 {
+    margin-bottom: 48px;
+    margin-top: 13px;
+}
+
+.comments_form textarea {
+    border-color: #E7E7E7;
+    border-style: solid;
+    border-width: 0 0 1px;
+    box-shadow: none;
+    margin-bottom: 57px;
+    margin-top: 12px;
+    font-size: 12px;
+    color: #777;
+}
+
+.comments_form input[type="submit"] {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ddd;
+    color: hsl(0, 0%, 20%);
+    font-size: 12px;
+    padding: 10px 20px;
+}
+
+.comments_form .form-group {
+    margin-bottom: 0;
+}
+
+.comments_form input[type="submit"]:hover {
+    color: #F8928D;
+}
+
+
+/* 2) Main page css*/
+
+.header_top {
+    background-color: #333333;
+    padding: 15px 0 14px;
+}
+
+#header_carousel p {
+    color: white;
+    font-size: 12px;
+    margin-top: 0px;
+    margin-bottom: -1px;
+}
+
+.main_box ul {
+    list-style: outside none none;
+    padding: 0;
+}
+
+.main_box ul li {
+    display: inline-block;
+    margin-right: -4px;
+    padding: 8px 0;
+    position: relative;
+}
+
+.main_box ul li.nav_9gags:hover {
+    background: rgba(0, 0, 0, 0) url('../imagesandvideos/smile.svg') no-repeat scroll 25px !important;
+    background-size: 25px 25px;
+    transition: all 0.1s ease 0s;
+}
+
+.main_box ul li.nav_9gags {
+    background: rgba(0, 0, 0, 0) url('../imagesandvideos/smile.svg') no-repeat scroll 25px;
+    background-size: 25px 25px;
+    border-top: 0px solid #56BAE7;
+}
+
+.main_box ul li.nav_9gags a {
+    margin-left: 23px;
+    padding: 18px 29px 9px 51px;
+}
+
+.main_box ul li.nav_jokes:hover {
+    background: rgba(0, 0, 0, 0) url('../imagesandvideos/mouth-open-laugh.svg') no-repeat scroll 25px !important;
+    background-size: 25px 25px;
+    transition: all 0.1s ease 0s;
+}
+
+.main_box ul li.nav_jokes {
+    background: rgba(0, 0, 0, 0) url('../imagesandvideos/mouth-open-laugh.svg') no-repeat scroll 25px;
+    background-size: 25px 25px;
+    border-top: 0px solid #56BAE7;
+}
+
+.main_box ul li.nav_jokes a {
+    margin-left: 23px;
+    padding: 18px 29px 9px 51px;
+}
+
+.jokes_left .single_top_img_text {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-right: 10px;
+}
+
+.main_box ul li.nav_videos:hover {
+    background: rgba(0, 0, 0, 0) url('../imagesandvideos/old-video-camera-outline-symbol.svg') no-repeat scroll 25px;
+    background-size: 25px 25px;
+    transition: all 0.1s ease 0s;
+}
+
+.main_box ul li.nav_videos {
+    background: rgba(0, 0, 0, 0) url('../imagesandvideos/old-video-camera-outline-symbol.svg') no-repeat scroll 25px;
+    background-size: 25px 25px;
+    border-top: 0px solid #56BAE7;
+}
+
+.main_box ul li.nav_videos a {
+    margin-left: 23px;
+    padding: 18px 29px 9px 51px;
+}
+
+.nav_videos i {
+    margin-right: 5px;
+}
+
+.nav_videos .last_bottom {
+    border-bottom: 0px solid #efefef;
+}
+
+.gags_bottom {
+    border-bottom: 1px solid #efefef;
+    overflow: hidden;
+    padding: 10px 0;
+    position: relative;
+}
+
+.gags_bottom.last_bottom {
+    border-bottom: 0px solid #efefef;
+}
+
+.left_gags {
+    border: 1px solid #efefef;
+    padding: 5px;
+    position: relative;
+}
+
+.category_tag {
+    margin-right: 5px;
+}
+
+.all_left_jokes {
+    border: 1px solid #efefef;
+    padding: 5px;
+}
+
+.all_left_videos {
+    border: 1px solid #efefef;
+    padding: 5px;
+}
+
+.videos_left {
+    border-bottom: 1px solid #efefef;
+    overflow: hidden;
+    padding: 10px 0;
+    position: relative;
+}
+
+.jokes_left {
+    border-bottom: 1px solid #efefef;
+    overflow: hidden;
+    padding: 10px 0;
+    position: relative;
+}
+
+.left_main_header {
+    border-bottom: 1px solid #efefef;
+    margin-bottom: 26px;
+    overflow: hidden;
+    padding-top: 12px;
+}
+
+.single_top_img {
+    float: left;
+    margin-right: 11px;
+    height: 100px;
+    width: 100px;
+    position: relative;
+}
+
+.single_top_img_text, .single_bottom_text {
+    margin-left: 15px;
+    margin-right: 15px;
+    position: relative;
+}
+
+.top_img {
+    height: 180px;
+    width: 150px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.top_video {
+    padding: 25px;
+}
+
+.single_top_img > img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.top_img > img {
+    max-height: 100%;
+    max-width: 100%
+}
+
+/*video {*/
+/*min-height:280px;*/
+/*width: 500px;*/
+/*}*/
+
+i {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+
+.save_button_wrap {
+    margin-top: 3%;
+    margin-left: 20px;
+    margin-right: 3%;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+
+/* 3) Video post css */
+
+
+.sp_video_box {
+    margin-bottom: 6%;
+    padding-bottom: 8%;
+    border-bottom: 1px solid #EDEDED;
+}
+
+.sp_video_title {
+    padding-top: 5%;
+    padding-bottom: 10%;
+}
+
+/*  4) Joke page css */
+.endless_page_template {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.single_joke {
+    margin-left: 10px;
+    margin-right: 10px;
+    position: relative;
+}
+
+
+.all_jokes {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#likes_number:hover {
+    text-decoration: underline;
+}
+
+/*  5) Videos page css   */
+
+.all_videos {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.single_video {
+    border-bottom: 1px solid #efefef;
+    padding: 8% 0;
+    position: relative;
+}
+
+div.single_video:nth-child(1) {
+    padding-top: 2%;
+    padding-bottom: 8%;
+}
+/*.single_video iframe {*/
+/*width: 100%;*/
+/*height: 100%;*/
+/*}*/
+
+/*  6) 9gag post css  */
+.single_9gag_bottom_text {
+    margin-bottom: 30px;
+    padding-right: 10px;
+}
+
+.post_9gag_bottom_text {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.videos-list_text {
+    padding-bottom: 5%;
+}
+
+/* 7) Ninegags page css */
+.all_ninegags {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.single_9gag_image_or_video {
+    margin-bottom: 6%;
+    padding-bottom: 8%;
+    border-bottom: 1px solid #EDEDED;
+}
+
+.single_ninegag {
+    border-bottom: 1px solid #efefef;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.btn .glyphicon {
+    margin-left: 10px;
+}
+
+/* 8) Saved items page css */
+.all_saved_items {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* 9) Joke post css */
+
+.joke_details_page p:nth-child(2) {
+    margin-bottom: 5%;
+}
+
+.joke_details_page {
+    padding-top: 10%;
+}
+
+/* 10) Profile css */
+
+#profile_container {
+    margin-top: 10%;
+}

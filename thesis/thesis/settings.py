@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,15 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'django.contrib.sites',
+    'social.apps.django_app.default',
+    'sass_processor',
     'crispy_forms',
     'debug_toolbar',
     'pytz',
     'djcelery',
-    'django_extensions',
-    'django.contrib.sites',
     'moderation',
     'el_pagination',
-    'social.apps.django_app.default',
     'rolepermissions',
     'gm2m',
     'haystack',
@@ -54,8 +54,6 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 1
-
-
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -136,21 +134,18 @@ AUTHENTICATION_BACKENDS = (
 
 )
 
-
 SOCIAL_AUTH_FACEBOOK_KEY = '527379650781936'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'd14158368a25f659e4920fb7fb845380'
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_location']
 
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-  'fields': 'id, name, email, gender, timezone, location, picture'
+    'fields': 'id, name, email, gender, timezone, location, picture'
 }
-
 
 SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'email', 'location']
 
 # SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'index'
 SOCIAL_AUTH_LOGIN_URL = 'index'
-
 
 USER_MODEL = 'auth.User'
 
@@ -167,9 +162,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.user.user_details',
 )
 
-
 ROLEPERMISSIONS_MODULE = 'thesis.roles'
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -188,17 +181,32 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'funfly/static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'funfly/static/funfly')
 MEDIA_URL = '/'
+
+SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'funfly/static/')
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
+)
+
+SASS_PROCESSOR_INCLUDE_DIRS = (
+    os.path.join(BASE_DIR, 'funfly/static/funfly/css'),
+)
+
+
+SASS_PRECISION = 8
 
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'index'
 
+
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 DEFAULT_CHARSET = 'utf-8'
-
 
 # DEBUG_TOOLBAR_PANELS = (
 # #   'debug_toolbar.panels.version.VersionDebugPanel',
@@ -212,7 +220,6 @@ DEFAULT_CHARSET = 'utf-8'
 # CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Europe/Bucharest'
 CELERY_ENABLE_UTC = False
-
 
 HAYSTACK_CONNECTIONS = {
     'default': {
