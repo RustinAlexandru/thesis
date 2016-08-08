@@ -1,15 +1,8 @@
-@mixin my-navbar-item($url, $top-border-colour) {
-  background: rgba(0, 0, 0, 0) url('#{$url}') no-repeat scroll;
+@mixin my-navbar-item($url, $background-colour, $top-border-colour) {
+  background: $background-colour url('#{$url}') no-repeat scroll;
   background-size: 25px 25px;
   background-position: 10% 50%;
   border-top: 2px solid $top-border-colour;
-}
-
-@mixin my-narbar-item-hover($url) {
-  background: #c66196 url('#{$url}') no-repeat scroll;
-  background-size: 25px 25px;
-  background-position: 10% 50%;
-  border-top: 2px solid #c66196;
 }
 
 .social_header {
@@ -117,71 +110,10 @@
 
 .main_nav_box {
   ul {
-    li.nav_9gags {
-      @include my-navbar-item("../imagesandvideos/smile.svg", #c66196);
-      &:hover {
-        @include my-narbar-item-hover("../imagesandvideos/smile.svg")
-      }
-    }
-  }
-}
-
-.main_nav_box {
-  ul {
-    li.nav_videos {
-      @include my-navbar-item("../imagesandvideos/old-video-camera-outline-symbol.svg", #35A3F0);
-      &:hover {
-        @include my-narbar-item-hover("../imagesandvideos/old-video-camera-outline-symbol.svg");
-      }
-
-    }
-  }
-}
-
-.main_nav_box {
-  ul {
-    li.nav_jokes {
-      @include my-navbar-item("../imagesandvideos/mouth-open-laugh.svg", #FFA431);
-      &:hover {
-        @include my-narbar-item-hover("../imagesandvideos/mouth-open-laugh.svg")
-      }
-    }
-  }
-}
-
-#nav_about:hover {
-  background: #c66196
-}
-
-.main_nav_box {
-  ul {
-    li.add_item {
-      border-top: 2px solid #0a006c;
-      &:hover {
-        background: #c66196;
-      }
-    }
-  }
-}
-
-#myNavbar {
-  .navbar_left {
-    padding-left: 10%;
-  }
-}
-
-.main_nav_box {
-  ul {
     li {
       display: inline-block;
-      margin-right: -4px;
       padding: 8px 0;
       position: relative;
-      &:hover {
-        a {
-          border-right: 1px solid #c66196;
-        }
-      }
       a {
         border-right: 1px solid #efefef;
         color: #444444;
@@ -193,6 +125,103 @@
         text-transform: uppercase;
       }
     }
+  }
+}
+
+.main_nav_box {
+  ul {
+    li.nav_9gags {
+      @include my-navbar-item("../imagesandvideos/smile.svg", rgba(0, 0, 0, 0), #663399);
+      &:hover {
+        @include my-navbar-item("../imagesandvideos/smile.svg", #663399, #663399);
+        a {
+          border-right: 1px solid #663399;
+          color: #fff; // override bootstrap nav on hover colour
+        }
+      }
+    }
+  }
+}
+
+.main_nav_box {
+  ul {
+    li.nav_videos {
+      @include my-navbar-item("../imagesandvideos/old-video-camera-outline-symbol.svg", rgba(0, 0, 0, 0), #ff6666);
+      &:hover {
+        @include my-navbar-item("../imagesandvideos/old-video-camera-outline-symbol.svg", #ff6666, #ff6666);
+        a {
+          border-right: 1px solid #ff6666;
+          color: #fff; // override bootstrap nav on hover colour
+        }
+      }
+
+    }
+  }
+}
+
+.main_nav_box {
+  ul {
+    li.nav_jokes {
+      @include my-navbar-item("../imagesandvideos/mouth-open-laugh.svg", rgba(0, 0, 0, 0), #cccc33);
+      &:hover {
+        @include my-navbar-item("../imagesandvideos/mouth-open-laugh.svg", #cccc33, #cccc33);
+        a {
+          border-right: 1px solid #cccc33;
+          color: #fff; // override bootstrap nav on hover colour
+        }
+      }
+    }
+  }
+}
+
+.main_nav_box {
+  ul {
+    li.saved_items {
+      @include my-navbar-item("", rgba(0, 0, 0, 0), #6699cc);
+      &:hover {
+        @include my-navbar-item("", #6699cc, #6699cc);
+        a {
+          border-right: 1px solid #6699cc;
+          color: #fff; // override bootstrap nav on hover colour
+        }
+      }
+    }
+  }
+}
+
+.main_nav_box {
+  ul {
+    li#nav_about {
+      @include my-navbar-item("", rgba(0, 0, 0, 0), #cc6699);
+      &:hover {
+        @include my-navbar-item("", #cc6699, #cc6699);
+        a {
+          border-right: 1px solid #cc6699;
+          color: #fff; // override bootstrap nav on hover colour
+        }
+      }
+    }
+  }
+}
+
+.main_nav_box {
+  ul {
+    li.add_item {
+      @include my-navbar-item("", rgba(0, 0, 0, 0), #0a006c);
+      &:hover {
+        @include my-navbar-item("", #0a006c, #0a006c);
+        a {
+          border-right: 1px solid #0a006c;
+          color: #fff; // override bootstrap nav on hover colour
+        }
+      }
+    }
+  }
+}
+
+#myNavbar {
+  .navbar_left {
+    padding-left: 10%;
   }
 }
 

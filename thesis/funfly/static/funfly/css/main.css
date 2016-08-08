@@ -6033,57 +6033,10 @@ i {
 .main_nav {
   box-shadow: 0 2px 10px #eee; }
 
-.main_nav_box ul li.nav_9gags {
-  background: transparent url("../imagesandvideos/smile.svg") no-repeat scroll;
-  background-size: 25px 25px;
-  background-position: 10% 50%;
-  border-top: 2px solid #c66196; }
-  .main_nav_box ul li.nav_9gags:hover {
-    background: #c66196 url("../imagesandvideos/smile.svg") no-repeat scroll;
-    background-size: 25px 25px;
-    background-position: 10% 50%;
-    border-top: 2px solid #c66196; }
-
-.main_nav_box ul li.nav_videos {
-  background: transparent url("../imagesandvideos/old-video-camera-outline-symbol.svg") no-repeat scroll;
-  background-size: 25px 25px;
-  background-position: 10% 50%;
-  border-top: 2px solid #35A3F0; }
-  .main_nav_box ul li.nav_videos:hover {
-    background: #c66196 url("../imagesandvideos/old-video-camera-outline-symbol.svg") no-repeat scroll;
-    background-size: 25px 25px;
-    background-position: 10% 50%;
-    border-top: 2px solid #c66196; }
-
-.main_nav_box ul li.nav_jokes {
-  background: transparent url("../imagesandvideos/mouth-open-laugh.svg") no-repeat scroll;
-  background-size: 25px 25px;
-  background-position: 10% 50%;
-  border-top: 2px solid #FFA431; }
-  .main_nav_box ul li.nav_jokes:hover {
-    background: #c66196 url("../imagesandvideos/mouth-open-laugh.svg") no-repeat scroll;
-    background-size: 25px 25px;
-    background-position: 10% 50%;
-    border-top: 2px solid #c66196; }
-
-#nav_about:hover {
-  background: #c66196; }
-
-.main_nav_box ul li.add_item {
-  border-top: 2px solid #0a006c; }
-  .main_nav_box ul li.add_item:hover {
-    background: #c66196; }
-
-#myNavbar .navbar_left {
-  padding-left: 10%; }
-
 .main_nav_box ul li {
   display: inline-block;
-  margin-right: -4px;
   padding: 8px 0;
   position: relative; }
-  .main_nav_box ul li:hover a {
-    border-right: 1px solid #c66196; }
   .main_nav_box ul li a {
     border-right: 1px solid #efefef;
     color: #444444;
@@ -6093,6 +6046,93 @@ i {
     margin-left: 20px;
     padding: 18px 30px 18px 24px;
     text-transform: uppercase; }
+
+.main_nav_box ul li.nav_9gags {
+  background: transparent url("../imagesandvideos/smile.svg") no-repeat scroll;
+  background-size: 25px 25px;
+  background-position: 10% 50%;
+  border-top: 2px solid #663399; }
+  .main_nav_box ul li.nav_9gags:hover {
+    background: #663399 url("../imagesandvideos/smile.svg") no-repeat scroll;
+    background-size: 25px 25px;
+    background-position: 10% 50%;
+    border-top: 2px solid #663399; }
+    .main_nav_box ul li.nav_9gags:hover a {
+      border-right: 1px solid #663399;
+      color: #fff; }
+
+.main_nav_box ul li.nav_videos {
+  background: transparent url("../imagesandvideos/old-video-camera-outline-symbol.svg") no-repeat scroll;
+  background-size: 25px 25px;
+  background-position: 10% 50%;
+  border-top: 2px solid #ff6666; }
+  .main_nav_box ul li.nav_videos:hover {
+    background: #ff6666 url("../imagesandvideos/old-video-camera-outline-symbol.svg") no-repeat scroll;
+    background-size: 25px 25px;
+    background-position: 10% 50%;
+    border-top: 2px solid #ff6666; }
+    .main_nav_box ul li.nav_videos:hover a {
+      border-right: 1px solid #ff6666;
+      color: #fff; }
+
+.main_nav_box ul li.nav_jokes {
+  background: transparent url("../imagesandvideos/mouth-open-laugh.svg") no-repeat scroll;
+  background-size: 25px 25px;
+  background-position: 10% 50%;
+  border-top: 2px solid #cccc33; }
+  .main_nav_box ul li.nav_jokes:hover {
+    background: #cccc33 url("../imagesandvideos/mouth-open-laugh.svg") no-repeat scroll;
+    background-size: 25px 25px;
+    background-position: 10% 50%;
+    border-top: 2px solid #cccc33; }
+    .main_nav_box ul li.nav_jokes:hover a {
+      border-right: 1px solid #cccc33;
+      color: #fff; }
+
+.main_nav_box ul li.saved_items {
+  background: transparent url("") no-repeat scroll;
+  background-size: 25px 25px;
+  background-position: 10% 50%;
+  border-top: 2px solid #6699cc; }
+  .main_nav_box ul li.saved_items:hover {
+    background: #6699cc url("") no-repeat scroll;
+    background-size: 25px 25px;
+    background-position: 10% 50%;
+    border-top: 2px solid #6699cc; }
+    .main_nav_box ul li.saved_items:hover a {
+      border-right: 1px solid #6699cc;
+      color: #fff; }
+
+.main_nav_box ul li#nav_about {
+  background: transparent url("") no-repeat scroll;
+  background-size: 25px 25px;
+  background-position: 10% 50%;
+  border-top: 2px solid #cc6699; }
+  .main_nav_box ul li#nav_about:hover {
+    background: #cc6699 url("") no-repeat scroll;
+    background-size: 25px 25px;
+    background-position: 10% 50%;
+    border-top: 2px solid #cc6699; }
+    .main_nav_box ul li#nav_about:hover a {
+      border-right: 1px solid #cc6699;
+      color: #fff; }
+
+.main_nav_box ul li.add_item {
+  background: transparent url("") no-repeat scroll;
+  background-size: 25px 25px;
+  background-position: 10% 50%;
+  border-top: 2px solid #0a006c; }
+  .main_nav_box ul li.add_item:hover {
+    background: #0a006c url("") no-repeat scroll;
+    background-size: 25px 25px;
+    background-position: 10% 50%;
+    border-top: 2px solid #0a006c; }
+    .main_nav_box ul li.add_item:hover a {
+      border-right: 1px solid #0a006c;
+      color: #fff; }
+
+#myNavbar .navbar_left {
+  padding-left: 10%; }
 
 .header_top {
   background-color: #333333;

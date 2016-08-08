@@ -195,7 +195,7 @@
 							<li class="nav_videos"><a href="{% url 'videos' %}">Videos</a></li>
 							<li class="nav_jokes"><a href="{% url 'jokes' %}">Jokes</a></li>
 							{% if user|is_in_group:"Moderators" %}
-							  <li class="save_item"><a href="{% url 'add_item' %}">Add item</a> </li>
+							  <li class="add_item"><a href="{% url 'add_item' %}">Add item</a> </li>
 							{% endif %}
 							{% if user.is_authenticated %}
 								<li class="saved_items"><a href="{% url 'saved_items_list' %}">Saved items</a> </li>
