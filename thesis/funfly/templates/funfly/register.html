@@ -7,11 +7,9 @@
 
 {% block main_wrapper %}
 
-	<div class="col-md-9 col-sm-9 col-xs-9">
-
-		<h2 class="centered">Create your account</h2>
-
-		<div class="register_form">
+	<div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+		<div class="register-form-container">
+		<h2 class="register-form-container-title">Create your account</h2>
 			<p class="error">{{ message }}</p>
 			{% load crispy_forms_tags %}
 			{% crispy RegisterForm RegisterForm.helper %}

@@ -12,10 +12,19 @@ from funfly.models import PostComment
 from PIL import Image as pil
 import StringIO, time, os.path
 from django.core.files.uploadedfile import InMemoryUploadedFile
-
+from django.conf import settings
 
 class CustomAuthenticationForm(AuthenticationForm):
     password = forms.CharField(label=_(u"Password"), strip=False, widget=forms.PasswordInput)
+    remember_me = forms.BooleanField(required=False)
+
+    def clean_remember_me(self):
+        remember_me = self.cleaned_data['remember_me']
+        if not remember_me:
+            settings.SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+        else:
+            settings.SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+        return remember_me
 
 
 # class CustomAuthenticationFormOauth(LoginForm):
@@ -142,8 +151,8 @@ class RegisterForm(forms.Form):
         self.helper.form_id = 'id_register_form'
         self.helper.form_method = 'post'
         self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-lg-3'
-        self.helper.field_class = 'col-lg-4'
+        self.helper.label_class = 'col-lg-5 col-md-5 col-sm-5 col-xs-5'
+        self.helper.field_class = 'col-lg-6 col-md-6 col-sm-6 col-xs-6'
         self.helper.layout = Layout(
             Fieldset(
                 '',

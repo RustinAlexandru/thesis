@@ -61,7 +61,7 @@
 						</div>
 						<div class="single_comment_text">
 							<div class="sp_title">
-								<a href="#"><h4> {{ comment.user }} </h4></a>
+								<a href="{% url 'view_profile' comment.user.userprofile.pk %}"><h4> {{ comment.user }} </h4></a>
 								<p> {{ comment.date_added }}  </p>
 							</div>
 							<p>

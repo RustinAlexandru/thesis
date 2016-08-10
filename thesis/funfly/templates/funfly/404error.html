@@ -1,0 +1,30 @@
+{% extends 'funfly/layout.html' %}
+{% load staticfiles %}
+
+{% block head %}
+	{{ block.super }}
+	<style>
+		.main_wrapper {
+			background-color: #ccc;
+		}
+
+	</style>
+{% endblock %}
+
+{% block content %}
+	{% block main_wrapper %}
+		<div class="col-md-9 col-sm-9 col-xs-9">
+			<div class="error404"><span class="error404__wrapper"><img class="error404__img"
+																	   src="//www4-static4.gog.com/bundles/gogwebsitecommon/img/404/404_ccc.3.jpg"><span
+					class="bear"><span class="bear__text">
+					The page you‘re<br>
+					trying to reach does not<br>
+					exist :(. Check the address<br>
+					or <a class="un" href="/en/support/contact/general_website_questions">report an error</a>.
+				</span><img class="bear__img"
+							src="//www4-static2.gog.com/bundles/gogwebsitecommon/img/404/bear.png"></span></span></div>
+		</div>
+	{% endblock %}
+{% endblock %}
+
+

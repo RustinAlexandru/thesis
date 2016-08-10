@@ -7,7 +7,6 @@
 
 {% block  head %}
 	<head>
-
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<title>Funfly</title>
@@ -154,6 +153,29 @@
 					</script>
 				{% endblock %}
 			</div>
+		</div>
+	{% endblock %}
+	{% block sidebar_right %}
+		<div id="changelist-sorting">
+			<h2>Sort</h2>
+			<h3> By date </h3>
+			<ul>
+				<li class="selected">
+					<a href="?moderation_status__exact=1">Default</a></li>
+				<li>
+					<a href="?content_type=15&amp;moderation_status__exact=1">Newest</a></li>
+				<li>
+					<a href="?content_type=2&amp;moderation_status__exact=1">Oldest</a></li>
+			</ul>
+			<h3> By points </h3>
+			<ul>
+				<li>
+					<a href="?">Default</a></li>
+				<li class="selected">
+					<a href="?moderation_status__exact=1">Highest</a></li>
+				<li>
+					<a href="?moderation_status__exact=2">Lowest</a></li>
+			</ul>
 		</div>
 	{% endblock %}
 {% endblock %}

@@ -1,5 +1,6 @@
 .login-form-container {
   margin-top: 15%;
+  background-color: #f1edf5;
 }
 
 .login-form-auth-title {
@@ -17,7 +18,11 @@
     }
   }
   .button-facebook {
-    background: #3b5998;
+    padding-left: 5%;
+    padding-right: 5%;
+    a {
+      background: #3b5998;
+    }
   }
 }
 
@@ -41,17 +46,30 @@
     left: 50%;
     top: -0.10em;
     margin-left: -1.5em;
-    background-color: white;
+    background-color: #f1edf5;
     width: 3em;
     text-align: center;
   }
 }
 
+#login-form {
+  .button-login {
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 4.5%;
+  }
+}
 
 .remember-me {
   padding-left: 20px;
+  input {
+    margin-left: -15px !important;
+  }
 }
 
 .forgot_pswd {
   margin-top: 10px;
 }
+
+
+// media query for login sm  pull right forgot me text

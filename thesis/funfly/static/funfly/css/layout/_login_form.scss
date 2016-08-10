@@ -1,8 +1,75 @@
-.login_form {
-  margin-top: 50px;
+.login-form-container {
+  margin-top: 15%;
+  background-color: #f1edf5;
 }
 
-.form-signin-heading {
-  margin-bottom: 30px;
-  margin-top: 30px;
+.login-form-auth-title {
+  text-align: center;
+  line-height: 300%;
 }
+
+.login-form-social-buttons {
+  a {
+    color: white; // In yourUse @body-bg
+    opacity: 0.9;
+    &:hover {
+      color: white;
+      opacity: 1;
+    }
+  }
+  .button-facebook {
+    padding-left: 5%;
+    padding-right: 5%;
+    a {
+      background: #3b5998;
+    }
+  }
+}
+
+.login-form-container-OR {
+  position: relative;
+  font-size: 1.5em;
+  color: #aaa;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  .login-form-container-OR-hrOR {
+    background-color: #cdcdcd;
+    height: 1px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .login-form-container-OR-spanOR {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: -0.10em;
+    margin-left: -1.5em;
+    background-color: #f1edf5;
+    width: 3em;
+    text-align: center;
+  }
+}
+
+#login-form {
+  .button-login {
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 4.5%;
+  }
+}
+
+.remember-me {
+  padding-left: 20px;
+  input {
+    margin-left: -15px !important;
+  }
+}
+
+.forgot_pswd {
+  margin-top: 10px;
+}
+
+
+// media query for login sm  pull right forgot me text

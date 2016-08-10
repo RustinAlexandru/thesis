@@ -223,38 +223,38 @@
 
 
 {# News Showcase Area Start #}
-{% block news_showcase %}
-<section class="news_showcase_area">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12">
-				<div class="showcase_box">
-					<div class="showcase_left">
-						<div class="news_item">
-
-						</div>
-						<div class="news_item">
-
-						</div>
-						<div class="news_item">
-
-						</div>
-					</div>
-					<div class="showcase_right">
-						<div class="news_item">
-
-						</div>
-						<div class="news_item">
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
+{#{% block news_showcase %}#}
+{#<section class="news_showcase_area">#}
+{#	<div class="container">#}
+{#		<div class="row">#}
+{#			<div class="col-md-12 col-sm-12 col-xs-12">#}
+{#				<div class="showcase_box">#}
+{#					<div class="showcase_left">#}
+{#						<div class="news_item">#}
+{##}
+{#						</div>#}
+{#						<div class="news_item">#}
+{##}
+{#						</div>#}
+{#						<div class="news_item">#}
+{##}
+{#						</div>#}
+{#					</div>#}
+{#					<div class="showcase_right">#}
+{#						<div class="news_item">#}
+{##}
+{#						</div>#}
+{#						<div class="news_item">#}
+{##}
+{#						</div>#}
+{#					</div>#}
+{#				</div>#}
+{#			</div>#}
+{#		</div>#}
+{#	</div>#}
+{#</section>#}
 {# News Showcase Area End #}
-{% endblock %}
+{#{% endblock %}#}
 
 
 {# Main Wrapper Start #}
@@ -887,18 +887,19 @@
 				</div>
 				{# Left Main Area End #}
 			</div>
+			{% endblock %}
 			<div class="col-md-3 col-sm-3 col-xs-12">
+			{% block sidebar_right %}
 
 				<aside class="main_page_sidebar_right">
 
 				</aside>
-
+			{% endblock %}
 			</div>
 		</div>
 	</div>
 </section>
 {# Main Wrapper End #}
-{% endblock %}
 
 
 

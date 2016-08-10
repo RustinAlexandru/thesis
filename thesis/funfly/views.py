@@ -25,6 +25,8 @@ import ast
 # from youtube_parsing import youtube_search
 from thesis.settings import MEDIA_ROOT
 
+def custom404(request):
+    return render(request, '404error.html', status=404)
 
 def anonymous_required(function=None):
     def _dec(view_func):

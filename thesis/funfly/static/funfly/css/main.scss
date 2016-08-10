@@ -5,13 +5,14 @@
 @import "vendors/bootstrap";
 
 
-@import "base";
-
-
+@import "layout/base";
 @import "layout/grid";
+@import "layout/right_sidebar";
 @import "layout/header";
+@import "layout/forms";
 @import "layout/login_form";
 @import "layout/comment_form";
+@import "layout/register_form";
 @import "layout/comment";
 
 
@@ -26,3 +27,4 @@
 @import "pages/saved_items";
 @import "pages/video_post";
 @import "pages/videos";
+@import "pages/404error";

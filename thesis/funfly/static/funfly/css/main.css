@@ -5814,6 +5814,9 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+.main_wrapper {
+  margin-top: 2%; }
+
 .main_box ul {
   list-style: outside none none;
   padding: 0; }
@@ -5946,6 +5949,45 @@ i {
   position: absolute;
   top: 0;
   right: 0; }
+
+#changelist-sorting {
+  z-index: 1000;
+  width: 240px;
+  background: #f8f8f8;
+  border-left: none;
+  margin: 0;
+  margin-top: 10%; }
+  #changelist-sorting h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 5px 15px;
+    margin-bottom: 12px;
+    margin: 0;
+    font-weight: 400;
+    text-align: left;
+    background: #ff8100;
+    color: #777; }
+  #changelist-sorting h3 {
+    font-weight: 400;
+    font-size: 14px;
+    padding: 0 15px;
+    margin-bottom: 10px; }
+  #changelist-sorting ul {
+    margin: 5px 0;
+    padding: 0 15px 15px;
+    border-bottom: 1px solid #eaeaea; }
+    #changelist-sorting ul li {
+      list-style-type: none;
+      margin-left: 0;
+      padding-left: 0; }
+    #changelist-sorting ul li.selected {
+      border-left: 5px solid #eaeaea;
+      padding-left: 10px;
+      margin-left: -15px; }
+  #changelist-sorting ul:last-child {
+    border-bottom: none;
+    padding-bottom: 0; }
 
 .social_header {
   float: left;
@@ -6144,12 +6186,66 @@ i {
   margin-top: 0px;
   margin-bottom: -1px; }
 
-.login_form {
-  margin-top: 50px; }
+.buttonHolder {
+  text-align: center;
+  padding-bottom: 2%; }
 
-.form-signin-heading {
-  margin-bottom: 30px;
-  margin-top: 30px; }
+.login-form-container {
+  margin-top: 15%;
+  background-color: #f1edf5; }
+
+.login-form-auth-title {
+  text-align: center;
+  line-height: 300%; }
+
+.login-form-social-buttons a {
+  color: white;
+  opacity: 0.9; }
+  .login-form-social-buttons a:hover {
+    color: white;
+    opacity: 1; }
+
+.login-form-social-buttons .button-facebook {
+  padding-left: 5%;
+  padding-right: 5%; }
+  .login-form-social-buttons .button-facebook a {
+    background: #3b5998; }
+
+.login-form-container-OR {
+  position: relative;
+  font-size: 1.5em;
+  color: #aaa;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em; }
+  .login-form-container-OR .login-form-container-OR-hrOR {
+    background-color: #cdcdcd;
+    height: 1px;
+    margin-top: 0;
+    margin-bottom: 0; }
+  .login-form-container-OR .login-form-container-OR-spanOR {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: -0.10em;
+    margin-left: -1.5em;
+    background-color: #f1edf5;
+    width: 3em;
+    text-align: center; }
+
+#login-form .button-login {
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-top: 4.5%; }
+
+.remember-me {
+  padding-left: 20px; }
+  .remember-me input {
+    margin-left: -15px !important; }
+
+.forgot_pswd {
+  margin-top: 10px; }
 
 .comments_form {
   margin-top: 5%; }
@@ -6175,6 +6271,18 @@ i {
       color: #F8928D; }
   .comments_form .form-group {
     margin-bottom: 0; }
+
+.register-form-container {
+  margin-top: 10%;
+  background-color: #f1edf5; }
+
+.register-form-container-title {
+  text-align: center;
+  padding-top: 2%; }
+
+#id_register_form .buttonHolder {
+  text-align: center;
+  padding-bottom: 2%; }
 
 .single_comment {
   overflow: hidden;
@@ -6233,7 +6341,8 @@ i {
   padding-top: 10%; }
 
 .login-form-container {
-  margin-top: 15%; }
+  margin-top: 15%;
+  background-color: #f1edf5; }
 
 .login-form-auth-title {
   text-align: center;
@@ -6247,7 +6356,10 @@ i {
     opacity: 1; }
 
 .login-form-social-buttons .button-facebook {
-  background: #3b5998; }
+  padding-left: 5%;
+  padding-right: 5%; }
+  .login-form-social-buttons .button-facebook a {
+    background: #3b5998; }
 
 .login-form-container-OR {
   position: relative;
@@ -6268,12 +6380,19 @@ i {
     left: 50%;
     top: -0.10em;
     margin-left: -1.5em;
-    background-color: white;
+    background-color: #f1edf5;
     width: 3em;
     text-align: center; }
 
+#login-form .button-login {
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-top: 4.5%; }
+
 .remember-me {
   padding-left: 20px; }
+  .remember-me input {
+    margin-left: -15px !important; }
 
 .forgot_pswd {
   margin-top: 10px; }
@@ -6291,7 +6410,7 @@ i {
   padding-bottom: 5%; }
 
 .all_ninegags {
-  margin-top: 50px;
+  margin-top: 5%;
   margin-bottom: 50px; }
 
 .single_9gag_image_or_video {
@@ -6358,5 +6477,23 @@ div.single_video:nth-child(1) {
 /*width: 100%;*/
 /*height: 100%;*/
 /*}*/
+.error404__wrapper {
+  display: inline-block;
+  position: relative;
+  margin-top: 10%; }
+
+.bear__text {
+  position: absolute;
+  padding: 10px 0 0 50px;
+  font-size: 11px; }
+
+.bear__img {
+  max-width: none; }
+
+.bear {
+  position: absolute;
+  right: auto;
+  left: 81.1497326203%;
+  top: 38.2716049383%; }
 
 /*# sourceMappingURL=../../../../../../../../../../static/funfly/css/main.css.map */

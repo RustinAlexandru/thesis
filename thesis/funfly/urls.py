@@ -13,6 +13,8 @@ from funfly.views import VideoPostDetails, VideosList, JokesList, JokePostDetail
 from . import views
 from views import anonymous_required, ViewProfile
 
+
+
 urlpatterns = [
                   url(r'^admin/', admin.site.urls),
                   url(r'^login/$', anonymous_required(auth_views.login), {
