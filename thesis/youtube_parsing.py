@@ -50,8 +50,9 @@ def youtube_search(query):
             youtube_title = search_result["snippet"]["title"]
             youtube_url = 'https://www.youtube.com/embed/' + youtube_id
             youtube_added_at = search_result["snippet"]["publishedAt"]
+            description = search_result["snippet"]["description"]
             youtube_item = Youtube.objects.get_or_create(identifier=youtube_id, title=youtube_title,
-                                                         added_at=youtube_added_at, url=youtube_url)
+                                                         date_added=youtube_added_at, url=youtube_url)
 
 
     print "Videos:\n", "\n".join(videos), "\n"

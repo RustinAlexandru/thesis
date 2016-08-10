@@ -6232,6 +6232,52 @@ i {
 .joke_details_page {
   padding-top: 10%; }
 
+.login-form-container {
+  margin-top: 15%; }
+
+.login-form-auth-title {
+  text-align: center;
+  line-height: 300%; }
+
+.login-form-social-buttons a {
+  color: white;
+  opacity: 0.9; }
+  .login-form-social-buttons a:hover {
+    color: white;
+    opacity: 1; }
+
+.login-form-social-buttons .button-facebook {
+  background: #3b5998; }
+
+.login-form-container-OR {
+  position: relative;
+  font-size: 1.5em;
+  color: #aaa;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em; }
+  .login-form-container-OR .login-form-container-OR-hrOR {
+    background-color: #cdcdcd;
+    height: 1px;
+    margin-top: 0;
+    margin-bottom: 0; }
+  .login-form-container-OR .login-form-container-OR-spanOR {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: -0.10em;
+    margin-left: -1.5em;
+    background-color: white;
+    width: 3em;
+    text-align: center; }
+
+.remember-me {
+  padding-left: 20px; }
+
+.forgot_pswd {
+  margin-top: 10px; }
+
 .single_9gag_bottom_text {
   margin-bottom: 30px;
   padding-right: 10px; }
