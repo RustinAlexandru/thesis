@@ -257,11 +257,14 @@ class VideosList(AjaxListView):
         if self.request.is_ajax():
             date_orderby_val = self.request.GET.get("date_orderBy")
             title_orderby_val = self.request.GET.get("title_orderBy")
-
-            if date_orderby_val is None:
+            if date_orderby_val == 'Default' and title_orderby_val == 'Default':
+                return Youtube.objects.all()
+            if date_orderby_val == 'Default':
                 return Youtube.objects.order_by(title_orderby_val)
-            elif title_orderby_val is None:
+            elif title_orderby_val == 'Default':
                 return Youtube.objects.order_by(date_orderby_val)
+            else:
+                return Youtube.objects.order_by(date_orderby_val, title_orderby_val)
         else:  # normal get request
             return Youtube.objects.all()
 
@@ -280,25 +283,24 @@ class NinegagsList(AjaxListView):
             if filter_val != 'Any' and filter_val is not None:
                 filter_val = ast.literal_eval(filter_val)  # String "False" -> bool False
                 if date_orderby_val == 'Default' and points_orderby_val == 'Default':
-                   return Ninegag.objects.filter(is_video=filter_val)
+                    return Ninegag.objects.filter(is_video=filter_val)
                 if date_orderby_val == 'Default':
-                    return  Ninegag.objects.filter(is_video=filter_val).order_by(points_orderby_val)
+                    return Ninegag.objects.filter(is_video=filter_val).order_by(points_orderby_val)
                 elif points_orderby_val == 'Default':
-                    return  Ninegag.objects.filter(is_video=filter_val).order_by(date_orderby_val)
+                    return Ninegag.objects.filter(is_video=filter_val).order_by(date_orderby_val)
                 else:
-                    new_context = Ninegag.objects.filter(is_video=filter_val).order_by(date_orderby_val,
-                                                                                       points_orderby_val)
+                    return Ninegag.objects.filter(is_video=filter_val).order_by(date_orderby_val,
+                                                                                points_orderby_val)
             elif filter_val == 'Any':
                 if date_orderby_val == 'Default' and points_orderby_val == 'Default':
                     return Ninegag.objects.all()
                 if date_orderby_val == 'Default':
-                    return  Ninegag.objects.order_by(points_orderby_val)
+                    return Ninegag.objects.order_by(points_orderby_val)
                 elif points_orderby_val == 'Default':
                     return Ninegag.objects.order_by(date_orderby_val)
                 else:
-                    new_context = Ninegag.objects.order_by(date_orderby_val, points_orderby_val)
+                    return Ninegag.objects.order_by(date_orderby_val, points_orderby_val)
 
-            return new_context
         else:  # normal get request
             return Ninegag.objects.all()
 
@@ -322,15 +324,42 @@ class JokesList(AjaxListView):
             likes_orderby_val = self.request.GET.get("likes_orderBy")
             dislikes_orderby_val = self.request.GET.get("dislikes_orderBy")
 
-            if (filter_val == 'Any' or filter_val is None):
-                new_context = Joke.objects.all()
-                new_context = Joke.objects.filter(category=filter_val).order_by(date_orderby_val, dislikes_orderby_val)
-            elif dislikes_orderby_val is None:
-                new_context = Joke.objects.filter(category=filter_val).order_by(date_orderby_val, likes_orderby_val)
+            if filter_val != 'Any' and filter_val is not None:
+                if date_orderby_val == 'Default' and likes_orderby_val == 'Default' and dislikes_orderby_val == 'Default':
+                    return Joke.objects.filter(category=filter_val)
+                elif likes_orderby_val == 'Default' and dislikes_orderby_val == 'Default':
+                    return Joke.objects.filter(category=filter_val).order_by(date_orderby_val)
+                elif likes_orderby_val == 'Default' and date_orderby_val == 'Default':
+                    return Joke.objects.filter(category=filter_val).order_by(dislikes_orderby_val)
+                elif date_orderby_val == 'Default' and dislikes_orderby_val == 'Default':
+                    return Joke.objects.filter(category=filter_val).order_by(likes_orderby_val)
+                elif date_orderby_val == 'Default':
+                    return Joke.objects.filter(category=filter_val).order_by(likes_orderby_val, dislikes_orderby_val)
+                elif likes_orderby_val == 'Default':
+                    return Joke.objects.filter(category=filter_val).order_by(date_orderby_val, dislikes_orderby_val)
+                elif dislikes_orderby_val == 'Default':
+                    return Joke.objects.filter(category=filter_val).order_by(date_orderby_val, likes_orderby_val)
+                else:
+                    return Joke.objects.filter(category=filter_val).order_by(date_orderby_val, likes_orderby_val,
+                                                                             dislikes_orderby_val)
             else:
-                new_context = Joke.objects.filter(category=filter_val).order_by(date_orderby_val, likes_orderby_val,
-                                                                                dislikes_orderby_val)
-            return new_context
+                if date_orderby_val == 'Default' and likes_orderby_val == 'Default' and dislikes_orderby_val == 'Default':
+                    return Joke.objects.all()
+                elif likes_orderby_val == 'Default' and dislikes_orderby_val == 'Default':
+                    return Joke.objects.order_by(date_orderby_val)
+                elif likes_orderby_val == 'Default' and date_orderby_val == 'Default':
+                    return Joke.objects.order_by(dislikes_orderby_val)
+                elif date_orderby_val == 'Default' and dislikes_orderby_val == 'Default':
+                    return Joke.objects.order_by(likes_orderby_val)
+                elif date_orderby_val == 'Default':
+                    return Joke.objects.order_by(likes_orderby_val, dislikes_orderby_val)
+                elif likes_orderby_val == 'Default':
+                    return Joke.objects.order_by(date_orderby_val, dislikes_orderby_val)
+                elif dislikes_orderby_val == 'Default':
+                    return Joke.objects.order_by(date_orderby_val, likes_orderby_val)
+                else:
+                    return Joke.objects.order_by(date_orderby_val, likes_orderby_val,
+                                                 dislikes_orderby_val)
 
         else:  # normal get request
             return Joke.objects.all()

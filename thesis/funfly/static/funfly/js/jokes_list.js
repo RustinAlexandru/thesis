@@ -6,19 +6,20 @@
  */
 
 
-var orderByDate = 'date_added';
-var orderByLikes = 'likes';
-var orderByDislikes = 'dislikes';
+var orderByDate = 'Default';
+var orderByLikes = 'Default';
+var orderByDislikes = 'Default';
 var jokeCategory = 'Any';
+
+var data = {
+    joke_category: jokeCategory,
+    date_orderBy: orderByDate,
+    likes_orderBy: orderByLikes,
+    dislikes_orderBy: orderByDislikes
+};
 
 function sendRequest() {
 
-    var data = {
-        joke_category: jokeCategory,
-        date_orderBy: orderByDate,
-        likes_orderBy : orderByLikes,
-        dislikes_orderBy: orderByDislikes
-    };
 
     $.ajax({
         url: '',
@@ -33,59 +34,41 @@ function sendRequest() {
     });
 }
 
-function changeIcons(selector){
-
-    var checkbox = $(selector + " :checkbox");
-    var icon_var = $(selector).children(":nth-child(2)");
-    if (checkbox.is(':checked')) {
-        // the checkbox was checked
-        icon_var.removeClass("fa-arrow-down");
-        icon_var.addClass("fa-arrow-up");
-    } else {
-        // the checkbox was unchecked
-        icon_var.removeClass("fa-arrow-up");
-        icon_var.addClass("fa-arrow-down");
-
-    }
-}
-
-
 
 $(document).ready(function () {
-
-    var date_orderby_selector = '#date_orderBy';
-    var likes_orderby_selector = '#likes_orderBy';
-    var dislikes_orderby_selector = '#dislikes_orderBy';
-    var date_checkbox_selector = date_orderby_selector + " :checkbox";
-    var likes_checkbox_selector = likes_orderby_selector + " :checkbox";
-    var dislikes_checkbox_selector = dislikes_orderby_selector + " :checkbox";
 
 
     $("body").tooltip({
         selector: '[data-toggle="tooltip"]'
     });
 
-    $(date_checkbox_selector).on('change', function () {
-        changeIcons(date_orderby_selector);
+    var date_orderby_selector = '#date_orderby';
+    var likes_orderby_selector = '#likes_orderby';
+    var dislikes_orderby_selector = '#dislikes_orderby';
 
-        orderByDate = ($(date_checkbox_selector).is(':checked') ? '-date_added' : 'date_added');
+    $(date_orderby_selector + ' li').on('click', function () {
+        $(date_orderby_selector).find('.selected').removeClass('selected');
+        $(this).addClass('selected');
+        data['date_orderBy'] = $(this).children(':first').data('sort');
         sendRequest();
+
     });
 
-    $(likes_checkbox_selector).on('change', function () {
-        changeIcons(likes_orderby_selector);
-
-        orderByLikes = ($(likes_checkbox_selector).is(':checked') ? '-likes' : 'likes');
+    $(likes_orderby_selector + ' li').on('click', function () {
+        $(likes_orderby_selector).find('.selected').removeClass('selected');
+        $(this).addClass('selected');
+        data['likes_orderBy'] = $(this).children(':first').data('sort');
         sendRequest();
+
     });
 
-    $(dislikes_checkbox_selector).on('change', function () {
-        changeIcons(dislikes_orderby_selector);
-
-        orderByDislikes = ($(dislikes_checkbox_selector).is(':checked') ? '-dislikes' : 'dislikes');
+    $(dislikes_orderby_selector + ' li').on('click', function () {
+        $(dislikes_orderby_selector).find('.selected').removeClass('selected');
+        $(this).addClass('selected');
+        data['dislikes_orderBy'] = $(this).children(':first').data('sort');
         sendRequest();
-    });
 
+    });
 
     page_href = window.location.href;
 
@@ -209,20 +192,20 @@ $(document).ready(function () {
     $("#filter_sort_form").on('submit', function (e) {
         current_page = $('.endless_page_current > strong:nth-child(1)').text();
         // url = window.location.href + '?page=' + current_page + '&querystring_key=page'
-        jokeCategory = $('.selectpicker').val();
-            $.ajax({
-                url: '',
-                type: 'GET',
-                data: $(this).serialize(),
-                success: function (data) {
-                    $(".endless_page_template").html(data)
-                },
-                error: function (err) {
-                    console.log('err: ' + err);
-                }
-            });
-            e.preventDefault();
+        data['joke_category'] = $('.selectpicker').val();
+        $.ajax({
+            url: '',
+            type: 'GET',
+            data: data,
+            success: function (data) {
+                $(".endless_page_template").html(data)
+            },
+            error: function (err) {
+                console.log('err: ' + err);
+            }
         });
+        e.preventDefault();
+    });
 
     $("#filter_sort_form").on('change', "[data-input]", function () {
         $("#filter_sort_form").submit()

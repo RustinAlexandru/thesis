@@ -14,7 +14,7 @@ var data = {
 };
 
 
-function sendRequest() {
+function sendRequest(data) {
 
 
     $.ajax({
@@ -28,22 +28,6 @@ function sendRequest() {
             console.log('err: ' + err);
         }
     });
-}
-
-function changeIcons(selector) {
-
-    var checkbox = $(selector + " :checkbox");
-    var icon_var = $(selector).children(":nth-child(2)");
-    if (checkbox.is(':checked')) {
-        // the checkbox was checked
-        icon_var.removeClass("fa-arrow-down");
-        icon_var.addClass("fa-arrow-up");
-    } else {
-        // the checkbox was unchecked
-        icon_var.removeClass("fa-arrow-up");
-        icon_var.addClass("fa-arrow-down");
-
-    }
 }
 
 
@@ -60,7 +44,7 @@ $(document).ready(function () {
         $(date_orderby_selector).find('.selected').removeClass('selected');
         $(this).addClass('selected');
         data['date_orderBy'] = $(this).children(':first').data('sort');
-        sendRequest();
+        sendRequest(data);
 
     });
 
@@ -68,7 +52,7 @@ $(document).ready(function () {
         $(points_orderby_selector).find('.selected').removeClass('selected');
         $(this).addClass('selected');
         data['points_orderBy'] = $(this).children(':first').data('sort');
-        sendRequest();
+        sendRequest(data);
 
     });
 

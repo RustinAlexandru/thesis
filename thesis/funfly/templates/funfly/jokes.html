@@ -21,7 +21,6 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 		<script type="application/javascript" src="{% static "funfly/js/bootstrap.js" %}"></script>
 		<script src="{% static "funfly/sweetalert2/sweetalert2.min.js" %}"></script>
-		<script src="{% static "funfly/sweetalert2/sweetalert2.min.js" %}"></script>
 		<script src="{% static "funfly/js/jokes_list.js" %}"></script>
 
 
@@ -145,18 +144,18 @@
 				<li class="selected">
 					<a data-sort="Default">Default</a></li>
 				<li>
-					<a data-sort="-points">Most liked</a></li>
+					<a data-sort="-likes">Most liked</a></li>
 				<li>
-					<a data-sort="points">Least liked</a></li>
+					<a data-sort="likes">Least liked</a></li>
 			</ul>
 			<h3> By dislikes</h3>
 			<ul id="dislikes_orderby">
 				<li class="selected">
 					<a data-sort="Default">Default</a></li>
 				<li>
-					<a data-sort="-points">Most disliked</a></li>
+					<a data-sort="-dislikes">Most disliked</a></li>
 				<li>
-					<a data-sort="points">Least disliked</a></li>
+					<a data-sort="dislikes">Least disliked</a></li>
 			</ul>
 		</div>
 	{% endblock %}

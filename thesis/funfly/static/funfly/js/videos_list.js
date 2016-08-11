@@ -3,15 +3,12 @@
  */
 
 
-var orderByDate = 'date_added';
-var orderByTitle = 'title';
+var orderByDate = 'Default';
+var orderByTitle = 'Default';
 
-var date_data = {
-    'date_orderBy': orderByDate
-};
-
-var title_data = {
-    'title_orderBy': orderByTitle
+var data = {
+    date_orderBy: orderByDate,
+    title_orderBy: orderByTitle
 };
 
 function sendRequest(data) {
@@ -29,51 +26,31 @@ function sendRequest(data) {
     });
 }
 
-function changeIcons(selector){
-
-    var checkbox = $(selector + " :checkbox");
-    var icon_var = $(selector).children(":nth-child(2)");
-    if (checkbox.is(':checked')) {
-        // the checkbox was checked
-        icon_var.removeClass("fa-arrow-down");
-        icon_var.addClass("fa-arrow-up");
-    } else {
-        // the checkbox was unchecked
-        icon_var.removeClass("fa-arrow-up");
-        icon_var.addClass("fa-arrow-down");
-
-    }
-}
-
 
 $(document).ready(function () {
-
-    var date_orderby_selector = '#date_orderBy';
-    var title_orderby_selector = '#title_orderBy';
-    var date_checkbox_selector = date_orderby_selector + " :checkbox";
-    var title_checkbox_selector = title_orderby_selector + " :checkbox";
-
 
     $("body").tooltip({
         selector: '[data-toggle="tooltip"]'
     });
 
-    $(date_checkbox_selector).on('change', function () {
-        changeIcons(date_orderby_selector);
+    var date_orderby_selector = '#date_orderby';
+    var title_orderby_selector =  '#title_orderby';
 
-        orderByDate = ($(date_checkbox_selector).is(':checked') ? '-date_added' : 'date_added');
-        date_data['date_orderBy'] = orderByDate;
-        sendRequest(date_data);
+    $(date_orderby_selector + ' li').on('click', function () {
+        $(date_orderby_selector).find('.selected').removeClass('selected');
+        $(this).addClass('selected');
+        data['date_orderBy'] = $(this).children(':first').data('sort');
+        sendRequest(data);
+
     });
 
-    $(title_checkbox_selector).on('change', function () {
-        changeIcons(title_orderby_selector);
+    $(title_orderby_selector + ' li').on('click', function () {
+        $(title_orderby_selector).find('.selected').removeClass('selected');
+        $(this).addClass('selected');
+        data['title_orderBy'] = $(this).children(':first').data('sort');
+        sendRequest(data);
 
-        orderByTitle = ($(title_checkbox_selector).is(':checked') ? '-title' : 'title');
-        title_data['title_orderBy'] = orderByTitle;
-        sendRequest(title_data);
     });
-
 
     page_href = window.location.href;
 
@@ -143,28 +120,6 @@ $(document).ready(function () {
             }
         });
     });
-
-
-    // $("#filter_sort_form").on('submit', function (e) {
-    //     current_page = $('.endless_page_current > strong:nth-child(1)').text();
-    //     // url = window.location.href + '?page=' + current_page + '&querystring_key=page'
-    //         $.ajax({
-    //             url: '',
-    //             type: 'GET',
-    //             data: data,
-    //             success: function (data) {
-    //                 $(".endless_page_template").html(data)
-    //             },
-    //             error: function (err) {
-    //                 console.log('err: ' + err);
-    //             }
-    //         });
-    //         e.preventDefault();
-    //     });
-
-    // $("#filter_sort_form").on('change', "[data-input]", function () {
-    //     $("#filter_sort_form").submit()
-    // });
 
 });
 
