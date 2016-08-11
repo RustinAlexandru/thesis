@@ -99,6 +99,7 @@
 	{% block main_wrapper %}
 		<div class="col-md-9 col-sm-9 col-xs-9 all_jokes">
 			<div class="filtering">
+				<h2>Filter</h2>
 				<form id="filter_sort_form" class="form-inline" method="get" action="{% url 'jokes' %}">
 					<div class="form-group">
 						<label class="input-group" for="type">Please select a category </label>
@@ -110,28 +111,6 @@
 							{% endfor %}
 
 						</select>
-					</div>
-					<div class="form-group ordering">
-						<label for="orderBy">Sort by</label>
-
-						<div class="btn-group" data-toggle="buttons">
-							<label class="btn btn-default" id="date_orderBy">
-								<input type="checkbox" value="date_added" name="date_orderBy"/>
-								Date
-								<i class="fa fa-arrow-down"></i>
-							</label>
-							<label class="btn btn-default" id="likes_orderBy">
-								<input type="checkbox" value="likes" name="likes_orderBy"/>
-								Likes
-								<i class="fa fa-arrow-down"></i>
-							</label>
-							<label class="btn btn-default" id="dislikes_orderBy">
-								<input type="checkbox" value="dislikes" name="dislikes_orderBy"/>
-								Dislikes
-								<i class="fa fa-arrow-down"></i>
-							</label>
-						</div>
-
 					</div>
 				</form>
 			</div>
@@ -149,5 +128,38 @@
 			</div>
 		</div>
 	{% endblock %}
+	{% block sidebar_right %}
+		<div id="changelist-sorting">
+			<h2>Sort</h2>
+			<h3> By date </h3>
+			<ul id="date_orderby">
+				<li class="selected">
+					<a data-sort="Default">Default</a></li>
+				<li>
+					<a data-sort="-date_added">Newest</a></li>
+				<li>
+					<a data-sort="date_added">Oldest</a></li>
+			</ul>
+			<h3> By likes </h3>
+			<ul id="likes_orderby">
+				<li class="selected">
+					<a data-sort="Default">Default</a></li>
+				<li>
+					<a data-sort="-points">Most liked</a></li>
+				<li>
+					<a data-sort="points">Least liked</a></li>
+			</ul>
+			<h3> By dislikes</h3>
+			<ul id="dislikes_orderby">
+				<li class="selected">
+					<a data-sort="Default">Default</a></li>
+				<li>
+					<a data-sort="-points">Most disliked</a></li>
+				<li>
+					<a data-sort="points">Least disliked</a></li>
+			</ul>
+		</div>
+	{% endblock %}
 {% endblock %}
+
 

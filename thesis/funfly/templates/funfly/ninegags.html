@@ -90,6 +90,7 @@
 	{% block main_wrapper %}
 		<div class="col-md-9 col-sm-9 col-xs-9 all_ninegags">
 			<div class="filtering">
+						<h2>Filter</h2>
 				<form id="filter_sort_form" class="form-inline" method="get" action="{% url 'ninegags' %}">
 					<div class="form-group">
 						<label class="input-group" for="type">Type of item</label>
@@ -99,23 +100,6 @@
 							<option value="False" data-icon="glyphicon-camera">Images</option>
 							<option value="True" data-icon="glyphicon-film">GIFs</option>
 						</select>
-					</div>
-					<div class="form-group ordering">
-						<label for="orderBy">Sort by</label>
-
-						<div class="btn-group" data-toggle="buttons">
-							<label class="btn btn-default" id="date_orderBy">
-								<input type="checkbox" value="date_added" name="date_orderBy"/>
-								Date
-								<i class="fa fa-arrow-down"></i>
-							</label>
-							<label class="btn btn-default" id="points_orderBy">
-								<input type="checkbox" value="points" name="points_orderBy"/>
-								Points
-								<i class="fa fa-arrow-down"></i>
-							</label>
-						</div>
-
 					</div>
 				</form>
 			</div>
@@ -159,22 +143,22 @@
 		<div id="changelist-sorting">
 			<h2>Sort</h2>
 			<h3> By date </h3>
-			<ul>
+			<ul id="date_orderby">
 				<li class="selected">
-					<a href="?moderation_status__exact=1">Default</a></li>
+					<a data-sort="Default">Default</a></li>
 				<li>
-					<a href="?content_type=15&amp;moderation_status__exact=1">Newest</a></li>
+					<a data-sort="-date_added">Newest</a></li>
 				<li>
-					<a href="?content_type=2&amp;moderation_status__exact=1">Oldest</a></li>
+					<a data-sort="date_added">Oldest</a></li>
 			</ul>
 			<h3> By points </h3>
-			<ul>
-				<li>
-					<a href="?">Default</a></li>
+			<ul id="points_orderby">
 				<li class="selected">
-					<a href="?moderation_status__exact=1">Highest</a></li>
+					<a data-sort="Default">Default</a></li>
 				<li>
-					<a href="?moderation_status__exact=2">Lowest</a></li>
+					<a data-sort="-points">Highest</a></li>
+				<li>
+					<a data-sort="points">Lowest</a></li>
 			</ul>
 		</div>
 	{% endblock %}

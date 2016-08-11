@@ -3,8 +3,8 @@
  */
 
 
-var orderByPoints = 'points';
-var orderByDate = 'date_added';
+var orderByPoints = 'Default';
+var orderByDate = 'Default';
 var itemType = 'Any';
 
 var data = {
@@ -49,30 +49,28 @@ function changeIcons(selector) {
 
 $(document).ready(function () {
 
-    var date_orderby_selector = '#date_orderBy';
-    var points_orderby_selector = '#points_orderBy';
-    var date_checkbox_selector = date_orderby_selector + " :checkbox";
-    var points_checkbox_selector = points_orderby_selector + " :checkbox";
-
-
-    $("body").tooltip({
+    $('body').tooltip({
         selector: '[data-toggle="tooltip"]'
     });
 
-    $(date_checkbox_selector).on('change', function () {
-        changeIcons(date_orderby_selector);
+    var date_orderby_selector = '#date_orderby';
+    var points_orderby_selector =  '#points_orderby';
 
-        data['date_orderBy'] = ($(date_checkbox_selector).is(':checked') ? '-date_added' : 'date_added');
+    $(date_orderby_selector + ' li').on('click', function () {
+        $(date_orderby_selector).find('.selected').removeClass('selected');
+        $(this).addClass('selected');
+        data['date_orderBy'] = $(this).children(':first').data('sort');
         sendRequest();
+
     });
 
-    $(points_checkbox_selector).on('change', function () {
-        changeIcons(points_orderby_selector);
-
-        data['points_orderBy'] = ($(points_checkbox_selector).is(':checked') ? '-points' : 'points');
+    $(points_orderby_selector + ' li').on('click', function () {
+        $(points_orderby_selector).find('.selected').removeClass('selected');
+        $(this).addClass('selected');
+        data['points_orderBy'] = $(this).children(':first').data('sort');
         sendRequest();
-    });
 
+    });
 
     page_href = window.location.href;
 

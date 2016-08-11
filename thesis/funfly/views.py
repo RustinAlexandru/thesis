@@ -21,12 +21,13 @@ from django.apps import apps
 import json
 import ast
 
-
 # from youtube_parsing import youtube_search
 from thesis.settings import MEDIA_ROOT
 
+
 def custom404(request):
     return render(request, '404error.html', status=404)
+
 
 def anonymous_required(function=None):
     def _dec(view_func):
@@ -115,11 +116,9 @@ def register(request):
             else:
                 avatar = None
 
-
             user = User.objects.create(username=username, email=email)
             user.set_password(password)
             user.save()
-
 
             profile = UserProfile.objects.create(user=user, sex=sex, city=city, timezone=timezone, avatar=avatar)
 
@@ -165,6 +164,7 @@ class UpdateProfile(UpdateView):
         if avatar:
             form.instance.avatar = form.resize_avatar()
         return super(UpdateProfile, self).form_valid(form)
+
 
 class VideoPostDetails(DetailView):
     model = Youtube
@@ -262,9 +262,8 @@ class VideosList(AjaxListView):
                 return Youtube.objects.order_by(title_orderby_val)
             elif title_orderby_val is None:
                 return Youtube.objects.order_by(date_orderby_val)
-        else:                                   # normal get request
+        else:  # normal get request
             return Youtube.objects.all()
-
 
 
 class NinegagsList(AjaxListView):
@@ -273,8 +272,6 @@ class NinegagsList(AjaxListView):
     template_name = 'ninegags.html'
     page_template = 'ninegags_ajax.html'
 
-
-
     def get_queryset(self):
         if self.request.is_ajax():
             filter_val = self.request.GET.get("itemType")
@@ -282,13 +279,28 @@ class NinegagsList(AjaxListView):
             points_orderby_val = self.request.GET.get("points_orderBy")
             if filter_val != 'Any' and filter_val is not None:
                 filter_val = ast.literal_eval(filter_val)  # String "False" -> bool False
-                new_context = Ninegag.objects.filter(is_video=filter_val).order_by(date_orderby_val, points_orderby_val)
+                if date_orderby_val == 'Default' and points_orderby_val == 'Default':
+                   return Ninegag.objects.filter(is_video=filter_val)
+                if date_orderby_val == 'Default':
+                    return  Ninegag.objects.filter(is_video=filter_val).order_by(points_orderby_val)
+                elif points_orderby_val == 'Default':
+                    return  Ninegag.objects.filter(is_video=filter_val).order_by(date_orderby_val)
+                else:
+                    new_context = Ninegag.objects.filter(is_video=filter_val).order_by(date_orderby_val,
+                                                                                       points_orderby_val)
             elif filter_val == 'Any':
-                new_context = Ninegag.objects.order_by(date_orderby_val, points_orderby_val)
-            return Ninegag.objects.all()
-        else:                                   # normal get request
-            return Ninegag.objects.all()
+                if date_orderby_val == 'Default' and points_orderby_val == 'Default':
+                    return Ninegag.objects.all()
+                if date_orderby_val == 'Default':
+                    return  Ninegag.objects.order_by(points_orderby_val)
+                elif points_orderby_val == 'Default':
+                    return Ninegag.objects.order_by(date_orderby_val)
+                else:
+                    new_context = Ninegag.objects.order_by(date_orderby_val, points_orderby_val)
 
+            return new_context
+        else:  # normal get request
+            return Ninegag.objects.all()
 
     def get_template_names(self):
         if self.request.is_ajax():
@@ -310,27 +322,14 @@ class JokesList(AjaxListView):
             likes_orderby_val = self.request.GET.get("likes_orderBy")
             dislikes_orderby_val = self.request.GET.get("dislikes_orderBy")
 
-            if (filter_val == 'Any' or filter_val is None) and \
-                    date_orderby_val is None and likes_orderby_val is None and dislikes_orderby_val is None:
+            if (filter_val == 'Any' or filter_val is None):
                 new_context = Joke.objects.all()
-            elif filter_val == 'Any' and date_orderby_val is None:
-                new_context = Joke.objects.order_by(likes_orderby_val, dislikes_orderby_val)
-            elif filter_val == 'Any' and likes_orderby_val is None:
-                new_context = Joke.objects.order_by(date_orderby_val, dislikes_orderby_val)
-            elif filter_val == 'Any' and dislikes_orderby_val is None:
-                new_context = Joke.objects.order_by(date_orderby_val, likes_orderby_val)
-            elif filter_val == 'Any':
-                new_context = Joke.objects.order_by(date_orderby_val, likes_orderby_val, dislikes_orderby_val)
-            elif date_orderby_val is None and likes_orderby_val is None and dislikes_orderby_val is None:
-                new_context = Joke.objects.filter(category=filter_val)
-            elif date_orderby_val is None:
-                new_context = Joke.objects.filter(category=filter_val).order_by(likes_orderby_val, dislikes_orderby_val)
-            elif likes_orderby_val is None:
                 new_context = Joke.objects.filter(category=filter_val).order_by(date_orderby_val, dislikes_orderby_val)
             elif dislikes_orderby_val is None:
                 new_context = Joke.objects.filter(category=filter_val).order_by(date_orderby_val, likes_orderby_val)
             else:
-                new_context = Joke.objects.filter(category=filter_val).order_by(date_orderby_val, likes_orderby_val, dislikes_orderby_val)
+                new_context = Joke.objects.filter(category=filter_val).order_by(date_orderby_val, likes_orderby_val,
+                                                                                dislikes_orderby_val)
             return new_context
 
         else:  # normal get request
@@ -342,6 +341,7 @@ class JokesList(AjaxListView):
         categories_list = sorted(set(map(lambda d: d['category'], categories)))
         context['categories'] = categories_list
         return context
+
 
 @login_required
 def add_item_to_savelist(request):
@@ -366,6 +366,7 @@ def add_item_to_savelist(request):
             data_sent["integrity_error"] = integrity_error.__class__.__name__
 
         return JsonResponse(data_sent)
+
 
 @login_required
 def like_item(request):
@@ -392,6 +393,7 @@ def like_item(request):
             data_sent['likes_list'] = names
 
         return JsonResponse(data_sent)
+
 
 @login_required
 def add_point(request):
@@ -507,7 +509,7 @@ def saved_items_list(request):
                 model_type = apps.get_model('funfly', request.GET.get('itemType'))
                 saved_items = user_profile.saved_items.filter(Model=model_type)
                 context = {
-                    'saved_items' : saved_items
+                    'saved_items': saved_items
                 }
                 return render(request, 'funfly/saved_items_list_ajax.html', context)
 
@@ -533,6 +535,5 @@ def saved_items_list(request):
         context = {
             'saved_items': saved_items
         }
-        return render_to_response('funfly/saved_items_list.html',context=context)
+        return render_to_response('funfly/saved_items_list.html', context=context)
         # return render(request,'funfly/saved_items_list.html', context)
-
