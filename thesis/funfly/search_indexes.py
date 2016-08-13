@@ -1,6 +1,6 @@
 from haystack import indexes
 from models import Ninegag, Youtube, Joke
-
+from django.contrib.auth import get_user_model
 
 class NinegagIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
@@ -22,3 +22,10 @@ class JokeIndex(indexes.SearchIndex, indexes.Indexable):
 
     def get_model(self):
         return Joke
+
+
+class UserIndex(indexes.SearchIndex, indexes.Indexable):
+    text = indexes.CharField(document=True, use_template=True)
+
+    def get_model(self):
+        return get_user_model()

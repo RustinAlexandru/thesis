@@ -27,6 +27,7 @@ urlpatterns = [
                   url(r'^about/$', views.about, name='about'),
                   url(r'^profile/(?P<pk>\d+)/$', ViewProfile.as_view(template_name='view_profile.html'),
                       name='view_profile'),
+                  url(r'^profile/(?P<pk>\d+)/follow/$', views.follow_user, name='follow'),
                   url(r'^profile/edit/(?P<pk>\d+)/$',
                       login_required(views.UpdateProfile.as_view(template_name='update_profile.html')),
                       name='edit_profile'),

@@ -3,6 +3,7 @@
 {% load custom_tags %}
 
 
+
 {% block head %}
 	{{ block.super }}
 
@@ -135,6 +136,13 @@
 							</div>
 
 						{% endif %}
+
+						{% if result.model|classname == 'User' %}
+							<div>
+								<a href="{% url 'view_profile' result.object.userprofile.pk %}">{{ result.object.username }}</a>
+							</div>
+						{% endif %}
+
 					{% empty %}
 						<p>Sorry! No results found.</p>
 					{% endfor %}

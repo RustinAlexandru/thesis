@@ -83,7 +83,7 @@ $(document).ready(function () {
             url = page_href + 'add_to_savelist/'; // first page in a paginated list, url doesnt contain 'page' in it
         }
 
-        data_received = {
+        data = {
             "item_id": item_id,
             "item_type": item_type
         };
@@ -91,7 +91,7 @@ $(document).ready(function () {
             type: 'POST',
             url: url,
             data: {
-                "data": JSON.stringify(data_received)
+                "data": JSON.stringify(data)
             },
             dataType: "json",
             success: function (data) {

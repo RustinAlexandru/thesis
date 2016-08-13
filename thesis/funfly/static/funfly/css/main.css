@@ -6037,19 +6037,19 @@ i {
   margin: 0;
   padding: 0px 55px 0px 20px;
   font-size: 20px;
-  color: red; }
+  color: #F16567; }
 
 .searchbox-input::-webkit-input-placeholder {
-  color: #d74b4b; }
+  color: #F16567; }
 
 .searchbox-input:-moz-placeholder {
-  color: #d74b4b; }
+  color: #F16567; }
 
 .searchbox-input::-moz-placeholder {
-  color: #d74b4b; }
+  color: #F16567; }
 
 .searchbox-input:-ms-input-placeholder {
-  color: #d74b4b; }
+  color: #F16567; }
 
 .searchbox-icon,
 .searchbox-submit {

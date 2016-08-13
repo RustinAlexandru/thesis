@@ -10,10 +10,6 @@ from .forms import UserProfileForm
 # class Admin(admin.ModelAdmin):
     # readonly_fields = ('date_added',)
 
-class NinegagAdmin(ModerationAdmin):
-    list_display = ("title", "pk", "is_video")
-    readonly_fields = ('date_added',)
-
 
 
 class UserProfileInline(admin.StackedInline):
@@ -25,6 +21,10 @@ class UserProfileAdmin(UserAdmin):
 
 class UserProfileAdmin2(admin.ModelAdmin):
     form = UserProfileForm
+
+class NinegagAdmin(ModerationAdmin):
+    list_display = ("title", "pk", "is_video")
+    readonly_fields = ('date_added',)
 
 class JokeAdmin(ModerationAdmin):
     list_display = ("text", "category")

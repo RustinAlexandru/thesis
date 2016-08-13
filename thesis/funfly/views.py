@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core import serializers
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render, render_to_response
@@ -566,3 +567,23 @@ def saved_items_list(request):
         }
         return render_to_response('funfly/saved_items_list.html', context=context)
         # return render(request,'funfly/saved_items_list.html', context)
+
+
+@login_required
+def follow_user(request, pk):
+    user = request.user
+    user_profile = UserProfile.objects.get(user=user)
+    if request.method == 'POST' and request.is_ajax():
+        data_sent = {
+        }
+        try:
+            followed_userprofile_id = pk
+            followed_userprofile = UserProfile.objects.get(pk=followed_userprofile_id)
+            if (user_profile.pk == followed_userprofile.pk):
+                data_sent['self_follow_error'] = 'True'
+                return JsonResponse(data_sent)
+            user_profile.follows.add(followed_userprofile)
+        except IntegrityError as integrity_error:
+            data_sent["integrity_error"] = integrity_error.__class__.__name__
+
+        return JsonResponse(data_sent)
