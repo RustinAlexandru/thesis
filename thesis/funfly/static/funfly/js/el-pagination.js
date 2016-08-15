@@ -61,7 +61,8 @@
                 var context = getContext(link);
                 // Fire onClick callback.
                 if (settings.onClick.apply(html_link, [context]) !== false) {
-                    var data = 'querystring_key=' + context.key;
+
+                    data = 'querystring_key=' + context.key;
                     // Send the Ajax request.
                     $.get(context.url, data, function (fragment) {
                         container.before(fragment);

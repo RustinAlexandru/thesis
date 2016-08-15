@@ -27,7 +27,7 @@ $(document).ready(function () {
         };
         $.ajax({
             type: 'POST',
-            url: url,
+            url: url,   
             data: {
                 "data": JSON.stringify(data_sent)
             },

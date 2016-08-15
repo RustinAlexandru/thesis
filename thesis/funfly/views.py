@@ -258,6 +258,10 @@ class VideosList(AjaxListView):
         if self.request.is_ajax():
             date_orderby_val = self.request.GET.get("date_orderBy")
             title_orderby_val = self.request.GET.get("title_orderBy")
+            if date_orderby_val is None:
+                date_orderby_val = 'Default'
+            if title_orderby_val is None:
+                title_orderby_val = 'Default'
             if date_orderby_val == 'Default' and title_orderby_val == 'Default':
                 return Youtube.objects.all()
             if date_orderby_val == 'Default':
@@ -324,6 +328,12 @@ class JokesList(AjaxListView):
             date_orderby_val = self.request.GET.get("date_orderBy")
             likes_orderby_val = self.request.GET.get("likes_orderBy")
             dislikes_orderby_val = self.request.GET.get("dislikes_orderBy")
+            if date_orderby_val is None:
+                date_orderby_val = 'Default'
+            if likes_orderby_val is None:
+                likes_orderby_val = 'Default'
+            if dislikes_orderby_val is None:
+                dislikes_orderby_val = 'Default'
 
             if filter_val != 'Any' and filter_val is not None:
                 if date_orderby_val == 'Default' and likes_orderby_val == 'Default' and dislikes_orderby_val == 'Default':
