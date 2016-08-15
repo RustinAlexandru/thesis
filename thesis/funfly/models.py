@@ -25,6 +25,7 @@ class UserProfile(models.Model):
     avatar = models.ImageField(upload_to='imagesandvideos/imageorvideos/avatars',
                                default='avatars/no_avatar.jpg', blank=True, null=True)
     saved_items = GM2MField()
+    private_saved_items = models.BooleanField(default=False)
     follows = models.ManyToManyField('self', related_name='followers', symmetrical=False)
 
     def __unicode__(self):

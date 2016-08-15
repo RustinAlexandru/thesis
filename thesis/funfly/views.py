@@ -62,6 +62,10 @@ def index(request):
     user = request.user
     if user.is_authenticated():
         user_profile = UserProfile.objects.get(user=user)
+        followers = user_profile.followers.all()
+        following = user_profile.follows.all()
+        context['followers'] = followers
+        context['following'] = following
 
     if request.method == 'POST' and request.is_ajax():
         data_sent = {
@@ -83,7 +87,7 @@ def index(request):
 
         return JsonResponse(data_sent)
 
-    return render(request, 'funfly/layout.html', context)
+    return render(request, 'funfly/index.html', context)
 
 
 def register(request):

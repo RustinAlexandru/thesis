@@ -21,6 +21,7 @@ class UserProfileAdmin(UserAdmin):
 
 class UserProfileAdmin2(admin.ModelAdmin):
     form = UserProfileForm
+    filter_horizontal = ['follows',]
 
 class NinegagAdmin(ModerationAdmin):
     list_display = ("title", "pk", "is_video")

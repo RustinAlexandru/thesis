@@ -1,3 +1,20 @@
 {% extends 'funfly/layout.html' %}
 
 
+{% block sidebar_right %}
+	<h3>Followers</h3>
+	<ul>
+		{% for follower in followers %}
+			<li>{{ follower.user.username }}</li>
+		{% endfor %}
+	</ul>
+
+	<br>
+	<h3>Following</h3>
+	<ul>
+		{% for follow in following %}
+			<li>{{ follow.user.username }}</li>
+		{% endfor %}
+
+	</ul>
+{% endblock %}
