@@ -582,6 +582,20 @@ def saved_items_list(request):
         return render_to_response('funfly/saved_items_list.html', context=context)
         # return render(request,'funfly/saved_items_list.html', context)
 
+@login_required
+def saved_items_list_settings(request):
+    if request.method == 'POST' and request.is_ajax():
+        user = request.user
+        user_profile = request.user.userprofile
+        option = request.POST['option']
+        if option == 'Public':
+            user_profile.private_saved_items = False
+        elif option == 'Private':
+            user_profile.private_saved_items = True
+        user_profile.save()
+        data = {}
+        data['result'] = option
+        return JsonResponse(data)
 
 @login_required
 def follow_user(request, pk):

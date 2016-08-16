@@ -46,6 +46,7 @@ urlpatterns = [
                   url(r'^comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
                   url(r'add/$', views.add_item, name='add_item'),
                   url(r'saved_items/$', views.saved_items_list, name='saved_items_list'),
+                  url(r'saved_items_settings/$', views.saved_items_list_settings, name='saved_items_list_settings'),
                   url(r'.*add_to_savelist/$', views.add_item_to_savelist, name='add_item_to_savelist'),
                   url(r'.*like/$', views.like_item, name='like_item'),
                   url(r'.*add_point/$', views.add_point, name='add_point'),

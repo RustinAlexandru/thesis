@@ -6040,16 +6040,16 @@ i {
   color: #F16567; }
 
 .searchbox-input::-webkit-input-placeholder {
-  color: #F16567; }
+  color: #d74b4b; }
 
 .searchbox-input:-moz-placeholder {
-  color: #F16567; }
+  color: #d74b4b; }
 
 .searchbox-input::-moz-placeholder {
-  color: #F16567; }
+  color: #d74b4b; }
 
 .searchbox-input:-ms-input-placeholder {
-  color: #F16567; }
+  color: #d74b4b; }
 
 .searchbox-icon,
 .searchbox-submit {
@@ -6454,8 +6454,11 @@ i {
   margin-top: 10%; }
 
 .all_saved_items {
-  margin-top: 50px;
-  margin-bottom: 50px; }
+  margin-top: 8%;
+  margin-bottom: 5%; }
+
+#private-savelist-form #custom-toggle {
+  margin-left: 2%; }
 
 .sp_video_box {
   margin-bottom: 6%;

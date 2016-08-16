@@ -21,7 +21,12 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 		<script type="application/javascript" src="{% static "funfly/js/bootstrap.js" %}"></script>
 		<script src="{% static "funfly/sweetalert2/sweetalert2.min.js" %}"></script>
-		<script src="{% static "funfly/js/delete_savelist_item.js" %}"></script>
+		<script src="{% static "funfly/js/savelist.js" %}"></script>
+
+
+		<!-- Bootstrap toogle -->
+		<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+		<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet"
@@ -95,7 +100,7 @@
 		<div class="col-md-9 col-sm-9 col-xs-9 all_saved_items">
 			{% if saved_items %}
 				<div class="filtering">
-					<form id="filter_sort_form" class="form-inline" method="get" action="{% url 'ninegags' %}">
+					<form id="filter_sort_form" class="form-inline" method="get" action="{% url 'saved_items_list' %}">
 						<div class="form-group">
 							<label class="input-group" for="type">Please select an item category</label>
 							<select class="selectpicker show-tick show-menu-arrow" title="Anything" data-width="fit"
@@ -109,6 +114,15 @@
 					</form>
 				</div>
 			{% endif %}
+			<div class="private-savelist">
+				<form action="{% url 'saved_items_list_settings' %}" method="POST" id="private-savelist-form">
+					<div class="form-group">
+						<label>Do you want your save list to be public or private?</label>
+						<input id="custom-toggle" type="checkbox" class="form-control" data-toggle="toggle" checked data-on="Public"
+							   data-off="Private" data-onstyle="danger" data-offstyle="success">
+					</div>
+				</form>
+			</div>
 			<div class="saved_items_container">
 				{% for item in saved_items %}
 					{% if item|classname == 'Ninegag' %}

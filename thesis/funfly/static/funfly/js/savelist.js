@@ -59,24 +59,51 @@ $(document).ready(function () {
         // current_page = $('.endless_page_current > strong:nth-child(1)').text();
         // url = window.location.href + '?page=' + current_page + '&querystring_key=page'
         data['itemType'] = $('.selectpicker').val();
-            $.ajax({
-                url: '',
-                type: 'GET',
-                data: data,
-                success: function (data) {
-                    $(".saved_items_container").html(data)
-                },
-                error: function (err) {
-                    console.log('err: ' + err);
-                }
-            });
-            e.preventDefault();
+        $.ajax({
+            url: '',
+            type: 'GET',
+            data: data,
+            success: function (data) {
+                $(".saved_items_container").html(data);
+            },
+            error: function (err) {
+                console.log('err: ' + err);
+            }
         });
-
-    $("#filter_sort_form").on('change', "[data-input]", function () {
-        $("#filter_sort_form").submit()
+        e.preventDefault();
     });
 
+    $("#filter_sort_form").on('change', "[data-input]", function () {
+        $("#filter_sort_form").submit();
+    });
+
+    $("#private-savelist-form").on('submit', function (e) {
+        var toggle = $('#custom-toggle');
+        url = $(this).attr('action');
+
+        data['option'] = (toggle.prop('checked', true)) ? toggle.data('off') : toggle.data('on');
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: data,
+            success: function (data) {
+                swal(
+                    'Alright,!',
+                    'Your savelist is now ' + data['result'],
+                    'success'
+                )
+            },
+            error: function (err) {
+                console.log('err: ' + err);
+            }
+        });
+        e.preventDefault();
+    });
+
+    $("#private-savelist-form").on('change', "[data-toggle]", function () {
+        $("#private-savelist-form").submit();
+    })
 
 });
 

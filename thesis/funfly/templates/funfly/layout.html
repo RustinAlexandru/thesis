@@ -9,81 +9,87 @@
 <!--[if gt IE 8]><!-->
 <html class="no-js" lang=""> <!--<![endif]-->
 {% block head %}
-<head>
+	<head>
 
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>Funfly</title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Funfly</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" type="text/css" href="{% sass_src 'funfly/css/main.scss' %}">
-	<link rel="stylesheet" href="{% static "funfly/css/responsive.css" %}">
-	<link rel="stylesheet" href="{% static "funfly/font-awesome-4.6.3/css/font-awesome.min.css" %}">
-	<link rel="stylesheet" type="text/css" href="{% static "funfly/sweetalert2/sweetalert2.css" %}">
-	<script type="application/javascript" src="{% static "funfly/js/jquery.min.js" %}"></script>
-	<script type="application/javascript" src="{% static "funfly/js/bootstrap.js" %}"></script>
-	<script src="{% static "funfly/sweetalert2/sweetalert2.min.js" %}"></script>
-    <script src="{% static "funfly/js/main.js" %}"></script>
+		<link rel="stylesheet" type="text/css" href="{% sass_src 'funfly/css/main.scss' %}">
+		<link rel="stylesheet" href="{% static "funfly/css/responsive.css" %}">
+		<link rel="stylesheet" href="{% static "funfly/font-awesome-4.6.3/css/font-awesome.min.css" %}">
+		<link rel="stylesheet" type="text/css" href="{% static "funfly/sweetalert2/sweetalert2.css" %}">
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+				integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+		<script type="application/javascript" src="{% static "funfly/js/bootstrap.js" %}"></script>
+		<script src="{% static "funfly/sweetalert2/sweetalert2.min.js" %}"></script>
+		<script src="{% static "funfly/js/main.js" %}"></script>
 
 
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet"
-		  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+		<!-- Bootstrap toogle -->
+		<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+		<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
 
-	<script>
-		$(document).ready(function () {
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet"
+			  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
 
-			var submitIcon = $('.searchbox-icon');
-			var inputBox = $('.searchbox-input');
-			var searchBox = $('.searchbox');
-			var isOpen = false;
-			submitIcon.click(function () {
-				if (isOpen == false) {
-					searchBox.addClass('searchbox-open');
-					inputBox.focus();
-					isOpen = true;
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
+		<script>
+			$(document).ready(function () {
+
+				var submitIcon = $('.searchbox-icon');
+				var inputBox = $('.searchbox-input');
+				var searchBox = $('.searchbox');
+				var isOpen = false;
+				submitIcon.click(function () {
+					if (isOpen == false) {
+						searchBox.addClass('searchbox-open');
+						inputBox.focus();
+						isOpen = true;
+					} else {
+						searchBox.removeClass('searchbox-open');
+						inputBox.focusout();
+						isOpen = false;
+					}
+				});
+				submitIcon.mouseup(function () {
+					return false;
+				});
+				searchBox.mouseup(function () {
+					return false;
+				});
+				$(document).mouseup(function () {
+					if (isOpen == true) {
+						$('.searchbox-icon').css('display', 'block');
+						submitIcon.click();
+					}
+				});
+			});
+			function buttonUp() {
+				var inputVal = $('.searchbox-input').val();
+				inputVal = $.trim(inputVal).length;
+				if (inputVal !== 0) {
+					$('.searchbox-icon').css('display', 'none');
 				} else {
-					searchBox.removeClass('searchbox-open');
-					inputBox.focusout();
-					isOpen = false;
-				}
-			});
-			submitIcon.mouseup(function () {
-				return false;
-			});
-			searchBox.mouseup(function () {
-				return false;
-			});
-			$(document).mouseup(function () {
-				if (isOpen == true) {
+					$('.searchbox-input').val('');
 					$('.searchbox-icon').css('display', 'block');
-					submitIcon.click();
 				}
-			});
-		});
-		function buttonUp() {
-			var inputVal = $('.searchbox-input').val();
-			inputVal = $.trim(inputVal).length;
-			if (inputVal !== 0) {
-				$('.searchbox-icon').css('display', 'none');
-			} else {
-				$('.searchbox-input').val('');
-				$('.searchbox-icon').css('display', 'block');
 			}
-		}
-	</script>
+		</script>
 
-{#	<style>#}
-{#		body {#}
-{#			background: url(' {% static "funfly/imagesandvideos/backgroundpngf.png" %} ') no-repeat;#}
-{#			}#}
-{#	</style>#}
-</head>
-{% endblock%}
+		{#	<style>#}
+		{#		body {#}
+		{#			background: url(' {% static "funfly/imagesandvideos/backgroundpngf.png" %} ') no-repeat;#}
+		{#			}#}
+		{#	</style>#}
+	</head>
+{% endblock %}
 
 
 <body>
@@ -160,55 +166,55 @@
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<nav class="main_nav_box navbar-default"
 						 role="navigation">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle"
-								data-toggle="collapse" data-target="#myNavbar"
-								aria-expanded="false" aria-controls="navbar">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+									data-toggle="collapse" data-target="#myNavbar"
+									aria-expanded="false" aria-controls="navbar">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
 
-						<a class="navbar-brand"
-						   href="{% url 'index' %}">FunFly</a>
-					</div>
+							<a class="navbar-brand"
+							   href="{% url 'index' %}">FunFly</a>
+						</div>
 
-					<div class="collapse navbar-collapse" id="myNavbar">
-						{% if user.is_authenticated %}
-							<ul class="nav navbar-nav navbar-right">
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle"
-									   data-toggle="dropdown"
-									   role="button" aria-haspopup="false"
-									   aria-expanded="false">{{ user.username }} <span
-											class="caret"></span></a>
-									<ul class="dropdown-menu" role="menu">
-										<li><a href="{% url 'view_profile' user.userprofile.pk %}">Profile</a></li>
-											<li><a href="{% url "logout" %}">Logout</a></li>
-									</ul>
-								</li>
-							</ul>
-						{% else %}
-							<ul class="nav navbar-nav navbar-right">
-								<li><a href="{% url "login" %}">Log in</a></li>
-								<li><a href="{% url "register" %}">Register</a></li>
-							</ul>
-						{% endif %}
-
-						<ul class="navbar_left nav navbar-nav">
-							<li class="nav_9gags"><a href="{% url 'ninegags' %}">9Gags</a></li>
-							<li class="nav_videos"><a href="{% url 'videos' %}">Videos</a></li>
-							<li class="nav_jokes"><a href="{% url 'jokes' %}">Jokes</a></li>
-							{% if user|is_in_group:"Moderators" %}
-							  <li class="add_item"><a href="{% url 'add_item' %}">Add item</a> </li>
-							{% endif %}
+						<div class="collapse navbar-collapse" id="myNavbar">
 							{% if user.is_authenticated %}
-								<li class="saved_items"><a href="{% url 'saved_items_list' %}">Saved items</a> </li>
+								<ul class="nav navbar-nav navbar-right">
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle"
+										   data-toggle="dropdown"
+										   role="button" aria-haspopup="false"
+										   aria-expanded="false">{{ user.username }} <span
+												class="caret"></span></a>
+										<ul class="dropdown-menu" role="menu">
+											<li><a href="{% url 'view_profile' user.userprofile.pk %}">Profile</a></li>
+											<li><a href="{% url "logout" %}">Logout</a></li>
+										</ul>
+									</li>
+								</ul>
+							{% else %}
+								<ul class="nav navbar-nav navbar-right">
+									<li><a href="{% url "login" %}">Log in</a></li>
+									<li><a href="{% url "register" %}">Register</a></li>
+								</ul>
 							{% endif %}
-							<li id="nav_about"><a href="{% url 'about' %}">About</a></li>
-						</ul>
-					</div>
+
+							<ul class="navbar_left nav navbar-nav">
+								<li class="nav_9gags"><a href="{% url 'ninegags' %}">9Gags</a></li>
+								<li class="nav_videos"><a href="{% url 'videos' %}">Videos</a></li>
+								<li class="nav_jokes"><a href="{% url 'jokes' %}">Jokes</a></li>
+								{% if user|is_in_group:"Moderators" %}
+									<li class="add_item"><a href="{% url 'add_item' %}">Add item</a></li>
+								{% endif %}
+								{% if user.is_authenticated %}
+									<li class="saved_items"><a href="{% url 'saved_items_list' %}">Saved items</a></li>
+								{% endif %}
+								<li id="nav_about"><a href="{% url 'about' %}">About</a></li>
+							</ul>
+						</div>
 					</nav>
 				</div>
 			</div>
@@ -218,8 +224,6 @@
 
 </header>
 {# Header Area End #}
-
-
 
 
 {# News Showcase Area Start #}
@@ -262,621 +266,739 @@
 	<div class="container">
 		<div class="row">
 			{% block main_wrapper %}
-			<div class="col-md-9 col-sm-9 col-xs-12">
-				{# Left Main Area Start #}
-				<div class="left_main_area">
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<div class="left_main_header 9gags_heading">
-								<div class="left_main main_box">
-									<ul>
-										<li class="nav_9gags"><a href="#">9Gags</a></li>
-									</ul>
-                				</div>
-							</div>
-							<div class="9gags_area_box">
-								<div class="row">
-									<div class="col-md-6 col-sm-6 col-xs-12">
-										<div class="left_gags">
-											{% if items.0.is_video %}
-												<div class="top_video">
-													<div align="center"
-														 class="embed-responsive embed-responsive-16by9">
-														<video preload="auto" loop muted controls
-															   class="embed-responsive-item">
-															<source src="{% static items.0.imagevideo_path %}"
-																	type="video/mp4">
-															Your browser does not support the video tag!
-														</video>
+				<div class="col-md-9 col-sm-9 col-xs-12">
+					{# Left Main Area Start #}
+					<div class="left_main_area">
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								<div class="left_main_header 9gags_heading">
+									<div class="left_main main_box">
+										<ul>
+											<li class="nav_9gags"><a href="#">9Gags</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="9gags_area_box">
+									<div class="row">
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<div class="left_gags">
+												{% if items.0.is_video %}
+													<div class="top_video">
+														<div align="center"
+															 class="embed-responsive embed-responsive-16by9">
+															<video preload="auto" loop muted controls
+																   class="embed-responsive-item">
+																<source src="{% static items.0.imagevideo_path %}"
+																		type="video/mp4">
+																Your browser does not support the video tag!
+															</video>
+														</div>
+														{% if request.user.is_authenticated %}
+															<div class="save_button_wrap">
+																<span class="glyphicon glyphicon-bookmark save_item"
+																	  data-item-id="{{ items.0.pk }}"
+																	  data-item-type="Ninegag" data-toggle="tooltip"
+																	  data-container="body"
+																	  title="Click to save the item into your personal list!"></span>
+															</div>
+														{% endif %}
 													</div>
-													{% if request.user.is_authenticated%}
+												{% else %}
+													<div class="top_img">
+														<img class="img-responsive"
+															 src="{% static items.0.imagevideo_path %}" alt="">
+													</div>
+													{% if request.user.is_authenticated %}
 														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ items.0.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+															<span class="glyphicon glyphicon-bookmark save_item"
+																  data-item-id="{{ items.0.pk }}"
+																  data-item-type="Ninegag" data-toggle="tooltip"
+																  data-container="body"
+																  title="Click to save the item into your personal list!"></span>
 														</div>
 													{% endif %}
-												</div>
-											{% else %}
-												<div class="top_img">
-													<img class="img-responsive"
-														 src="{% static items.0.imagevideo_path %}" alt="">
-												</div>
-												{% if request.user.is_authenticated %}
-													<div class="save_button_wrap">
-														<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ items.0.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
-													</div>
 												{% endif %}
-											{% endif %}
-											<div class="single_top_img_text">
-												<h4>
-													{% if items %}
-													<a href="{% url 'ninegag_post_details' items.0.pk %}"> {{ items.0.title }} </a>
-													{% endif %}
-												</h4>
-												<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i class="fa fa-clock-o"></i> {{ items.0.date_added }}<i
-													class="fa fa-comment"></i>{{ items.0.approved_comments.count }}
-												comments</p>
-											</div>
-											<div class="all_gags_bottom">
-												<div class="gags_bottom">
-													{% if items.1.is_video %}
-														<div class="top_video">
-															<div align="center"
-																 class="embed-responsive embed-responsive-16by9">
-																<video preload="auto" loop muted controls
-																	   class="embed-responsive-item">
-																	<source src="{% static items.1.imagevideo_path %}"
-																			type="video/mp4">
-																	Your browser does not support the video tag!
-																</video>
-															</div>
-															{% if request.user.is_authenticated %}
-																<div class="save_button_wrap">
-																	<span class="glyphicon glyphicon-bookmark save_item " data-item-id="{{ items.1.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
-																</div>
-															{% endif %}
-														</div>
-													{% else %}
-														<div class="top_img">
-															<img class="img-responsive"
-																 src="{% static items.1.imagevideo_path %}" alt="">
-														</div>
-														{% if request.user.is_authenticated %}
-															<div class="save_button_wrap">
-																<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ items.1.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-															</div>
+												<div class="single_top_img_text">
+													<h4>
+														{% if items %}
+															<a href="{% url 'ninegag_post_details' items.0.pk %}"> {{ items.0.title }} </a>
 														{% endif %}
-													{% endif %}
-													<div class="single_bottom_text">
-														<h4>
-															{% if items %}
-															<a href="{% url 'ninegag_post_details' items.1.pk %}"> {{ items.1.title }} </a>
-															{% endif %}
-														</h4>
-														<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
-																class="fa fa-clock-o"></i> {{ items.1.date_added }}
-															<i class="fa fa-comment"></i>{{ items.1.approved_comments.count }}
-															comments</p>
-													</div>
+													</h4>
+													<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
+															class="fa fa-clock-o"></i> {{ items.0.date_added }}<i
+															class="fa fa-comment"></i>{{ items.0.approved_comments.count }}
+														comments</p>
 												</div>
-												<div class="gags_bottom">
-													{% if items.2.is_video %}
-														<div class="top_video">
-															<div align="center"
-																 class="embed-responsive embed-responsive-16by9">
-																<video preload="auto" loop muted controls
-																	   class="embed-responsive-item">
-																	<source src="{% static items.2.imagevideo_path %}"
-																			type="video/mp4">
-																	Your browser does not support the video tag!
-																</video>
+												<div class="all_gags_bottom">
+													<div class="gags_bottom">
+														{% if items.1.is_video %}
+															<div class="top_video">
+																<div align="center"
+																	 class="embed-responsive embed-responsive-16by9">
+																	<video preload="auto" loop muted controls
+																		   class="embed-responsive-item">
+																		<source src="{% static items.1.imagevideo_path %}"
+																				type="video/mp4">
+																		Your browser does not support the video tag!
+																	</video>
+																</div>
+																{% if request.user.is_authenticated %}
+																	<div class="save_button_wrap">
+																		<span class="glyphicon glyphicon-bookmark save_item "
+																			  data-item-id="{{ items.1.pk }}"
+																			  data-item-type="Ninegag"
+																			  data-toggle="tooltip"
+																			  data-container="body"
+																			  title="Click to save the item into your personal list!"></span>
+																	</div>
+																{% endif %}
+															</div>
+														{% else %}
+															<div class="top_img">
+																<img class="img-responsive"
+																	 src="{% static items.1.imagevideo_path %}" alt="">
 															</div>
 															{% if request.user.is_authenticated %}
 																<div class="save_button_wrap">
-																	<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.2.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+																	<span class="glyphicon glyphicon-bookmark save_item"
+																		  data-item-id="{{ items.1.pk }}"
+																		  data-item-type="Ninegag" data-toggle="tooltip"
+																		  data-container="body"
+																		  title="Click to save the item into your personal list!"></span>
 																</div>
 															{% endif %}
-														</div>
-													{% else %}
-														<div class="top_img">
-															<img class="img-responsive"
-																 src="{% static items.2.imagevideo_path %}" alt="">
-														</div>
-														{% if request.user.is_authenticated %}
-															<div class="save_button_wrap">
-																<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.2.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-															</div>
 														{% endif %}
-													{% endif %}
-													<div class="single_bottom_text">
-														<h4>
-															{% if items %}
-															<a href="{% url 'ninegag_post_details' items.2.pk %}"> {{ items.2.title }} </a>
-															{% endif %}
-														</h4>
-														<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
-																class="fa fa-clock-o"></i> {{ items.2.date_added }}
-															<i class="fa fa-comment"></i>{{ items.2.approved_comments.count }}
-															comments</p>
+														<div class="single_bottom_text">
+															<h4>
+																{% if items %}
+																	<a href="{% url 'ninegag_post_details' items.1.pk %}"> {{ items.1.title }} </a>
+																{% endif %}
+															</h4>
+															<p><a class="category_tag"
+																  href="{% url 'ninegags' %}">9gag</a>| <i
+																	class="fa fa-clock-o"></i> {{ items.1.date_added }}
+																<i class="fa fa-comment"></i>{{ items.1.approved_comments.count }}
+																comments</p>
+														</div>
 													</div>
-												</div>
-												<div class="gags_bottom last_bottom">
-													{% if items.3.is_video %}
-														<div class="top_video">
-															<div align="center"
-																 class="embed-responsive embed-responsive-16by9">
-																<video preload="auto" loop muted controls
-																	   class="embed-responsive-item">
-																	<source src="{% static items.3.imagevideo_path %}"
-																			type="video/mp4">
-																	Your browser does not support the video tag!
-																</video>
+													<div class="gags_bottom">
+														{% if items.2.is_video %}
+															<div class="top_video">
+																<div align="center"
+																	 class="embed-responsive embed-responsive-16by9">
+																	<video preload="auto" loop muted controls
+																		   class="embed-responsive-item">
+																		<source src="{% static items.2.imagevideo_path %}"
+																				type="video/mp4">
+																		Your browser does not support the video tag!
+																	</video>
+																</div>
+																{% if request.user.is_authenticated %}
+																	<div class="save_button_wrap">
+																		<span class="glyphicon glyphicon-bookmark save_item"
+																			  data-item-id="{{ items.2.pk }}"
+																			  data-item-type="Ninegag"
+																			  data-toggle="tooltip"
+																			  data-container="body"
+																			  title="Click to save the item into your personal list!"></span>
+																	</div>
+																{% endif %}
+															</div>
+														{% else %}
+															<div class="top_img">
+																<img class="img-responsive"
+																	 src="{% static items.2.imagevideo_path %}" alt="">
 															</div>
 															{% if request.user.is_authenticated %}
 																<div class="save_button_wrap">
-																	<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.3.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
+																	<span class="glyphicon glyphicon-bookmark save_item"
+																		  data-item-id="{{ items.2.pk }}"
+																		  data-item-type="Ninegag" data-toggle="tooltip"
+																		  data-container="body"
+																		  title="Click to save the item into your personal list!"></span>
 																</div>
 															{% endif %}
-														</div>
-													{% else %}
-														<div class="top_img">
-															<img class="img-responsive"
-																 src="{% static items.3.imagevideo_path %}" alt="">
-														</div>
-														{% if request.user.is_authenticated %}
-															<div class="save_button_wrap">
-																<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.3.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-															</div>
 														{% endif %}
-													{% endif %}
-													<div class="single_bottom_text">
-														<h4>
-															{% if items %}
-															<a href="{% url 'ninegag_post_details' items.3.pk %}"> {{ items.3.title }}</a>
+														<div class="single_bottom_text">
+															<h4>
+																{% if items %}
+																	<a href="{% url 'ninegag_post_details' items.2.pk %}"> {{ items.2.title }} </a>
+																{% endif %}
+															</h4>
+															<p><a class="category_tag"
+																  href="{% url 'ninegags' %}">9gag</a>| <i
+																	class="fa fa-clock-o"></i> {{ items.2.date_added }}
+																<i class="fa fa-comment"></i>{{ items.2.approved_comments.count }}
+																comments</p>
+														</div>
+													</div>
+													<div class="gags_bottom last_bottom">
+														{% if items.3.is_video %}
+															<div class="top_video">
+																<div align="center"
+																	 class="embed-responsive embed-responsive-16by9">
+																	<video preload="auto" loop muted controls
+																		   class="embed-responsive-item">
+																		<source src="{% static items.3.imagevideo_path %}"
+																				type="video/mp4">
+																		Your browser does not support the video tag!
+																	</video>
+																</div>
+																{% if request.user.is_authenticated %}
+																	<div class="save_button_wrap">
+																		<span class="glyphicon glyphicon-bookmark save_item"
+																			  data-item-id="{{ items.3.pk }}"
+																			  data-item-type="Ninegag"
+																			  data-toggle="tooltip"
+																			  data-container="body"
+																			  title="Click to save the item into your personal list!"></span>
+																	</div>
+																{% endif %}
+															</div>
+														{% else %}
+															<div class="top_img">
+																<img class="img-responsive"
+																	 src="{% static items.3.imagevideo_path %}" alt="">
+															</div>
+															{% if request.user.is_authenticated %}
+																<div class="save_button_wrap">
+																	<span class="glyphicon glyphicon-bookmark save_item"
+																		  data-item-id="{{ items.3.pk }}"
+																		  data-item-type="Ninegag" data-toggle="tooltip"
+																		  data-container="body"
+																		  title="Click to save the item into your personal list!"></span>
+																</div>
 															{% endif %}
-														</h4>
-														<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
-																class="fa fa-clock-o"></i> {{ items.3.date_added }}
-															<i class="fa fa-comment"></i>{{ items.3.approved_comments.count }}
-															comments</p>
+														{% endif %}
+														<div class="single_bottom_text">
+															<h4>
+																{% if items %}
+																	<a href="{% url 'ninegag_post_details' items.3.pk %}"> {{ items.3.title }}</a>
+																{% endif %}
+															</h4>
+															<p><a class="category_tag"
+																  href="{% url 'ninegags' %}">9gag</a>| <i
+																	class="fa fa-clock-o"></i> {{ items.3.date_added }}
+																<i class="fa fa-comment"></i>{{ items.3.approved_comments.count }}
+																comments</p>
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-									<div class="col-md-6 col-sm-6 col-xs-12">
-										<div class="left_gags">
-											{% if items.4.is_video %}
-												<div class="top_video">
-													<div align="center"
-														 class="embed-responsive embed-responsive-16by9">
-														<video preload="auto" loop muted controls
-															   class="embed-responsive-item">
-															<source src="{% static items.4.imagevideo_path %}"
-																	type="video/mp4">
-															Your browser does not support the video tag!
-														</video>
-													</div>
-													{% if request.user.is_authenticated%}
-														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.4.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<div class="left_gags">
+												{% if items.4.is_video %}
+													<div class="top_video">
+														<div align="center"
+															 class="embed-responsive embed-responsive-16by9">
+															<video preload="auto" loop muted controls
+																   class="embed-responsive-item">
+																<source src="{% static items.4.imagevideo_path %}"
+																		type="video/mp4">
+																Your browser does not support the video tag!
+															</video>
 														</div>
-													{% endif %}
-												</div>
+														{% if request.user.is_authenticated %}
+															<div class="save_button_wrap">
+																<span class="glyphicon glyphicon-bookmark save_item"
+																	  data-item-id="{{ items.4.pk }}"
+																	  data-item-type="Ninegag" data-toggle="tooltip"
+																	  data-container="body"
+																	  title="Click to save the item into your personal list!"></span>
+															</div>
+														{% endif %}
+													</div>
 
-											{% else %}
-												<div class="top_img">
-													<img class="img-responsive"
-														 src="{% static items.4.imagevideo_path %}"
-														 alt="">
-												</div>
-												{% if request.user.is_authenticated %}
-													<div class="save_button_wrap">
-														<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.4.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
-													</div>
-												{% endif %}
-											{% endif %}
-											<div class="single_top_img_text">
-												<h4>
-													{% if items %}
-													<a href="{% url 'ninegag_post_details' items.4.pk %}"> {{ items.4.title }}</a>
-													{% endif %}
-												</h4>
-												<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
-														class="fa fa-clock-o"></i>{{ items.4.date_added }}<i
-														class="fa fa-comment"></i>{{ items.4.approved_comments.count }}
-													comments</p>
-											</div>
-											<div class="all_gags_bottom">
-												<div class="gags_bottom">
-													{% if items.5.is_video %}
-														<div class="top_video">
-															<div align="center"
-																 class="embed-responsive embed-responsive-16by9">
-																<video preload="auto" loop muted controls
-																	   class="embed-responsive-item">
-																	<source src="{% static items.5.imagevideo_path %}"
-																			type="video/mp4">
-																	Your browser does not support the video tag!
-																</video>
-															</div>
-															{% if request.user.is_authenticated %}
-																<div class="save_button_wrap">
-																	<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.5.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-																</div>
-															{% endif %}
-														</div>
-													{% else %}
-														<div class="top_img">
-															<img class="img-responsive"
-																 src="{% static items.5.imagevideo_path %}" alt="">
-														</div>
-														{% if request.user.is_authenticated%}
-															<div class="save_button_wrap">
-																<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.5.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
-															</div>
-														{% endif %}
-													{% endif %}
-													<div class="single_bottom_text">
-														<h4>
-															{% if items %}
-															<a href="{% url 'ninegag_post_details' items.5.pk %}"> {{ items.5.title }} </a>
-															{% endif %}
-														</h4>
-														<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
-																class="fa fa-clock-o"></i> {{ items.5.date_added }}
-															<i class="fa fa-comment"></i>{{ items.5.approved_comments.count }}
-															comments</p>
-													</div>
-												</div>
-												<div class="gags_bottom">
-													{% if items.6.is_video %}
-														<div class="top_video">
-															<div align="center"
-																 class="embed-responsive embed-responsive-16by9">
-																<video preload="auto" loop muted controls
-																	   class="embed-responsive-item">
-																	<source src="{% static items.6.imagevideo_path %}"
-																			type="video/mp4">
-																	Your browser does not support the video tag!
-																</video>
-															</div>
-															{% if request.user.is_authenticated %}
-																<div class="save_button_wrap">
-																	<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.6.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
-																</div>
-															{% endif %}
-														</div>
-													{% else %}
-														<div class="top_img">
-															<img class="img-responsive"
-																 src="{% static items.6.imagevideo_path %}" alt="">
-														</div>
-														{% if request.user.is_authenticated %}
-															<div class="save_button_wrap">
-																<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.6.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
-															</div>
-														{% endif %}
-													{% endif %}
-													<div class="single_bottom_text">
-														<h4>
-															{% if items %}
-															<a href="{% url 'ninegag_post_details' items.6.pk %}"> {{ items.6.title }} </a>
-															{% endif %}
-														</h4>
-														<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
-																class="fa fa-clock-o"></i> {{ items.6.date_added }}
-															<i class="fa fa-comment"></i>{{ items.6.approved_comments.count }}
-															comments</p>
-													</div>
-												</div>
-												<div class="gags_bottom last_bottom">
-													{% if items.7.is_video %}
-														<div class="top_video">
-															<div align="center"
-																 class="embed-responsive embed-responsive-16by9">
-																<video preload="auto" loop muted controls
-																	   class="embed-responsive-item">
-																	<source src="{% static items.7.imagevideo_path %}"
-																			type="video/mp4">
-																	Your browser does not support the video tag!
-																</video>
-															</div>
-															{% if request.user.is_authenticated %}
-																<div class="save_button_wrap">
-																	<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.7.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-																</div>
-															{% endif %}
-														</div>
-													{% else %}
-														<div class="top_img">
-															<img class="img-responsive"
-																 src="{% static items.7.imagevideo_path %}" alt="">
-														</div>
-														{% if request.user.is_authenticated %}
-															<div class="save_button_wrap">
-																<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ items.7.pk }}" data-item-type="Ninegag" data-toggle="tooltip"  data-container="body" title="Click to save the item into your personal list!"></span>
-															</div>
-														{% endif %}
-													{% endif %}
-													<div class="single_bottom_text">
-														<h4>
-															{% if items %}
-															<a href="{% url 'ninegag_post_details' items.7.pk %}"> {{ items.7.title }} </a>
-															{% endif %}
-														</h4>
-														<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
-																class="fa fa-clock-o"></i> {{ items.7.date_added }}
-															<i class="fa fa-comment"></i>{{ items.7.approved_comments.count }}
-															comments</p>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="left_main_header videos_heading">
-								<div class="left_main main_box">
-									<ul>
-										<li class="nav_videos"><a href="#">Videos</a></li>
-									</ul>
-								</div>
-							</div>
-							<div class="videos_area_box">
-								<div class="row">
-									<div class="col-md-6 col-sm-6 col-xs-12">
-										<div class="all_left_videos">
-											<div class="videos_left">
-												<div class="top_video">
-													<div align="center"
-														 class="embed-responsive embed-responsive-16by9">
-														<iframe src={{ videos.0.url }} class="embed-responsive-item"></iframe>
-														Your browser does not support the video tag!
-														</video>
-													</div>
-													{% if request.user.is_authenticated%}
-														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ videos.0.pk }}" data-item-type="Youtube" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-														</div>
-													{% endif %}
-												</div>
-												<div class="single_bottom_text">
-													<h4>
-														{% if videos %}
-														<a href="{% url 'video_post_details' videos.0.pk %}"> {{ videos.0.title }} </a>
-														{% endif %}
-													</h4>
-													<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
-															class="fa fa-clock-o"></i> {{ videos.0.added_at }}
-														<i class="fa fa-comment"></i> {{ videos.0.approved_comments.count }}
-														comments </p>
-												</div>
-											</div>
-											<div class="videos_left last_bottom">
-												<div class="top_video">
-													<div align="center"
-														 class="embed-responsive embed-responsive-16by9">
-														<iframe class="embed-responsive-item"
-																src={{ videos.1.url }}></iframe>
-														Your browser does not support iframes!
-													</div>
-													{% if request.user.is_authenticated%}
-														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ videos.1.pk }}" data-item-type="Ninegag" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-														</div>
-													{% endif %}
-												</div>
-												<div class="single_bottom_text">
-													<h4>
-														{% if videos %}
-														<a href="{% url 'video_post_details' videos.1.pk %}"> {{ videos.1.title }} </a>
-														{% endif %}
-													</h4>
-													<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
-															class="fa fa-clock-o"></i> {{ videos.1.date_added }}
-														<i class="fa fa-comment"></i> {{ videos.1.approved_comments.count }}
-														comments </p>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-6 col-sm-6 col-xs-12">
-										<div class="all_left_videos">
-											<div class="videos_left">
-												<div class="top_video">
-													<div align="center"
-														 class="embed-responsive embed-responsive-16by9">
-														<iframe class="embed-responsive-item"
-																src={{ videos.2.url }}></iframe>
-														Your browser does not support iframes!
+												{% else %}
+													<div class="top_img">
+														<img class="img-responsive"
+															 src="{% static items.4.imagevideo_path %}"
+															 alt="">
 													</div>
 													{% if request.user.is_authenticated %}
 														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ videos.2.pk }}" data-item-type="Youtube" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+															<span class="glyphicon glyphicon-bookmark save_item"
+																  data-item-id="{{ items.4.pk }}"
+																  data-item-type="Ninegag" data-toggle="tooltip"
+																  data-container="body"
+																  title="Click to save the item into your personal list!"></span>
 														</div>
 													{% endif %}
-												</div>
-												<div class="single_bottom_text">
+												{% endif %}
+												<div class="single_top_img_text">
 													<h4>
-														{% if videos %}
-														<a href="{% url 'video_post_details' videos.2.pk %}"> {{ videos.2.title }} </a>
+														{% if items %}
+															<a href="{% url 'ninegag_post_details' items.4.pk %}"> {{ items.4.title }}</a>
 														{% endif %}
 													</h4>
-													<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
-															class="fa fa-clock-o"></i> {{ videos.2.date_added }}
-														<i class="fa fa-comment"></i>{{ videos.2.approved_comments.count }}
-														comments </p>
+													<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
+															class="fa fa-clock-o"></i>{{ items.4.date_added }}<i
+															class="fa fa-comment"></i>{{ items.4.approved_comments.count }}
+														comments</p>
 												</div>
-											</div>
-											<div class="videos_left last_bottom">
-												<div class="top_video">
-													<div align="center"
-														 class="embed-responsive embed-responsive-16by9">
-														<iframe class="embed-responsive-item"
-																src={{ videos.3.url }}></iframe>
-														Your browser does not support iframes!
+												<div class="all_gags_bottom">
+													<div class="gags_bottom">
+														{% if items.5.is_video %}
+															<div class="top_video">
+																<div align="center"
+																	 class="embed-responsive embed-responsive-16by9">
+																	<video preload="auto" loop muted controls
+																		   class="embed-responsive-item">
+																		<source src="{% static items.5.imagevideo_path %}"
+																				type="video/mp4">
+																		Your browser does not support the video tag!
+																	</video>
+																</div>
+																{% if request.user.is_authenticated %}
+																	<div class="save_button_wrap">
+																		<span class="glyphicon glyphicon-bookmark save_item"
+																			  data-item-id="{{ items.5.pk }}"
+																			  data-item-type="Ninegag"
+																			  data-toggle="tooltip"
+																			  data-container="body"
+																			  title="Click to save the item into your personal list!"></span>
+																	</div>
+																{% endif %}
+															</div>
+														{% else %}
+															<div class="top_img">
+																<img class="img-responsive"
+																	 src="{% static items.5.imagevideo_path %}" alt="">
+															</div>
+															{% if request.user.is_authenticated %}
+																<div class="save_button_wrap">
+																	<span class="glyphicon glyphicon-bookmark save_item"
+																		  data-item-id="{{ items.5.pk }}"
+																		  data-item-type="Ninegag" data-toggle="tooltip"
+																		  data-container="body"
+																		  title="Click to save the item into your personal list!"></span>
+																</div>
+															{% endif %}
+														{% endif %}
+														<div class="single_bottom_text">
+															<h4>
+																{% if items %}
+																	<a href="{% url 'ninegag_post_details' items.5.pk %}"> {{ items.5.title }} </a>
+																{% endif %}
+															</h4>
+															<p><a class="category_tag"
+																  href="{% url 'ninegags' %}">9gag</a>| <i
+																	class="fa fa-clock-o"></i> {{ items.5.date_added }}
+																<i class="fa fa-comment"></i>{{ items.5.approved_comments.count }}
+																comments</p>
+														</div>
 													</div>
-													{% if request.user.is_authenticated %}
-														<div class="save_button_wrap">
-															<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ videos.3.pk }}" data-item-type="Youtube" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
-														</div>
-													{% endif %}
-												</div>
-												<div class="single_bottom_text">
-													<h4>
-														{% if videos %}
-														<a href="{% url 'video_post_details' videos.3.pk %}"> {{ videos.3.title }} </a>
+													<div class="gags_bottom">
+														{% if items.6.is_video %}
+															<div class="top_video">
+																<div align="center"
+																	 class="embed-responsive embed-responsive-16by9">
+																	<video preload="auto" loop muted controls
+																		   class="embed-responsive-item">
+																		<source src="{% static items.6.imagevideo_path %}"
+																				type="video/mp4">
+																		Your browser does not support the video tag!
+																	</video>
+																</div>
+																{% if request.user.is_authenticated %}
+																	<div class="save_button_wrap">
+																		<span class="glyphicon glyphicon-bookmark save_item"
+																			  data-item-id="{{ items.6.pk }}"
+																			  data-item-type="Ninegag"
+																			  data-toggle="tooltip"
+																			  data-container="body"
+																			  title="Click to save the item into your personal list!"></span>
+																	</div>
+																{% endif %}
+															</div>
+														{% else %}
+															<div class="top_img">
+																<img class="img-responsive"
+																	 src="{% static items.6.imagevideo_path %}" alt="">
+															</div>
+															{% if request.user.is_authenticated %}
+																<div class="save_button_wrap">
+																	<span class="glyphicon glyphicon-bookmark save_item"
+																		  data-item-id="{{ items.6.pk }}"
+																		  data-item-type="Ninegag" data-toggle="tooltip"
+																		  data-container="body"
+																		  title="Click to save the item into your personal list!"></span>
+																</div>
+															{% endif %}
 														{% endif %}
-													</h4>
-													<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
-															class="fa fa-clock-o"></i> {{ videos.3.date_added }}
-														<i class="fa fa-comment"></i>{{ videos.3.approved_comments.count }}
-														comments </p>
+														<div class="single_bottom_text">
+															<h4>
+																{% if items %}
+																	<a href="{% url 'ninegag_post_details' items.6.pk %}"> {{ items.6.title }} </a>
+																{% endif %}
+															</h4>
+															<p><a class="category_tag"
+																  href="{% url 'ninegags' %}">9gag</a>| <i
+																	class="fa fa-clock-o"></i> {{ items.6.date_added }}
+																<i class="fa fa-comment"></i>{{ items.6.approved_comments.count }}
+																comments</p>
+														</div>
+													</div>
+													<div class="gags_bottom last_bottom">
+														{% if items.7.is_video %}
+															<div class="top_video">
+																<div align="center"
+																	 class="embed-responsive embed-responsive-16by9">
+																	<video preload="auto" loop muted controls
+																		   class="embed-responsive-item">
+																		<source src="{% static items.7.imagevideo_path %}"
+																				type="video/mp4">
+																		Your browser does not support the video tag!
+																	</video>
+																</div>
+																{% if request.user.is_authenticated %}
+																	<div class="save_button_wrap">
+																		<span class="glyphicon glyphicon-bookmark save_item"
+																			  data-item-id="{{ items.7.pk }}"
+																			  data-item-type="Ninegag"
+																			  data-toggle="tooltip"
+																			  data-container="body"
+																			  title="Click to save the item into your personal list!"></span>
+																	</div>
+																{% endif %}
+															</div>
+														{% else %}
+															<div class="top_img">
+																<img class="img-responsive"
+																	 src="{% static items.7.imagevideo_path %}" alt="">
+															</div>
+															{% if request.user.is_authenticated %}
+																<div class="save_button_wrap">
+																	<span class="glyphicon glyphicon-bookmark save_item"
+																		  data-item-id="{{ items.7.pk }}"
+																		  data-item-type="Ninegag" data-toggle="tooltip"
+																		  data-container="body"
+																		  title="Click to save the item into your personal list!"></span>
+																</div>
+															{% endif %}
+														{% endif %}
+														<div class="single_bottom_text">
+															<h4>
+																{% if items %}
+																	<a href="{% url 'ninegag_post_details' items.7.pk %}"> {{ items.7.title }} </a>
+																{% endif %}
+															</h4>
+															<p><a class="category_tag"
+																  href="{% url 'ninegags' %}">9gag</a>| <i
+																	class="fa fa-clock-o"></i> {{ items.7.date_added }}
+																<i class="fa fa-comment"></i>{{ items.7.approved_comments.count }}
+																comments</p>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="left_main_header jokes_heading">
-								<div class="left_main main_box">
-									<ul>
-										<li class="nav_jokes"><a href="#">Jokes</a></li>
-									</ul>
-                				</div>
-							</div>
-							<div class="jokes_area_box">
-								<div class="row">
-									<div class="col-md-6 col-sm-6 col-xs-12">
-										<div class="all_left_jokes">
-											<div class="jokes_left">
-												<div class="single_top_img_text">
-													{% if jokes %}
-														<h6>
-															<a href="{% url 'joke_post_details' jokes.0.pk %}"> {{ jokes.0.text }} </a>
-														</h6>
-													{% endif %}
-												</div>
-												<div class="single_bottom_text">
-													<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>| <i
-															class="fa fa-clock-o"></i> {{ jokes.0.date_added }}<i
-															class="fa fa-comment"></i>{{ jokes.0.approved_comments.count }}
-														comments
-													</p>
-												</div>
-												{% if request.user.is_authenticated %}
-													<div class="save_button_wrap">
-														<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ jokes.0.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+								<div class="left_main_header videos_heading">
+									<div class="left_main main_box">
+										<ul>
+											<li class="nav_videos"><a href="#">Videos</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="videos_area_box">
+									<div class="row">
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<div class="all_left_videos">
+												<div class="videos_left">
+													<div class="top_video">
+														<div align="center"
+															 class="embed-responsive embed-responsive-16by9">
+															<iframe src={{ videos.0.url }} class="embed-responsive-item"></iframe>
+															Your browser does not support the video tag!
+															</video>
+														</div>
+														{% if request.user.is_authenticated %}
+															<div class="save_button_wrap">
+																<span class="glyphicon glyphicon-bookmark save_item"
+																	  data-item-id="{{ videos.0.pk }}"
+																	  data-item-type="Youtube" data-toggle="tooltip"
+																	  data-container="body"
+																	  title="Click to save the item into your personal list!"></span>
+															</div>
+														{% endif %}
 													</div>
-												{% endif %}
+													<div class="single_bottom_text">
+														<h4>
+															{% if videos %}
+																<a href="{% url 'video_post_details' videos.0.pk %}"> {{ videos.0.title }} </a>
+															{% endif %}
+														</h4>
+														<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
+																class="fa fa-clock-o"></i> {{ videos.0.added_at }}
+															<i class="fa fa-comment"></i> {{ videos.0.approved_comments.count }}
+															comments </p>
+													</div>
+												</div>
+												<div class="videos_left last_bottom">
+													<div class="top_video">
+														<div align="center"
+															 class="embed-responsive embed-responsive-16by9">
+															<iframe class="embed-responsive-item"
+																	src={{ videos.1.url }}></iframe>
+															Your browser does not support iframes!
+														</div>
+														{% if request.user.is_authenticated %}
+															<div class="save_button_wrap">
+																<span class="glyphicon glyphicon-bookmark save_item"
+																	  data-item-id="{{ videos.1.pk }}"
+																	  data-item-type="Ninegag" data-toggle="tooltip"
+																	  data-container="body"
+																	  title="Click to save the item into your personal list!"></span>
+															</div>
+														{% endif %}
+													</div>
+													<div class="single_bottom_text">
+														<h4>
+															{% if videos %}
+																<a href="{% url 'video_post_details' videos.1.pk %}"> {{ videos.1.title }} </a>
+															{% endif %}
+														</h4>
+														<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
+																class="fa fa-clock-o"></i> {{ videos.1.date_added }}
+															<i class="fa fa-comment"></i> {{ videos.1.approved_comments.count }}
+															comments </p>
+													</div>
+												</div>
 											</div>
-											<div class="jokes_left">
-												<div class="single_top_img_text">
-													{% if jokes %}
-														<h6>
-															<a href="{% url 'joke_post_details' jokes.1.pk %}"> {{ jokes.1.text }} </a>
-														</h6>
-													{% endif %}
-												</div>
-												<div class="single_bottom_text">
-													<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>| <i
-															class="fa fa-clock-o"></i> {{ jokes.1.date_added }}<i
-															class="fa fa-comment"></i>{{ jokes.1.approved_comments.count }}
-														comments
-													</p>
-												</div>
-												{% if request.user.is_authenticated%}
-													<div class="save_button_wrap">
-														<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ jokes.1.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<div class="all_left_videos">
+												<div class="videos_left">
+													<div class="top_video">
+														<div align="center"
+															 class="embed-responsive embed-responsive-16by9">
+															<iframe class="embed-responsive-item"
+																	src={{ videos.2.url }}></iframe>
+															Your browser does not support iframes!
+														</div>
+														{% if request.user.is_authenticated %}
+															<div class="save_button_wrap">
+																<span class="glyphicon glyphicon-bookmark save_item"
+																	  data-item-id="{{ videos.2.pk }}"
+																	  data-item-type="Youtube" data-toggle="tooltip"
+																	  data-container="body"
+																	  title="Click to save the item into your personal list!"></span>
+															</div>
+														{% endif %}
 													</div>
-												{% endif %}
-											</div>
-											<div class="jokes_left last_left">
-												<div class="single_top_img_text">
-													{% if jokes %}
-														<h6>
-															<a href="{% url 'joke_post_details' jokes.2.pk %}"> {{ jokes.2.text }} </a>
-														</h6>
-													{% endif %}
-												</div>
-												<div class="single_bottom_text">
-													<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>| <i
-															class="fa fa-clock-o"></i> {{ jokes.2.date_added }}<i
-															class="fa fa-comment"></i>{{ jokes.2.approved_comments.count }}
-														comments
-													</p></div>
-												{% if request.user.is_authenticated %}
-													<div class="save_button_wrap">
-														<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ jokes.2.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+													<div class="single_bottom_text">
+														<h4>
+															{% if videos %}
+																<a href="{% url 'video_post_details' videos.2.pk %}"> {{ videos.2.title }} </a>
+															{% endif %}
+														</h4>
+														<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
+																class="fa fa-clock-o"></i> {{ videos.2.date_added }}
+															<i class="fa fa-comment"></i>{{ videos.2.approved_comments.count }}
+															comments </p>
 													</div>
-												{% endif %}
+												</div>
+												<div class="videos_left last_bottom">
+													<div class="top_video">
+														<div align="center"
+															 class="embed-responsive embed-responsive-16by9">
+															<iframe class="embed-responsive-item"
+																	src={{ videos.3.url }}></iframe>
+															Your browser does not support iframes!
+														</div>
+														{% if request.user.is_authenticated %}
+															<div class="save_button_wrap">
+																<span class="glyphicon glyphicon-bookmark save_item"
+																	  data-item-id="{{ videos.3.pk }}"
+																	  data-item-type="Youtube" data-toggle="tooltip"
+																	  data-container="body"
+																	  title="Click to save the item into your personal list!"></span>
+															</div>
+														{% endif %}
+													</div>
+													<div class="single_bottom_text">
+														<h4>
+															{% if videos %}
+																<a href="{% url 'video_post_details' videos.3.pk %}"> {{ videos.3.title }} </a>
+															{% endif %}
+														</h4>
+														<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
+																class="fa fa-clock-o"></i> {{ videos.3.date_added }}
+															<i class="fa fa-comment"></i>{{ videos.3.approved_comments.count }}
+															comments </p>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
-									<div class="col-md-6 col-sm-6 col-xs-12">
-										<div class="all_left_jokes">
-											<div class="jokes_left">
-												<div class="single_top_img_text">
-													{% if jokes %}
-														<h6>
-															<a href="{% url 'joke_post_details' jokes.3.pk %}"> {{ jokes.3.text }} </a>
-														</h6>
+								</div>
+								<div class="left_main_header jokes_heading">
+									<div class="left_main main_box">
+										<ul>
+											<li class="nav_jokes"><a href="#">Jokes</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="jokes_area_box">
+									<div class="row">
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<div class="all_left_jokes">
+												<div class="jokes_left">
+													<div class="single_top_img_text">
+														{% if jokes %}
+															<h6>
+																<a href="{% url 'joke_post_details' jokes.0.pk %}"> {{ jokes.0.text }} </a>
+															</h6>
+														{% endif %}
+													</div>
+													<div class="single_bottom_text">
+														<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>|
+															<i
+																	class="fa fa-clock-o"></i> {{ jokes.0.date_added }}<i
+																	class="fa fa-comment"></i>{{ jokes.0.approved_comments.count }}
+															comments
+														</p>
+													</div>
+													{% if request.user.is_authenticated %}
+														<div class="save_button_wrap">
+															<span class="glyphicon glyphicon-bookmark save_item"
+																  data-item-id="{{ jokes.0.pk }}" data-item-type="Joke"
+																  data-toggle="tooltip" data-container="body"
+																  title="Click to save the item into your personal list!"></span>
+														</div>
 													{% endif %}
 												</div>
-												<div class="single_bottom_text">
-													<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>| <i
-															class="fa fa-clock-o"></i> {{ jokes.3.date_added }}<i
-															class="fa fa-comment"></i>{{ jokes.3.approved_comments.count }}
-														comments
-													</p>
-												</div>
-												{% if request.user.is_authenticated %}
-													<div class="save_button_wrap">
-														<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ jokes.3.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+												<div class="jokes_left">
+													<div class="single_top_img_text">
+														{% if jokes %}
+															<h6>
+																<a href="{% url 'joke_post_details' jokes.1.pk %}"> {{ jokes.1.text }} </a>
+															</h6>
+														{% endif %}
 													</div>
-												{% endif %}
+													<div class="single_bottom_text">
+														<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>|
+															<i
+																	class="fa fa-clock-o"></i> {{ jokes.1.date_added }}<i
+																	class="fa fa-comment"></i>{{ jokes.1.approved_comments.count }}
+															comments
+														</p>
+													</div>
+													{% if request.user.is_authenticated %}
+														<div class="save_button_wrap">
+															<span class="glyphicon glyphicon-bookmark save_item"
+																  data-item-id="{{ jokes.1.pk }}" data-item-type="Joke"
+																  data-toggle="tooltip" data-container="body"
+																  title="Click to save the item into your personal list!"></span>
+														</div>
+													{% endif %}
+												</div>
+												<div class="jokes_left last_left">
+													<div class="single_top_img_text">
+														{% if jokes %}
+															<h6>
+																<a href="{% url 'joke_post_details' jokes.2.pk %}"> {{ jokes.2.text }} </a>
+															</h6>
+														{% endif %}
+													</div>
+													<div class="single_bottom_text">
+														<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>|
+															<i
+																	class="fa fa-clock-o"></i> {{ jokes.2.date_added }}<i
+																	class="fa fa-comment"></i>{{ jokes.2.approved_comments.count }}
+															comments
+														</p></div>
+													{% if request.user.is_authenticated %}
+														<div class="save_button_wrap">
+															<span class="glyphicon glyphicon-bookmark save_item"
+																  data-item-id="{{ jokes.2.pk }}" data-item-type="Joke"
+																  data-toggle="tooltip" data-container="body"
+																  title="Click to save the item into your personal list!"></span>
+														</div>
+													{% endif %}
+												</div>
 											</div>
-											<div class="jokes_left">
-												<div class="single_top_img_text">
-													{% if jokes %}
-														<h6>
-															<a href="{% url 'joke_post_details' jokes.4.pk %}"> {{ jokes.4.text }} </a>
-														</h6>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<div class="all_left_jokes">
+												<div class="jokes_left">
+													<div class="single_top_img_text">
+														{% if jokes %}
+															<h6>
+																<a href="{% url 'joke_post_details' jokes.3.pk %}"> {{ jokes.3.text }} </a>
+															</h6>
+														{% endif %}
+													</div>
+													<div class="single_bottom_text">
+														<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>|
+															<i
+																	class="fa fa-clock-o"></i> {{ jokes.3.date_added }}<i
+																	class="fa fa-comment"></i>{{ jokes.3.approved_comments.count }}
+															comments
+														</p>
+													</div>
+													{% if request.user.is_authenticated %}
+														<div class="save_button_wrap">
+															<span class="glyphicon glyphicon-bookmark save_item"
+																  data-item-id="{{ jokes.3.pk }}" data-item-type="Joke"
+																  data-toggle="tooltip" data-container="body"
+																  title="Click to save the item into your personal list!"></span>
+														</div>
 													{% endif %}
 												</div>
-												<div class="single_bottom_text">
-													<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>| <i
-															class="fa fa-clock-o"></i> {{ jokes.4.date_added }}<i
-															class="fa fa-comment"></i>{{ jokes.4.approved_comments.count }}
-														comments
-													</p>
-												</div>
-												{% if request.user.is_authenticated %}
-													<div class="save_button_wrap">
-														<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ jokes.4.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+												<div class="jokes_left">
+													<div class="single_top_img_text">
+														{% if jokes %}
+															<h6>
+																<a href="{% url 'joke_post_details' jokes.4.pk %}"> {{ jokes.4.text }} </a>
+															</h6>
+														{% endif %}
 													</div>
-												{% endif %}
-											</div>
-											<div class="jokes_left last_left">
-												<div class="single_top_img_text">
-													{% if jokes %}
-														<h6>
-															<a href="{% url 'joke_post_details' jokes.5.pk %}"> {{ jokes.5.text }} </a>
-														</h6>
+													<div class="single_bottom_text">
+														<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>|
+															<i
+																	class="fa fa-clock-o"></i> {{ jokes.4.date_added }}<i
+																	class="fa fa-comment"></i>{{ jokes.4.approved_comments.count }}
+															comments
+														</p>
+													</div>
+													{% if request.user.is_authenticated %}
+														<div class="save_button_wrap">
+															<span class="glyphicon glyphicon-bookmark save_item"
+																  data-item-id="{{ jokes.4.pk }}" data-item-type="Joke"
+																  data-toggle="tooltip" data-container="body"
+																  title="Click to save the item into your personal list!"></span>
+														</div>
 													{% endif %}
 												</div>
-												<div class="single_bottom_text">
-													<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>| <i
-															class="fa fa-clock-o"></i> {{ jokes.5.date_added }}<i
-															class="fa fa-comment"></i>{{ jokes.5.approved_comments.count }}
-														comments
-													</p>
-												</div>
-												{% if request.user.is_authenticated %}
-													<div class="save_button_wrap">
-														<span class="glyphicon glyphicon-bookmark save_item"  data-item-id="{{ jokes.5.pk }}" data-item-type="Joke" data-toggle="tooltip" data-container="body" title="Click to save the item into your personal list!"></span>
+												<div class="jokes_left last_left">
+													<div class="single_top_img_text">
+														{% if jokes %}
+															<h6>
+																<a href="{% url 'joke_post_details' jokes.5.pk %}"> {{ jokes.5.text }} </a>
+															</h6>
+														{% endif %}
 													</div>
-												{% endif %}
+													<div class="single_bottom_text">
+														<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>|
+															<i
+																	class="fa fa-clock-o"></i> {{ jokes.5.date_added }}<i
+																	class="fa fa-comment"></i>{{ jokes.5.approved_comments.count }}
+															comments
+														</p>
+													</div>
+													{% if request.user.is_authenticated %}
+														<div class="save_button_wrap">
+															<span class="glyphicon glyphicon-bookmark save_item"
+																  data-item-id="{{ jokes.5.pk }}" data-item-type="Joke"
+																  data-toggle="tooltip" data-container="body"
+																  title="Click to save the item into your personal list!"></span>
+														</div>
+													{% endif %}
+												</div>
 											</div>
 										</div>
 									</div>
@@ -884,23 +1006,21 @@
 							</div>
 						</div>
 					</div>
+					{# Left Main Area End #}
 				</div>
-				{# Left Main Area End #}
-			</div>
 			{% endblock %}
 			<div class="col-md-3 col-sm-3 col-xs-12">
-			{% block sidebar_right %}
+				{% block sidebar_right %}
 
-				<aside class="main_page_sidebar_right">
+					<aside class="main_page_sidebar_right">
 
-				</aside>
-			{% endblock %}
+					</aside>
+				{% endblock %}
 			</div>
 		</div>
 	</div>
 </section>
 {# Main Wrapper End #}
-
 
 
 </body>
