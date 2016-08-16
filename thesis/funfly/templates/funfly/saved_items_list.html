@@ -98,6 +98,8 @@
 {% block content %}
 	{% block main_wrapper %}
 		<div class="col-md-9 col-sm-9 col-xs-9 all_saved_items">
+			<h2>Settings</h2>
+
 			{% if saved_items %}
 				<div class="filtering">
 					<form id="filter_sort_form" class="form-inline" method="get" action="{% url 'saved_items_list' %}">
@@ -114,6 +116,7 @@
 					</form>
 				</div>
 			{% endif %}
+
 			<div class="private-savelist">
 				<form action="{% url 'saved_items_list_settings' %}" method="POST" id="private-savelist-form">
 					<div class="form-group">

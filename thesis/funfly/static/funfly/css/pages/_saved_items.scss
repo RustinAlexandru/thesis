@@ -1,11 +1,31 @@
 .all_saved_items {
-    margin-top: 8%;
-    margin-bottom: 5%;
+  margin-top: 8%;
+  margin-bottom: 5%;
+  h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 5px 15px;
+    margin: 0;
+    margin-bottom: 2%;
+    font-weight: 400;
+    text-align: left;
+    background: #ff8100;
+    color: #777;
+  }
+
+  .form-group {
+    margin-left: 5%;
+  }
 }
 
+.private-savelist {
+  margin-top: 3%;
+  margin-bottom: 10%;
+}
 
 #private-savelist-form {
-    #custom-toggle {
-      margin-left: 2%;
-    }
+  #custom-toggle {
+    margin-left: 2%;
+  }
 }

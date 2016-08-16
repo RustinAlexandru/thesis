@@ -6340,6 +6340,14 @@ i {
 .joke_details_page {
   padding-top: 10%; }
 
+.single_joke {
+  margin-left: 10px;
+  margin-right: 10px;
+  position: relative; }
+
+#likes_number:hover {
+  text-decoration: underline; }
+
 .filtering h2 {
   font-size: 14px;
   text-transform: uppercase;
@@ -6351,6 +6359,14 @@ i {
   text-align: left;
   background: #ff8100;
   color: #777; }
+
+.all_jokes {
+  margin-top: 5%;
+  margin-bottom: 5%; }
+
+.endless_page_template {
+  margin-top: 10%;
+  margin-bottom: 3%; }
 
 .login-form-container {
   margin-top: 15%;
@@ -6423,7 +6439,7 @@ i {
 
 .all_ninegags {
   margin-top: 5%;
-  margin-bottom: 50px; }
+  margin-bottom: 5%; }
 
 .single_9gag_image_or_video {
   margin-bottom: 6%;
@@ -6450,12 +6466,33 @@ i {
   background: #ff8100;
   color: #777; }
 
+.endless_page_template {
+  margin-top: 10% !important;
+  margin-bottom: 3% !important; }
+
 #profile_container {
   margin-top: 10%; }
 
 .all_saved_items {
   margin-top: 8%;
   margin-bottom: 5%; }
+  .all_saved_items h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 5px 15px;
+    margin: 0;
+    margin-bottom: 2%;
+    font-weight: 400;
+    text-align: left;
+    background: #ff8100;
+    color: #777; }
+  .all_saved_items .form-group {
+    margin-left: 5%; }
+
+.private-savelist {
+  margin-top: 3%;
+  margin-bottom: 10%; }
 
 #private-savelist-form #custom-toggle {
   margin-left: 2%; }
@@ -6468,28 +6505,6 @@ i {
 .sp_video_title {
   padding-top: 5%;
   padding-bottom: 10%; }
-
-/*  4) Joke page css */
-.endless_page_template {
-  margin-top: 50px;
-  margin-bottom: 50px; }
-
-.single_joke {
-  margin-left: 10px;
-  margin-right: 10px;
-  position: relative; }
-
-.all_jokes {
-  margin-top: 50px;
-  margin-bottom: 50px; }
-
-#likes_number:hover {
-  text-decoration: underline; }
-
-/*  5) Videos page css   */
-.all_videos {
-  margin-top: 50px;
-  margin-bottom: 50px; }
 
 .single_video {
   border-bottom: 1px solid #efefef;
@@ -6515,6 +6530,10 @@ div.single_video:nth-child(1) {
   text-align: left;
   background: #ff8100;
   color: #777; }
+
+.all_videos {
+  margin-top: 5%;
+  margin-bottom: 5%; }
 
 .error404__wrapper {
   display: inline-block;

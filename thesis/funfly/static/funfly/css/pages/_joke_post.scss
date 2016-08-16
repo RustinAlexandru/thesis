@@ -1,7 +1,17 @@
 .joke_details_page p:nth-child(2) {
-    margin-bottom: 5%;
+  margin-bottom: 5%;
 }
 
 .joke_details_page {
-    padding-top: 10%;
+  padding-top: 10%;
+}
+
+.single_joke {
+  margin-left: 10px;
+  margin-right: 10px;
+  position: relative;
+}
+
+#likes_number:hover {
+  text-decoration: underline;
 }
