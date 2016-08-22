@@ -18,15 +18,29 @@ $(document).ready(function () {
         if (this.value == 'Video') {
             $("#div_id_text_area").hide();
             $("#div_id_media_file").hide();
+
+            $("#div_id_source_url label").addClass('requiredField');
+            if ($("#div_id_source_url .asteriskField").length == 0) {
+                $("#div_id_source_url label").append("<span class='asteriskField'>*</span>");
+            }
         }
         else if (this.value == 'Joke') {
+            $("#div_id_title").hide();
             $("#div_id_text_area").show();
             $("#div_id_media_file").hide();
+            $("#div_id_source_url label").removeClass('requiredField');
+            if ($("#div_id_source_url .asteriskField").length == 1) {
+                $("#div_id_source_url .asteriskField").remove();
+            }
         }
         else  //Ninegag
         {
             $("#div_id_text_area").hide();
             $("#div_id_media_file").show();
+            $("#div_id_source_url label").removeClass('requiredField');
+            if ($("#div_id_source_url .asteriskField").length == 1) {
+                $("#div_id_source_url .asteriskField").remove();
+            }
         }
     });
 

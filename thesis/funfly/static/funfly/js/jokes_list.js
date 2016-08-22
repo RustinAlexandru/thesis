@@ -172,11 +172,17 @@ $(document).ready(function () {
             },
             dataType: "json",
             success: function (data) {
-                $('#likes_number').html(data['likes']);
-                $("#likes_user_list").html("");
+                $('#likes_number_'+ item_id).html(data['likes']);
+                $("#likes_user_list_" + item_id).html("");
                 data['likes_list'].forEach(function (item) {
-                    $("#likes_user_list").append("<li class='list-group-item'>" + item['username'] + "</li>");
-                })
+                    $("#likes_user_list_" + item_id).append("<li class='list-group-item'>" + item['username'] + "</li>");
+                });
+                if (data["message"] == "You disliked this")
+                {
+                    swal('Alright, ',
+                        'You removed your like!',
+                        'success')
+                }
             },
             error: function (data) {
                 sweetAlert(

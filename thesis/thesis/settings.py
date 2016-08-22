@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'debug_toolbar',
     'pytz',
-    'djcelery',
     'moderation',
     'el_pagination',
     'rolepermissions',

@@ -1,20 +1,39 @@
 {% extends 'funfly/layout.html' %}
+{% load staticfiles %}
 
 
 {% block sidebar_right %}
-	<h3>Followers</h3>
-	<ul>
-		{% for follower in followers %}
-			<li>{{ follower.user.username }}</li>
-		{% endfor %}
-	</ul>
 
-	<br>
-	<h3>Following</h3>
-	<ul>
-		{% for follow in following %}
-			<li>{{ follow.user.username }}</li>
-		{% endfor %}
+	<div class="social-media-sidebar">
 
-	</ul>
+		<div id="followers" class="social-list">
+			<div class="count">
+				<p>{{ followers.count }}</p>
+				<h4>followers</h4>
+			</div>
+			<ul>
+				{% for follower in followers %}
+					<li>{{ follower.user.username }} <a
+							href="{% url 'view_profile' follower.user.userprofile.pk %}"> <span
+							class="glyphicon glyphicon-user"> </span></a></li>
+				{% endfor %}
+			</ul>
+		</div>
+
+		<div id="following" class="social-list">
+			<div class="count">
+				<p>{{ following.count }}</p>
+				<h4>following</h4>
+			</div>
+			<ul>
+				{% for follow in following %}
+					<li>{{ follow.user.username }} <a
+							href="{% url 'view_profile' follow.user.userprofile.pk %}"> <span
+							class="glyphicon glyphicon-user"> </span> </a></li>
+				{% endfor %}
+
+			</ul>
+		</div>
+
+	</div>
 {% endblock %}

@@ -2,12 +2,8 @@
 {% load custom_tags %}
 {% load sass_tags %}
 
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang=""> <!--<![endif]-->
+<! DOCTYPE html>
+
 {% block head %}
 	<head>
 
@@ -93,8 +89,6 @@
 
 
 <body>
-
-
 {# Header Area Start #}
 <header class="header_area">
 	<div class="header_top">
@@ -225,41 +219,39 @@
 </header>
 {# Header Area End #}
 
+{% comment %} News Showcase Area Start
+{% block news_showcase %}
+<section class="news_showcase_area">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="showcase_box">
+					<div class="showcase_left">
+						<div class="news_item">
 
-{# News Showcase Area Start #}
-{#{% block news_showcase %}#}
-{#<section class="news_showcase_area">#}
-{#	<div class="container">#}
-{#		<div class="row">#}
-{#			<div class="col-md-12 col-sm-12 col-xs-12">#}
-{#				<div class="showcase_box">#}
-{#					<div class="showcase_left">#}
-{#						<div class="news_item">#}
-{##}
-{#						</div>#}
-{#						<div class="news_item">#}
-{##}
-{#						</div>#}
-{#						<div class="news_item">#}
-{##}
-{#						</div>#}
-{#					</div>#}
-{#					<div class="showcase_right">#}
-{#						<div class="news_item">#}
-{##}
-{#						</div>#}
-{#						<div class="news_item">#}
-{##}
-{#						</div>#}
-{#					</div>#}
-{#				</div>#}
-{#			</div>#}
-{#		</div>#}
-{#	</div>#}
-{#</section>#}
-{# News Showcase Area End #}
-{#{% endblock %}#}
+						</div>
+						<div class="news_item">
 
+						</div>
+						<div class="news_item">
+
+						</div>
+					</div>
+					<div class="showcase_right">
+						<div class="news_item">
+
+						</div>
+						<div class="news_item">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+ News Showcase Area End
+{% endblock %}{% endcomment %}
 
 {# Main Wrapper Start #}
 <section class="main_wrapper">
@@ -1010,12 +1002,11 @@
 				</div>
 			{% endblock %}
 			<div class="col-md-3 col-sm-3 col-xs-12">
-				{% block sidebar_right %}
+				<aside class="sidebar_right">
+					{% block sidebar_right %}
 
-					<aside class="main_page_sidebar_right">
-
-					</aside>
-				{% endblock %}
+					{% endblock %}
+				</aside>
 			</div>
 		</div>
 	</div>

@@ -16,7 +16,7 @@
 				</span>
 			{% endif %}
 
-			<span id="likes">likes: </span><span data-toggle="modal" data-target="#myModal" id="likes_number">{{ joke.total_likes }}</span>
+			<span id="likes_{{ joke.pk }}">likes: </span><span data-toggle="modal" data-target="#myModal" id="likes_number_{{ joke.pk }}">{{ joke.total_likes }}</span>
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -26,7 +26,7 @@
 						<h4 class="modal-title" id="myModalLabel">See who else liked this: </h4>
 					</div>
 					<div class="modal-body">
-						<div id="likes_user_list">
+						<div id="likes_user_list_{{ joke.pk }}">
 							<ul class="list-group">
 								{% for user in joke.likes_users %}
 								<li class="list-group-item">{{ user.username }}</li>

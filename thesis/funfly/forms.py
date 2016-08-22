@@ -248,12 +248,13 @@ class AddItemForm(forms.Form):
                             required=True)
 
     source_url = forms.CharField(max_length=200,
-                                 required=False)
+                                 required=True)
 
-    media_file = forms.FileField(label='Please select a file to upload')
+    media_file = forms.FileField(label='Please select a file to upload', required=True)
 
     text_area = forms.CharField(
         widget=forms.Textarea(),
+        required=True
     )
 
     def __init__(self, *args, **kwargs):

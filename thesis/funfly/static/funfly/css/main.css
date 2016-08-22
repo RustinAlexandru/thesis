@@ -6334,6 +6334,25 @@ i {
     text-align: right;
     width: 25%; }
 
+.social-media-sidebar {
+  margin-left: 25%; }
+  .social-media-sidebar ul {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0; }
+    .social-media-sidebar ul li {
+      margin-top: 5%; }
+      .social-media-sidebar ul li span {
+        margin-left: 5%; }
+  .social-media-sidebar .social-list {
+    margin-top: 20%; }
+    .social-media-sidebar .social-list:first-child {
+      margin-top: 35%; }
+    .social-media-sidebar .social-list .count {
+      display: inline-block; }
+      .social-media-sidebar .social-list .count p {
+        text-align: center; }
+
 .joke_details_page p:nth-child(2) {
   margin-bottom: 5%; }
 

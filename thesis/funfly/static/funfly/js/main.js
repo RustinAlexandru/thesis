@@ -174,8 +174,6 @@ $(document).ready(function () {
                 add_point_button.remove();
                 button = 'button' + item_id;
                 sessionStorage.setItem(button, "deleted")
-
-
             },
             error: function (data) {
                 sweetAlert(
@@ -213,7 +211,7 @@ $(document).ready(function () {
     }
 
     hideAddPointButtons();
-
+    
     var submitIcon = $('.searchbox-icon');
     var inputBox = $('.searchbox-input');
     var searchBox = $('.searchbox');

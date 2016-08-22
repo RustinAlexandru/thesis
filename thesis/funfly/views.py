@@ -19,6 +19,7 @@ from models import Ninegag, UserProfile, Joke, Youtube, PostComment
 from django.http import HttpResponseNotAllowed, HttpResponseRedirect, JsonResponse
 from django.db import IntegrityError
 from django.apps import apps
+from datetime import date, datetime
 import json
 import ast
 
@@ -100,6 +101,8 @@ def register(request):
     elif request.method == 'POST':
         form = RegisterForm(request.POST, request.FILES)
         if form.is_valid():
+            first_name = form.cleaned_data["first_name"]
+            last_name = form.cleaned_data["last_name"]
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password"]
             email = form.cleaned_data["email"]
@@ -121,7 +124,7 @@ def register(request):
             else:
                 avatar = None
 
-            user = User.objects.create(username=username, email=email)
+            user = User.objects.create(first_name=first_name,last_name=last_name, username=username, email=email)
             user.set_password(password)
             user.save()
 
@@ -430,11 +433,13 @@ def like_item(request):
             if item.likes.filter(id=user.id).exists():
                 item.likes.remove(user)
                 message = 'You disliked this'
+                data_sent['message'] = message
             else:
                 item.likes.add(user)
             data_sent['likes'] = item.total_likes()
             names = list(item.likes_users().values('username'))
             data_sent['likes_list'] = names
+
 
         return JsonResponse(data_sent)
 
@@ -490,7 +495,7 @@ def save_file(_file, path=''):
     filename = _file._get_name()
     fd = open('%s/%s' % (MEDIA_ROOT, str(path) + str(filename)), 'wb')
     path = '{0}/{1}'.format('funfly/imagesandvideos/imageorvideos/', str(filename))
-    for chunk in file.chunks():
+    for chunk in _file.chunks():
         fd.write(chunk)
     fd.close()
     return path
@@ -511,12 +516,20 @@ def add_item(request):
         return render(request, 'funfly/add_item.html', context)
     elif request.method == 'POST':
         form = AddItemForm(request.POST, request.FILES)
+        item_option = form.data['item_type']
+        if item_option == 'Ninegag':
+            form.fields.pop('text_area')
+        elif item_option == 'Video':
+            form.fields.pop('media_file')
+            form.fields.pop('text_area')
+        elif item_option == 'Joke':
+            form.fields.pop('title')
+            form.fields.pop('media_file')
         if form.is_valid():
-            item_option = form.cleaned_data['item_type']
             if item_option == 'Ninegag':
                 title = form.cleaned_data['title']
-                url = form.cleaned_data['url']
-                imagevideo = request.FILES['media']
+                url = form.cleaned_data['source_url']
+                imagevideo = request.FILES['media_file']
                 path = save_file(imagevideo)
                 file_path, file_extension = os.path.splitext(path)
                 if file_extension == '.png' or file_extension == '.jpg':
@@ -525,9 +538,12 @@ def add_item(request):
                     is_video = True
                 ninegag = Ninegag.objects.create(title=title, source_url=url, imagevideo_path=path, is_video=is_video)
             elif item_option == 'Video':
-                pass
+                title = form.cleaned_data['title']
+                source_url = form.cleaned_data['source_url']
+                youtube = Youtube.objects.create(title=title, url=source_url, date_added=datetime.today())
             else:
-                pass
+                text = form.cleaned_data['text_area']
+                joke = Joke.objects.create(text=text)
             return redirect('add_item')
         else:
             context = {
