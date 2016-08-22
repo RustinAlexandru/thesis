@@ -11,6 +11,10 @@ $(document).ready(function () {
     var dropdown_item_type = $('#id_item_type');
     if (dropdown_item_type.val() == 'Ninegag') {
         $("#div_id_text_area").hide();
+        $("#div_id_source_url label").removeClass('requiredField');
+        if ($("#div_id_source_url .asteriskField").length == 1) {
+            $("#div_id_source_url .asteriskField").remove();
+        }
     }
 
 

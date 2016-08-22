@@ -124,7 +124,7 @@ def register(request):
             else:
                 avatar = None
 
-            user = User.objects.create(first_name=first_name,last_name=last_name, username=username, email=email)
+            user = User.objects.create(first_name=first_name, last_name=last_name, username=username, email=email)
             user.set_password(password)
             user.save()
 
@@ -440,7 +440,6 @@ def like_item(request):
             names = list(item.likes_users().values('username'))
             data_sent['likes_list'] = names
 
-
         return JsonResponse(data_sent)
 
 
@@ -494,7 +493,7 @@ def comment_remove(request, pk):
 def save_file(_file, path=''):
     filename = _file._get_name()
     fd = open('%s/%s' % (MEDIA_ROOT, str(path) + str(filename)), 'wb')
-    path = '{0}/{1}'.format('funfly/imagesandvideos/imageorvideos/', str(filename))
+    path = '{0}/{1}'.format('funfly/imagesandvideos/imageorvideos', str(filename))
     for chunk in _file.chunks():
         fd.write(chunk)
     fd.close()
@@ -519,6 +518,8 @@ def add_item(request):
         item_option = form.data['item_type']
         if item_option == 'Ninegag':
             form.fields.pop('text_area')
+            if form.data['source_url'] == '':
+                form.fields.pop('source_url')
         elif item_option == 'Video':
             form.fields.pop('media_file')
             form.fields.pop('text_area')
@@ -528,15 +529,23 @@ def add_item(request):
         if form.is_valid():
             if item_option == 'Ninegag':
                 title = form.cleaned_data['title']
-                url = form.cleaned_data['source_url']
+                url = ''
+                if 'source_url' in form.cleaned_data.keys():
+                    url = form.cleaned_data['source_url']
                 imagevideo = request.FILES['media_file']
-                path = save_file(imagevideo)
+                path = save_file(imagevideo, 'imagesandvideos/imageorvideos/')
                 file_path, file_extension = os.path.splitext(path)
                 if file_extension == '.png' or file_extension == '.jpg':
                     is_video = False
                 else:
                     is_video = True
-                ninegag = Ninegag.objects.create(title=title, source_url=url, imagevideo_path=path, is_video=is_video)
+                if url:
+                    ninegag = Ninegag.objects.create(title=title, source_url=url, imagevideo_path=path,
+                                                     is_video=is_video)
+                else:
+                    ninegag = Ninegag.objects.create(title=title,imagevideo_path=path,
+                                                     is_video=is_video)
+
             elif item_option == 'Video':
                 title = form.cleaned_data['title']
                 source_url = form.cleaned_data['source_url']
@@ -598,6 +607,7 @@ def saved_items_list(request):
         return render_to_response('funfly/saved_items_list.html', context=context)
         # return render(request,'funfly/saved_items_list.html', context)
 
+
 @login_required
 def saved_items_list_settings(request):
     if request.method == 'POST' and request.is_ajax():
@@ -612,6 +622,7 @@ def saved_items_list_settings(request):
         data = {}
         data['result'] = option
         return JsonResponse(data)
+
 
 @login_required
 def follow_user(request, pk):
