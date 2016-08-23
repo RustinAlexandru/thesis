@@ -121,7 +121,8 @@
 				<form action="{% url 'saved_items_list_settings' %}" method="POST" id="private-savelist-form">
 					<div class="form-group">
 						<label>Do you want your save list to be public or private?</label>
-						<input id="custom-toggle" type="checkbox" class="form-control" data-toggle="toggle" checked data-on="Public"
+						<input id="custom-toggle" type="checkbox" class="form-control" data-toggle="toggle" checked
+							   data-on="Public"
 							   data-off="Private" data-onstyle="danger" data-offstyle="success">
 					</div>
 				</form>
@@ -139,7 +140,14 @@
 								<p><a class="category_tag" href="#">9gag</a>| <i
 										class="fa fa-clock-o"></i> {{ item.date_added }}
 									<i class="fa fa-comment"></i>{{ item.approved_comments.count }}
-									comments</p>
+									comments
+									{% if request.user.is_authenticated %}<a class="fb-share-button fb_share" href="#"
+																			 data-href="[page_url]"
+																			 data-image="[image_url]"
+																			 data-title="[Post_title]  "
+																			 data-desc="[Post_description]"> <i
+											class="fa fa-facebook"></i> </a>{% endif %}
+								</p>
 							</div>
 							{% if item.is_video %}
 								<div class="top_video">
@@ -184,7 +192,14 @@
 								<p><a class="category_tag" href="#">videos</a>|<i
 										class="fa fa-clock-o"></i> {{ item.date_added }}
 									<i class="fa fa-comment"></i> {{ item.approved_comments.count }}
-									comments </p>
+									comments
+									{% if request.user.is_authenticated %}<a class="fb-share-button fb_share" href="#"
+																			 data-href="[page_url]"
+																			 data-image="[image_url]"
+																			 data-title="[Post_title]  "
+																			 data-desc="[Post_description]"> <i
+											class="fa fa-facebook"></i> </a>{% endif %}
+								</p>
 							</div>
 							<div class="top_video">
 								<div align="center"
@@ -218,7 +233,13 @@
 							</div>
 							<p><i class="fa fa-clock-o"></i> {{ item.date_added }}<i
 									class="fa fa-comment"></i>{{ item.approved_comments.count }}
-								comments</p>
+								comments
+								{% if request.user.is_authenticated %}<a class="fb-share-button fb_share" href="#"
+																		 data-href="[page_url]" data-image="[image_url]"
+																		 data-title="[Post_title]  "
+																		 data-desc="[Post_description]"> <i
+										class="fa fa-facebook"></i> </a>{% endif %}
+							</p>
 						</div>
 
 					{% endif %}

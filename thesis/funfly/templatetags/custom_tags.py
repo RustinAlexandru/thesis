@@ -28,4 +28,4 @@ def tranform_gender_to_string(obj):
     if obj == '0':
         return 'Female'
     else:
-        return 'Female'
+        return 'Male'

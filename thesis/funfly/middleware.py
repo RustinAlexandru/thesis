@@ -9,12 +9,10 @@ from io import BytesIO
 from PIL import Image as pil
 import StringIO
 
-
 from funfly.models import UserProfile
 
 
 class TimezoneMiddleware(object):
-
     def process_request(self, request):
         pass
         if request.user.is_authenticated() and request.user.userprofile.timezone:
@@ -24,25 +22,23 @@ class TimezoneMiddleware(object):
 
 
 def resize_avatar(file, name):
-        img = pil.open(file)
+    img = pil.open(file)
 
-        img.thumbnail((75, 75), pil.ANTIALIAS)
+    img.thumbnail((75, 75), pil.ANTIALIAS)
 
-        thumb_io = StringIO.StringIO()
-        img.save(thumb_io, 'JPEG')
+    thumb_io = StringIO.StringIO()
+    img.save(thumb_io, 'JPEG')
 
-        filename = name
+    filename = name
 
-        file = InMemoryUploadedFile(thumb_io,
-                                    u"avatar",
-                                    filename,
-                                    '.JPG',
-                                    thumb_io.len,
-                                    None)
+    file = InMemoryUploadedFile(thumb_io,
+                                u"avatar",
+                                filename,
+                                '.JPG',
+                                thumb_io.len,
+                                None)
 
-        return file
-
-
+    return file
 
 
 def save_profile(backend, user, response, *args, **kwargs):
@@ -59,7 +55,7 @@ def save_profile(backend, user, response, *args, **kwargs):
         photo = resize_avatar(photo, 'profile_pic_{}'.format(response['id']))
         if sex == 'male':
             sex = '1'
-        else:       # female
+        else:  # female
             sex = '0'
         # profile_timezone = response.get('timezone')
 

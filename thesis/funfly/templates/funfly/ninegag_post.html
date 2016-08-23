@@ -5,11 +5,11 @@
 	{{ block.super }}
 	<style>
 
-	.save_button_wrap {
-		margin-top: 1%;
-		margin-right: 2%;
+		.save_button_wrap {
+			margin-top: 1%;
+			margin-right: 2%;
 
-	}
+		}
 
 
 	</style>
@@ -31,6 +31,11 @@
 						   data-toggle="tooltip" data-container="body" title="Click to add a point!"></i>
 					</span>
 					{% endif %}
+					{% if request.user.is_authenticated %}<a class="fb-share-button fb_share" href="#"
+															 data-href="[page_url]" data-image="[image_url]"
+															 data-title="[Post_title]  "
+															 data-desc="[Post_description]"> <i
+							class="fa fa-facebook"></i> </a>{% endif %}
 				</p>
 				{% if request.user.is_authenticated %}
 					<div class="save_button_wrap">
@@ -57,11 +62,12 @@
 				{% for comment in comments %}
 					<div class="single_comment">
 						<div class="single_comment_avatar">
-							<img src="/static/funfly{{comment.user.userprofile.avatar.url }}" alt="">
+							<img src="/static/funfly{{ comment.user.userprofile.avatar.url }}" alt="">
 						</div>
 						<div class="single_comment_text">
 							<div class="sp_title">
-								<a href="{% url 'view_profile' comment.user.userprofile.pk %}"><h4> {{ comment.user }} </h4></a>
+								<a href="{% url 'view_profile' comment.user.userprofile.pk %}">
+									<h4> {{ comment.user }} </h4></a>
 								<p> {{ comment.date_added }}  </p>
 							</div>
 							<p>
@@ -80,13 +86,13 @@
 				{% endfor %}
 			</div>
 			{% if request.user.is_authenticated %}
-			<div class="comment_form">
-				<h2>Leave your comment</h2>
-				<div class="comments_form">
-					{% load crispy_forms_tags %}
-					{% crispy CommentForm CommentForm.helper %}
+				<div class="comment_form">
+					<h2>Leave your comment</h2>
+					<div class="comments_form">
+						{% load crispy_forms_tags %}
+						{% crispy CommentForm CommentForm.helper %}
+					</div>
 				</div>
-			</div>
 			{% endif %}
 		</div>
 	{% endblock %}

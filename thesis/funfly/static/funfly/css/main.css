@@ -5,6 +5,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+@import url("https://fonts.googleapis.com/css?family=Lato:300i,400|Montserrat|Roboto:300i,400|Source+Sans+Pro");
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -5817,6 +5818,12 @@ button.close {
 .main_wrapper {
   margin-top: 2%; }
 
+.single_top_img_text, .single_bottom_text, .post_9gag_bottom_text, .post_joke_bottom_text {
+  font-family: "Source Sans Pro", sans-serif; }
+
+body {
+  font-family: "Roboto", sans-serif; }
+
 .main_box ul {
   list-style: outside none none;
   padding: 0; }
@@ -6284,6 +6291,21 @@ i {
   text-align: center;
   padding-bottom: 2%; }
 
+.register-form-social-buttons {
+  margin-top: 5%;
+  margin-bottom: 5%; }
+  .register-form-social-buttons a {
+    color: white;
+    opacity: 0.9; }
+    .register-form-social-buttons a:hover {
+      color: white;
+      opacity: 1; }
+  .register-form-social-buttons .button-facebook {
+    padding-left: 5%;
+    padding-right: 5%; }
+    .register-form-social-buttons .button-facebook a {
+      background: #3b5998; }
+
 .single_comment {
   overflow: hidden;
   padding: 36px 0; }
@@ -6551,8 +6573,11 @@ div.single_video:nth-child(1) {
   color: #777; }
 
 .all_videos {
-  margin-top: 5%;
+  margin-top: 1.5%;
   margin-bottom: 5%; }
+
+.endless_page_template {
+  margin-top: 0% !important; }
 
 .error404__wrapper {
   display: inline-block;

@@ -12,12 +12,18 @@
 			</h4>
 			<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
 					class="fa fa-clock-o"></i> {{ video.date_added }}
-				<i class="fa fa-comment"></i>{{ video.approved_comments.count }} comments </p>
+				<i class="fa fa-comment"></i>{{ video.approved_comments.count }} comments
+				{% if request.user.is_authenticated %}<a class="fb-share-button fb_share" href="#"
+														 data-href="[page_url]" data-image="[image_url]"
+														 data-title="[Post_title]  "
+														 data-desc="[Post_description]"> <i
+						class="fa fa-facebook"></i> </a>{% endif %}
+			</p>
 			{% if request.user.is_authenticated %}
 				<div class="save_button_wrap">
 					<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ video.pk }}"
-									  data-item-type="Youtube" data-toggle="tooltip" data-container="body"
-									  title="Click to save the item into your personal list!">
+						  data-item-type="Youtube" data-toggle="tooltip" data-container="body"
+						  title="Click to save the item into your personal list!">
 					</span>
 				</div>
 			{% endif %}

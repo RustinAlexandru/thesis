@@ -14,21 +14,7 @@ var data = {
 };
 
 
-function sendRequest(data) {
 
-
-    $.ajax({
-        url: '',
-        type: 'GET',
-        data: data,
-        success: function (data) {
-            $(".endless_page_template").html(data)
-        },
-        error: function (err) {
-            console.log('err: ' + err);
-        }
-    });
-}
 
 
 $(document).ready(function () {
@@ -228,6 +214,23 @@ $(document).ready(function () {
 
         
     }
+
+    function sendRequest(data) {
+
+
+    $.ajax({
+        url: '',
+        type: 'GET',
+        data: data,
+        success: function (data) {
+            $(".endless_page_template").html(data);
+            hideAddPointButtons();
+        },
+        error: function (err) {
+            console.log('err: ' + err);
+        }
+    });
+}
 
 });
 

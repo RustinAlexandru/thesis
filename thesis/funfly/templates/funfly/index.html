@@ -6,6 +6,7 @@
 
 	<div class="social-media-sidebar">
 
+		{% if request.user.is_authenticated %}
 		<div id="followers" class="social-list">
 			<div class="count">
 				<p>{{ followers.count }}</p>
@@ -34,6 +35,6 @@
 
 			</ul>
 		</div>
-
+		{% endif %}
 	</div>
 {% endblock %}

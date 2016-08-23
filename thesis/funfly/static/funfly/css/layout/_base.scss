@@ -1,3 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300i,400|Montserrat|Roboto:300i,400|Source+Sans+Pro');
+
+
+$robo: 'Roboto', sans-serif;
+$lato: 'Lato', sans-serif;
+$montserrat: 'Montserrat', sans-serif;
+$source-sans-pro: 'Source Sans Pro', sans-serif;
+
 .main_wrapper {
   margin-top: 2%;
+}
+
+
+.single_top_img_text, .single_bottom_text, .post_9gag_bottom_text, .post_joke_bottom_text {
+  font-family: $source-sans-pro;
+}
+
+body {
+  font-family: $robo;
 }

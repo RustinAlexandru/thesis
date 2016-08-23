@@ -22,7 +22,13 @@
 				<h2><a href=""> {{ object.title }} </a></h2>
 				<p><a class="category_tag" href="{% url 'videos' %}">videos</a>| <i
 						class="fa fa-clock-o"></i> {{ object.date_added }}
-					<i class="fa fa-comment"></i> {{ object.approved_comments.count }} comments</p>
+					<i class="fa fa-comment"></i> {{ object.approved_comments.count }} comments
+					{% if request.user.is_authenticated %}<a class="fb-share-button fb_share" href="#"
+															 data-href="[page_url]" data-image="[image_url]"
+															 data-title="[Post_title]  "
+															 data-desc="[Post_description]"> <i
+							class="fa fa-facebook"></i> </a>{% endif %}
+				</p>
 				{% if request.user.is_authenticated %}
 					<div class="save_button_wrap">
 						<span class="glyphicon glyphicon-bookmark save_item" data-item-id="{{ object.pk }}"
@@ -37,15 +43,16 @@
 				</div>
 			</div>
 			<div class="sp_comments_box">
-				<h2>{{ comments.count}} comments</h2>
+				<h2>{{ comments.count }} comments</h2>
 				{% for comment in comments %}
 					<div class="single_comment">
 						<div class="single_comment_avatar">
-							<img src="/static/funfly{{comment.user.userprofile.avatar.url }}" alt="">
+							<img src="/static/funfly{{ comment.user.userprofile.avatar.url }}" alt="">
 						</div>
 						<div class="single_comment_text">
 							<div class="sp_title">
-								<a href="{% url 'view_profile' comment.user.userprofile.pk %}"><h4> {{ comment.user }} </h4></a>
+								<a href="{% url 'view_profile' comment.user.userprofile.pk %}">
+									<h4> {{ comment.user }} </h4></a>
 								<p> {{ comment.date_added }}  </p>
 							</div>
 							<p>

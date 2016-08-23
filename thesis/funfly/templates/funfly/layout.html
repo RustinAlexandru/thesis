@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load custom_tags %}
+{% load social_share %}
 {% load sass_tags %}
 
 <! DOCTYPE html>
@@ -89,6 +90,53 @@
 
 
 <body>
+<div id="fb-root"></div>
+
+<script type='text/javascript'>
+
+	window.fbAsyncInit = function () {
+		FB.init({
+			appId: 527379650781936,
+			status: true,
+			cookie: true,
+			xfbml: true,
+			version: 'v2.7'
+		});
+	};
+
+
+	(function (d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s);
+		js.id = id;
+		js.src = "http://connect.facebook.net/en_US/sdk.js#version=v2.6&appId=527379650781936&status=true&cookie=true&xfbml=true";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+
+	function postToFeed(title, desc, url, image) {
+		var obj = {method: 'feed', link: url, picture: image, name: title, description: desc};
+
+		function callback(response) {
+		}
+
+		FB.ui(obj, callback);
+	}
+
+	var fbShareBtn = $('.fb_share');
+	//fbShareBtn.addEventListener('click', function(e) {
+	$('.fb_share').click(function (e) {
+		e.preventDefault();
+		var title = fbShareBtn.getAttribute('data-title'),
+				desc = fbShareBtn.getAttribute('data-desc'),
+				url = fbShareBtn.getAttribute('href'),
+				image = fbShareBtn.getAttribute('data-image');
+		postToFeed(title, desc, url, image);
+		return false;
+	});
+
+</script>
+
 {# Header Area Start #}
 <header class="header_area">
 	<div class="header_top">
@@ -319,7 +367,13 @@
 													<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
 															class="fa fa-clock-o"></i> {{ items.0.date_added }}<i
 															class="fa fa-comment"></i>{{ items.0.approved_comments.count }}
-														comments</p>
+														comments {% if request.user.is_authenticated %}
+															<a class="fb-share-button fb_share" href="#"
+															   data-href="[page_url]" data-image="[image_url]"
+															   data-title="[Post_title]  "
+															   data-desc="[Post_description]"> <i
+																	class="fa fa-facebook"></i> </a>{% endif %}
+													</p>
 												</div>
 												<div class="all_gags_bottom">
 													<div class="gags_bottom">
@@ -370,7 +424,14 @@
 																  href="{% url 'ninegags' %}">9gag</a>| <i
 																	class="fa fa-clock-o"></i> {{ items.1.date_added }}
 																<i class="fa fa-comment"></i>{{ items.1.approved_comments.count }}
-																comments</p>
+																comments {% if request.user.is_authenticated %}
+																	<a class="fb-share-button fb_share" href="#"
+																	   data-href="[page_url]"
+																	   data-image="[image_url]"
+																	   data-title="[Post_title]  "
+																	   data-desc="[Post_description]"> <i
+																			class="fa fa-facebook"></i> </a>{% endif %}
+															</p>
 														</div>
 													</div>
 													<div class="gags_bottom">
@@ -421,7 +482,14 @@
 																  href="{% url 'ninegags' %}">9gag</a>| <i
 																	class="fa fa-clock-o"></i> {{ items.2.date_added }}
 																<i class="fa fa-comment"></i>{{ items.2.approved_comments.count }}
-																comments</p>
+																comments
+																{% if request.user.is_authenticated %}
+																	<a class="fb-share-button fb_share" href="#"
+																	   data-href="[page_url]" data-image="[image_url]"
+																	   data-title="[Post_title]  "
+																	   data-desc="[Post_description]"> <i
+																			class="fa fa-facebook"></i> </a>{% endif %}
+															</p>
 														</div>
 													</div>
 													<div class="gags_bottom last_bottom">
@@ -472,7 +540,14 @@
 																  href="{% url 'ninegags' %}">9gag</a>| <i
 																	class="fa fa-clock-o"></i> {{ items.3.date_added }}
 																<i class="fa fa-comment"></i>{{ items.3.approved_comments.count }}
-																comments</p>
+																comments
+																{% if request.user.is_authenticated %}
+																	<a class="fb-share-button fb_share" href="#"
+																	   data-href="[page_url]" data-image="[image_url]"
+																	   data-title="[Post_title]  "
+																	   data-desc="[Post_description]"> <i
+																			class="fa fa-facebook"></i> </a>{% endif %}
+															</p>
 														</div>
 													</div>
 												</div>
@@ -527,7 +602,14 @@
 													<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
 															class="fa fa-clock-o"></i>{{ items.4.date_added }}<i
 															class="fa fa-comment"></i>{{ items.4.approved_comments.count }}
-														comments</p>
+														comments
+														{% if request.user.is_authenticated %}
+															<a class="fb-share-button fb_share" href="#"
+															   data-href="[page_url]" data-image="[image_url]"
+															   data-title="[Post_title]  "
+															   data-desc="[Post_description]"> <i
+																	class="fa fa-facebook"></i> </a>{% endif %}
+													</p>
 												</div>
 												<div class="all_gags_bottom">
 													<div class="gags_bottom">
@@ -578,7 +660,14 @@
 																  href="{% url 'ninegags' %}">9gag</a>| <i
 																	class="fa fa-clock-o"></i> {{ items.5.date_added }}
 																<i class="fa fa-comment"></i>{{ items.5.approved_comments.count }}
-																comments</p>
+																comments
+																{% if request.user.is_authenticated %}
+																	<a class="fb-share-button fb_share" href="#"
+																	   data-href="[page_url]" data-image="[image_url]"
+																	   data-title="[Post_title]  "
+																	   data-desc="[Post_description]"> <i
+																			class="fa fa-facebook"></i> </a>{% endif %}
+															</p>
 														</div>
 													</div>
 													<div class="gags_bottom">
@@ -629,7 +718,14 @@
 																  href="{% url 'ninegags' %}">9gag</a>| <i
 																	class="fa fa-clock-o"></i> {{ items.6.date_added }}
 																<i class="fa fa-comment"></i>{{ items.6.approved_comments.count }}
-																comments</p>
+																comments
+																{% if request.user.is_authenticated %}
+																	<a class="fb-share-button fb_share" href="#"
+																	   data-href="[page_url]" data-image="[image_url]"
+																	   data-title="[Post_title]  "
+																	   data-desc="[Post_description]"> <i
+																			class="fa fa-facebook"></i> </a>{% endif %}
+															</p>
 														</div>
 													</div>
 													<div class="gags_bottom last_bottom">
@@ -680,7 +776,14 @@
 																  href="{% url 'ninegags' %}">9gag</a>| <i
 																	class="fa fa-clock-o"></i> {{ items.7.date_added }}
 																<i class="fa fa-comment"></i>{{ items.7.approved_comments.count }}
-																comments</p>
+																comments
+																{% if request.user.is_authenticated %}
+																	<a class="fb-share-button fb_share" href="#"
+																	   data-href="[page_url]" data-image="[image_url]"
+																	   data-title="[Post_title]  "
+																	   data-desc="[Post_description]"> <i
+																			class="fa fa-facebook"></i> </a>{% endif %}
+															</p>
 														</div>
 													</div>
 												</div>
@@ -726,7 +829,13 @@
 														<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
 																class="fa fa-clock-o"></i> {{ videos.0.added_at }}
 															<i class="fa fa-comment"></i> {{ videos.0.approved_comments.count }}
-															comments </p>
+															comments {% if request.user.is_authenticated %}
+																<a class="fb-share-button fb_share" href="#"
+																   data-href="[page_url]" data-image="[image_url]"
+																   data-title="[Post_title]  "
+																   data-desc="[Post_description]"> <i
+																		class="fa fa-facebook"></i> </a>{% endif %}
+														</p>
 													</div>
 												</div>
 												<div class="videos_left last_bottom">
@@ -756,7 +865,14 @@
 														<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
 																class="fa fa-clock-o"></i> {{ videos.1.date_added }}
 															<i class="fa fa-comment"></i> {{ videos.1.approved_comments.count }}
-															comments </p>
+															comments
+															{% if request.user.is_authenticated %}
+																<a class="fb-share-button fb_share" href="#"
+																   data-href="[page_url]" data-image="[image_url]"
+																   data-title="[Post_title]  "
+																   data-desc="[Post_description]"> <i
+																		class="fa fa-facebook"></i> </a>{% endif %}
+														</p>
 													</div>
 												</div>
 											</div>
@@ -790,7 +906,14 @@
 														<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
 																class="fa fa-clock-o"></i> {{ videos.2.date_added }}
 															<i class="fa fa-comment"></i>{{ videos.2.approved_comments.count }}
-															comments </p>
+															comments
+															{% if request.user.is_authenticated %}
+																<a class="fb-share-button fb_share" href="#"
+																   data-href="[page_url]" data-image="[image_url]"
+																   data-title="[Post_title]  "
+																   data-desc="[Post_description]"> <i
+																		class="fa fa-facebook"></i> </a>{% endif %}
+														</p>
 													</div>
 												</div>
 												<div class="videos_left last_bottom">
@@ -820,7 +943,14 @@
 														<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
 																class="fa fa-clock-o"></i> {{ videos.3.date_added }}
 															<i class="fa fa-comment"></i>{{ videos.3.approved_comments.count }}
-															comments </p>
+															comments
+															{% if request.user.is_authenticated %}
+																<a class="fb-share-button fb_share" href="#"
+																   data-href="[page_url]" data-image="[image_url]"
+																   data-title="[Post_title]  "
+																   data-desc="[Post_description]"> <i
+																		class="fa fa-facebook"></i> </a>{% endif %}
+														</p>
 													</div>
 												</div>
 											</div>
@@ -852,6 +982,12 @@
 																	class="fa fa-clock-o"></i> {{ jokes.0.date_added }}<i
 																	class="fa fa-comment"></i>{{ jokes.0.approved_comments.count }}
 															comments
+															{% if request.user.is_authenticated %}
+																<a class="fb-share-button fb_share" href="#"
+																   data-href="[page_url]" data-image="[image_url]"
+																   data-title="[Post_title]  "
+																   data-desc="[Post_description]"> <i
+																		class="fa fa-facebook"></i> </a>{% endif %}
 														</p>
 													</div>
 													{% if request.user.is_authenticated %}
@@ -877,6 +1013,12 @@
 																	class="fa fa-clock-o"></i> {{ jokes.1.date_added }}<i
 																	class="fa fa-comment"></i>{{ jokes.1.approved_comments.count }}
 															comments
+															{% if request.user.is_authenticated %}
+																<a class="fb-share-button fb_share" href="#"
+																   data-href="[page_url]" data-image="[image_url]"
+																   data-title="[Post_title]  "
+																   data-desc="[Post_description]"> <i
+																		class="fa fa-facebook"></i> </a>{% endif %}
 														</p>
 													</div>
 													{% if request.user.is_authenticated %}
@@ -902,7 +1044,14 @@
 																	class="fa fa-clock-o"></i> {{ jokes.2.date_added }}<i
 																	class="fa fa-comment"></i>{{ jokes.2.approved_comments.count }}
 															comments
-														</p></div>
+															{% if request.user.is_authenticated %}
+																<a class="fb-share-button fb_share" href="#"
+																   data-href="[page_url]" data-image="[image_url]"
+																   data-title="[Post_title]  "
+																   data-desc="[Post_description]"> <i
+																		class="fa fa-facebook"></i> </a>{% endif %}
+														</p>
+													</div>
 													{% if request.user.is_authenticated %}
 														<div class="save_button_wrap">
 															<span class="glyphicon glyphicon-bookmark save_item"
@@ -930,6 +1079,12 @@
 																	class="fa fa-clock-o"></i> {{ jokes.3.date_added }}<i
 																	class="fa fa-comment"></i>{{ jokes.3.approved_comments.count }}
 															comments
+															{% if request.user.is_authenticated %}
+																<a class="fb-share-button fb_share" href="#"
+																   data-href="[page_url]" data-image="[image_url]"
+																   data-title="[Post_title]  "
+																   data-desc="[Post_description]"> <i
+																		class="fa fa-facebook"></i> </a>{% endif %}
 														</p>
 													</div>
 													{% if request.user.is_authenticated %}
@@ -955,6 +1110,12 @@
 																	class="fa fa-clock-o"></i> {{ jokes.4.date_added }}<i
 																	class="fa fa-comment"></i>{{ jokes.4.approved_comments.count }}
 															comments
+															{% if request.user.is_authenticated %}
+																<a class="fb-share-button fb_share" href="#"
+																   data-href="[page_url]" data-image="[image_url]"
+																   data-title="[Post_title]  "
+																   data-desc="[Post_description]"> <i
+																		class="fa fa-facebook"></i> </a>{% endif %}
 														</p>
 													</div>
 													{% if request.user.is_authenticated %}
@@ -980,6 +1141,12 @@
 																	class="fa fa-clock-o"></i> {{ jokes.5.date_added }}<i
 																	class="fa fa-comment"></i>{{ jokes.5.approved_comments.count }}
 															comments
+															{% if request.user.is_authenticated %}
+																<a class="fb-share-button fb_share" href="#"
+																   data-href="[page_url]" data-image="[image_url]"
+																   data-title="[Post_title]  "
+																   data-desc="[Post_description]"> <i
+																		class="fa fa-facebook"></i> </a>{% endif %}
 														</p>
 													</div>
 													{% if request.user.is_authenticated %}

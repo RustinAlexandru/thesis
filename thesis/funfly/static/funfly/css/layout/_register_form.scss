@@ -14,3 +14,23 @@
     padding-bottom: 2%;
   }
 }
+
+.register-form-social-buttons {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  a {
+    color: white; // In yourUse @body-bg
+    opacity: 0.9;
+    &:hover {
+      color: white;
+      opacity: 1;
+    }
+  }
+  .button-facebook {
+    padding-left: 5%;
+    padding-right: 5%;
+    a {
+      background: #3b5998;
+    }
+  }
+}
