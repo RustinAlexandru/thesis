@@ -56,9 +56,15 @@ def index(request):
     left_6_jokes = Joke.objects.order_by('-pk')[:6]
     left_4_videos = Youtube.objects.order_by('-pk')[:4]
     context = {
-        'items': left_8_items,
-        'jokes': left_6_jokes,
-        'videos': left_4_videos,
+        'items': [{'item': post,
+                   'url': request.build_absolute_uri(reverse('ninegag_post_details', args=[post.pk]))}
+                  for post in left_8_items],
+        'jokes': [{'joke': post,
+                   'url': request.build_absolute_uri(reverse('joke_post_details', args=[post.pk]))}
+                  for post in left_6_jokes],
+        'videos': [{'video': post,
+                   'url': request.build_absolute_uri(reverse('video_post_details', args=[post.pk]))}
+                  for post in left_4_videos],
     }
     user = request.user
     if user.is_authenticated():
@@ -88,7 +94,7 @@ def index(request):
 
         return JsonResponse(data_sent)
 
-    return render(request, 'funfly/index.html', context)
+    return render(request, 'funfly/layout.html', context)
 
 
 def register(request):

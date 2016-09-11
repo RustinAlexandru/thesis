@@ -24,10 +24,8 @@ hours_ago = now + ago
 hours_ago = str(hours_ago).replace(" ", "T")
 hours_ago = hours_ago[:hours_ago.find(".")] + "Z"
 
-
 def youtube_search(query):
     youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=DEVELOPER_KEY)
-
 
     search_response = youtube.search().list(
         q=query,
@@ -38,7 +36,6 @@ def youtube_search(query):
         type='video',
         publishedAfter=hours_ago,
     ).execute()
-
 
     videos = []
 

@@ -67,17 +67,61 @@
 						submitIcon.click();
 					}
 				});
+
+					window.fbAsyncInit = function () {
+			FB.init({
+				appId: 527379650781936,
+				status: true,
+				cookie: true,
+				xfbml: true,
+				version: 'v2.7'
+			});
+		};
+
+
+		(function (d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "http://connect.facebook.net/en_US/sdk.js#version=v2.6&appId=527379650781936&status=true&cookie=true&xfbml=true";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
+		function postToFeed(title, desc, url, image) {
+			var obj = {method: 'feed', link: url, name: title, description: desc};
+
+			function callback(response) {
+			}
+
+			FB.ui(obj, callback);
+		}
+
+		$('.fb_share').on('click', function (e) {
+			e.preventDefault();
+			var obj = $(this);
+			var title = obj.data('title');
+			var desc = obj.data('desc');
+			var url = obj.data('href');
+			postToFeed(title, desc, url);
+			return false;
+		});
+
 			});
 			function buttonUp() {
 				var inputVal = $('.searchbox-input').val();
 				inputVal = $.trim(inputVal).length;
 				if (inputVal !== 0) {
-					$('.searchbox-icon').css('display', 'none');
+					$('.searchbox-icon').hide();
 				} else {
 					$('.searchbox-input').val('');
-					$('.searchbox-icon').css('display', 'block');
+					$('.searchbox-icon').show();
 				}
 			}
+
+
+
+
 		</script>
 
 		{#	<style>#}
@@ -85,6 +129,7 @@
 		{#			background: url(' {% static "funfly/imagesandvideos/backgroundpngf.png" %} ') no-repeat;#}
 		{#			}#}
 		{#	</style>#}
+
 	</head>
 {% endblock %}
 
@@ -92,50 +137,7 @@
 <body>
 <div id="fb-root"></div>
 
-<script type='text/javascript'>
 
-	window.fbAsyncInit = function () {
-		FB.init({
-			appId: 527379650781936,
-			status: true,
-			cookie: true,
-			xfbml: true,
-			version: 'v2.7'
-		});
-	};
-
-
-	(function (d, s, id) {
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) return;
-		js = d.createElement(s);
-		js.id = id;
-		js.src = "http://connect.facebook.net/en_US/sdk.js#version=v2.6&appId=527379650781936&status=true&cookie=true&xfbml=true";
-		fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));
-
-	function postToFeed(title, desc, url, image) {
-		var obj = {method: 'feed', link: url, picture: image, name: title, description: desc};
-
-		function callback(response) {
-		}
-
-		FB.ui(obj, callback);
-	}
-
-	var fbShareBtn = $('.fb_share');
-	//fbShareBtn.addEventListener('click', function(e) {
-	$('.fb_share').click(function (e) {
-		e.preventDefault();
-		var title = fbShareBtn.getAttribute('data-title'),
-				desc = fbShareBtn.getAttribute('data-desc'),
-				url = fbShareBtn.getAttribute('href'),
-				image = fbShareBtn.getAttribute('data-image');
-		postToFeed(title, desc, url, image);
-		return false;
-	});
-
-</script>
 
 {# Header Area Start #}
 <header class="header_area">
@@ -322,13 +324,13 @@
 									<div class="row">
 										<div class="col-md-6 col-sm-6 col-xs-12">
 											<div class="left_gags">
-												{% if items.0.is_video %}
+												{% if items.0.item.is_video %}
 													<div class="top_video">
 														<div align="center"
 															 class="embed-responsive embed-responsive-16by9">
 															<video preload="auto" loop muted controls
 																   class="embed-responsive-item">
-																<source src="{% static items.0.imagevideo_path %}"
+																<source src="{% static items.0.item.imagevideo_path %}"
 																		type="video/mp4">
 																Your browser does not support the video tag!
 															</video>
@@ -336,7 +338,7 @@
 														{% if request.user.is_authenticated %}
 															<div class="save_button_wrap">
 																<span class="glyphicon glyphicon-bookmark save_item"
-																	  data-item-id="{{ items.0.pk }}"
+																	  data-item-id="{{ items.0.item.pk }}"
 																	  data-item-type="Ninegag" data-toggle="tooltip"
 																	  data-container="body"
 																	  title="Click to save the item into your personal list!"></span>
@@ -346,12 +348,12 @@
 												{% else %}
 													<div class="top_img">
 														<img class="img-responsive"
-															 src="{% static items.0.imagevideo_path %}" alt="">
+															 src="{% static items.0.item.imagevideo_path %}" alt="">
 													</div>
 													{% if request.user.is_authenticated %}
 														<div class="save_button_wrap">
 															<span class="glyphicon glyphicon-bookmark save_item"
-																  data-item-id="{{ items.0.pk }}"
+																  data-item-id="{{ items.0.item.pk }}"
 																  data-item-type="Ninegag" data-toggle="tooltip"
 																  data-container="body"
 																  title="Click to save the item into your personal list!"></span>
@@ -361,29 +363,29 @@
 												<div class="single_top_img_text">
 													<h4>
 														{% if items %}
-															<a href="{% url 'ninegag_post_details' items.0.pk %}"> {{ items.0.title }} </a>
+															<a href="{% url 'ninegag_post_details' items.0.item.pk %}"> {{ items.0.item.title }} </a>
 														{% endif %}
 													</h4>
 													<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
-															class="fa fa-clock-o"></i> {{ items.0.date_added }}<i
-															class="fa fa-comment"></i>{{ items.0.approved_comments.count }}
+															class="fa fa-clock-o"></i> {{ items.0.item.date_added }}<i
+															class="fa fa-comment"></i>{{ items.0.item.approved_comments.count }}
 														comments {% if request.user.is_authenticated %}
 															<a class="fb-share-button fb_share" href="#"
-															   data-href="[page_url]" data-image="[image_url]"
-															   data-title="[Post_title]  "
-															   data-desc="[Post_description]"> <i
+															   data-href="{{ items.0.url }}" data-image="[image_url]"
+															   data-title="{{ items.0.item.title }}"
+															   data-desc=""> <i
 																	class="fa fa-facebook"></i> </a>{% endif %}
 													</p>
 												</div>
 												<div class="all_gags_bottom">
 													<div class="gags_bottom">
-														{% if items.1.is_video %}
+														{% if items.1.item.is_video %}
 															<div class="top_video">
 																<div align="center"
 																	 class="embed-responsive embed-responsive-16by9">
 																	<video preload="auto" loop muted controls
 																		   class="embed-responsive-item">
-																		<source src="{% static items.1.imagevideo_path %}"
+																		<source src="{% static items.1.item.imagevideo_path %}"
 																				type="video/mp4">
 																		Your browser does not support the video tag!
 																	</video>
@@ -391,7 +393,7 @@
 																{% if request.user.is_authenticated %}
 																	<div class="save_button_wrap">
 																		<span class="glyphicon glyphicon-bookmark save_item "
-																			  data-item-id="{{ items.1.pk }}"
+																			  data-item-id="{{ items.1.item.pk }}"
 																			  data-item-type="Ninegag"
 																			  data-toggle="tooltip"
 																			  data-container="body"
@@ -402,12 +404,12 @@
 														{% else %}
 															<div class="top_img">
 																<img class="img-responsive"
-																	 src="{% static items.1.imagevideo_path %}" alt="">
+																	 src="{% static items.1.item.imagevideo_path %}" alt="">
 															</div>
 															{% if request.user.is_authenticated %}
 																<div class="save_button_wrap">
 																	<span class="glyphicon glyphicon-bookmark save_item"
-																		  data-item-id="{{ items.1.pk }}"
+																		  data-item-id="{{ items.1.item.pk }}"
 																		  data-item-type="Ninegag" data-toggle="tooltip"
 																		  data-container="body"
 																		  title="Click to save the item into your personal list!"></span>
@@ -417,31 +419,31 @@
 														<div class="single_bottom_text">
 															<h4>
 																{% if items %}
-																	<a href="{% url 'ninegag_post_details' items.1.pk %}"> {{ items.1.title }} </a>
+																	<a href="{% url 'ninegag_post_details' items.1.item.pk %}"> {{ items.1.item.title }} </a>
 																{% endif %}
 															</h4>
 															<p><a class="category_tag"
 																  href="{% url 'ninegags' %}">9gag</a>| <i
-																	class="fa fa-clock-o"></i> {{ items.1.date_added }}
-																<i class="fa fa-comment"></i>{{ items.1.approved_comments.count }}
+																	class="fa fa-clock-o"></i> {{ items.1.item.date_added }}
+																<i class="fa fa-comment"></i>{{ items.1.item.approved_comments.count }}
 																comments {% if request.user.is_authenticated %}
 																	<a class="fb-share-button fb_share" href="#"
-																	   data-href="[page_url]"
+																	   data-href="{{ items.1.url }}"
 																	   data-image="[image_url]"
-																	   data-title="[Post_title]  "
-																	   data-desc="[Post_description]"> <i
+																	   data-title="{{ items.1.item.title }}  "
+																	   data-desc=""> <i
 																			class="fa fa-facebook"></i> </a>{% endif %}
 															</p>
 														</div>
 													</div>
 													<div class="gags_bottom">
-														{% if items.2.is_video %}
+														{% if items.2.item.is_video %}
 															<div class="top_video">
 																<div align="center"
 																	 class="embed-responsive embed-responsive-16by9">
 																	<video preload="auto" loop muted controls
 																		   class="embed-responsive-item">
-																		<source src="{% static items.2.imagevideo_path %}"
+																		<source src="{% static items.2.item.imagevideo_path %}"
 																				type="video/mp4">
 																		Your browser does not support the video tag!
 																	</video>
@@ -449,7 +451,7 @@
 																{% if request.user.is_authenticated %}
 																	<div class="save_button_wrap">
 																		<span class="glyphicon glyphicon-bookmark save_item"
-																			  data-item-id="{{ items.2.pk }}"
+																			  data-item-id="{{ items.2.item.pk }}"
 																			  data-item-type="Ninegag"
 																			  data-toggle="tooltip"
 																			  data-container="body"
@@ -460,12 +462,12 @@
 														{% else %}
 															<div class="top_img">
 																<img class="img-responsive"
-																	 src="{% static items.2.imagevideo_path %}" alt="">
+																	 src="{% static items.2.item.imagevideo_path %}" alt="">
 															</div>
 															{% if request.user.is_authenticated %}
 																<div class="save_button_wrap">
 																	<span class="glyphicon glyphicon-bookmark save_item"
-																		  data-item-id="{{ items.2.pk }}"
+																		  data-item-id="{{ items.2.item.pk }}"
 																		  data-item-type="Ninegag" data-toggle="tooltip"
 																		  data-container="body"
 																		  title="Click to save the item into your personal list!"></span>
@@ -475,31 +477,31 @@
 														<div class="single_bottom_text">
 															<h4>
 																{% if items %}
-																	<a href="{% url 'ninegag_post_details' items.2.pk %}"> {{ items.2.title }} </a>
+																	<a href="{% url 'ninegag_post_details' items.2.item.pk %}"> {{ items.2.item.title }} </a>
 																{% endif %}
 															</h4>
 															<p><a class="category_tag"
 																  href="{% url 'ninegags' %}">9gag</a>| <i
-																	class="fa fa-clock-o"></i> {{ items.2.date_added }}
-																<i class="fa fa-comment"></i>{{ items.2.approved_comments.count }}
+																	class="fa fa-clock-o"></i> {{ items.2.item.date_added }}
+																<i class="fa fa-comment"></i>{{ items.2.item.approved_comments.count }}
 																comments
 																{% if request.user.is_authenticated %}
 																	<a class="fb-share-button fb_share" href="#"
-																	   data-href="[page_url]" data-image="[image_url]"
-																	   data-title="[Post_title]  "
-																	   data-desc="[Post_description]"> <i
+																	   data-href="{{ items.2.url }}" data-image="[image_url]"
+																	   data-title="{{ items.2.item.title }}  "
+																	   data-desc=""> <i
 																			class="fa fa-facebook"></i> </a>{% endif %}
 															</p>
 														</div>
 													</div>
 													<div class="gags_bottom last_bottom">
-														{% if items.3.is_video %}
+														{% if items.3.item.item.is_video %}
 															<div class="top_video">
 																<div align="center"
 																	 class="embed-responsive embed-responsive-16by9">
 																	<video preload="auto" loop muted controls
 																		   class="embed-responsive-item">
-																		<source src="{% static items.3.imagevideo_path %}"
+																		<source src="{% static items.3.item.item.imagevideo_path %}"
 																				type="video/mp4">
 																		Your browser does not support the video tag!
 																	</video>
@@ -507,7 +509,7 @@
 																{% if request.user.is_authenticated %}
 																	<div class="save_button_wrap">
 																		<span class="glyphicon glyphicon-bookmark save_item"
-																			  data-item-id="{{ items.3.pk }}"
+																			  data-item-id="{{ items.3.item.pk }}"
 																			  data-item-type="Ninegag"
 																			  data-toggle="tooltip"
 																			  data-container="body"
@@ -518,12 +520,12 @@
 														{% else %}
 															<div class="top_img">
 																<img class="img-responsive"
-																	 src="{% static items.3.imagevideo_path %}" alt="">
+																	 src="{% static items.3.item.imagevideo_path %}" alt="">
 															</div>
 															{% if request.user.is_authenticated %}
 																<div class="save_button_wrap">
 																	<span class="glyphicon glyphicon-bookmark save_item"
-																		  data-item-id="{{ items.3.pk }}"
+																		  data-item-id="{{ items.3.item.pk }}"
 																		  data-item-type="Ninegag" data-toggle="tooltip"
 																		  data-container="body"
 																		  title="Click to save the item into your personal list!"></span>
@@ -533,19 +535,19 @@
 														<div class="single_bottom_text">
 															<h4>
 																{% if items %}
-																	<a href="{% url 'ninegag_post_details' items.3.pk %}"> {{ items.3.title }}</a>
+																	<a href="{% url 'ninegag_post_details' items.3.item.pk %}"> {{ items.3.item.title }}</a>
 																{% endif %}
 															</h4>
 															<p><a class="category_tag"
 																  href="{% url 'ninegags' %}">9gag</a>| <i
-																	class="fa fa-clock-o"></i> {{ items.3.date_added }}
-																<i class="fa fa-comment"></i>{{ items.3.approved_comments.count }}
+																	class="fa fa-clock-o"></i> {{ items.3.item.date_added }}
+																<i class="fa fa-comment"></i>{{ items.3.item.approved_comments.count }}
 																comments
 																{% if request.user.is_authenticated %}
 																	<a class="fb-share-button fb_share" href="#"
-																	   data-href="[page_url]" data-image="[image_url]"
-																	   data-title="[Post_title]  "
-																	   data-desc="[Post_description]"> <i
+																	   data-href="{{ items.3.url }}" data-image="[image_url]"
+																	   data-title="{{ items.3.item.title }}"
+																	   data-desc=""> <i
 																			class="fa fa-facebook"></i> </a>{% endif %}
 															</p>
 														</div>
@@ -555,13 +557,13 @@
 										</div>
 										<div class="col-md-6 col-sm-6 col-xs-12">
 											<div class="left_gags">
-												{% if items.4.is_video %}
+												{% if items.4.item.is_video %}
 													<div class="top_video">
 														<div align="center"
 															 class="embed-responsive embed-responsive-16by9">
 															<video preload="auto" loop muted controls
 																   class="embed-responsive-item">
-																<source src="{% static items.4.imagevideo_path %}"
+																<source src="{% static items.4.item.imagevideo_path %}"
 																		type="video/mp4">
 																Your browser does not support the video tag!
 															</video>
@@ -569,7 +571,7 @@
 														{% if request.user.is_authenticated %}
 															<div class="save_button_wrap">
 																<span class="glyphicon glyphicon-bookmark save_item"
-																	  data-item-id="{{ items.4.pk }}"
+																	  data-item-id="{{ items.4.item.pk }}"
 																	  data-item-type="Ninegag" data-toggle="tooltip"
 																	  data-container="body"
 																	  title="Click to save the item into your personal list!"></span>
@@ -580,13 +582,13 @@
 												{% else %}
 													<div class="top_img">
 														<img class="img-responsive"
-															 src="{% static items.4.imagevideo_path %}"
+															 src="{% static items.4.item.imagevideo_path %}"
 															 alt="">
 													</div>
 													{% if request.user.is_authenticated %}
 														<div class="save_button_wrap">
 															<span class="glyphicon glyphicon-bookmark save_item"
-																  data-item-id="{{ items.4.pk }}"
+																  data-item-id="{{ items.4.item.pk }}"
 																  data-item-type="Ninegag" data-toggle="tooltip"
 																  data-container="body"
 																  title="Click to save the item into your personal list!"></span>
@@ -596,30 +598,30 @@
 												<div class="single_top_img_text">
 													<h4>
 														{% if items %}
-															<a href="{% url 'ninegag_post_details' items.4.pk %}"> {{ items.4.title }}</a>
+															<a href="{% url 'ninegag_post_details' items.4.item.pk %}"> {{ items.4.item.title }}</a>
 														{% endif %}
 													</h4>
 													<p><a class="category_tag" href="{% url 'ninegags' %}">9gag</a>| <i
-															class="fa fa-clock-o"></i>{{ items.4.date_added }}<i
-															class="fa fa-comment"></i>{{ items.4.approved_comments.count }}
+															class="fa fa-clock-o"></i>{{ items.4.item.date_added }}<i
+															class="fa fa-comment"></i>{{ items.4.item.approved_comments.count }}
 														comments
 														{% if request.user.is_authenticated %}
 															<a class="fb-share-button fb_share" href="#"
-															   data-href="[page_url]" data-image="[image_url]"
-															   data-title="[Post_title]  "
-															   data-desc="[Post_description]"> <i
+															   data-href="{{ items.4.url }}" data-image="[image_url]"
+															   data-title="{{ items.4.item.title }}"
+															   data-desc=""> <i
 																	class="fa fa-facebook"></i> </a>{% endif %}
 													</p>
 												</div>
 												<div class="all_gags_bottom">
 													<div class="gags_bottom">
-														{% if items.5.is_video %}
+														{% if items.5.item.is_video %}
 															<div class="top_video">
 																<div align="center"
 																	 class="embed-responsive embed-responsive-16by9">
 																	<video preload="auto" loop muted controls
 																		   class="embed-responsive-item">
-																		<source src="{% static items.5.imagevideo_path %}"
+																		<source src="{% static items.5.item.imagevideo_path %}"
 																				type="video/mp4">
 																		Your browser does not support the video tag!
 																	</video>
@@ -627,7 +629,7 @@
 																{% if request.user.is_authenticated %}
 																	<div class="save_button_wrap">
 																		<span class="glyphicon glyphicon-bookmark save_item"
-																			  data-item-id="{{ items.5.pk }}"
+																			  data-item-id="{{ items.5.item.pk }}"
 																			  data-item-type="Ninegag"
 																			  data-toggle="tooltip"
 																			  data-container="body"
@@ -638,12 +640,12 @@
 														{% else %}
 															<div class="top_img">
 																<img class="img-responsive"
-																	 src="{% static items.5.imagevideo_path %}" alt="">
+																	 src="{% static items.5.item.imagevideo_path %}" alt="">
 															</div>
 															{% if request.user.is_authenticated %}
 																<div class="save_button_wrap">
 																	<span class="glyphicon glyphicon-bookmark save_item"
-																		  data-item-id="{{ items.5.pk }}"
+																		  data-item-id="{{ items.5.item.pk }}"
 																		  data-item-type="Ninegag" data-toggle="tooltip"
 																		  data-container="body"
 																		  title="Click to save the item into your personal list!"></span>
@@ -653,31 +655,31 @@
 														<div class="single_bottom_text">
 															<h4>
 																{% if items %}
-																	<a href="{% url 'ninegag_post_details' items.5.pk %}"> {{ items.5.title }} </a>
+																	<a href="{% url 'ninegag_post_details' items.5.item.pk %}"> {{ items.5.item.title }} </a>
 																{% endif %}
 															</h4>
 															<p><a class="category_tag"
 																  href="{% url 'ninegags' %}">9gag</a>| <i
-																	class="fa fa-clock-o"></i> {{ items.5.date_added }}
-																<i class="fa fa-comment"></i>{{ items.5.approved_comments.count }}
+																	class="fa fa-clock-o"></i> {{ items.5.item.date_added }}
+																<i class="fa fa-comment"></i>{{ items.5.item.approved_comments.count }}
 																comments
 																{% if request.user.is_authenticated %}
 																	<a class="fb-share-button fb_share" href="#"
-																	   data-href="[page_url]" data-image="[image_url]"
-																	   data-title="[Post_title]  "
-																	   data-desc="[Post_description]"> <i
+																	   data-href="{{ items.5.url }}" data-image="[image_url]"
+																	   data-title="{{ items.5.item.title }}"
+																	   data-desc=""> <i
 																			class="fa fa-facebook"></i> </a>{% endif %}
 															</p>
 														</div>
 													</div>
 													<div class="gags_bottom">
-														{% if items.6.is_video %}
+														{% if items.6.item.is_video %}
 															<div class="top_video">
 																<div align="center"
 																	 class="embed-responsive embed-responsive-16by9">
 																	<video preload="auto" loop muted controls
 																		   class="embed-responsive-item">
-																		<source src="{% static items.6.imagevideo_path %}"
+																		<source src="{% static items.6.item.imagevideo_path %}"
 																				type="video/mp4">
 																		Your browser does not support the video tag!
 																	</video>
@@ -685,7 +687,7 @@
 																{% if request.user.is_authenticated %}
 																	<div class="save_button_wrap">
 																		<span class="glyphicon glyphicon-bookmark save_item"
-																			  data-item-id="{{ items.6.pk }}"
+																			  data-item-id="{{ items.6.item.pk }}"
 																			  data-item-type="Ninegag"
 																			  data-toggle="tooltip"
 																			  data-container="body"
@@ -696,12 +698,12 @@
 														{% else %}
 															<div class="top_img">
 																<img class="img-responsive"
-																	 src="{% static items.6.imagevideo_path %}" alt="">
+																	 src="{% static items.6.item.imagevideo_path %}" alt="">
 															</div>
 															{% if request.user.is_authenticated %}
 																<div class="save_button_wrap">
 																	<span class="glyphicon glyphicon-bookmark save_item"
-																		  data-item-id="{{ items.6.pk }}"
+																		  data-item-id="{{ items.6.item.pk }}"
 																		  data-item-type="Ninegag" data-toggle="tooltip"
 																		  data-container="body"
 																		  title="Click to save the item into your personal list!"></span>
@@ -711,31 +713,31 @@
 														<div class="single_bottom_text">
 															<h4>
 																{% if items %}
-																	<a href="{% url 'ninegag_post_details' items.6.pk %}"> {{ items.6.title }} </a>
+																	<a href="{% url 'ninegag_post_details' items.6.item.pk %}"> {{ items.6.item.title }} </a>
 																{% endif %}
 															</h4>
 															<p><a class="category_tag"
 																  href="{% url 'ninegags' %}">9gag</a>| <i
-																	class="fa fa-clock-o"></i> {{ items.6.date_added }}
-																<i class="fa fa-comment"></i>{{ items.6.approved_comments.count }}
+																	class="fa fa-clock-o"></i> {{ items.6.item.date_added }}
+																<i class="fa fa-comment"></i>{{ items.6.item.approved_comments.count }}
 																comments
 																{% if request.user.is_authenticated %}
 																	<a class="fb-share-button fb_share" href="#"
-																	   data-href="[page_url]" data-image="[image_url]"
-																	   data-title="[Post_title]  "
-																	   data-desc="[Post_description]"> <i
+																	   data-href="{{ items.6.url }}" data-image="[image_url]"
+																	   data-title="{{ items.6.item.title }}"
+																	   data-desc=""> <i
 																			class="fa fa-facebook"></i> </a>{% endif %}
 															</p>
 														</div>
 													</div>
 													<div class="gags_bottom last_bottom">
-														{% if items.7.is_video %}
+														{% if items.7.item.is_video %}
 															<div class="top_video">
 																<div align="center"
 																	 class="embed-responsive embed-responsive-16by9">
 																	<video preload="auto" loop muted controls
 																		   class="embed-responsive-item">
-																		<source src="{% static items.7.imagevideo_path %}"
+																		<source src="{% static items.7.item.imagevideo_path %}"
 																				type="video/mp4">
 																		Your browser does not support the video tag!
 																	</video>
@@ -743,7 +745,7 @@
 																{% if request.user.is_authenticated %}
 																	<div class="save_button_wrap">
 																		<span class="glyphicon glyphicon-bookmark save_item"
-																			  data-item-id="{{ items.7.pk }}"
+																			  data-item-id="{{ items.7.item.pk }}"
 																			  data-item-type="Ninegag"
 																			  data-toggle="tooltip"
 																			  data-container="body"
@@ -754,12 +756,12 @@
 														{% else %}
 															<div class="top_img">
 																<img class="img-responsive"
-																	 src="{% static items.7.imagevideo_path %}" alt="">
+																	 src="{% static items.7.item.imagevideo_path %}" alt="">
 															</div>
 															{% if request.user.is_authenticated %}
 																<div class="save_button_wrap">
 																	<span class="glyphicon glyphicon-bookmark save_item"
-																		  data-item-id="{{ items.7.pk }}"
+																		  data-item-id="{{ items.7.item.pk }}"
 																		  data-item-type="Ninegag" data-toggle="tooltip"
 																		  data-container="body"
 																		  title="Click to save the item into your personal list!"></span>
@@ -769,19 +771,19 @@
 														<div class="single_bottom_text">
 															<h4>
 																{% if items %}
-																	<a href="{% url 'ninegag_post_details' items.7.pk %}"> {{ items.7.title }} </a>
+																	<a href="{% url 'ninegag_post_details' items.7.item.pk %}"> {{ items.7.item.title }} </a>
 																{% endif %}
 															</h4>
 															<p><a class="category_tag"
 																  href="{% url 'ninegags' %}">9gag</a>| <i
-																	class="fa fa-clock-o"></i> {{ items.7.date_added }}
-																<i class="fa fa-comment"></i>{{ items.7.approved_comments.count }}
+																	class="fa fa-clock-o"></i> {{ items.7.item.date_added }}
+																<i class="fa fa-comment"></i>{{ items.7.item.approved_comments.count }}
 																comments
 																{% if request.user.is_authenticated %}
 																	<a class="fb-share-button fb_share" href="#"
-																	   data-href="[page_url]" data-image="[image_url]"
-																	   data-title="[Post_title]  "
-																	   data-desc="[Post_description]"> <i
+																	   data-href="{{ items.7.url }}" data-image="[image_url]"
+																	   data-title="{{ items.7.item.title }}"
+																	   data-desc=""> <i
 																			class="fa fa-facebook"></i> </a>{% endif %}
 															</p>
 														</div>
@@ -806,14 +808,14 @@
 													<div class="top_video">
 														<div align="center"
 															 class="embed-responsive embed-responsive-16by9">
-															<iframe src={{ videos.0.url }} class="embed-responsive-item"></iframe>
+															<iframe src={{ videos.0.video.url }} class="embed-responsive-item"></iframe>
 															Your browser does not support the video tag!
 															</video>
 														</div>
 														{% if request.user.is_authenticated %}
 															<div class="save_button_wrap">
 																<span class="glyphicon glyphicon-bookmark save_item"
-																	  data-item-id="{{ videos.0.pk }}"
+																	  data-item-id="{{ videos.0.video.pk }}"
 																	  data-item-type="Youtube" data-toggle="tooltip"
 																	  data-container="body"
 																	  title="Click to save the item into your personal list!"></span>
@@ -823,17 +825,17 @@
 													<div class="single_bottom_text">
 														<h4>
 															{% if videos %}
-																<a href="{% url 'video_post_details' videos.0.pk %}"> {{ videos.0.title }} </a>
+																<a href="{% url 'video_post_details' videos.0.video.pk %}"> {{ videos.0.video.title }} </a>
 															{% endif %}
 														</h4>
 														<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
-																class="fa fa-clock-o"></i> {{ videos.0.added_at }}
-															<i class="fa fa-comment"></i> {{ videos.0.approved_comments.count }}
+																class="fa fa-clock-o"></i> {{ videos.0.video.added_at }}
+															<i class="fa fa-comment"></i> {{ videos.0.video.approved_comments.count }}
 															comments {% if request.user.is_authenticated %}
 																<a class="fb-share-button fb_share" href="#"
-																   data-href="[page_url]" data-image="[image_url]"
-																   data-title="[Post_title]  "
-																   data-desc="[Post_description]"> <i
+																   data-href="{{ videos.0.url }}" data-image="[image_url]"
+																   data-title="{{ videos.0.video.title }}"
+																   data-desc=""> <i
 																		class="fa fa-facebook"></i> </a>{% endif %}
 														</p>
 													</div>
@@ -843,13 +845,13 @@
 														<div align="center"
 															 class="embed-responsive embed-responsive-16by9">
 															<iframe class="embed-responsive-item"
-																	src={{ videos.1.url }}></iframe>
+																	src={{ videos.1.video.url }}></iframe>
 															Your browser does not support iframes!
 														</div>
 														{% if request.user.is_authenticated %}
 															<div class="save_button_wrap">
 																<span class="glyphicon glyphicon-bookmark save_item"
-																	  data-item-id="{{ videos.1.pk }}"
+																	  data-item-id="{{ videos.1.video.pk }}"
 																	  data-item-type="Ninegag" data-toggle="tooltip"
 																	  data-container="body"
 																	  title="Click to save the item into your personal list!"></span>
@@ -859,18 +861,18 @@
 													<div class="single_bottom_text">
 														<h4>
 															{% if videos %}
-																<a href="{% url 'video_post_details' videos.1.pk %}"> {{ videos.1.title }} </a>
+																<a href="{% url 'video_post_details' videos.1.video.pk %}"> {{ videos.1.video.title }} </a>
 															{% endif %}
 														</h4>
 														<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
-																class="fa fa-clock-o"></i> {{ videos.1.date_added }}
-															<i class="fa fa-comment"></i> {{ videos.1.approved_comments.count }}
+																class="fa fa-clock-o"></i> {{ videos.1.video.date_added }}
+															<i class="fa fa-comment"></i> {{ videos.1.video.approved_comments.count }}
 															comments
 															{% if request.user.is_authenticated %}
 																<a class="fb-share-button fb_share" href="#"
-																   data-href="[page_url]" data-image="[image_url]"
-																   data-title="[Post_title]  "
-																   data-desc="[Post_description]"> <i
+																   data-href="{{ videos.1.url }}" data-image="[image_url]"
+																   data-title="{{ videos.1.video.title }}"
+																   data-desc=""> <i
 																		class="fa fa-facebook"></i> </a>{% endif %}
 														</p>
 													</div>
@@ -884,13 +886,13 @@
 														<div align="center"
 															 class="embed-responsive embed-responsive-16by9">
 															<iframe class="embed-responsive-item"
-																	src={{ videos.2.url }}></iframe>
+																	src={{ videos.2.video.url }}></iframe>
 															Your browser does not support iframes!
 														</div>
 														{% if request.user.is_authenticated %}
 															<div class="save_button_wrap">
 																<span class="glyphicon glyphicon-bookmark save_item"
-																	  data-item-id="{{ videos.2.pk }}"
+																	  data-item-id="{{ videos.2.video.pk }}"
 																	  data-item-type="Youtube" data-toggle="tooltip"
 																	  data-container="body"
 																	  title="Click to save the item into your personal list!"></span>
@@ -900,18 +902,18 @@
 													<div class="single_bottom_text">
 														<h4>
 															{% if videos %}
-																<a href="{% url 'video_post_details' videos.2.pk %}"> {{ videos.2.title }} </a>
+																<a href="{% url 'video_post_details' videos.2.video.pk %}"> {{ videos.2.video.title }} </a>
 															{% endif %}
 														</h4>
 														<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
-																class="fa fa-clock-o"></i> {{ videos.2.date_added }}
-															<i class="fa fa-comment"></i>{{ videos.2.approved_comments.count }}
+																class="fa fa-clock-o"></i> {{ videos.2.video.date_added }}
+															<i class="fa fa-comment"></i>{{ videos.2.video.approved_comments.count }}
 															comments
 															{% if request.user.is_authenticated %}
 																<a class="fb-share-button fb_share" href="#"
-																   data-href="[page_url]" data-image="[image_url]"
-																   data-title="[Post_title]  "
-																   data-desc="[Post_description]"> <i
+																   data-href="{{ videos.2.url }}" data-image="[image_url]"
+																   data-title="{{ videos.2.video.title }}"
+																   data-desc=""> <i
 																		class="fa fa-facebook"></i> </a>{% endif %}
 														</p>
 													</div>
@@ -921,13 +923,13 @@
 														<div align="center"
 															 class="embed-responsive embed-responsive-16by9">
 															<iframe class="embed-responsive-item"
-																	src={{ videos.3.url }}></iframe>
+																	src={{ videos.3.video.url }}></iframe>
 															Your browser does not support iframes!
 														</div>
 														{% if request.user.is_authenticated %}
 															<div class="save_button_wrap">
 																<span class="glyphicon glyphicon-bookmark save_item"
-																	  data-item-id="{{ videos.3.pk }}"
+																	  data-item-id="{{ videos.3.video.pk }}"
 																	  data-item-type="Youtube" data-toggle="tooltip"
 																	  data-container="body"
 																	  title="Click to save the item into your personal list!"></span>
@@ -937,18 +939,18 @@
 													<div class="single_bottom_text">
 														<h4>
 															{% if videos %}
-																<a href="{% url 'video_post_details' videos.3.pk %}"> {{ videos.3.title }} </a>
+																<a href="{% url 'video_post_details' videos.3.video.pk %}"> {{ videos.3.video.title }} </a>
 															{% endif %}
 														</h4>
 														<p><a class="category_tag" href="{% url 'videos' %}">videos</a>|<i
-																class="fa fa-clock-o"></i> {{ videos.3.date_added }}
-															<i class="fa fa-comment"></i>{{ videos.3.approved_comments.count }}
+																class="fa fa-clock-o"></i> {{ videos.3.video.date_added }}
+															<i class="fa fa-comment"></i>{{ videos.3.video.approved_comments.count }}
 															comments
 															{% if request.user.is_authenticated %}
 																<a class="fb-share-button fb_share" href="#"
-																   data-href="[page_url]" data-image="[image_url]"
-																   data-title="[Post_title]  "
-																   data-desc="[Post_description]"> <i
+																   data-href="{{ videos.3.url }}" data-image="[image_url]"
+																   data-title="{{ videos.3.video.title }}"
+																   data-desc=""> <i
 																		class="fa fa-facebook"></i> </a>{% endif %}
 														</p>
 													</div>
@@ -972,28 +974,28 @@
 													<div class="single_top_img_text">
 														{% if jokes %}
 															<h6>
-																<a href="{% url 'joke_post_details' jokes.0.pk %}"> {{ jokes.0.text }} </a>
+																<a href="{% url 'joke_post_details' jokes.0.joke.pk %}"> {{ jokes.0.joke.text }} </a>
 															</h6>
 														{% endif %}
 													</div>
 													<div class="single_bottom_text">
 														<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>|
 															<i
-																	class="fa fa-clock-o"></i> {{ jokes.0.date_added }}<i
-																	class="fa fa-comment"></i>{{ jokes.0.approved_comments.count }}
+																	class="fa fa-clock-o"></i> {{ jokes.0.joke.date_added }}<i
+																	class="fa fa-comment"></i>{{ jokes.0.joke.approved_comments.count }}
 															comments
 															{% if request.user.is_authenticated %}
 																<a class="fb-share-button fb_share" href="#"
-																   data-href="[page_url]" data-image="[image_url]"
-																   data-title="[Post_title]  "
-																   data-desc="[Post_description]"> <i
+																   data-href="{{ jokes.0.url }}" data-image="[image_url]"
+																   data-title="{{ jokes.0.joke.text }}"
+																   data-desc=""> <i
 																		class="fa fa-facebook"></i> </a>{% endif %}
 														</p>
 													</div>
 													{% if request.user.is_authenticated %}
 														<div class="save_button_wrap">
 															<span class="glyphicon glyphicon-bookmark save_item"
-																  data-item-id="{{ jokes.0.pk }}" data-item-type="Joke"
+																  data-item-id="{{ jokes.0.joke.pk }}" data-item-type="Joke"
 																  data-toggle="tooltip" data-container="body"
 																  title="Click to save the item into your personal list!"></span>
 														</div>
@@ -1003,28 +1005,28 @@
 													<div class="single_top_img_text">
 														{% if jokes %}
 															<h6>
-																<a href="{% url 'joke_post_details' jokes.1.pk %}"> {{ jokes.1.text }} </a>
+																<a href="{% url 'joke_post_details' jokes.1.joke.pk %}"> {{ jokes.1.joke.text }} </a>
 															</h6>
 														{% endif %}
 													</div>
 													<div class="single_bottom_text">
 														<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>|
 															<i
-																	class="fa fa-clock-o"></i> {{ jokes.1.date_added }}<i
-																	class="fa fa-comment"></i>{{ jokes.1.approved_comments.count }}
+																	class="fa fa-clock-o"></i> {{ jokes.1.joke.date_added }}<i
+																	class="fa fa-comment"></i>{{ jokes.1.joke.approved_comments.count }}
 															comments
 															{% if request.user.is_authenticated %}
 																<a class="fb-share-button fb_share" href="#"
-																   data-href="[page_url]" data-image="[image_url]"
-																   data-title="[Post_title]  "
-																   data-desc="[Post_description]"> <i
+																   data-href="{{ jokes.1.url }}" data-image="[image_url]"
+																   data-title="{{ jokes.1.joke.text }}"
+																   data-desc=""> <i
 																		class="fa fa-facebook"></i> </a>{% endif %}
 														</p>
 													</div>
 													{% if request.user.is_authenticated %}
 														<div class="save_button_wrap">
 															<span class="glyphicon glyphicon-bookmark save_item"
-																  data-item-id="{{ jokes.1.pk }}" data-item-type="Joke"
+																  data-item-id="{{ jokes.1.joke.pk }}" data-item-type="Joke"
 																  data-toggle="tooltip" data-container="body"
 																  title="Click to save the item into your personal list!"></span>
 														</div>
@@ -1034,28 +1036,28 @@
 													<div class="single_top_img_text">
 														{% if jokes %}
 															<h6>
-																<a href="{% url 'joke_post_details' jokes.2.pk %}"> {{ jokes.2.text }} </a>
+																<a href="{% url 'joke_post_details' jokes.2.joke.pk %}"> {{ jokes.2.joke.text }} </a>
 															</h6>
 														{% endif %}
 													</div>
 													<div class="single_bottom_text">
 														<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>|
 															<i
-																	class="fa fa-clock-o"></i> {{ jokes.2.date_added }}<i
-																	class="fa fa-comment"></i>{{ jokes.2.approved_comments.count }}
+																	class="fa fa-clock-o"></i> {{ jokes.2.joke.date_added }}<i
+																	class="fa fa-comment"></i>{{ jokes.2.joke.approved_comments.count }}
 															comments
 															{% if request.user.is_authenticated %}
 																<a class="fb-share-button fb_share" href="#"
-																   data-href="[page_url]" data-image="[image_url]"
-																   data-title="[Post_title]  "
-																   data-desc="[Post_description]"> <i
+																   data-href="{{ jokes.2.url }}" data-image="[image_url]"
+																   data-title="{{ jokes.2.joke.text }}"
+																   data-desc=""> <i
 																		class="fa fa-facebook"></i> </a>{% endif %}
 														</p>
 													</div>
 													{% if request.user.is_authenticated %}
 														<div class="save_button_wrap">
 															<span class="glyphicon glyphicon-bookmark save_item"
-																  data-item-id="{{ jokes.2.pk }}" data-item-type="Joke"
+																  data-item-id="{{ jokes.2.joke.pk }}" data-item-type="Joke"
 																  data-toggle="tooltip" data-container="body"
 																  title="Click to save the item into your personal list!"></span>
 														</div>
@@ -1069,28 +1071,28 @@
 													<div class="single_top_img_text">
 														{% if jokes %}
 															<h6>
-																<a href="{% url 'joke_post_details' jokes.3.pk %}"> {{ jokes.3.text }} </a>
+																<a href="{% url 'joke_post_details' jokes.3.joke.pk %}"> {{ jokes.3.joke.text }} </a>
 															</h6>
 														{% endif %}
 													</div>
 													<div class="single_bottom_text">
 														<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>|
 															<i
-																	class="fa fa-clock-o"></i> {{ jokes.3.date_added }}<i
-																	class="fa fa-comment"></i>{{ jokes.3.approved_comments.count }}
+																	class="fa fa-clock-o"></i> {{ jokes.3.joke.date_added }}<i
+																	class="fa fa-comment"></i>{{ jokes.3.joke.approved_comments.count }}
 															comments
 															{% if request.user.is_authenticated %}
 																<a class="fb-share-button fb_share" href="#"
-																   data-href="[page_url]" data-image="[image_url]"
-																   data-title="[Post_title]  "
-																   data-desc="[Post_description]"> <i
+																   data-href="{{ jokes.3.url }}" data-image="[image_url]"
+																   data-title="{{ jokes.3.joke.text }}"
+																   data-desc=""> <i
 																		class="fa fa-facebook"></i> </a>{% endif %}
 														</p>
 													</div>
 													{% if request.user.is_authenticated %}
 														<div class="save_button_wrap">
 															<span class="glyphicon glyphicon-bookmark save_item"
-																  data-item-id="{{ jokes.3.pk }}" data-item-type="Joke"
+																  data-item-id="{{ jokes.3.joke.pk }}" data-item-type="Joke"
 																  data-toggle="tooltip" data-container="body"
 																  title="Click to save the item into your personal list!"></span>
 														</div>
@@ -1100,28 +1102,28 @@
 													<div class="single_top_img_text">
 														{% if jokes %}
 															<h6>
-																<a href="{% url 'joke_post_details' jokes.4.pk %}"> {{ jokes.4.text }} </a>
+																<a href="{% url 'joke_post_details' jokes.4.joke.pk %}"> {{ jokes.4.joke.text }} </a>
 															</h6>
 														{% endif %}
 													</div>
 													<div class="single_bottom_text">
 														<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>|
 															<i
-																	class="fa fa-clock-o"></i> {{ jokes.4.date_added }}<i
-																	class="fa fa-comment"></i>{{ jokes.4.approved_comments.count }}
+																	class="fa fa-clock-o"></i> {{ jokes.4.joke.date_added }}<i
+																	class="fa fa-comment"></i>{{ jokes.4.joke.approved_comments.count }}
 															comments
 															{% if request.user.is_authenticated %}
 																<a class="fb-share-button fb_share" href="#"
-																   data-href="[page_url]" data-image="[image_url]"
-																   data-title="[Post_title]  "
-																   data-desc="[Post_description]"> <i
+																   data-href="{{ jokes.4.url }}" data-image="[image_url]"
+																   data-title="{{ jokes.4.joke.text }}"
+																   data-desc=""> <i
 																		class="fa fa-facebook"></i> </a>{% endif %}
 														</p>
 													</div>
 													{% if request.user.is_authenticated %}
 														<div class="save_button_wrap">
 															<span class="glyphicon glyphicon-bookmark save_item"
-																  data-item-id="{{ jokes.4.pk }}" data-item-type="Joke"
+																  data-item-id="{{ jokes.4.joke.pk }}" data-item-type="Joke"
 																  data-toggle="tooltip" data-container="body"
 																  title="Click to save the item into your personal list!"></span>
 														</div>
@@ -1131,28 +1133,28 @@
 													<div class="single_top_img_text">
 														{% if jokes %}
 															<h6>
-																<a href="{% url 'joke_post_details' jokes.5.pk %}"> {{ jokes.5.text }} </a>
+																<a href="{% url 'joke_post_details' jokes.5.joke.pk %}"> {{ jokes.5.joke.text }} </a>
 															</h6>
 														{% endif %}
 													</div>
 													<div class="single_bottom_text">
 														<p><a class="category_tag" href="{% url 'jokes' %}">jokes</a>|
 															<i
-																	class="fa fa-clock-o"></i> {{ jokes.5.date_added }}<i
-																	class="fa fa-comment"></i>{{ jokes.5.approved_comments.count }}
+																	class="fa fa-clock-o"></i> {{ jokes.5.joke.date_added }}<i
+																	class="fa fa-comment"></i>{{ jokes.5.joke.approved_comments.count }}
 															comments
 															{% if request.user.is_authenticated %}
 																<a class="fb-share-button fb_share" href="#"
-																   data-href="[page_url]" data-image="[image_url]"
-																   data-title="[Post_title]  "
-																   data-desc="[Post_description]"> <i
+																   data-href="{{ jokes.5.url }}" data-image="[image_url]"
+																   data-title="{{ jokes.5.joke.text }}"
+																   data-desc=""> <i
 																		class="fa fa-facebook"></i> </a>{% endif %}
 														</p>
 													</div>
 													{% if request.user.is_authenticated %}
 														<div class="save_button_wrap">
 															<span class="glyphicon glyphicon-bookmark save_item"
-																  data-item-id="{{ jokes.5.pk }}" data-item-type="Joke"
+																  data-item-id="{{ jokes.5.joke.pk }}" data-item-type="Joke"
 																  data-toggle="tooltip" data-container="body"
 																  title="Click to save the item into your personal list!"></span>
 														</div>

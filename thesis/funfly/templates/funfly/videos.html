@@ -75,7 +75,48 @@
 						submitIcon.click();
 					}
 				});
+
+			window.fbAsyncInit = function () {
+			FB.init({
+				appId: 527379650781936,
+				status: true,
+				cookie: true,
+				xfbml: true,
+				version: 'v2.7'
 			});
+		};
+
+
+		(function (d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "http://connect.facebook.net/en_US/sdk.js#version=v2.6&appId=527379650781936&status=true&cookie=true&xfbml=true";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
+		function postToFeed(title, desc, url, image) {
+			var obj = {method: 'feed', link: url, name: title, description: desc};
+
+			function callback(response) {
+			}
+
+			FB.ui(obj, callback);
+		}
+
+		$('.fb_share').on('click', function (e) {
+			e.preventDefault();
+			var obj = $(this);
+			var title = obj.data('title');
+			var desc = obj.data('desc');
+			var url = obj.data('href');
+			postToFeed(title, desc, url);
+			return false;
+		});
+
+			});
+
 			function buttonUp() {
 				var inputVal = $('.searchbox-input').val();
 				inputVal = $.trim(inputVal).length;

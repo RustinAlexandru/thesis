@@ -19,9 +19,9 @@
 			<span id="likes_{{ joke.pk }}">likes: </span><span data-toggle="modal" data-target="#myModal"
 															   id="likes_number_{{ joke.pk }}">{{ joke.total_likes }}</span>
 			{% if request.user.is_authenticated %}<a class="fb-share-button fb_share" href="#"
-					   data-href="[page_url]" data-image="[image_url]"
-					   data-title="[Post_title]  "
-					   data-desc="[Post_description]"> <i
+					   data-href="{{ request.get_host }}{% url 'joke_post_details' joke.pk %} " data-image="[image_url]"
+					   data-title="{{ joke.text }}"
+					   data-desc=""> <i
 					class="fa fa-facebook"></i> </a>{% endif %}
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">

@@ -12,9 +12,9 @@
 					class="fa fa-clock-o"></i> {{ ninegag.date_added }}
 				<i class="fa fa-comment"></i> {{ ninegag.approved_comments.count }} comments
 				{% if request.user.is_authenticated %}<a class="fb-share-button fb_share" href="#"
-														 data-href="[page_url]" data-image="[image_url]"
-														 data-title="[Post_title]  "
-														 data-desc="[Post_description]"> <i
+														 data-href="{{ request.get_host }}{% url 'ninegag_post_details' ninegag.pk %}" data-image="[image_url]"
+														 data-title="{{ ninegag.title }}"
+														 data-desc=""> <i
 						class="fa fa-facebook"></i> </a>{% endif %}
 			</p>
 			<p>

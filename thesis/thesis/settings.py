@@ -42,13 +42,14 @@ INSTALLED_APPS = [
     'social.apps.django_app.default',
     'sass_processor',
     'crispy_forms',
-    'debug_toolbar',
+    # 'debug_toolbar',
     'pytz',
     'moderation',
     'el_pagination',
     'rolepermissions',
     'gm2m',
     'haystack',
+    'django_social_share',
 
 ]
 
